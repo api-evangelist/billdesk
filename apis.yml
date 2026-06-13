@@ -1,0 +1,92 @@
+aid: billdesk
+name: BillDesk
+description: BillDesk is an Indian integrated payment solutions platform founded in 2000, offering REST APIs for bill payments, recurring mandates, UPI payments, net banking, card payments, and enterprise payment gateway integrations. The platform provides three integration tiers (Neo full-redirect, Ace SDK, and CX+ deep API), supporting online payments, e-Mandate setup, invoicing, refunds, tokenization, and 150+ payment methods across web, mobile, and third-party e-commerce plugins.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/billdesk/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - Payments
+  - India
+  - Payment Gateway
+  - UPI
+  - Recurring Payments
+  - Mandates
+  - Net Banking
+  - Bill Payments
+  - Fintech
+apis:
+  - aid: billdesk:neo-payments-api
+    name: BillDesk Neo Full Redirect API
+    description: Pre-built hosted checkout solution for one-time and recurring online payments. Merchants redirect customers to BillDesk-hosted pages, minimizing PCI DSS scope.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+    baseURL: https://api.billdesk.com/payments/ve1_2
+    tags:
+      - Payments
+      - Checkout
+      - Redirect
+    properties:
+      - type: Documentation
+        url: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  - aid: billdesk:ace-sdk-api
+    name: BillDesk Ace SDK API
+    description: SDK-based payment integration for Android, iOS, Flutter, and web. Provides embedded payment experiences with BillDesk handling payment orchestration.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+    baseURL: https://api.billdesk.com/payments/ve1_2
+    tags:
+      - SDK
+      - Mobile Payments
+      - Android
+      - iOS
+      - Flutter
+    properties:
+      - type: Documentation
+        url: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  - aid: billdesk:cx-plus-deep-api
+    name: BillDesk CX+ Deep API
+    description: Direct REST API access for advanced payment processing, giving merchants full control over checkout UX. Supports transactions, mandates, refunds, card tokenization, invoices, payment links, and settlement retrieval.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.billdesk.io/
+    baseURL: https://api.billdesk.com/payments/ve1_2
+    tags:
+      - REST API
+      - Payments
+      - Mandates
+      - Refunds
+      - Tokenization
+      - Invoicing
+      - UPI
+    properties:
+      - type: Documentation
+        url: https://docs.billdesk.io/
+      - type: Sandbox
+        url: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+common:
+  - type: Website
+    url: https://www.billdesk.com/web/
+  - type: Documentation
+    url: https://docs.billdesk.io/
+  - type: GitHubOrg
+    url: https://github.com/billdesk
+  - type: LinkedIn
+    url: https://in.linkedin.com/company/billdesk
+  - type: Blog
+    url: https://www.billdesk.com/web/blog
+  - type: Pricing
+    url: https://www.billdesk.com/web/contact
+  - type: StatusPage
+    url: https://uptime.com/billdesk.com
+  - type: X
+    url: https://twitter.com/billdesk
+  - type: Plans
+    url: plans/billdesk-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/billdesk-rate-limits.yml
+  - type: FinOps
+    url: finops/billdesk-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

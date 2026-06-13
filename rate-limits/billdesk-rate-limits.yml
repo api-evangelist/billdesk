@@ -1,0 +1,23 @@
+name: BillDesk Rate Limits
+description: BillDesk does not publicly document specific API rate limits. The following reflects general best practices and what is known from public integration documentation.
+url: https://docs.billdesk.io/
+limits:
+  - scope: General API
+    details: Rate limits are not publicly disclosed by BillDesk. Enterprise merchants should contact BillDesk for limits applicable to their integration.
+    contact: https://www.billdesk.com/web/contact
+  - scope: Sandbox / UAT Environment
+    endpoint_base: https://uat1.billdesk.com/u2/payments/
+    details: Available to merchants with a BillDesk Playground Account for testing. Throttling may apply in UAT to simulate production constraints.
+  - scope: Production Environment
+    endpoint_base: https://api.billdesk.com/payments/
+    details: Production rate limits are governed by merchant SLA and contract terms negotiated with BillDesk.
+best_practices:
+  - Implement idempotency keys for all payment create operations to safely retry without duplicate charges
+  - Use exponential back-off for retries on 429 (Too Many Requests) or 5xx responses
+  - Batch mandate and invoice operations where the API supports batch endpoints
+  - Cache authentication tokens for their full validity window to minimize token-creation calls
+  - Use webhook callbacks rather than polling to retrieve transaction status updates
+notes:
+  - BillDesk supports idempotency across its v2 REST APIs
+  - Webhooks are the recommended mechanism for asynchronous payment status updates
+  - No public SLA or uptime SLA document was found at time of cataloging (2026-06-13)

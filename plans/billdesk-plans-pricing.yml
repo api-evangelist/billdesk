@@ -1,0 +1,41 @@
+name: BillDesk Plans and Pricing
+description: BillDesk does not publicly list pricing tiers. Merchants must contact their sales team for custom quotes. The following represents known publicly available information about their fee structure.
+url: https://www.billdesk.com/web/contact
+plans:
+  - name: Enterprise
+    description: Custom pricing for enterprise merchants and large organizations. Rates are negotiated directly with BillDesk sales based on transaction volume.
+    contact: true
+    fees:
+      - method: UPI
+        mdr: "0%"
+        notes: No MDR on UPI transactions per government mandate (RBI/FinMin directive)
+      - method: RuPay Debit Card
+        mdr: "0%"
+        notes: No MDR on RuPay debit card transactions
+      - method: Other Debit Cards
+        mdr: "0.40% - 0.85%"
+        notes: Varies by card network and bank
+      - method: Credit Cards
+        mdr: "0.85% - 2.0%"
+        notes: Varies by card type and issuer; contact sales for actual rate
+      - method: Net Banking
+        mdr: "Flat fee per transaction"
+        notes: Varies by bank; exact rates negotiated with BillDesk
+      - method: Wallets / Prepaid Cards
+        mdr: "~Rs 8 flat fee"
+        notes: Approximate; subject to change
+      - method: Cash Cards
+        mdr: "~Rs 8 flat fee"
+        notes: Approximate; subject to change
+    tax:
+      type: GST
+      rate: "18%"
+      notes: 18% Goods and Services Tax applied on top of gateway fees
+    take_rate:
+      estimated: "~0.3% of TPV"
+      notes: BillDesk's estimated blended take rate across all payment methods
+notes:
+  - BillDesk does not publish payment gateway charges on its website
+  - Pricing is negotiated based on merchant profile, volume, and payment mix
+  - Contact sales at https://www.billdesk.com/web/contact for merchant-specific rates
+  - Regulatory mandates (RBI/FinMin) govern UPI and RuPay MDR waivers

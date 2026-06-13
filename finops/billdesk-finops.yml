@@ -1,0 +1,33 @@
+name: BillDesk FinOps
+description: Financial operations guidance for teams integrating with BillDesk payment gateway, covering cost attribution, monitoring, and optimization strategies.
+url: https://www.billdesk.com/web/
+cost_drivers:
+  - name: Transaction Volume (TPV)
+    description: Primary cost driver; fees are applied per transaction based on payment method. Higher volume may unlock lower negotiated rates.
+    optimization: Negotiate volume-based rate tiers during onboarding or renewal; consolidate payment volumes across business units.
+  - name: Payment Method Mix
+    description: UPI and RuPay carry zero MDR; credit cards and international cards carry the highest MDR. Payment method mix directly impacts blended cost.
+    optimization: Promote UPI and RuPay to end customers where feasible to reduce blended MDR. Display low-cost options prominently at checkout.
+  - name: Refund Processing
+    description: Refunds may incur gateway fees that are not reversed; confirm refund fee treatment in merchant agreement.
+    optimization: Minimize refund rates through clear product descriptions and robust dispute resolution before chargeback.
+  - name: GST on Gateway Fees
+    description: 18% GST is levied on all gateway fees. GST-registered merchants may be able to claim input tax credit (ITC).
+    optimization: Ensure merchant GST registration is current and gateway invoices are correctly formatted for ITC claims.
+  - name: Mandate / Recurring Setup
+    description: e-Mandate setup for recurring payments (UPI AutoPay, NACH) may carry a per-mandate registration fee separate from per-transaction MDR.
+    optimization: Batch mandate registration where possible; review mandate conversion rates to avoid paying for failed registrations.
+monitoring:
+  - action: Tag API calls by product line (Neo / Ace / CX+) for cost attribution across teams
+  - action: Pull daily settlement reports via the Retrieve Settlement API endpoint to reconcile costs in real time
+  - action: Alert on spike in refund volume as a proxy for customer satisfaction and indirect gateway cost
+  - action: Track payment method distribution monthly to monitor MDR trends
+  - action: Reconcile invoice data from Create/Retrieve Invoice endpoints against bank settlement statements
+governance:
+  - Review merchant agreement annually and renegotiate rates based on volume growth
+  - Maintain a record of all BillDesk-issued invoices for GST ITC compliance
+  - Ensure PCI DSS scope is minimized by using BillDesk-hosted SDKs (Neo / Ace) to reduce compliance overhead
+notes:
+  - BillDesk's estimated blended take rate is approximately 0.3% of TPV
+  - Settlement reports and invoice APIs provide the primary data feed for FinOps reconciliation
+  - Contact: https://www.billdesk.com/web/contact for merchant-specific pricing and SLA discussions
