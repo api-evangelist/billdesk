@@ -1,0 +1,65 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://www.billdesk.com/",
+  "name": "BillDesk",
+  "description": "BillDesk is an Indian integrated payment solutions platform founded in 2000, offering REST APIs for bill payments, recurring mandates, UPI payments, net banking, card payments, and enterprise payment gateway integrations.",
+  "url": "https://www.billdesk.com/web/",
+  "sameAs": [
+    "https://github.com/billdesk",
+    "https://in.linkedin.com/company/billdesk",
+    "https://twitter.com/billdesk"
+  ],
+  "foundingDate": "2000",
+  "areaServed": {
+    "@type": "Country",
+    "name": "India"
+  },
+  "knowsAbout": [
+    "Payment Gateway",
+    "UPI Payments",
+    "Net Banking",
+    "Recurring Payments",
+    "E-Mandates",
+    "Bill Payments",
+    "Card Tokenisation",
+    "Payment Links",
+    "Invoicing",
+    "Settlement"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "BillDesk API Products",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "BillDesk Neo Full Redirect API",
+        "description": "Pre-built hosted checkout solution for one-time and recurring online payments. Merchants redirect customers to BillDesk-hosted pages, minimizing PCI DSS scope.",
+        "url": "https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal",
+        "category": "Payment API"
+      },
+      {
+        "@type": "Offer",
+        "name": "BillDesk Ace SDK API",
+        "description": "SDK-based payment integration for Android, iOS, Flutter, and web. Provides embedded payment experiences with BillDesk handling payment orchestration.",
+        "url": "https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal",
+        "category": "Mobile Payment SDK"
+      },
+      {
+        "@type": "Offer",
+        "name": "BillDesk CX+ Deep API",
+        "description": "Direct REST API access for advanced payment processing, giving merchants full control over checkout UX. Supports transactions, mandates, refunds, card tokenization, invoices, payment links, and settlement retrieval.",
+        "url": "https://docs.billdesk.io/",
+        "category": "REST Payment API"
+      }
+    ]
+  },
+  "potentialAction": {
+    "@type": "ReadAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://docs.billdesk.io/",
+      "name": "BillDesk Developer Documentation"
+    }
+  }
+}
