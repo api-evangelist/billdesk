@@ -3,5 +3,14 @@
   "url": "https://www.billdesk.com/web/blog",
   "description": "BillDesk blog covering payment technology, UPI, digital payments, and fintech trends in India.",
   "modified": "2026-06-13",
-  "posts": []
+  "posts": [],
+  "repo": "billdesk",
+  "feeds": [
+    {
+      "source": "https://in.linkedin.com/company/billdesk",
+      "error": "HTTPError"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-06-14T20:42:17Z"
 }
