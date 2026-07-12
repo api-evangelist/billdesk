@@ -65,6 +65,8 @@ apis:
       - type: Sandbox
         url: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
 common:
+  - type: DomainSecurity
+    url: security/billdesk-domain-security.yml
   - type: Website
     url: https://www.billdesk.com/web/
   - type: Documentation
