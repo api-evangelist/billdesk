@@ -1,6 +1,17 @@
 aid: billdesk
 name: BillDesk
 description: BillDesk is an Indian integrated payment solutions platform founded in 2000, offering REST APIs for bill payments, recurring mandates, UPI payments, net banking, card payments, and enterprise payment gateway integrations. The platform provides three integration tiers (Neo full-redirect, Ace SDK, and CX+ deep API), supporting online payments, e-Mandate setup, invoicing, refunds, tokenization, and 150+ payment methods across web, mobile, and third-party e-commerce plugins.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: approval
