@@ -8,10 +8,13 @@
   "feeds": [
     {
       "source": "https://in.linkedin.com/company/billdesk",
-      "error": "HTTPError"
+      "feed_url": "https://in.linkedin.com/company/billdesk",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-08-22T20:20:02Z",
+  "fetched": "2026-08-30T22:33:40Z",
   "agent_pulled": "2026-06-27"
 }
