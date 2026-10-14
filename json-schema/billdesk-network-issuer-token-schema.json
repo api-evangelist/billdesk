@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/billdesk/main/json-schema/billdesk-network-issuer-token-schema.json",
+  "title": "Network-issuer-token",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/billdesk-tokenization-openapi.yml#/components/schemas/Network-issuer-token",
+  "type": "object",
+  "properties": {
+    "token_ref_no": {
+      "type": "string",
+      "description": "Token Reference Number – as received from TSP"
+    },
+    "status": {
+      "type": "string",
+      "description": "Token Status – as received from TSP"
+    },
+    "token_expiry_month": {
+      "type": "string",
+      "description": "Token Expiry Month – as received from TSP in the MM format"
+    },
+    "token_expiry_year": {
+      "type": "string",
+      "description": "Token Expiry Year – as received from TSP in the YYYY format"
+    },
+    "createdon": {
+      "type": "string"
+    },
+    "token_cryptogram": {
+      "type": "string",
+      "description": "Token Cryptogram – as received from TSP in the ‘Detokenize’ response"
+    },
+    "token_value": {
+      "type": "string",
+      "description": "Token Value – as received from TSP in the ‘Detokenize’ response"
+    }
+  }
+}

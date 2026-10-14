@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/billdesk/main/json-schema/billdesk-customer-response-schema.json",
+  "title": "customer-response",
+  "description": "Customer object response. Note : PII data will be masked",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/billdesk-linkpay-openapi.yml#/components/schemas/customer-response",
+  "x-stoplight": {
+    "id": "1rjufsjbzrny1"
+  },
+  "type": "object",
+  "properties": {
+    "first_name": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "gkgqnz6wem9zx"
+      },
+      "description": "Customer’s First Name"
+    },
+    "last_name": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "en5q24tmbshcp"
+      },
+      "description": "Customer’s Last Name"
+    },
+    "mobile": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "3zmr7egoosoth"
+      },
+      "description": "Customer’s Mobile number"
+    },
+    "email": {
+      "type": "string",
+      "x-stoplight": {
+        "id": "8igxybrrjssyi"
+      },
+      "description": "Customer’s Email address"
+    }
+  }
+}

@@ -1,0 +1,454 @@
+[
+ {
+  "page": "https://docs.billdesk.io/reference/validatvpa.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "x-stoplight": {
+    "id": "4xc6m4o59p67m"
+   },
+   "servers": [
+    {
+     "url": "https://uat1.billdesk.com/u2",
+     "description": "UAT server"
+    },
+    {
+     "url": "https://api.billdesk.com",
+     "description": "PROD server"
+    }
+   ],
+   "info": {
+    "title": "Validate VPA",
+    "description": "This explorer allows merchants to evaluate APIs that are available in the BillDesk Payment Gateway API suite.\n - Only HMAC authentication is supported.\n - All APIs are RESTful and resource oriented.\n - Servers listed are applicable for the API explorer only.",
+    "contact": {
+     "name": "API Support",
+     "url": "https://www.billdesk.com/helpcenter.htm",
+     "email": "support@billdesk.com"
+    },
+    "version": "2.5"
+   },
+   "x-samples-languages": [
+    "shell",
+    "json",
+    "node",
+    "java",
+    "csharp"
+   ],
+   "paths": {
+    "/payments/ve1_2/upi/validatevpa": {
+     "post": {
+      "summary": "Validate VPA",
+      "operationId": "validatVPA",
+      "responses": {
+       "200": {
+        "description": "OK",
+        "headers": {
+         "BD-Traceid": {
+          "schema": {
+           "type": "string"
+          },
+          "description": "BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail."
+         },
+         "Content-Type": {
+          "schema": {
+           "type": "string"
+          },
+          "description": "Request Content-Type to take the values application/jose"
+         },
+         "Accept": {
+          "schema": {
+           "type": "string"
+          },
+          "description": "Accept Response Content-Type to take the values application/jose"
+         }
+        },
+        "content": {
+         "application/json": {
+          "schema": {
+           "type": "object",
+           "properties": {
+            "objectid ": {
+             "$ref": "#/components/schemas/Objectid"
+            },
+            "mercid": {
+             "$ref": "#/components/schemas/Mercid"
+            },
+            "orderid": {
+             "$ref": "#/components/schemas/Orderid"
+            },
+            "payer_name": {
+             "type": "string",
+             "description": "VPA account holder’s name"
+            },
+            "validation_status": {
+             "type": "string",
+             "description": "Validation Status",
+             "enum": [
+              "success",
+              "failed"
+             ]
+            },
+            "verification_error_code": {
+             "$ref": "#/components/schemas/Error_code"
+            },
+            "verification_error_type": {
+             "$ref": "#/components/schemas/Error_type"
+            },
+            "verification_error_desc": {
+             "$ref": "#/components/schemas/Error_desc"
+            },
+            "upi": {
+             "$ref": "#/components/schemas/Upi-response"
+            },
+            "createdon": {
+             "$ref": "#/components/schemas/Createdon"
+            }
+           }
+          }
+         }
+        }
+       },
+       "403": {
+        "description": "Forbidden",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/Error-object"
+          },
+          "examples": {
+           "Forbidden": {
+            "$ref": "#/components/examples/403-error"
+           }
+          }
+         }
+        },
+        "headers": {
+         "BD-Traceid": {
+          "schema": {
+           "type": "string"
+          },
+          "description": "BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail."
+         },
+         "Content-Type": {
+          "schema": {
+           "type": "string"
+          },
+          "description": "Request Content-Type to take the values application/jose"
+         },
+         "Accept": {
+          "schema": {
+           "type": "string"
+          },
+          "description": "Accept Response Content-Type to take the values application/jose"
+         }
+        }
+       },
+       "500": {
+        "description": "Internal Server Error",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/Error-object"
+          },
+          "examples": {
+           "Internal server error": {
+            "$ref": "#/components/examples/500-error"
+           }
+          }
+         }
+        },
+        "headers": {
+         "BD-Traceid": {
+          "schema": {
+           "type": "string"
+          },
+          "description": "BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail."
+         },
+         "Content-Type": {
+          "schema": {
+           "type": "string"
+          },
+          "description": "Request Content-Type to take the values application/jose"
+         },
+         "Accept": {
+          "schema": {
+           "type": "string"
+          },
+          "description": "Accept Response Content-Type to take the values application/jose"
+         }
+        }
+       }
+      },
+      "description": "This API can be used to verify the VPA (Virtual Payment Address) for the upi payment method.",
+      "parameters": [
+       {
+        "$ref": "#/components/parameters/bdTraceId"
+       },
+       {
+        "$ref": "#/components/parameters/bdTimeStamp"
+       },
+       {
+        "$ref": "#/components/parameters/Content-Type"
+       },
+       {
+        "$ref": "#/components/parameters/Accept"
+       }
+      ],
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "type": "object",
+          "properties": {
+           "mercid": {
+            "$ref": "#/components/schemas/Mercid"
+           },
+           "orderid ": {
+            "$ref": "#/components/schemas/Orderid"
+           },
+           "payment_method_type ": {
+            "type": "string",
+            "description": "Represents the method of payment, will be fixed value upi",
+            "enum": [
+             "upi"
+            ]
+           },
+           "upi": {
+            "$ref": "#/components/schemas/Upi"
+           }
+          },
+          "required": [
+           "mercid",
+           "orderid ",
+           "payment_method_type ",
+           "upi"
+          ]
+         },
+         "examples": {}
+        }
+       }
+      },
+      "tags": [
+       "Validate VPA"
+      ]
+     }
+    }
+   },
+   "components": {
+    "schemas": {
+     "Error-object": {
+      "type": "object",
+      "properties": {
+       "status": {
+        "type": "integer",
+        "description": "This will be same as HTTP response code"
+       },
+       "error_type": {
+        "type": "string",
+        "description": "This indicates of the category of errors that could be encountered, for e.g. validation_error, api_connection_error, etc."
+       },
+       "error_code": {
+        "type": "string",
+        "description": "Under the error_type, there could be different error_codes that could be returned depending upon the API and the underlying interaction"
+       },
+       "message": {
+        "type": "string",
+        "description": "More details as a description for the error_code"
+       }
+      }
+     },
+     "Createdon": {
+      "title": "createdon",
+      "x-stoplight": {
+       "id": "k3ewegvbimz0g"
+      },
+      "type": "string",
+      "description": "object creation timestamp",
+      "format": "date-time"
+     },
+     "Error_code": {
+      "title": "error_code",
+      "x-stoplight": {
+       "id": "2grhtze0qf6ob"
+      },
+      "type": "string",
+      "description": "Represents the error code for the response"
+     },
+     "Error_desc": {
+      "title": "error_desc",
+      "x-stoplight": {
+       "id": "uyor3loffwtew"
+      },
+      "type": "string",
+      "description": "Represents the error description for the response"
+     },
+     "Error_type": {
+      "title": "error_type",
+      "x-stoplight": {
+       "id": "snpogojwqc0aq"
+      },
+      "type": "string",
+      "description": "Represents the error type for the response"
+     },
+     "Mercid": {
+      "title": "mercid",
+      "x-stoplight": {
+       "id": "43ns25lu1fyuc"
+      },
+      "type": "string",
+      "pattern": "^[A-Za-z0-9]{1,10}$",
+      "example": "BDMERCID",
+      "description": "Unique identifier as defined by BillDesk for each merchant"
+     },
+     "Objectid": {
+      "title": "objectid",
+      "x-stoplight": {
+       "id": "bbwm8bhhbqd4r"
+      },
+      "type": "string",
+      "description": "String representing the object's type. Objects of the same type share the same value. ",
+      "enum": [
+       "transaction",
+       "authentication",
+       "mandate",
+       "invoice",
+       "cardaccount",
+       "validatevpa",
+       "dispute",
+       "settlement",
+       "altid",
+       "mandate_token",
+       "accountvalidation"
+      ]
+     },
+     "Orderid": {
+      "title": "orderid",
+      "x-stoplight": {
+       "id": "lmwrwf7xn6wq8"
+      },
+      "type": "string",
+      "description": "Unique ID generated by the merchant for each request",
+      "pattern": "^[-/~A-Za-z0-9\\_ \\:.,#@!\\\\*\\\\+]{1,120}$",
+      "example": "TEST0000009005"
+     },
+     "Upi-response": {
+      "type": "object",
+      "x-examples": {
+       "Example 1": {
+        "upi": {
+         "vpa": "billdesk@upi",
+         "masked_vpa": "xxxxxx@upi"
+        }
+       }
+      },
+      "title": "upi-response",
+      "description": "Response of upi object in case of upi collect flow",
+      "properties": {
+       "upi": {
+        "type": "object",
+        "properties": {
+         "vpa": {
+          "type": "string",
+          "description": "unmasked value of vpa"
+         },
+         "masked_vpa": {
+          "type": "string",
+          "description": "masked value of vpa"
+         }
+        }
+       }
+      }
+     },
+     "Upi": {
+      "type": "object",
+      "x-stoplight": {
+       "id": "5964437f54f97"
+      },
+      "x-examples": {
+       "Example 1": {
+        "vpa": "testvpa@abc"
+       }
+      },
+      "properties": {
+       "vpa": {
+        "type": "string",
+        "description": "Virtual Payment Address",
+        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\\\.\\\\-\\\\_]{2,38}\\\\@[a-zA-Z0-9]{3,20}$",
+        "example": "abc@okbank"
+       }
+      },
+      "description": "Required when payment_method_type = upi and txn_process_type = collect"
+     }
+    },
+    "parameters": {
+     "bdTraceId": {
+      "in": "header",
+      "name": "BD-Traceid",
+      "description": "BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "example": "20201203182838"
+      }
+     },
+     "bdTimeStamp": {
+      "in": "header",
+      "name": "BD-Timestamp",
+      "description": "Request timestamp to identify date and time of origin of request. Example, a value of BD-Timestamp 20210113180403 identifies the request to have originated on 13th January 2021 at 06:04:03 PM.",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "example": "20201203182838"
+      }
+     },
+     "Content-Type": {
+      "name": "Content-Type",
+      "in": "header",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "example": "application/json"
+      },
+      "description": "Request Content-Type to take the values application/jose"
+     },
+     "Accept": {
+      "name": "Accept",
+      "in": "header",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "example": "application/jose"
+      },
+      "description": "Accept Response Content-Type to take the values application/jose"
+     }
+    },
+    "examples": {
+     "403-error": {
+      "value": {
+       "status": 403,
+       "error_type": "inaccessable_resource_error",
+       "error_code": "GNIAE0002",
+       "message": "Access forbidden"
+      }
+     },
+     "500-error": {
+      "value": {
+       "status": 500,
+       "error_type": "api_processing_error",
+       "error_code": "AUAPE0001",
+       "message": "Internal server error"
+      }
+     }
+    }
+   },
+   "tags": [
+    {
+     "name": "Validate VPA"
+    }
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   }
+  }
+ }
+]

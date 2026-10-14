@@ -1,0 +1,504 @@
+openapi: 3.0.0
+x-stoplight:
+  id: l1vkc0g92donk
+servers:
+- url: https://uat1.billdesk.com/u2
+  description: UAT server
+- url: https://api.billdesk.com
+  description: PROD server
+info:
+  title: Penny Drop
+  description: "This explorer allows merchants to evaluate APIs that are available in the BillDesk Payment Gateway API suite.\n - Only HMAC authentication is supported.\n - All APIs are RESTful and resource oriented.\n - Servers listed are applicable for the API explorer only."
+  contact:
+    name: API Support
+    url: https://www.billdesk.com/helpcenter.htm
+    email: support@billdesk.com
+  version: '2.5'
+x-samples-languages:
+- shell
+- json
+- node
+- java
+- csharp
+paths:
+  /pgauth/ve1_2/accountvalidation:
+    post:
+      summary: Penny Drop
+      operationId: pennydrop
+      responses:
+        '200':
+          description: OK
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    objectid: accountvalidation
+                    bank_account:
+                      number: '123456041'
+                      ifsc: NPCI0000001
+                      name: kiran
+                    customer:
+                      name: kiran
+                    validationid: AV1E0E00000017
+                    mercid: BDMERC
+                    orderid: BDTESTORDERID876
+                    currency: '356'
+                    bankid: AVI
+                    itemcode: DIRECT
+                    additional_info:
+                      additional_info1: Details1
+                      additional_info2: Details2
+                    auth_status: success
+                    bankrefno: '831913675598'
+                    name_matched: 'true'
+                    createdon: '2018-11-15T11:26:14+05:30'
+                properties:
+                  objectid:
+                    $ref: '#/components/schemas/Objectid'
+                  bank_account:
+                    type: object
+                    properties:
+                      number:
+                        $ref: '#/components/schemas/Bankacc_number'
+                      ifsc:
+                        $ref: '#/components/schemas/IFSC'
+                      name:
+                        $ref: '#/components/schemas/Bankaccount_holder_name'
+                  customer:
+                    type: object
+                    properties:
+                      name:
+                        $ref: '#/components/schemas/Bankaccount_holder_name'
+                  validationid:
+                    type: string
+                  mercid:
+                    $ref: '#/components/schemas/Mercid'
+                  orderid:
+                    $ref: '#/components/schemas/Orderid'
+                  currency:
+                    $ref: '#/components/schemas/Currency'
+                  bankid:
+                    $ref: '#/components/schemas/Bankid'
+                  itemcode:
+                    $ref: '#/components/schemas/Itemcode'
+                  additional_info:
+                    $ref: '#/components/schemas/Additional-Info'
+                  auth_status:
+                    type: string
+                    description: 'Represents the status of the request – with possible values as
+
+                      • success
+
+                      • failure'
+                    enum:
+                    - pending
+                    - failure
+                  bankrefno:
+                    $ref: '#/components/schemas/Bank_ref_no'
+                  name_matched:
+                    type: string
+                    description: Value that indicates the status of name matching
+                    enum:
+                    - 'true'
+                    - 'false'
+                  createdon:
+                    $ref: '#/components/schemas/Createdon'
+              examples:
+                Success:
+                  value:
+                    objectid: accountvalidation
+                    bank_account:
+                      number: '123456041'
+                      ifsc: NPCI0000001
+                      name: kiran
+                    customer:
+                      name: kiran
+                    validationid: AV1E0E00000017
+                    mercid: BDMERCID
+                    orderid: BDTESTORDERID876
+                    currency: '356'
+                    bankid: AVI
+                    itemcode: DIRECT
+                    auth_status: success
+                    bankrefno: '831913675598'
+                    name_matched: 'true'
+                    createdon: '2018-11-15T11:26:14+05:30'
+                Failure:
+                  value:
+                    objectid: accountvalidation
+                    bank_account:
+                      number: '11123456789'
+                      ifsc: DLXB0000093
+                      name: BENE CUSTOMER NAME
+                    customer:
+                      name: BENES CUSTOMER NAME
+                    validationid: AV238D00000100
+                    mercid: BDMERC
+                    orderid: BDTESTORDERID847
+                    currency: '356'
+                    bankid: HMP
+                    itemcode: DIRECT
+                    additional_info: test description
+                    auth_status: failure
+                    auth_error_code: AVPAE0001
+                    auth_error_description: Invalid Account Number
+                    auth_error_type: payment_authentication_error
+                    createdon: '2018-11-15T11:26:14+05:30'
+      description: This API facilitates account validation with pennydrop
+      parameters:
+      - $ref: '#/components/parameters/bdTraceId'
+      - $ref: '#/components/parameters/bdTimeStamp'
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  mercid: BDMERC
+                  currency: '356'
+                  bankid: AVI
+                  itemcode: DIRECT
+                  additional_info:
+                    additional_info1: Details1
+                    additional_info2: Details2
+                  orderid: BDTESTORDERID876
+                  payment_method: bank_account
+                  bank_account:
+                    number: ' 123456041'
+                    ifsc: ' NPCI0000001'
+                  customer:
+                    name: BENE CUSTOMER NAME
+                  device:
+                    init_channel: internet
+                    ip: 124.124.1.1
+                    mac: 11-AC-58-21-1B-AA
+                    imei: '990000112233445'
+                    user_agent: Mozilla/5.0 (WindowsNT10.0;WOW64;rv:51.0)Gecko/20100101Firefox/51.0
+                    accept_header: text/html
+                    fingerprintid: 61b12c18b5d0cf901be34a23ca64bb19
+              properties:
+                mercid:
+                  $ref: '#/components/schemas/Mercid'
+                currency:
+                  $ref: '#/components/schemas/Currency'
+                bankid:
+                  $ref: '#/components/schemas/Bankid'
+                itemcode:
+                  $ref: '#/components/schemas/Itemcode'
+                additional_info:
+                  $ref: '#/components/schemas/Additional-Info'
+                orderid:
+                  $ref: '#/components/schemas/Orderid'
+                payment_method:
+                  $ref: '#/components/schemas/Payment_method_type'
+                bank_account:
+                  type: object
+                  properties:
+                    number:
+                      $ref: '#/components/schemas/Bankacc_number'
+                    ifsc:
+                      $ref: '#/components/schemas/IFSC'
+                customer:
+                  type: object
+                  properties:
+                    name:
+                      $ref: '#/components/schemas/Bankaccount_holder_name'
+                device:
+                  $ref: '#/components/schemas/Device-order'
+            examples:
+              Request:
+                value:
+                  objectid: accountvalidation
+                  bank_account:
+                    number: '123456041'
+                    ifsc: NPCI0000001
+                    name: kiran
+                  customer:
+                    name: kiran
+                  validationid: AV1E0E00000017
+                  mercid: BDMERCID
+                  orderid: BDTESTORDERID876
+                  currency: '356'
+                  bankid: AVI
+                  itemcode: DIRECT
+                  auth_status: success
+                  bankrefno: '831913675598'
+                  name_matched: 'true'
+                  createdon: '2018-11-15T11:26:14+05:30'
+      tags:
+      - Penny Drop
+components:
+  parameters:
+    bdTraceId:
+      in: header
+      name: BD-Traceid
+      description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    bdTimeStamp:
+      in: header
+      name: BD-Timestamp
+      description: Request timestamp to identify date and time of origin of request. Example, a value of BD-Timestamp 20210113180403 identifies the request to have originated on 13th January 2021 at 06:04:03 PM.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/json
+      description: Request Content-Type to take the values application/jose
+    Accept:
+      name: Accept
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/jose
+      description: Accept Response Content-Type to take the values application/jose
+  schemas:
+    Additional-Info:
+      type: object
+      x-examples:
+        Example 1:
+          additional_info:
+            additional_info1: Details1
+            additional_info2: Details2
+            additional_info3: Details3
+            additional_info4: Details4
+            additional_info5: Details5
+            additional_info6: Details6
+            additional_info7: Details7
+            additional_info8: Details8
+            additional_info9: Details9
+            additional_info10: Details10
+      description: 'Array of 7 additional_info values that can be attached to
+
+        the transaction.
+
+        Note: Merchant is advised to not pass customer PII
+
+        information in additional info fields.'
+      properties:
+        additional_info1:
+          type: string
+          example: Details1
+        additional_info2:
+          type: string
+          example: Details2
+        additional_info3:
+          type: string
+          example: Details3
+        additional_info4:
+          type: string
+          example: Details4
+        additional_info5:
+          type: string
+          example: Details5
+        additional_info6:
+          type: string
+          example: Details6
+        additional_info7:
+          type: string
+          example: Details7
+    IFSC:
+      title: IFSC
+      x-stoplight:
+        id: grn65kr3i0pk0
+      type: string
+      description: IFSC of the bank account number
+      pattern: ^[A-Za-z]{4}[a-zA-Z0-9]{7}$
+      example: IDBK10000002
+    Bank_ref_no:
+      title: bank_ref_no
+      x-stoplight:
+        id: tls0w5ung6eha
+      type: string
+      description: Transaction reference number generated by bank or acquirer
+    Bankacc_number:
+      title: bankacc_number
+      x-stoplight:
+        id: 9nwo0pwlz0qos
+      type: string
+      description: Bank account number
+      pattern: ^\\d{9,18}$
+      example: '12233445566'
+    Bankaccount_holder_name:
+      title: bankaccount_holder_name
+      x-stoplight:
+        id: jedjceugzit8g
+      type: string
+      description: Name of the bank account holder
+      example: John Doe
+      pattern: ^[A-Za-z0-9\\s\\.'\\-\\~\\@\\_]{1,120}$
+    Bankid:
+      title: bankid
+      x-stoplight:
+        id: gf7ntync4cj73
+      type: string
+      description: 'BillDesk defined unique identifier for acquirer
+
+        Mandatory for Upi and Netbanking flows'
+      example: 1HM
+      pattern: ^[A-Za-z0-9]{1,10}$
+    Createdon:
+      title: createdon
+      x-stoplight:
+        id: k3ewegvbimz0g
+      type: string
+      description: object creation timestamp
+      format: date-time
+    Currency:
+      title: currency
+      x-stoplight:
+        id: 1ehjh4f7vidz7
+      type: string
+      description: ISO currency of the transaction amount, for INR this value will be 356
+    Device-order:
+      type: object
+      x-stoplight:
+        id: bu2ij616i2uce
+      x-examples:
+        Example 1:
+          device:
+            init_channel: internet
+            ip: 124.124.1.1
+            mac: 11-AC-58-21-1B-AA
+            imei: '990000112233445'
+            user_agent: Mozilla/5.0(WindowsNT10.0;WOW64;rv:51.0)Gecko/20100101Firefox/51.0
+            accept_header: text/html
+            fingerprintid: 61b12c18b5d0cf901be34a23ca64bb19
+            browser_tz: '-330'
+            browser_color_depth: '32'
+            browser_java_enabled: 'false'
+            browser_screen_height: '601'
+            browser_screen_width: '657'
+            browser_language: en-US
+            browser_javascript_enabled: 'true'
+      title: Device object
+      description: Device Object
+      properties:
+        init_channel:
+          type: string
+          description: Initiating channel,accepted values are internet,app or kiosk
+          enum:
+          - internet
+          - app
+          - kiosk
+        ip:
+          type: string
+          description: Customer’s IP address
+          maxLength: 15
+        user_agent:
+          type: string
+          description: 'Exact content of the HTTP user-agent header
+
+
+            Note: If the total length of the User-Agent sent by the browser exceeds 2048 characters, truncate the excess portion'
+          example: 'Mozilla/5.0(WindowsNT10.0;WOW64;rv: 51.0)Gecko/20100101Firefox/51.0'
+          pattern: =^[A-Za-z0-9\\_\\:\\-\\,\\;\\/\\)\\(\\.\\s\\+\\[\\]\\=@]{10,255}$
+        accept_header:
+          type: string
+          description: Customer browser accept header values
+          maxLength: 255
+          example: application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+          pattern: ^[0-9A-Za-z\\.\\+\\-\\/\\=\\*\\,\\;]{10,255}$
+      required:
+      - init_channel
+      - ip
+      - user_agent
+      - accept_header
+    Itemcode:
+      title: item code
+      x-stoplight:
+        id: tz16mo44yvoae
+      type: string
+      description: Itemcode value as provided by BillDesk, with a default value DIRECT
+      example: DIRECT
+      pattern: ^[A-Za-z0-9]{1,20}$
+    Mercid:
+      title: mercid
+      x-stoplight:
+        id: 43ns25lu1fyuc
+      type: string
+      pattern: ^[A-Za-z0-9]{1,10}$
+      example: BDMERCID
+      description: Unique identifier as defined by BillDesk for each merchant
+    Objectid:
+      title: objectid
+      x-stoplight:
+        id: bbwm8bhhbqd4r
+      type: string
+      description: 'String representing the object''s type. Objects of the same type share the same value. '
+      enum:
+      - transaction
+      - authentication
+      - mandate
+      - invoice
+      - cardaccount
+      - validatevpa
+      - dispute
+      - settlement
+      - altid
+      - mandate_token
+      - accountvalidation
+    Orderid:
+      title: orderid
+      x-stoplight:
+        id: lmwrwf7xn6wq8
+      type: string
+      description: Unique ID generated by the merchant for each request
+      pattern: ^[-/~A-Za-z0-9\_ \:.,#@!\\*\\+]{1,120}$
+      example: TEST0000009005
+    Payment_method_type:
+      title: payment_method_type
+      x-stoplight:
+        id: kklghqguq1r3q
+      type: string
+      description: 'Represents the method of payment, and can take the following values - card, netbanking, wallet, upi, eft, bankaccount, cashcard, cardless (non-card emi option)
+
+        The associated object will also be provided in the request.'
+      enum:
+      - card
+      - netbanking
+      - upi
+      - eft
+      - cardless
+      - bankaccount
+tags:
+- name: Penny Drop
+x-provenance:
+  method: searched
+  source: https://docs.billdesk.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.billdesk.io/reference/pennydrop.md
+  merge:
+    pages: 1
+    deduped: 0
+    conflicts_kept_first: 0

@@ -1,0 +1,16 @@
+generated: '2026-10-14'
+method: none
+source:
+- https://zapier.com/apps/billdesk/integrations
+- https://n8n.io/integrations/billdesk/
+- https://composio.dev/toolkits/billdesk
+- https://monid.ai/tools/billdesk
+checked:
+- https://composio.dev/toolkits/billdesk
+- https://monid.ai/tools/billdesk
+- https://n8n.io/integrations/billdesk/
+- https://zapier.com/apps/billdesk/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []

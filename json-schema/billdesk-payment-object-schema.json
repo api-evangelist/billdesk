@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/billdesk/main/json-schema/billdesk-payment-object-schema.json",
+  "title": "payment-object",
+  "description": "This object is required for payment flow_type. Contains parameters pertaining to payment details.",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/billdesk-linkpay-openapi.yml#/components/schemas/payment-object",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "$ref": "#/$defs/amount"
+    },
+    "partial_payment_allowed": {
+      "$ref": "#/$defs/partial_payment_allowed"
+    },
+    "max_payments_allowed": {
+      "$ref": "#/$defs/max_payments_allowed"
+    },
+    "minimum_partial_amount": {
+      "$ref": "#/$defs/minimum_partial_amount"
+    },
+    "avs": {
+      "$ref": "#/$defs/avs-object"
+    }
+  },
+  "required": [
+    "amount"
+  ],
+  "$defs": {
+    "amount": {
+      "x-stoplight": {
+        "id": "tvvxkb7grxf9k"
+      },
+      "description": "Payment link amount",
+      "title": "amount",
+      "type": "string",
+      "pattern": "^([1-9]{1}[0-9]{0,7}(\\.[0-9]{1,2})?)$"
+    },
+    "avs-object": {
+      "type": "object",
+      "title": "avs",
+      "description": "The avs object can be added to the request to initiate a payment with a third-party bank account validation. AVS is supported for the card (debit card), netbanking and upi payment methods.\n",
+      "properties": {
+        "bankaccounts": {
+          "type": "array",
+          "description": "Object that contains the details of the payment method",
+          "items": {
+            "type": "object",
+            "properties": {
+              "number": {
+                "type": "string",
+                "description": "Customer's bank account number",
+                "pattern": "^\\\\d{9,18}$"
+              },
+              "ifsc": {
+                "type": "string",
+                "description": "IFSC of the bank account number",
+                "pattern": "^[A-Za-z]{4}[a-zA-Z0-9]{7}$"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the bank account holder",
+                "pattern": "^[A-Za-z0-9\\\\s\\\\.'\\\\-\\\\~\\\\@\\\\_]{1,120}$"
+              }
+            },
+            "required": [
+              "number",
+              "ifsc"
+            ]
+          }
+        }
+      }
+    },
+    "max_payments_allowed": {
+      "title": "max_payments_allowed",
+      "x-stoplight": {
+        "id": "455huxentsrza"
+      },
+      "type": "integer",
+      "description": "Only applicable in case partial payment allowed is true. Maximum number of partial payments that can be processed on the same link. This can be a maximum value of 10 (successful transactions)."
+    },
+    "minimum_partial_amount": {
+      "type": "string",
+      "title": "minimum_partial_amount",
+      "description": "Minimum amount that is required to be paid for every partial payment. Applicable when partial payment allowed is true. If not passed, default value will be set to 1.00",
+      "pattern": "^([1-9]{1}[0-9]{0,7}(\\.[0-9]{1,2})?)$"
+    },
+    "partial_payment_allowed": {
+      "title": "partial_payment_allowed",
+      "x-stoplight": {
+        "id": "orp0vilk2occc"
+      },
+      "type": "boolean",
+      "description": "To determine if partial payment is allowed on the link against the total amount used for link creation."
+    }
+  }
+}

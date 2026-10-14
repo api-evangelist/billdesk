@@ -1,0 +1,119 @@
+generated: '2026-10-14'
+method: derived
+generator: derive-data-model.py
+source:
+- openapi/billdesk-linkpay-openapi.yml
+- openapi/billdesk-pa-settlements-openapi.yml
+- openapi/billdesk-payments-openapi.yml
+- openapi/billdesk-penny-drop-openapi.yml
+- openapi/billdesk-recurring-openapi.yml
+- openapi/billdesk-tokenization-openapi.yml
+- openapi/billdesk-validate-vpa-openapi.yml
+notation: has_one = property $ref; has_many = array of $ref; belongs_to = <entity>_id field
+summary:
+  entities: 39
+  entities_in_spec: 39
+  relationships: 1
+entities:
+- name: Additional-Info
+  fields: 7
+  description: Array of 7 additional_info values that can be attached to
+- name: Altid_card_request
+  fields: 5
+- name: Avs-request
+  fields: 1
+  description: This API can be used to verify the bank account number by initiating a penny drop to the account.
+    For upi, validation is done at acquiring bank end
+- name: Avs-response
+  fields: 3
+- name: Bankaccount
+  fields: 7
+  description: Required when payment_method_type = bankaccount
+- name: Card-Response
+  fields: 4
+- name: Cardacc-network-issuer-token
+  fields: 5
+- name: Cardaccid_auth_data
+  fields: 7
+- name: Cardaccount-in-txn-response
+  fields: 8
+- name: Customer
+  fields: 4
+- name: Device
+  fields: 11
+- name: Device-order
+  fields: 4
+  description: Device
+- name: Error-object
+  fields: 4
+- name: Invoice
+  fields: 5
+- name: Links
+  fields: 1
+  description: Associated links with the object, and contains the issuer URL that will be provided in the redirect
+    authentication workflow
+- name: Links_Parameters
+  fields: 10
+  description: Parameters that are used to redirect the customer to the issuer URL
+- name: Mandate
+  fields: 12
+- name: Mandate-Response
+  fields: 18
+- name: Network-issuer-token
+  fields: 7
+- name: Pay-using-altid
+  fields: 4
+- name: Pay-using-card-account-id
+  fields: 4
+- name: Pay-using-card-number-pan
+  fields: 7
+- name: Pay-using-issuer-token
+  fields: 4
+- name: Pay-using-network-token
+  fields: 4
+- name: Refund_info
+  fields: 1
+- name: Response-parameters
+  fields: 8
+- name: Split_payment_refund_request
+  fields: 3
+- name: Split_payment_refund_response
+  fields: 4
+- name: Split_payment_request
+  fields: 2
+  description: This object is applicable in case a merchant has opted to receive the settlement in multiple settlement
+    accounts
+- name: Upi
+  fields: 1
+  description: Required when payment_method_type = upi and txn_process_type = collect
+- name: Upi-response
+  fields: 1
+  description: Response of upi object in case of upi collect flow
+- name: avs-object
+  fields: 1
+  description: The avs object can be added to the request to initiate a payment with a third-party bank account
+    validation. AVS is supported for the card (debit card), netbanking and upi payment methods.
+- name: customer-response
+  fields: 4
+  description: 'Customer object response. Note : PII data will be masked'
+- name: customer_notification
+  fields: 2
+  description: Merchant can choose to send Email or SMS or both to the customer once payment link is generated.
+- name: customer_notification-request
+  fields: 2
+  description: Merchant can choose to send Email or SMS or both to the customer once payment link is generated.
+- name: error-object
+  fields: 4
+- name: payment-object
+  fields: 5
+  description: This object is required for payment flow_type. Contains parameters pertaining to payment details.
+- name: payment-object-fetch-response
+  fields: 5
+- name: payment-object-response
+  fields: 4
+  description: Payment object contains parameters pertaining to payment details.
+relationships:
+- from: payment-object
+  to: avs-object
+  type: has_one
+  via: avs

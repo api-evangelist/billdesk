@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/billdesk/main/json-schema/billdesk-objectid-schema.json",
+  "title": "objectid",
+  "description": "String representing the object's type. Objects of the same type share the same value. ",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/billdesk-pa-settlements-openapi.yml#/components/schemas/Objectid",
+  "x-stoplight": {
+    "id": "bbwm8bhhbqd4r"
+  },
+  "type": "string",
+  "enum": [
+    "transaction",
+    "authentication",
+    "mandate",
+    "invoice",
+    "cardaccount",
+    "validatevpa",
+    "dispute",
+    "settlement",
+    "altid",
+    "mandate_token",
+    "accountvalidation",
+    "refund"
+  ]
+}

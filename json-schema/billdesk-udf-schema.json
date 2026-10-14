@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/billdesk/main/json-schema/billdesk-udf-schema.json",
+  "title": "UDF",
+  "description": "User defined fields defined by merchant which will be displayed to the customer on link summary page. Maximum udf objects allowed are 7. Note: Merchant is advised to not pass customer PII information in UDF fields.",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/billdesk-linkpay-openapi.yml#/components/schemas/udf",
+  "type": "array",
+  "x-stoplight": {
+    "id": "meocq7796jcmx"
+  },
+  "items": {
+    "x-stoplight": {
+      "id": "1nqq3lba6ll17"
+    },
+    "type": "object",
+    "properties": {
+      "sequence": {
+        "type": "integer",
+        "x-stoplight": {
+          "id": "rgpjfed3706xp"
+        },
+        "description": "Sequence of the field to be shown on link summary page. If this value is 1, the field will be shown on top of the link summary page.",
+        "maximum": 7
+      },
+      "field_label": {
+        "type": "string",
+        "x-stoplight": {
+          "id": "1q40pz86z2410"
+        },
+        "description": "Label of the field",
+        "pattern": "^[-/~A-Za-z0-9\\_ \\:.,#@!\\*\\+]{1,60}$"
+      },
+      "field_value": {
+        "type": "string",
+        "x-stoplight": {
+          "id": "iyqgumuovf38x"
+        },
+        "description": "Value of the field",
+        "pattern": "^[-/~A-Za-z0-9\\_ \\:.,#@!\\*\\+]{1,120}$"
+      },
+      "hidden_flag": {
+        "type": "boolean",
+        "x-stoplight": {
+          "id": "6fauk2m3yictv"
+        },
+        "description": "If true, the object will not be displayed on link summary page\n"
+      }
+    }
+  }
+}

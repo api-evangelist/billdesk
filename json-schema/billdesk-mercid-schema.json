@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/billdesk/main/json-schema/billdesk-mercid-schema.json",
+  "title": "mercid",
+  "description": "Unique identifier as defined by BillDesk for each merchant",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/billdesk-pa-settlements-openapi.yml#/components/schemas/Mercid",
+  "x-stoplight": {
+    "id": "43ns25lu1fyuc"
+  },
+  "type": "string",
+  "pattern": "^[A-Za-z0-9]{1,10}$"
+}

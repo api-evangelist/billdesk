@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/billdesk/main/json-schema/billdesk-payment-object-response-schema.json",
+  "title": "payment-object-response",
+  "description": "Payment object contains parameters pertaining to payment details.",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/billdesk-linkpay-openapi.yml#/components/schemas/payment-object-response",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "$ref": "#/$defs/amount"
+    },
+    "partial_payment_allowed": {
+      "$ref": "#/$defs/partial_payment_allowed"
+    },
+    "max_payments_allowed": {
+      "$ref": "#/$defs/max_payments_allowed-response"
+    },
+    "minimum_partial_amount": {
+      "$ref": "#/$defs/minimum_partial_amount-response"
+    }
+  },
+  "$defs": {
+    "amount": {
+      "x-stoplight": {
+        "id": "tvvxkb7grxf9k"
+      },
+      "description": "Payment link amount",
+      "title": "amount",
+      "type": "string",
+      "pattern": "^([1-9]{1}[0-9]{0,7}(\\.[0-9]{1,2})?)$"
+    },
+    "max_payments_allowed-response": {
+      "x-stoplight": {
+        "id": "h49661bkn7y2g"
+      },
+      "type": "integer",
+      "description": "Maximum number of partial payments that can be processed on the same link. This can be a maximum value of 10 (successful transactions). Value of 1 indicates a single payment can be collected against the link."
+    },
+    "minimum_partial_amount-response": {
+      "x-stoplight": {
+        "id": "rphcf0sbb83t3"
+      },
+      "type": "string",
+      "description": "Value equal to amount indicates a single payment can be collected against the link.",
+      "pattern": "^([1-9]{1}[0-9]{0,7}(\\.[0-9]{1,2})?)$"
+    },
+    "partial_payment_allowed": {
+      "title": "partial_payment_allowed",
+      "x-stoplight": {
+        "id": "orp0vilk2occc"
+      },
+      "type": "boolean",
+      "description": "To determine if partial payment is allowed on the link against the total amount used for link creation."
+    }
+  }
+}

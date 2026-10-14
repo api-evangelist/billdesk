@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/billdesk/main/json-schema/billdesk-pay-using-altid-schema.json",
+  "title": "Pay using alt id token",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/billdesk-payments-openapi.yml#/components/schemas/Pay-using-altid",
+  "type": "object",
+  "x-stoplight": {
+    "id": "77jgo8f9g4srj"
+  },
+  "properties": {
+    "altid_token": {
+      "type": "object",
+      "required": [
+        "altid_value",
+        "altid_cryptogram",
+        "altid_expiry_month",
+        "altid_expiry_year"
+      ],
+      "properties": {
+        "altid_value": {
+          "type": "string",
+          "description": "Token Value – as received from TSP, provided in the ‘Detokenize’ response",
+          "pattern": "^[A-Za-z0-9]{1,35}$"
+        },
+        "altid_cryptogram": {
+          "type": "string",
+          "description": "Token Cryptogram – as received from TSP, provided in the ‘Detokenize’ response",
+          "pattern": "^[a-zA-Z0-9\\\\/\\\\!@#\\\\$%\\\\^&\\\\*\\\\(\\\\)\\\\{\\\\}_\\\\+\\\\=\\\\|:”;’,\\\\.~`\\\\-\\\\\\\\]{1,256}$"
+        },
+        "altid_expiry_month": {
+          "type": "integer",
+          "description": "Token Expiry Month – as received from TSP in the MM format"
+        },
+        "altid_expiry_year": {
+          "type": "integer",
+          "description": "Token Expiry Year – as received from TSP in the YYYY format"
+        },
+        "altid_trid": {
+          "type": "string",
+          "description": "conditional: required only for AMEX - validate once"
+        }
+      }
+    },
+    "card_end": {
+      "type": "string",
+      "description": "Last 4 digits of the card number \n\nNote: For an EMI transaction via network token,this attribute value is required for loan booking"
+    },
+    "cvv": {
+      "type": "string",
+      "description": "Card cvv value"
+    },
+    "holder_name": {
+      "type": "string",
+      "description": "Cardholder name",
+      "pattern": "^[A-Za-z0-9\\\\\\\\s\\\\\\\\.'\\\\\\\\-\\\\\\\\~\\\\\\\\@\\\\\\\\_]{1,120}$"
+    }
+  },
+  "required": [
+    "altid_token",
+    "cvv",
+    "holder_name"
+  ]
+}

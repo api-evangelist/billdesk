@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/billdesk/main/json-schema/billdesk-customer-schema.json",
+  "title": "customer",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/billdesk-linkpay-openapi.yml#/components/schemas/Customer",
+  "type": "object",
+  "x-stoplight": {
+    "id": "4x1i3bhy9jzwf"
+  },
+  "properties": {
+    "first_name": {
+      "type": "string",
+      "description": "Customer’s First Name",
+      "pattern": "^[A-Za-z0-9]{1,15}$"
+    },
+    "last_name": {
+      "type": "string",
+      "description": "Customer’s Last Name",
+      "pattern": "^[A-Za-z0-9]{1,15}$"
+    },
+    "mobile": {
+      "type": "string",
+      "description": "Customer’s Mobile number. This parameter is mandatory if sms is passed as true in customer_notification object.",
+      "pattern": "^[\\+]{0,1}[0-9]{5,15}$"
+    },
+    "email": {
+      "type": "string",
+      "description": "Customer’s Email address. This parameter is mandatory if email is passed as true in customer_notification object.",
+      "pattern": "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9\\-]+)*(\\.[A-Za-z]{2,6})$"
+    }
+  }
+}

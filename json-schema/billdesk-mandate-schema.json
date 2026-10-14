@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/billdesk/main/json-schema/billdesk-mandate-schema.json",
+  "title": "Mandate",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/billdesk-payments-openapi.yml#/components/schemas/Mandate",
+  "type": "object",
+  "properties": {
+    "mercid": {
+      "type": "string",
+      "description": "Unique identifier as defined by BillDesk for each merchant",
+      "pattern": "^[A-Za-z0-9]{1,10}$"
+    },
+    "customer_refid": {
+      "type": "string",
+      "description": "Unique reference of the customer in the merchant system, and can be linked to different subscriptions of the same customer",
+      "pattern": "^[A-Za-z0-9\\\\_\\\\:\\\\-]{1,80}$"
+    },
+    "subscription_refid": {
+      "type": "string",
+      "description": "Unique reference assigned by merchant for the subscription",
+      "pattern": "^[A-Za-z0-9_-]{1,128}$"
+    },
+    "subscription_desc": {
+      "type": "string",
+      "description": "Customer friendly description for the subscription, this narration is generally displayed to the customer at the issuer channel"
+    },
+    "start_date": {
+      "$ref": "#/$defs/Start_date"
+    },
+    "end_date": {
+      "$ref": "#/$defs/End_date"
+    },
+    "amount": {
+      "type": "string",
+      "description": "Subscription amount in two decimals, eg. 2400.00",
+      "pattern": "^([1-9]{1}[0-9]{0,7}(\\.[0-9]{1,2})?)$"
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO currency code for the amount, with a value 356 for INR"
+    },
+    "frequency": {
+      "type": "string",
+      "description": "Frequency at which the subscription debits will be processed, possible values are:\n\n•\tweek - weekly\n•\tmnth - monthly\n•\tbimn – bi-monthly\n•\tqurt - quarterly\n•\tbian – bi-annually\n•\tyear - yearly\n•\tadho – adhoc\n\n",
+      "enum": [
+        "mnth",
+        "week",
+        "bimn",
+        "qurt",
+        "bian",
+        "year",
+        "adho"
+      ]
+    },
+    "amount_type": {
+      "$ref": "#/$defs/Amount_type"
+    },
+    "recurrence_rule": {
+      "$ref": "#/$defs/Recurrence_rule"
+    },
+    "debit_day": {
+      "$ref": "#/$defs/Debit_day"
+    }
+  },
+  "required": [
+    "mercid",
+    "customer_refid",
+    "subscription_refid",
+    "subscription_desc",
+    "start_date",
+    "end_date",
+    "amount",
+    "currency",
+    "frequency",
+    "amount_type"
+  ],
+  "$defs": {
+    "Amount_type": {
+      "title": "amount_type",
+      "x-stoplight": {
+        "id": "o7dqaslkupvxa"
+      },
+      "type": "string",
+      "description": "Indicates whether subscription amount is fixed or has a maximum limit. The following values are possible\n•\tmaximum - indicates the maximum amount that can be charged for the subscription\n•\tfixed – indicates the fixed amount to be charged for the subscription\nPlease note: For upi, only \"maximum\" is allowed. This is required to allow for token debit (small value transaction)\n",
+      "enum": [
+        "maximum",
+        "fixed"
+      ]
+    },
+    "Debit_day": {
+      "title": "debit_day",
+      "x-stoplight": {
+        "id": "ppp2ede7qx3fc"
+      },
+      "type": "string",
+      "description": "Required only where payment_method_type = upi. Default value \"1\" to be passed\n",
+      "pattern": "^\\\\d{1,2}$",
+      "enum": [
+        "1"
+      ]
+    },
+    "End_date": {
+      "title": "end_date",
+      "x-stoplight": {
+        "id": "uz968g6golwjt"
+      },
+      "type": "string",
+      "description": "Subscription end date in yyyy-mm-dd format\nNote: Should be greater than current date (IST timezone). For mandates that are valid ‘until cancelled’ by the customer, end_date year could be 2099, and for upi, maximum duration allowed for a mandate is 30 years",
+      "format": "date"
+    },
+    "Recurrence_rule": {
+      "title": "recurrence_rule",
+      "x-stoplight": {
+        "id": "mzu48wk4tb3i8"
+      },
+      "type": "string",
+      "description": "Note: Required only where payment_method_type = upi. Default value : 'after'\n",
+      "enum": [
+        "after"
+      ]
+    },
+    "Start_date": {
+      "title": "start_date",
+      "x-stoplight": {
+        "id": "v7tyy2tfnut1w"
+      },
+      "type": "string",
+      "description": "Subscription start date in yyyy-mm-dd format\nNote: Should be greater than or equal to current date (IST timezone). \nNote for UPI : Should be equal to mandate creation date for UPI. In UPI, an subsequent charge is created on a successful mandate. This includes the first charge as well along with mandate creation. Since first charge is done immediately, it is important that the mandate “start_date” should be today’s date \n",
+      "format": "date"
+    }
+  }
+}

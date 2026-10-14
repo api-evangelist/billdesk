@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/billdesk/main/json-schema/billdesk-pay-using-card-number-pan-schema.json",
+  "title": "Pay using card number - pan",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/billdesk-tokenization-openapi.yml#/components/schemas/Pay-using-card-number-pan",
+  "type": "object",
+  "x-stoplight": {
+    "id": "1xxgnveu0ix3k"
+  },
+  "properties": {
+    "number": {
+      "type": "string",
+      "pattern": "^[0-9]{16}$",
+      "description": "Card number"
+    },
+    "expiry_month": {
+      "type": "string",
+      "description": "Card expiry month in MM format"
+    },
+    "expiry_year": {
+      "type": "string",
+      "description": "Card expiry year in YYYY format"
+    },
+    "holder_name": {
+      "type": "string",
+      "description": "Cardholder name",
+      "pattern": "^[A-Za-z0-9\\\\\\\\s\\\\\\\\.'\\\\\\\\-\\\\\\\\~\\\\\\\\@\\\\\\\\_]{1,120}$"
+    },
+    "cvv": {
+      "type": "string",
+      "description": "Card cvv value"
+    },
+    "tokenize": {
+      "type": "string",
+      "enum": [
+        "true"
+      ],
+      "description": "If the card is required to be tokenized then, the value is true"
+    },
+    "coft_consent": {
+      "type": "string",
+      "enum": [
+        "true"
+      ],
+      "description": "Fixed value as true, confirming the card holder consent to tokenize the card"
+    }
+  },
+  "required": [
+    "number",
+    "expiry_month",
+    "expiry_year",
+    "cvv"
+  ]
+}

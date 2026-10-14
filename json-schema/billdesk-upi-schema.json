@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/billdesk/main/json-schema/billdesk-upi-schema.json",
+  "title": "Upi",
+  "description": "Required when payment_method_type = upi and txn_process_type = collect",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/billdesk-validate-vpa-openapi.yml#/components/schemas/Upi",
+  "type": "object",
+  "x-stoplight": {
+    "id": "5964437f54f97"
+  },
+  "properties": {
+    "vpa": {
+      "type": "string",
+      "description": "Virtual Payment Address",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\\\.\\\\-\\\\_]{2,38}\\\\@[a-zA-Z0-9]{3,20}$"
+    }
+  }
+}

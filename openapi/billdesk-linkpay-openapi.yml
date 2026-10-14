@@ -1,0 +1,1776 @@
+openapi: 3.1.0
+x-stoplight:
+  id: ykcpgrfsszuul
+info:
+  title: LinkPay
+  version: '1.0'
+servers:
+- description: UAT
+  url: https://uat1.billdesk.com/linkpay/links
+- description: PROD
+  url: https://api.billdesk.com/linkpay/links
+paths:
+  /create:
+    post:
+      summary: Create Link
+      operationId: create-link
+      responses:
+        '200':
+          description: OK
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    objectid: link
+                    mercid: BDMONITOR
+                    linkid: U4560001737452
+                    createdon: '2023-11-29T17:14:21+05:30'
+                    currency: '356'
+                    payment_method_allowed: card,upi
+                    flow_type: Transaction+Mandate
+                    mandate:
+                      amount: '200.00'
+                      amount_type: max
+                      frequency: monthly
+                      customer_refid: CUSTREF08900053
+                      subscription_refid: SUB614514510012
+                      subscription_desc: Unlimited Plan
+                      start_date: 2023-12-7
+                      end_date: ' '
+                      recurrence_rule: ' '
+                      debit_day: ' '
+                    customer:
+                      first_name: J*h*
+                      last_name: D*e
+                      mobile: '******9982'
+                      mobile_alt: '******9983'
+                      email: '*b*1*3@xyz.com'
+                      email_alt: '*q*4*6@xyz.com'
+                    customer_notification:
+                      sms: true
+                      email: false
+                      notify_status:
+                        sms: success
+                        email: fail
+                    udf:
+                    - sequence: '1'
+                      field_label: Policy number
+                      field_value: '1234567'
+                    - sequence: '2'
+                      field_label: Quote number
+                      field_value: '162728383'
+                    - sequence: '3'
+                      field_label: XYZ ID
+                      field_value: '1939498449'
+                    additional_info:
+                      additional_info1: Details1
+                      additional_info2: Details2
+                      additional_info3: Details3
+                      additional_info4: Details4
+                      additional_info5: Details5
+                      additional_info6: Details6
+                      additional_info7: Details7
+                    ru: https://www.merchanturl.com/response.jsp
+                    link_expiry_date: '2023-12-18T12:25:23+05:30'
+                    link_desc: Pending payment for bill 1234
+                    max_payments_allowed: '5'
+                    partial_payment_allowed: false
+                    minimum_partial_amount: ' '
+                    additional_charge_label: ' '
+                    additional_charge_amount: ' '
+                    link: https://billdesk.com/12345567
+                    link_status: Issued, Attempted, Partially Paid, Paid, Expired,Deleted
+                    link_error_code: PLS0000
+                    link_error_desc: Pending
+                    link_error_type: Pending
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      objectid:
+                        $ref: '#/components/schemas/objectid'
+                      linkid:
+                        $ref: '#/components/schemas/linkid'
+                      mercid:
+                        $ref: '#/components/schemas/Mercid'
+                      merc_link_ref_no:
+                        $ref: '#/components/schemas/merc_link_ref_no'
+                      createdon:
+                        $ref: '#/components/schemas/Createdon'
+                      flow_type:
+                        $ref: '#/components/schemas/flow_type'
+                      payment_method_allowed:
+                        $ref: '#/components/schemas/payment_method_allowed-response'
+                      currency:
+                        $ref: '#/components/schemas/Currency'
+                      payment:
+                        $ref: '#/components/schemas/payment-object-response'
+                        x-stoplight:
+                          id: hac7xqiepb31v
+                      customer:
+                        $ref: '#/components/schemas/customer-response'
+                      customer_notification:
+                        $ref: '#/components/schemas/customer_notification'
+                      udf:
+                        $ref: '#/components/schemas/udf'
+                      additional_info:
+                        $ref: '#/components/schemas/Additional-Info'
+                      forwarding_url:
+                        $ref: '#/components/schemas/forwarding_url'
+                        x-stoplight:
+                          id: ggq29rla5ujq1
+                      link_expiry_date:
+                        $ref: '#/components/schemas/link_expiry_date'
+                      link_desc:
+                        $ref: '#/components/schemas/link_desc'
+                      link:
+                        $ref: '#/components/schemas/link'
+                      link_title:
+                        $ref: '#/components/schemas/link_title'
+              examples:
+                Full Payment:
+                  value:
+                    data:
+                      objectid: link
+                      mercid: BDMERCID
+                      merc_link_ref_no: test2L
+                      currency: '356'
+                      payment_method_allowed: all
+                      flow_type: payment
+                      customer_notification:
+                        sms: false
+                        email: false
+                      link_expiry_date: '2024-11-16T12:11:24.829892081'
+                      link_title: Payment for Car Service
+                      payment:
+                        amount: '100.00'
+                        max_payments_allowed: 1
+                        partial_payment_allowed: false
+                        minimum_partial_amount: '100.00'
+                      linkid: LP20241017s1U1
+                      link: https://ssp-dev.billdesk.io/tinyurl/Iod28
+                Partial Payment:
+                  value:
+                    data:
+                      objectid: link
+                      mercid: BDMERCID
+                      merc_link_ref_no: test2K
+                      currency: '356'
+                      payment_method_allowed: all
+                      flow_type: payment
+                      customer_notification:
+                        sms: false
+                        email: false
+                      link_expiry_date: '2024-10-12T18:38:21.197224669'
+                      link_title: Payment for Car Service
+                      payment:
+                        amount: '100.00'
+                        max_payments_allowed: 2
+                        partial_payment_allowed: true
+                        minimum_partial_amount: '100.00'
+                      linkid: LP20240912Q7k7
+                      link: https://ssp-dev.billdesk.io/tinyurl/33XwZ
+                Using avs object:
+                  value:
+                    data:
+                      objectid: link
+                      mercid: BDMERCID
+                      merc_link_ref_no: test2M
+                      currency: '356'
+                      payment_method_allowed: all
+                      flow_type: payment
+                      customer_notification:
+                        sms: false
+                        email: false
+                      link_expiry_date: '2024-11-03T12:26:36.289864828'
+                      link_title: Payment for Car Service
+                      payment:
+                        amount: '100.00'
+                        max_payments_allowed: 1
+                        partial_payment_allowed: false
+                        minimum_partial_amount: '100.00'
+                      linkid: LP20241004AE6p
+                      link: https://ssp-dev.billdesk.io/tinyurl/ORAPL
+        '403':
+          description: Forbidden
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-object'
+              examples:
+                ? ''
+                : value:
+                    status: 403
+                    error_type: inaccessable_resource_error
+                    error_code: LPIAE0001
+                    message: Access forbidden
+        '500':
+          description: Internal Server Error
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-object'
+              examples:
+                ? ''
+                : value:
+                    status: 500
+                    error_type: api_processing_error
+                    error_code: LPAPE0001
+                    message: Internal server error
+        default:
+          description: Any bad or invalid request will lead to following error object
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-object'
+              examples:
+                Invalid merchant config:
+                  value:
+                    status: 422
+                    error_type: api_validation_error
+                    error_code: LPAVE0016
+                    message: Mercid does not exist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  mercid: BDMONITOR
+                  amount: '2.00'
+                  currency: '356'
+                  payment_method_allowed: card,upi
+                  flow_type: Transaction+Mandate
+                  mandate:
+                    amount: '200.00'
+                    amount_type: max
+                    frequency: monthly
+                    customer_refid: CUSTREF08900053
+                    subscription_refid: SUB614514510012
+                    subscription_desc: Unlimited Plan
+                    start_date: 2023-12-7
+                    end_date: ' '
+                    recurrence_rule: ' '
+                    debit_day: ' '
+                  customer:
+                    first_name: John
+                    last_name: Doe
+                    mobile: '9022979982'
+                    mobile_alt: '9022979983'
+                    email: abc123@xyz.com
+                    email_alt: pqr456@xyz.com
+                  customer_notification:
+                    sms: true
+                    email: false
+                  udf:
+                  - sequence: '1'
+                    field_label: Policy number
+                    field_value: '1234567'
+                  - sequence: '2'
+                    field_label: Quote number
+                    field_value: '162728383'
+                  - sequence: '3'
+                    field_label: XYZ ID
+                    field_value: '1939498449'
+                  additional_info:
+                    additional_info1: Details1
+                    additional_info2: Details2
+                    additional_info3: Details3
+                    additional_info4: Details4
+                    additional_info5: Details5
+                    additional_info6: Details6
+                    additional_info7: Details7
+                  ru: https://www.merchanturl.com/response.jsp
+                  link_expiry_date: '2023-12-18T12:25:23+05:30'
+                  link_desc: Pending payment for bill 1234
+                  max_payments_allowed: '5'
+                  partial_payment_allowed: false
+                  minimum_partial_amount: ' '
+                  additional_charge_label: ' '
+                  additional_charge_amount: ' '
+              properties:
+                data:
+                  type: object
+                  properties:
+                    mercid:
+                      $ref: '#/components/schemas/Mercid'
+                    merc_link_ref_no:
+                      $ref: '#/components/schemas/merc_link_ref_no'
+                    flow_type:
+                      $ref: '#/components/schemas/flow_type'
+                    payment_method_allowed:
+                      $ref: '#/components/schemas/payment_method_allowed'
+                      x-stoplight:
+                        id: 469ipohzsrgq4
+                    currency:
+                      $ref: '#/components/schemas/Currency'
+                    payment:
+                      $ref: '#/components/schemas/payment-object'
+                      x-stoplight:
+                        id: e9vw9k8lrtv1c
+                    customer:
+                      $ref: '#/components/schemas/Customer'
+                    customer_notification:
+                      $ref: '#/components/schemas/customer_notification-request'
+                    udf:
+                      $ref: '#/components/schemas/udf'
+                    additional_info:
+                      $ref: '#/components/schemas/Additional-Info'
+                    forwarding_url:
+                      $ref: '#/components/schemas/forwarding_url'
+                      x-stoplight:
+                        id: cg3d36a89xn3o
+                    link_expiry_date:
+                      $ref: '#/components/schemas/link_expiry_date'
+                    link_title:
+                      $ref: '#/components/schemas/link_title'
+                    link_desc:
+                      $ref: '#/components/schemas/link_desc'
+                  required:
+                  - mercid
+                  - flow_type
+                  - currency
+                  - link_title
+            examples:
+              Full Payment:
+                value:
+                  data:
+                    mercid: BDMERCID
+                    merc_link_ref_no: test2L
+                    currency: '356'
+                    flow_type: payment
+                    link_title: Payment for Car Service
+                    payment:
+                      amount: '100.00'
+              Partial Payment:
+                value:
+                  data:
+                    mercid: BDMERCID
+                    merc_link_ref_no: test2K
+                    currency: '356'
+                    flow_type: payment
+                    link_title: Payment for Car Service
+                    payment:
+                      amount: '100.00'
+                      partial_payment_allowed: true
+                      max_payments_allowed: 2
+                      minimum_partial_amount: '100'
+              Using avs object:
+                value:
+                  data:
+                    mercid: BDMERCID
+                    merc_link_ref_no: test2M
+                    currency: '356'
+                    flow_type: payment
+                    link_title: Payment for Car Service
+                    payment:
+                      amount: '100.00'
+                      avs:
+                        bankaccount:
+                        - number: '9999999999'
+                          ifsc: HDFC9999999
+                          holder_name: Dr. kahsdfk
+        description: ''
+      parameters:
+      - $ref: '#/components/parameters/PASettlement_BdTraceId'
+      - $ref: '#/components/parameters/PASettlement_BdTimeStamp'
+      - $ref: '#/components/parameters/PASettlement_Content-Type'
+      - $ref: '#/components/parameters/PASettlement_Accept'
+      description: This API will be used to create a link for the customer to make a payment and the merchant can choose the medium for dissemination of the link- Email, SMS or both.
+      tags:
+      - Payment Links
+    parameters: []
+  /delete:
+    post:
+      summary: Delete Link
+      operationId: delete-link
+      responses:
+        '200':
+          description: OK
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    objectid: link
+                    mercid: BDMONITOR
+                    linkid: U4560001737452
+                    createdon: '2023-11-29T17:14:21+05:30'
+                    amount: '2.00'
+                    currency: '356'
+                    payment_method_allowed: card,netbanking,upi,wallets,all
+                    flow_type: payments
+                    customer:
+                      first_name: J*h*
+                      last_name: D*e
+                      mobile: '******9982'
+                      mobile_alt: '******9983'
+                      email: '*b*1*3@xyz.com'
+                      email_alt: '*q*4*6@xyz.com'
+                    customer_notification:
+                      sms: true
+                      email: false
+                      notify_status:
+                        sms: success
+                        email: fail
+                    udf:
+                    - sequence: '1'
+                      field_label: Policy number
+                      field_value: '1234567'
+                    - sequence: '2'
+                      field_label: Quote number
+                      field_value: '162728383'
+                    - sequence: '3'
+                      field_label: XYZ ID
+                      field_value: '1939498449'
+                    additional_info:
+                      additional_info1: Details1
+                      additional_info2: Details2
+                      additional_info3: Details3
+                      additional_info4: Details4
+                      additional_info5: Details5
+                      additional_info6: Details6
+                      additional_info7: Details7
+                    ru: https://www.merchanturl.com/response.jsp
+                    link_expiry_date: '2023-12-18T12:25:23+05:30'
+                    link_desc: Pending payment for bill 1234
+                    max_payments_allowed: '5'
+                    partial_payment_allowed: true
+                    minimum_partial_amount: ' '
+                    additional_charge_label: ' '
+                    additional_charge_amount: ' '
+                    link: https://billdesk.com/12345567
+                    link_status: Issued, Attempted, Partially Paid, Paid, Expired, Cancelled
+                    link_error_code: PLS0000
+                    link_error_desc: Pending
+                    link_error_type: Pending
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      objectid:
+                        $ref: '#/components/schemas/objectid'
+                      linkid:
+                        $ref: '#/components/schemas/linkid'
+                      createdon:
+                        $ref: '#/components/schemas/Createdon'
+                      amount:
+                        $ref: '#/components/schemas/amount'
+                      currency:
+                        $ref: '#/components/schemas/Currency'
+                      payment_method_allowed:
+                        $ref: '#/components/schemas/payment_method_allowed'
+                      flow_type:
+                        $ref: '#/components/schemas/flow_type'
+                      customer:
+                        $ref: '#/components/schemas/Customer'
+                      customer_notification:
+                        $ref: '#/components/schemas/customer_notification-request'
+                      udf:
+                        $ref: '#/components/schemas/udf'
+                      additional_info:
+                        $ref: '#/components/schemas/Additional-Info'
+                      forwarding_url:
+                        $ref: '#/components/schemas/forwarding_url'
+                        x-stoplight:
+                          id: romcoviey742d
+                      link_expiry_date:
+                        $ref: '#/components/schemas/link_expiry_date'
+                      link_desc:
+                        $ref: '#/components/schemas/link_desc'
+                      link_title:
+                        $ref: '#/components/schemas/link_title'
+                      max_payments_allowed:
+                        $ref: '#/components/schemas/max_payments_allowed-response'
+                      partial_payment_allowed:
+                        $ref: '#/components/schemas/partial_payment_allowed'
+                      minimum_partial_amount:
+                        $ref: '#/components/schemas/minimum_partial_amount-response'
+                      link:
+                        $ref: '#/components/schemas/link'
+                      link_status:
+                        $ref: '#/components/schemas/link_status'
+              examples:
+                Delete response:
+                  value:
+                    data:
+                      objectid: link
+                      mercid: BDMERCID
+                      merc_link_ref_no: linkpay05
+                      currency: '356'
+                      flow_type: PAYMENT
+                      customer:
+                        first_name: Jane
+                        last_name: Doe
+                        mobile: 98XX5XXX38
+                        email: axc@google.com
+                      customer_notification:
+                        sms: false
+                        email: true
+                      additional_info:
+                        additional_info5: d
+                        additional_info1: d
+                        additional_info2: a
+                        additional_info3: p
+                        additional_info4: k
+                        additional_info6: r
+                        additional_info7: s
+                      link_expiry_date: '2024-09-29T10:38:00'
+                      link_desc: tyres
+                      payment:
+                        amount: '100.00'
+                        max_payments_allowed: 1
+                        partial_payment_allowed: false
+                        minimum_partial_amount: '100.00'
+                      linkid: LP202409103a6s
+                      link_status: DELETED
+                      createdon: '2024-09-10T17:02:30.525139'
+        '403':
+          description: Forbidden
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-object'
+              examples:
+                ? ''
+                : value:
+                    status: 403
+                    error_type: inaccessable_resource_error
+                    error_code: LPIAE0001
+                    message: Access forbidden
+        '500':
+          description: Internal Server Error
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-object'
+              examples:
+                ? ''
+                : value:
+                    status: 500
+                    error_type: api_processing_error
+                    error_code: LPAPE0001
+                    message: Internal server error
+        default:
+          description: Any bad or invalid request will lead to following error object
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-object'
+              examples:
+                Invalid merchant config:
+                  value:
+                    status: 422
+                    error_type: api_validation_error
+                    error_code: LPAVE0016
+                    message: Mercid does not exist
+      description: This API can be used to delete a previously created payment link
+      parameters:
+      - $ref: '#/components/parameters/PASettlement_BdTraceId'
+      - $ref: '#/components/parameters/PASettlement_BdTimeStamp'
+      - $ref: '#/components/parameters/PASettlement_Content-Type'
+      - $ref: '#/components/parameters/PASettlement_Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  mercid: BDMONITOR
+                  linkid: U4560001737452
+                  link_expiry_date: '2023-12-18T12:25:23+05:30'
+              properties:
+                data:
+                  type: object
+                  properties:
+                    mercid:
+                      $ref: '#/components/schemas/Mercid'
+                    linkid:
+                      $ref: '#/components/schemas/linkid'
+                    merc_link_ref_no:
+                      $ref: '#/components/schemas/merc_link_ref_no'
+                  required:
+                  - mercid
+            examples:
+              Using mercid and merc_link_ref_no combination:
+                value:
+                  data:
+                    mercid: BDMERCID
+                    merc_link_ref_no: linkpay05
+              Using mercid and linkid combination:
+                value:
+                  data:
+                    mercid: BDMERCID
+                    linkid: LP202409103a6s
+      tags:
+      - Payment Links
+    parameters: []
+  /fetch:
+    post:
+      summary: Retrieve Link
+      operationId: retrieve-link
+      responses:
+        '200':
+          description: OK
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    objectid: link
+                    mercid: BDMONITOR
+                    links_list:
+                    - linkid: U4560001737452
+                      createdon: '2023-11-29T17:14:21+05:30'
+                      amount: '300.00'
+                      currency: '356'
+                      ru: https://www.merchanturl.com/response.jsp
+                      link_expiry_date: '2023-12-18T12:25:23+05:30'
+                      link_desc: Pending payment for bill 1234
+                      max_payments_allowed: '5'
+                      partial_payment_allowed: true
+                      minimum_partial_amount: ' '
+                      additional_charge_label: ' '
+                      additional_charge_amount: ' '
+                      link: https://billdesk.com/12345567
+                      link_status: Initiated, Partially Paid, Paid, Expired
+                      link_error_code: PLS0000
+                      link_error_desc: Pending
+                      link_error_type: Pending
+                      transaction_list:
+                      - transactionid: ''
+                        amount: '100.00'
+                        auth_status: '0300'
+                        transaction_date: '2023-12-20T13:36:22+05:30'
+                        payment_method_type: card
+                      - transactionid: ''
+                        amount: '50.00'
+                        auth_status: '0300'
+                        transaction_date: '2023-12-20T13:36:22+05:30'
+                        payment_method_type: card
+                      amount_pending: '50.00'
+                      total_attempts: '5'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      objectid:
+                        $ref: '#/components/schemas/objectid'
+                      mercid:
+                        $ref: '#/components/schemas/Mercid'
+                      merc_link_ref_no:
+                        $ref: '#/components/schemas/merc_link_ref_no'
+                      linkid:
+                        $ref: '#/components/schemas/linkid'
+                      createdon:
+                        $ref: '#/components/schemas/Createdon'
+                      currency:
+                        $ref: '#/components/schemas/Currency'
+                      link_expiry_date:
+                        $ref: '#/components/schemas/link_expiry_date'
+                      link_desc:
+                        $ref: '#/components/schemas/link_desc'
+                      link_title:
+                        $ref: '#/components/schemas/link_title'
+                      link:
+                        $ref: '#/components/schemas/link'
+                      link_status:
+                        $ref: '#/components/schemas/link_status'
+                      forwarding_url:
+                        $ref: '#/components/schemas/forwarding_url'
+                        x-stoplight:
+                          id: oqx8um2zgtc2h
+                      payment_method_allowed:
+                        $ref: '#/components/schemas/payment_method_allowed-response'
+                        x-stoplight:
+                          id: t1tsp3q79xd3i
+                      payment:
+                        $ref: '#/components/schemas/payment-object-fetch-response'
+                        x-stoplight:
+                          id: uki5vs46ov5w0
+                      total_attempts:
+                        $ref: '#/components/schemas/total_attempts'
+                        description: Total successful payment attempts processed out of the maximum number of payments allowed for the link
+                      transaction_list:
+                        $ref: '#/components/schemas/transaction_list'
+                      customer:
+                        $ref: '#/components/schemas/customer-response'
+                        x-stoplight:
+                          id: qduhu4ktiekdi
+              examples:
+                Retrieve response:
+                  value:
+                    data:
+                      objectid: link
+                      mercid: BDMERCID
+                      merc_link_ref_no: linkpay05
+                      link_id: LP202409103a6s
+                      created_on: '2024-09-10T17:02:30.525139'
+                      currency: '356'
+                      link_expiry_date: '2024-09-29T10:38:00'
+                      link_desc: tyres
+                      link_title: car service
+                      link: https://ssp-dev.billdesk.io/tinyurl/CwQen
+                      link_status: ISSUED
+                      payment:
+                        amount: '100.00'
+                        max_payments_allowed: 1
+                        partial_payment_allowed: false
+                        minimum_partial_amount: '100.00'
+                        amount_pending: '100.00'
+                      total_attempts: '0'
+                      transaction_list: []
+                      customer:
+                        first_name: Jane
+                        last_name: Doe
+                        mobile: 98XX5XXX38
+                        email: axc@google.com
+                      payment_method_allowed: card,upi
+        '403':
+          description: Forbidden
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-object'
+              examples:
+                ? ''
+                : value:
+                    status: 403
+                    error_type: inaccessable_resource_error
+                    error_code: LPIAE0001
+                    message: Access forbidden
+        '500':
+          description: Internal Server Error
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-object'
+              examples:
+                ? ''
+                : value:
+                    status: 500
+                    error_type: api_processing_error
+                    error_code: LPAPE0001
+                    message: Internal server error
+        default:
+          description: Any bad or invalid request will lead to following error object
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-object'
+              examples:
+                Invalid merchant config:
+                  value:
+                    status: 422
+                    error_type: api_validation_error
+                    error_code: LPAVE0016
+                    message: Mercid does not exist
+      parameters:
+      - $ref: '#/components/parameters/PASettlement_BdTraceId'
+      - $ref: '#/components/parameters/PASettlement_BdTimeStamp'
+      - $ref: '#/components/parameters/PASettlement_Content-Type'
+      - $ref: '#/components/parameters/PASettlement_Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  mercid: BDMONITOR
+                  linkid: U4560001737452
+                  from_date: '2023-11-29'
+                  to_date: '2023-12-18'
+              properties:
+                data:
+                  type: object
+                  properties:
+                    mercid:
+                      $ref: '#/components/schemas/Mercid'
+                    linkid:
+                      $ref: '#/components/schemas/linkid'
+                    merc_link_ref_no:
+                      $ref: '#/components/schemas/merc_link_ref_no'
+                  required:
+                  - mercid
+            examples:
+              Using mercid and merc_link_ref_no combination:
+                value:
+                  data:
+                    mercid: BDMERCID
+                    merc_link_ref_no: linkpay05
+              Using mercid and linkid combination:
+                value:
+                  data:
+                    mercid: BDMERCID
+                    linkid: LP202409103a6s
+      description: This API can be used to fetch the status of an existing payment link
+      tags:
+      - Payment Links
+    parameters: []
+  /resend:
+    post:
+      summary: Resend Link
+      operationId: resend-link
+      responses:
+        '200':
+          description: OK
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    objectid: link
+                    mercid: BDMONITOR
+                    linkid: U4560001737452
+                    customer_notification:
+                      sms: true
+                      email: false
+                      notify_status:
+                        sms: success
+                        email: fail
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      objectid:
+                        $ref: '#/components/schemas/objectid'
+                      mercid:
+                        $ref: '#/components/schemas/Mercid'
+                      linkid:
+                        $ref: '#/components/schemas/linkid'
+                      customer_notification:
+                        $ref: '#/components/schemas/customer_notification-request'
+                      merc_link_ref_no:
+                        $ref: '#/components/schemas/merc_link_ref_no'
+              examples:
+                Resend response:
+                  value:
+                    data:
+                      objectid: link
+                      mercid: BDMERCID
+                      linkid: LP20240701WpEL
+                      customer_notification:
+                        sms: true
+                        email: false
+                      merc_link_ref_no: test1a
+        '403':
+          description: Forbidden
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-object'
+              examples:
+                ? ''
+                : value:
+                    status: 403
+                    error_type: inaccessable_resource_error
+                    error_code: LPIAE0001
+                    message: Access forbidden
+        '500':
+          description: Internal Server Error
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-object'
+              examples:
+                ? ''
+                : value:
+                    status: 500
+                    error_type: api_processing_error
+                    error_code: LPAPE0001
+                    message: Internal server error
+        default:
+          description: Any bad or invalid request will lead to following error object
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-object'
+              examples:
+                Invalid merchant config:
+                  value:
+                    status: 422
+                    error_type: api_validation_error
+                    error_code: LPAVE0016
+                    message: Mercid does not exist
+      description: This API can be used to resend notifications to customer for their previously created link
+      parameters:
+      - $ref: '#/components/parameters/PASettlement_BdTraceId'
+      - $ref: '#/components/parameters/PASettlement_BdTimeStamp'
+      - $ref: '#/components/parameters/PASettlement_Content-Type'
+      - $ref: '#/components/parameters/PASettlement_Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  mercid: BDMONITOR
+                  linkid: U4560001737452
+                  resend: 'true'
+              properties:
+                data:
+                  type: object
+                  properties:
+                    mercid:
+                      $ref: '#/components/schemas/Mercid'
+                    linkid:
+                      $ref: '#/components/schemas/linkid'
+                    merc_link_ref_no:
+                      $ref: '#/components/schemas/merc_link_ref_no'
+                  required:
+                  - mercid
+            examples:
+              Using mercid and merc_link_ref_no combination:
+                value:
+                  data:
+                    mercid: BDMERCID
+                    merc_link_ref_no: test1a
+              Using mercid and linkid combination:
+                value:
+                  data:
+                    mercid: BDMERCID
+                    linkid: LP20240701WpEL
+      tags:
+      - Payment Links
+    parameters: []
+components:
+  schemas:
+    amount:
+      x-stoplight:
+        id: tvvxkb7grxf9k
+      description: Payment link amount
+      title: amount
+      type: string
+      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+      example: '299.28'
+    payment_method_allowed:
+      title: payment_method_allowed
+      x-stoplight:
+        id: 93rodd6rm42o3
+      type: string
+      description: Comma separated values to define payment method allowed in the payment link. Allowed values - quickpay, card, emi, nb, upi, wallets, qr, gpay, neft_rtgs, whatsapppay, cbdc or all
+      example: card,upi
+    customer_notification-request:
+      type: object
+      x-examples:
+        Example 1:
+          sms: true
+          email: false
+      description: Merchant can choose to send Email or SMS or both to the customer once payment link is generated.
+      x-stoplight:
+        id: ewd7f9u885181
+      properties:
+        sms:
+          type: boolean
+          description: 'If true, BillDesk sends a SMS notification on the mobile number provided in customer object '
+        email:
+          type: boolean
+          description: 'If true, BillDesk sends an Email notification on the Email ID provided in customer object '
+    link_expiry_date:
+      title: link_expiry_date
+      x-stoplight:
+        id: vqtycwguu78nu
+      type: string
+      description: Expiry timestamp of the link. If not passed, the default expiry date is one month from the link creation date.
+      example: '2024-08-14T17:57:31.262889064'
+    link_desc:
+      title: link_desc
+      x-stoplight:
+        id: do1f7g5ij33uh
+      type: string
+      description: Merchant specific description of the link which gets displayed to the customer
+      pattern: ^[-/~A-Za-z0-9\_ \:.,#@!\*\+]{1,120}$
+      example: Apparel - Format shirt, Trousers - 4 nos.
+    partial_payment_allowed:
+      title: partial_payment_allowed
+      x-stoplight:
+        id: orp0vilk2occc
+      type: boolean
+      description: To determine if partial payment is allowed on the link against the total amount used for link creation.
+    flow_type:
+      title: flow_type
+      x-stoplight:
+        id: 83rdnyk5449cm
+      type: string
+      description: Fixed value "payment"
+      example: payment
+    udf:
+      type: array
+      x-examples:
+        Example 1:
+          udf:
+          - sequence: '1'
+            field_label: Policy number
+            field_value: '1234567'
+          - sequence: '2'
+            field_label: Quote number
+            field_value: '162728383'
+          - sequence: '3'
+            field_label: XYZ ID
+            field_value: '1939498449'
+      description: 'User defined fields defined by merchant which will be displayed to the customer on link summary page. Maximum udf objects allowed are 7. Note: Merchant is advised to not pass customer PII information in UDF fields.'
+      title: UDF
+      x-stoplight:
+        id: meocq7796jcmx
+      examples: []
+      items:
+        x-stoplight:
+          id: 1nqq3lba6ll17
+        type: object
+        properties:
+          sequence:
+            type: integer
+            x-stoplight:
+              id: rgpjfed3706xp
+            description: Sequence of the field to be shown on link summary page. If this value is 1, the field will be shown on top of the link summary page.
+            maximum: 7
+            example: 1
+          field_label:
+            type: string
+            x-stoplight:
+              id: 1q40pz86z2410
+            description: Label of the field
+            example: Quote number
+            pattern: ^[-/~A-Za-z0-9\_ \:.,#@!\*\+]{1,60}$
+          field_value:
+            type: string
+            x-stoplight:
+              id: iyqgumuovf38x
+            description: Value of the field
+            example: '162728383'
+            pattern: ^[-/~A-Za-z0-9\_ \:.,#@!\*\+]{1,120}$
+          hidden_flag:
+            type: boolean
+            x-stoplight:
+              id: 6fauk2m3yictv
+            description: 'If true, the object will not be displayed on link summary page
+
+              '
+    max_payments_allowed:
+      title: max_payments_allowed
+      x-stoplight:
+        id: 455huxentsrza
+      type: integer
+      description: Only applicable in case partial payment allowed is true. Maximum number of partial payments that can be processed on the same link. This can be a maximum value of 10 (successful transactions).
+      example: '2'
+    minimum_partial_amount:
+      type: string
+      x-examples:
+        Example 1:
+          minimum_partial_amount: '50'
+      title: minimum_partial_amount
+      description: Minimum amount that is required to be paid for every partial payment. Applicable when partial payment allowed is true. If not passed, default value will be set to 1.00
+      examples:
+      - string
+      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+      example: '50'
+    objectid:
+      title: objectid
+      x-stoplight:
+        id: s02rgz3dd6d2f
+      type: string
+      enum:
+      - link
+      description: String representing the object's type. Objects of the same type share the same value.
+    linkid:
+      title: linkid
+      x-stoplight:
+        id: 9g53zzgjj3vcg
+      type: string
+      description: Unique ID generated by BillDesk for a payment link
+      example: LP20240701lepFL
+    link:
+      title: link
+      x-stoplight:
+        id: 0fenyenc2c36x
+      type: string
+      description: Payment link generated where customer must be redirected for payment
+    customer_notification:
+      type: object
+      x-examples:
+        Example 1:
+          sms: true
+          email: false
+      x-stoplight:
+        id: k7e6coef34ccj
+      description: Merchant can choose to send Email or SMS or both to the customer once payment link is generated.
+      properties:
+        sms:
+          type: boolean
+          description: If true, Billdesk sends a SMS notification on the mobile number provided in customer object
+        email:
+          type: boolean
+          description: If true, Billdesk sends an Email notification on the Email ID provided in customer object
+    Additional-Info:
+      type: object
+      x-examples:
+        Example 1:
+          additional_info:
+            additional_info1: Details1
+            additional_info2: Details2
+            additional_info3: Details3
+            additional_info4: Details4
+            additional_info5: Details5
+            additional_info6: Details6
+            additional_info7: Details7
+            additional_info8: Details8
+            additional_info9: Details9
+            additional_info10: Details10
+      description: 'Array of 7 additional_info values that can be attached to
+
+        the transaction.
+
+        Note: Merchant is advised to not pass customer PII
+
+        information in additional info fields.'
+      properties:
+        additional_info1:
+          type: string
+          example: Details1
+          pattern: ^[-/~A-Za-z0-9\_ \:.,#@!\*\+]{1,120}$
+        additional_info2:
+          type: string
+          example: Details2
+          pattern: ^[-/~A-Za-z0-9\_ \:.,#@!\*\+]{1,120}$
+        additional_info3:
+          type: string
+          example: Details3
+          pattern: ^[-/~A-Za-z0-9\_ \:.,#@!\*\+]{1,120}$
+        additional_info4:
+          type: string
+          example: Details4
+          pattern: ^[-/~A-Za-z0-9\_ \:.,#@!\*\+]{1,120}$
+        additional_info5:
+          type: string
+          example: Details5
+          pattern: ^[-/~A-Za-z0-9\_ \:.,#@!\*\+]{1,120}$
+        additional_info6:
+          type: string
+          example: Details6
+          pattern: ^[-/~A-Za-z0-9\_ \:.,#@!\*\+]{1,120}$
+        additional_info7:
+          type: string
+          example: Details7
+          pattern: ^[-/~A-Za-z0-9\_ \:.,#@!\*\+]{1,120}$
+      x-stoplight:
+        id: uf5p0pzl17fur
+      examples: []
+    Createdon:
+      title: createdon
+      x-stoplight:
+        id: 1bot1fsk2q9m8
+      type: string
+      description: object creation timestamp
+      format: date-time
+    Currency:
+      title: currency
+      x-stoplight:
+        id: 4gwprgsvmr2f6
+      type: string
+      description: ISO currency code of the transaction amount as provided by BillDesk, with a fixed value 356.
+      example: '356'
+    Customer:
+      title: customer
+      x-examples:
+        Example 1:
+          first_name: John
+          last_name: Doe
+          mobile: '9800000000'
+          mobile_alt: '9800000000'
+          email: john.doe@somedomain.com
+          email_alt: john.doe@somedomain.com
+      type: object
+      x-stoplight:
+        id: 4x1i3bhy9jzwf
+      properties:
+        first_name:
+          type: string
+          description: Customer’s First Name
+          example: John
+          pattern: ^[A-Za-z0-9]{1,15}$
+        last_name:
+          type: string
+          description: Customer’s Last Name
+          example: Doe
+          pattern: ^[A-Za-z0-9]{1,15}$
+        mobile:
+          type: string
+          description: Customer’s Mobile number. This parameter is mandatory if sms is passed as true in customer_notification object.
+          example: '9022979988'
+          pattern: ^[\+]{0,1}[0-9]{5,15}$
+        email:
+          type: string
+          description: Customer’s Email address. This parameter is mandatory if email is passed as true in customer_notification object.
+          example: abc@xyz.com
+          pattern: ^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9\-]+)*(\.[A-Za-z]{2,6})$
+    Mercid:
+      title: mercid
+      x-stoplight:
+        id: p2d1wfy3kxe31
+      type: string
+      pattern: ^[A-Za-z0-9]{1,10}$
+      example: BDMERCID
+      description: Unique identifier as defined by BillDesk for each merchant
+    forwarding_url:
+      title: forwarding_url
+      x-stoplight:
+        id: 0de5x8ee0dhfg
+      type: string
+      description: 'Merchant specific url where customer will be redirected post transaction is completed. Please note : transaction details will not be posted on this url.'
+      pattern: ^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]
+      example: https://www.merchant.com
+    merc_link_ref_no:
+      title: merc_link_ref_number
+      x-stoplight:
+        id: ik1jmueze8cl9
+      type: string
+      description: Unique reference number provided by merchant
+      pattern: ^[A-Za-z0-9]{1,20}$
+      example: testlink01
+    link_title:
+      title: link_title
+      x-stoplight:
+        id: vdz57pkm5yv4f
+      type: string
+      description: Merchant specific title of the link which gets displayed to the customer
+      pattern: ^[A-Za-z0-9 ]{1,60}$
+      example: Instagram Purchase
+    payment_method_allowed-response:
+      x-stoplight:
+        id: r0aqxq66epyzc
+      type: string
+      description: If not passed or if passed as null, in response it will be all
+      enum:
+      - all
+    max_payments_allowed-response:
+      x-stoplight:
+        id: h49661bkn7y2g
+      type: integer
+      description: Maximum number of partial payments that can be processed on the same link. This can be a maximum value of 10 (successful transactions). Value of 1 indicates a single payment can be collected against the link.
+    minimum_partial_amount-response:
+      x-stoplight:
+        id: rphcf0sbb83t3
+      type: string
+      description: Value equal to amount indicates a single payment can be collected against the link.
+      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+      example: '299.28'
+    error-object:
+      title: error-object
+      x-stoplight:
+        id: maycbi1jxm2fv
+      type: object
+      properties:
+        status:
+          type: integer
+          x-stoplight:
+            id: jdda47decid89
+          description: This will be same as HTTP response code
+        error_type:
+          type: string
+          x-stoplight:
+            id: pbge0wolywsfg
+          description: This indicates of the category of errors that could be encountered, for e.g. validation_error, api_connection_error, etc.
+        error_code:
+          type: string
+          x-stoplight:
+            id: 1o8a0gotvba8w
+          description: Under the error_type, there could be different error_codes that could be returned depending upon the API and the underlying interaction
+        message:
+          type: string
+          x-stoplight:
+            id: cjhi4us30pd8t
+          description: More details as a description for the error_code
+    customer-response:
+      x-stoplight:
+        id: 1rjufsjbzrny1
+      type: object
+      description: 'Customer object response. Note : PII data will be masked'
+      properties:
+        first_name:
+          type: string
+          x-stoplight:
+            id: gkgqnz6wem9zx
+          description: Customer’s First Name
+        last_name:
+          type: string
+          x-stoplight:
+            id: en5q24tmbshcp
+          description: Customer’s Last Name
+        mobile:
+          type: string
+          x-stoplight:
+            id: 3zmr7egoosoth
+          description: Customer’s Mobile number
+        email:
+          type: string
+          x-stoplight:
+            id: 8igxybrrjssyi
+          description: Customer’s Email address
+    payment-object:
+      type: object
+      x-examples:
+        Example 1:
+          amount: 100
+          partial_payment_allowed: true
+          max_payments_allowed: 4
+          minimum_partial_amount: 1
+          avs:
+            bankaccount:
+            - number: '9999999999'
+              ifsc: HDFC9999999
+              holder_name: Dr. kahsdfk
+      properties:
+        amount:
+          $ref: '#/components/schemas/amount'
+        partial_payment_allowed:
+          $ref: '#/components/schemas/partial_payment_allowed'
+        max_payments_allowed:
+          $ref: '#/components/schemas/max_payments_allowed'
+        minimum_partial_amount:
+          $ref: '#/components/schemas/minimum_partial_amount'
+        avs:
+          $ref: '#/components/schemas/avs-object'
+      required:
+      - amount
+      description: This object is required for payment flow_type. Contains parameters pertaining to payment details.
+    payment-object-response:
+      type: object
+      x-examples:
+        Example 1:
+          amount: 100
+          partial_payment_allowed: true
+          max_payments_allowed: 4
+          minimum_partial_amount: 1
+          avs:
+            bankaccount:
+            - number: '9999999999'
+              ifsc: HDFC9999999
+              holder_name: Dr. kahsdfk
+      description: Payment object contains parameters pertaining to payment details.
+      properties:
+        amount:
+          $ref: '#/components/schemas/amount'
+        partial_payment_allowed:
+          $ref: '#/components/schemas/partial_payment_allowed'
+        max_payments_allowed:
+          $ref: '#/components/schemas/max_payments_allowed-response'
+        minimum_partial_amount:
+          $ref: '#/components/schemas/minimum_partial_amount-response'
+    avs-object:
+      type: object
+      x-examples:
+        Example 1:
+          bankaccounts:
+          - number: '12233445566'
+            ifsc: IDBK10000002
+            name: John Doe
+      title: avs
+      description: 'The avs object can be added to the request to initiate a payment with a third-party bank account validation. AVS is supported for the card (debit card), netbanking and upi payment methods.
+
+        '
+      properties:
+        bankaccounts:
+          type: array
+          description: Object that contains the details of the payment method
+          items:
+            type: object
+            properties:
+              number:
+                type: string
+                description: Customer's bank account number
+                example: '12233445566'
+                pattern: ^\\d{9,18}$
+              ifsc:
+                type: string
+                description: IFSC of the bank account number
+                example: IDBK10000002
+                pattern: ^[A-Za-z]{4}[a-zA-Z0-9]{7}$
+              name:
+                type: string
+                description: Name of the bank account holder
+                example: John Doe
+                pattern: ^[A-Za-z0-9\\s\\.'\\-\\~\\@\\_]{1,120}$
+            required:
+            - number
+            - ifsc
+    link_status:
+      title: link_status
+      x-stoplight:
+        id: mzfm8c62zjz8h
+      type: string
+      description: Status of payment link
+      enum:
+      - ISSUED
+      - ATTEMPTED
+      - PAID
+      - PARTIALLY PAID
+      - EXPIRED
+      - DELETED
+    amount-transaction:
+      title: amount
+      x-stoplight:
+        id: f0m22yteq1d5t
+      type: string
+      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+      example: '299.28'
+      description: Transaction amount in two decimals, eg. 299.28
+    Auth_status:
+      title: auth_status
+      x-stoplight:
+        id: s7n02k63lqlsj
+      type: string
+      description: "Represents the authorization status of the transaction with the following possible values:\n•\t0300 - transaction is successful\n•\t0002 - transaction is pending for authorization\n•\t0399 - transaction failed"
+      enum:
+      - '0300'
+      - '0002'
+      - 0399
+    Payment_method_type:
+      title: payment_method_type
+      x-stoplight:
+        id: ta4huk11kda8l
+      type: string
+      description: Represents the method of payment, and can take the following values - card, upi, wallets, nb.
+      enum:
+      - card
+      - upi
+      - wallets
+      - nb
+      example: card
+    Transaction_date:
+      title: transaction_date
+      x-stoplight:
+        id: rx9rhq88io0zz
+      type: string
+      description: BillDesk transaction date and time in YYYY-MM-DDThh:mm:ssTZD format
+      format: date-time
+      example: '2023-03-14T15:14:39+05:30'
+    Transactionid:
+      title: transactionid
+      x-stoplight:
+        id: kiqdftjqdqlya
+      type: string
+      description: 'Unique transactionid created by BillDesk '
+      pattern: ^[A-Za-z0-9]{14,35}$
+      example: U4560001099939
+    amount_pending:
+      title: amount_pending
+      x-stoplight:
+        id: uhuvnkenre7o0
+      type: string
+      description: 'Remaining amount required to be paid against the link after the successful payments. Note : When partial payment is allowed'
+      example: '100.00'
+    total_attempts:
+      title: total_attempts
+      x-stoplight:
+        id: pa0nmd1ujxna4
+      type: string
+      description: Total successful payment attempts processed out of the maximum number of payments allowed for the link
+      example: '3'
+    payment-object-fetch-response:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/amount'
+          x-stoplight:
+            id: hdmnw61vgga2x
+        amount_pending:
+          $ref: '#/components/schemas/amount_pending'
+          x-stoplight:
+            id: x5l2liw87t5r3
+        max_payments_allowed:
+          $ref: '#/components/schemas/max_payments_allowed-response'
+          x-stoplight:
+            id: a6nayap9bh7pj
+        minimum_partial_amount:
+          $ref: '#/components/schemas/minimum_partial_amount-response'
+          x-stoplight:
+            id: mal70uf0n6pkh
+        partial_payment_allowed:
+          $ref: '#/components/schemas/partial_payment_allowed'
+          x-stoplight:
+            id: pxlgvpsiqvezj
+    transaction_list:
+      title: transaction_list
+      x-stoplight:
+        id: i5s7tw56vy56x
+      type: array
+      items:
+        x-stoplight:
+          id: az9ks0qbcb06g
+        type: object
+        properties:
+          transactionid:
+            $ref: '#/components/schemas/Transactionid'
+          amount:
+            $ref: '#/components/schemas/amount-transaction'
+          auth_status:
+            $ref: '#/components/schemas/Auth_status'
+          transaction_date:
+            $ref: '#/components/schemas/Transaction_date'
+          payment_method_type:
+            $ref: '#/components/schemas/Payment_method_type'
+  parameters:
+    PASettlement_Accept:
+      name: Accept
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/jose
+      description: Accept Response Content-Type to take the values application/jose
+    PASettlement_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/json
+      description: Request Content-Type to take the values application/jose
+    PASettlement_BdTimeStamp:
+      in: header
+      name: BD-Timestamp
+      description: Request timestamp to identify date and time of origin of request. Example, a value of BD-Timestamp 20210113180403 identifies the request to have originated on 13th January 2021 at 06:04:03 PM.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    PASettlement_BdTraceId:
+      in: header
+      name: BD-Traceid
+      description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+x-provenance:
+  method: searched
+  source: https://docs.billdesk.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.billdesk.io/reference/create-link.md
+  - https://docs.billdesk.io/reference/delete-link.md
+  - https://docs.billdesk.io/reference/resend-link.md
+  - https://docs.billdesk.io/reference/retrieve-link.md
+  merge:
+    pages: 4
+    deduped: 59
+    conflicts_kept_first: 0

@@ -1,0 +1,174 @@
+generated: '2026-10-14'
+method: derived
+generator: derive-mcp-candidate.py
+source:
+- openapi/billdesk-linkpay-openapi.yml
+- openapi/billdesk-pa-settlements-openapi.yml
+- openapi/billdesk-payments-openapi.yml
+- openapi/billdesk-penny-drop-openapi.yml
+- openapi/billdesk-recurring-openapi.yml
+- openapi/billdesk-tokenization-openapi.yml
+- openapi/billdesk-validate-vpa-openapi.yml
+status: candidate
+deployment:
+  mode: none
+  auth: unknown
+  verified: derived
+note: No MCP server was found. No probe result in the dossier. Candidate tools below are derived from the 31 operation(s) in the provider's own
+  OpenAPI (31 listed); they describe what a server WOULD expose, not one that exists.
+tools:
+- name: create_link
+  operationId: create-link
+  method: POST
+  path: /create
+  description: Create Link
+- name: retrieve_settlement
+  operationId: retrieve-settlement
+  method: POST
+  path: /pasettlements/v1_2/settlements/get
+  description: Retrieve Settlement
+- name: create_authentication
+  operationId: createAuthentication
+  method: POST
+  path: /payments/ve1_2/authentications/create
+  description: Create Authentication
+- name: pennydrop
+  operationId: pennydrop
+  method: POST
+  path: /pgauth/ve1_2/accountvalidation
+  description: Penny Drop
+- name: create_invoice
+  operationId: createInvoice
+  method: POST
+  path: /pgsi/ve1_2/invoice/create
+  description: Create Invoice
+- name: retrievealtid
+  operationId: retrievealtid
+  method: POST
+  path: /payments/ve1_2/altid/get
+  description: Fetch AltID
+- name: validat_vpa
+  operationId: validatVPA
+  method: POST
+  path: /payments/ve1_2/upi/validatevpa
+  description: Validate VPA
+- name: delete_link
+  operationId: delete-link
+  method: POST
+  path: /delete
+  description: Delete Link
+- name: retrieve_authentication
+  operationId: retrieveAuthentication
+  method: POST
+  path: /payments/ve1_2/authentications/get
+  description: Retrieve Authentication
+- name: retrive_invoice
+  operationId: retriveInvoice
+  method: POST
+  path: /pgsi/ve1_2/invoice/get
+  description: Retrieve Invoice
+- name: create_card_account
+  operationId: createCardAccount
+  method: POST
+  path: /tokenizer/ve1_2/token/create
+  description: Create Card Account
+- name: retrieve_link
+  operationId: retrieve-link
+  method: POST
+  path: /fetch
+  description: Retrieve Link
+- name: validate_authentication
+  operationId: validateAuthentication
+  method: POST
+  path: /payments/ve1_2/authentications/validate
+  description: Validate Authentication
+- name: create_mandate
+  operationId: createMandate
+  method: POST
+  path: /pgsi/ve1_2/mandates/create
+  description: Create Mandate
+- name: delete_card_account
+  operationId: deleteCardAccount
+  method: POST
+  path: /tokenizer/ve1_2/token/delete
+  description: Delete Card Account
+- name: resend_link
+  operationId: resend-link
+  method: POST
+  path: /resend
+  description: Resend Link
+- name: create_order
+  operationId: createOrder
+  method: POST
+  path: /payments/ve1_2/orders/create
+  description: Create Order
+- name: delete_mandate
+  operationId: deleteMandate
+  method: POST
+  path: /pgsi/ve1_2/mandates/delete
+  description: Delete Mandate
+- name: list_card_account
+  operationId: listCardAccount
+  method: POST
+  path: /tokenizer/ve1_2/token/list
+  description: List Card Account
+- name: create_refund
+  operationId: createRefund
+  method: POST
+  path: /payments/ve1_2/refunds/create
+  description: Create Refund
+- name: retrieve_mandate
+  operationId: retrieveMandate
+  method: POST
+  path: /pgsi/ve1_2/mandates/get
+  description: Retrieve Mandate
+- name: retrieve_card_account
+  operationId: retrieveCardAccount
+  method: POST
+  path: /tokenizer/ve1_2/token/retrieve
+  description: Retrieve Card Account
+- name: retrieve_refund
+  operationId: retrieveRefund
+  method: POST
+  path: /payments/ve1_2/refunds/get
+  description: Retrieve Refund
+- name: list_mandates
+  operationId: listMandates
+  method: POST
+  path: /pgsi/ve1_2/mandates/list
+  description: List Mandates
+- name: create_transaction
+  operationId: createTransaction
+  method: POST
+  path: /payments/ve1_2/transactions/create
+  description: Create Transaction
+- name: modify_mandate
+  operationId: modifyMandate
+  method: POST
+  path: /pgsi/ve1_2/mandates/modify
+  description: Modify Mandate
+- name: post_payments_v1_2_transactions_get
+  operationId: post-payments-v1_2-transactions-get
+  method: POST
+  path: /payments/ve1_2/transactions/get
+  description: Retrieve Transaction
+- name: update_mandate
+  operationId: updateMandate
+  method: POST
+  path: /pgsi/ve1_2/mandates/update
+  description: Update Mandate
+- name: update_transaction
+  operationId: updateTransaction
+  method: POST
+  path: /payments/ve1_2/transactions/update
+  description: Update Transaction
+- name: create_mandate_token
+  operationId: createMandateToken
+  method: POST
+  path: /pgsi/ve1_2/mandatetokens/create
+  description: Create Mandate Token
+- name: modify_mandate_token
+  operationId: modify-mandate-token
+  method: POST
+  path: /pgsi/ve1_2/mandatetokens/update/create
+  description: Modify Mandate Token

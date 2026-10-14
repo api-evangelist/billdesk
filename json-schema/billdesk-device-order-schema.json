@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/billdesk/main/json-schema/billdesk-device-order-schema.json",
+  "title": "Device object",
+  "description": "Device Object",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/billdesk-penny-drop-openapi.yml#/components/schemas/Device-order",
+  "type": "object",
+  "x-stoplight": {
+    "id": "bu2ij616i2uce"
+  },
+  "properties": {
+    "init_channel": {
+      "type": "string",
+      "description": "Initiating channel,accepted values are internet,app or kiosk",
+      "enum": [
+        "internet",
+        "app",
+        "kiosk"
+      ]
+    },
+    "ip": {
+      "type": "string",
+      "description": "Customer’s IP address",
+      "maxLength": 15
+    },
+    "user_agent": {
+      "type": "string",
+      "description": "Exact content of the HTTP user-agent header\n\nNote: If the total length of the User-Agent sent by the browser exceeds 2048 characters, truncate the excess portion",
+      "pattern": "=^[A-Za-z0-9\\\\_\\\\:\\\\-\\\\,\\\\;\\\\/\\\\)\\\\(\\\\.\\\\s\\\\+\\\\[\\\\]\\\\=@]{10,255}$"
+    },
+    "accept_header": {
+      "type": "string",
+      "description": "Customer browser accept header values",
+      "maxLength": 255,
+      "pattern": "^[0-9A-Za-z\\\\.\\\\+\\\\-\\\\/\\\\=\\\\*\\\\,\\\\;]{10,255}$"
+    }
+  },
+  "required": [
+    "init_channel",
+    "ip",
+    "user_agent",
+    "accept_header"
+  ]
+}

@@ -1,6 +1,12 @@
 aid: billdesk
+
 name: BillDesk
-description: BillDesk is an Indian integrated payment solutions platform founded in 2000, offering REST APIs for bill payments, recurring mandates, UPI payments, net banking, card payments, and enterprise payment gateway integrations. The platform provides three integration tiers (Neo full-redirect, Ace SDK, and CX+ deep API), supporting online payments, e-Mandate setup, invoicing, refunds, tokenization, and 150+ payment methods across web, mobile, and third-party e-commerce plugins.
+
+description: BillDesk is an Indian integrated payment solutions platform founded in 2000, offering REST APIs for bill payments, recurring mandates,
+  UPI payments, net banking, card payments, and enterprise payment gateway integrations. The platform provides three integration tiers (Neo full-redirect,
+  Ace SDK, and CX+ deep API), supporting online payments, e-Mandate setup, invoicing, refunds, tokenization, and 150+ payment methods across web,
+  mobile, and third-party e-commerce plugins.
+
 deliveryModel:
   model: saas
   open_source: false
@@ -12,6 +18,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: enterprise
   onboarding: approval
@@ -24,97 +31,286 @@ accessModel:
   - plans
   generated: '2026-07-22'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/billdesk.png
+
 url: https://raw.githubusercontent.com/api-evangelist/billdesk/refs/heads/main/apis.yml
+
 created: '2026-06-13'
+
 modified: '2026-06-13'
+
 specificationVersion: '0.23'
+
 x-docs-platform: readme
+
 x-docs-platform-confidence: high
+
 x-docs-platform-checked: 2026-09-20
+
 tags:
-  - Payments
-  - India
-  - Payment Gateway
-  - UPI
-  - Recurring Payments
-  - Mandates
-  - Net Banking
-  - Bill Payments
-  - Fintech
-apis:
-  - aid: billdesk:neo-payments-api
-    name: BillDesk Neo Full Redirect API
-    description: Pre-built hosted checkout solution for one-time and recurring online payments. Merchants redirect customers to BillDesk-hosted pages, minimizing PCI DSS scope.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
-    baseURL: https://api.billdesk.com/payments/ve1_2
-    tags:
-      - Payments
-      - Checkout
-      - Redirect
-    properties:
-      - type: Documentation
-        url: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
-  - aid: billdesk:ace-sdk-api
-    name: BillDesk Ace SDK API
-    description: SDK-based payment integration for Android, iOS, Flutter, and web. Provides embedded payment experiences with BillDesk handling payment orchestration.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
-    baseURL: https://api.billdesk.com/payments/ve1_2
-    tags:
-      - SDK
-      - Mobile Payments
-      - Android
-      - iOS
-      - Flutter
-    properties:
-      - type: Documentation
-        url: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
-  - aid: billdesk:cx-plus-deep-api
-    name: BillDesk CX+ Deep API
-    description: Direct REST API access for advanced payment processing, giving merchants full control over checkout UX. Supports transactions, mandates, refunds, card tokenization, invoices, payment links, and settlement retrieval.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.billdesk.io/
-    baseURL: https://api.billdesk.com/payments/ve1_2
-    tags:
-      - REST API
-      - Payments
-      - Mandates
-      - Refunds
-      - Tokenization
-      - Invoicing
-      - UPI
-    properties:
-      - type: Documentation
-        url: https://docs.billdesk.io/
-      - type: Sandbox
-        url: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+- Payments
+- India
+- Payment Gateway
+- UPI
+- Recurring Payments
+- Mandates
+- Net Banking
+- Bill Payments
+- Fintech
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+
 common:
-  - type: DomainSecurity
-    url: security/billdesk-domain-security.yml
-  - type: Website
-    url: https://www.billdesk.com/web/
+- type: AgenticAccess
+  url: agentic-access/billdesk-agentic-access.yml
+- type: Spectral
+  url: rules/billdesk-rules.yml
+- type: JSONLD
+  url: json-ld/billdesk-context.jsonld
+- type: Vocabulary
+  url: vocabulary/billdesk-vocabulary.yml
+- type: DataModel
+  url: data-model/billdesk-data-model.yml
+- type: ErrorCatalog
+  url: errors/billdesk-problem-types.yml
+- type: Conformance
+  url: conformance/billdesk-conformance.yml
+- type: WellKnown
+  url: well-known/billdesk-well-known.yml
+- type: Hosts
+  url: hosts/billdesk-hosts.yml
+- type: Vendors
+  url: vendors/billdesk-vendors.yml
+- type: DomainSecurity
+  url: security/billdesk-domain-security.yml
+- type: Website
+  url: https://www.billdesk.com/web/
+- type: Documentation
+  url: https://docs.billdesk.io/
+- type: GitHubOrg
+  url: https://github.com/billdesk
+- type: LinkedIn
+  url: https://in.linkedin.com/company/billdesk
+- type: Blog
+  url: https://www.billdesk.com/web/blog
+- type: Pricing
+  url: https://www.billdesk.com/web/contact
+- type: StatusPage
+  url: https://uptime.com/billdesk.com
+- type: X
+  url: https://twitter.com/billdesk
+- type: Plans
+  url: plans/billdesk-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/billdesk-rate-limits.yml
+- type: FinOps
+  url: finops/billdesk-finops.yml
+
+apis:
+- aid: billdesk:neo-payments-api
+  name: BillDesk Neo Full Redirect API
+  description: Pre-built hosted checkout solution for one-time and recurring online payments. Merchants redirect customers to BillDesk-hosted
+    pages, minimizing PCI DSS scope.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - Payments
+  - Checkout
+  - Redirect
+  properties:
+  - type: Documentation
+    url: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+- aid: billdesk:ace-sdk-api
+  name: BillDesk Ace SDK API
+  description: SDK-based payment integration for Android, iOS, Flutter, and web. Provides embedded payment experiences with BillDesk handling
+    payment orchestration.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - SDK
+  - Mobile Payments
+  - Android
+  - iOS
+  - Flutter
+  properties:
+  - type: Documentation
+    url: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+- aid: billdesk:cx-plus-deep-api
+  name: BillDesk CX+ Deep API
+  description: Direct REST API access for advanced payment processing, giving merchants full control over checkout UX. Supports transactions,
+    mandates, refunds, card tokenization, invoices, payment links, and settlement retrieval.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.billdesk.io/
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - REST API
+  - Payments
+  - Mandates
+  - Refunds
+  - Tokenization
+  - Invoicing
+  - UPI
+  properties:
   - type: Documentation
     url: https://docs.billdesk.io/
-  - type: GitHubOrg
-    url: https://github.com/billdesk
-  - type: LinkedIn
-    url: https://in.linkedin.com/company/billdesk
-  - type: Blog
-    url: https://www.billdesk.com/web/blog
-  - type: Pricing
-    url: https://www.billdesk.com/web/contact
-  - type: StatusPage
-    url: https://uptime.com/billdesk.com
-  - type: X
-    url: https://twitter.com/billdesk
-  - type: Plans
-    url: plans/billdesk-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/billdesk-rate-limits.yml
-  - type: FinOps
-    url: finops/billdesk-finops.yml
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+  - type: Sandbox
+    url: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+- aid: billdesk:billdesk-linkpay
+  name: BillDesk Linkpay Openapi.Yml API
+  description: The Linkpay Openapi.Yml API from BillDesk — 4 operation(s) for linkpay openapi.yml.
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - Linkpay Openapi.Yml
+  properties:
+  - type: OpenAPI
+    url: openapi/billdesk-linkpay-openapi.yml
+  - type: JSONSchema
+    url: json-schema/billdesk-additional-info-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-udf-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-response-schema.json
+- aid: billdesk:billdesk-pa-settlements
+  name: BillDesk Settlement API
+  description: The Settlement API from BillDesk — 1 operation(s) for settlement.
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - Settlement
+  properties:
+  - type: OpenAPI
+    url: openapi/billdesk-pa-settlements-openapi.yml
+  - type: JSONSchema
+    url: json-schema/billdesk-objectid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mercid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-currency-schema.json
+- aid: billdesk:billdesk-payments
+  name: BillDesk Order API
+  description: The Order API from BillDesk — 11 operation(s) for order.
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - Order
+  properties:
+  - type: OpenAPI
+    url: openapi/billdesk-payments-openapi.yml
+  - type: JSONSchema
+    url: json-schema/billdesk-device-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mandate-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccount-in-txn-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-altid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-network-token-schema.json
+- aid: billdesk:billdesk-penny-drop
+  name: BillDesk Penny Drop API
+  description: The Penny Drop API from BillDesk — 1 operation(s) for penny drop.
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - Penny Drop
+  properties:
+  - type: OpenAPI
+    url: openapi/billdesk-penny-drop-openapi.yml
+  - type: JSONSchema
+    url: json-schema/billdesk-device-order-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-additional-info-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-method-type-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-objectid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-orderid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankid-schema.json
+- aid: billdesk:billdesk-recurring
+  name: BillDesk Recurring Openapi.Yml API
+  description: The Recurring Openapi.Yml API from BillDesk — 8 operation(s) for recurring openapi.yml.
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - Recurring Openapi.Yml
+  properties:
+  - type: OpenAPI
+    url: openapi/billdesk-recurring-openapi.yml
+  - type: JSONSchema
+    url: json-schema/billdesk-device-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-altid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-network-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-response-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankaccount-schema.json
+- aid: billdesk:billdesk-tokenization
+  name: BillDesk Card Account API
+  description: The Card Account API from BillDesk — 5 operation(s) for card account.
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - Card Account
+  properties:
+  - type: OpenAPI
+    url: openapi/billdesk-tokenization-openapi.yml
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-card-number-pan-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-altid-card-request-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardacc-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccid-auth-data-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-objectid-schema.json
+- aid: billdesk:billdesk-validate-vpa
+  name: BillDesk Validate VPA API
+  description: The Validate VPA API from BillDesk — 1 operation(s) for validate vpa.
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - Validate VPA
+  properties:
+  - type: OpenAPI
+    url: openapi/billdesk-validate-vpa-openapi.yml
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-objectid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-orderid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mercid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-error-desc-schema.json
+
+x-readme-harvest:
+  date: '2026-10-14'
+  ops: 31
+  tool: harvest-readme-openapi.py
+  portal: https://docs.billdesk.io

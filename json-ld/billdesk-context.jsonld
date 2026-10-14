@@ -1,0 +1,522 @@
+{
+  "@context": {
+    "@vocab": "https://billdesk.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "billdesk": "https://billdesk.com/schema#",
+    "customer_notification-request": "billdesk:customer_notification-request",
+    "sms": {
+      "@id": "billdesk:sms",
+      "@type": "xsd:boolean"
+    },
+    "email": {
+      "@id": "billdesk:email",
+      "@type": "xsd:boolean"
+    },
+    "objectid": "billdesk:objectid",
+    "customer_notification": "billdesk:customer_notification",
+    "Additional-Info": "billdesk:Additional-Info",
+    "additional_info1": {
+      "@id": "billdesk:additional_info1",
+      "@type": "xsd:string"
+    },
+    "additional_info2": {
+      "@id": "billdesk:additional_info2",
+      "@type": "xsd:string"
+    },
+    "additional_info3": {
+      "@id": "billdesk:additional_info3",
+      "@type": "xsd:string"
+    },
+    "additional_info4": {
+      "@id": "billdesk:additional_info4",
+      "@type": "xsd:string"
+    },
+    "additional_info5": {
+      "@id": "billdesk:additional_info5",
+      "@type": "xsd:string"
+    },
+    "additional_info6": {
+      "@id": "billdesk:additional_info6",
+      "@type": "xsd:string"
+    },
+    "additional_info7": {
+      "@id": "billdesk:additional_info7",
+      "@type": "xsd:string"
+    },
+    "Customer": "billdesk:Customer",
+    "first_name": {
+      "@id": "billdesk:first_name",
+      "@type": "xsd:string"
+    },
+    "last_name": {
+      "@id": "billdesk:last_name",
+      "@type": "xsd:string"
+    },
+    "mobile": {
+      "@id": "billdesk:mobile",
+      "@type": "xsd:string"
+    },
+    "payment_method_allowed-response": "billdesk:payment_method_allowed-response",
+    "error-object": "billdesk:error-object",
+    "status": {
+      "@id": "billdesk:status",
+      "@type": "xsd:integer"
+    },
+    "error_type": {
+      "@id": "billdesk:error_type",
+      "@type": "xsd:string"
+    },
+    "error_code": {
+      "@id": "billdesk:error_code",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "billdesk:message",
+      "@type": "xsd:string"
+    },
+    "customer-response": "billdesk:customer-response",
+    "payment-object": "billdesk:payment-object",
+    "amount": {
+      "@id": "billdesk:amount",
+      "@type": "@id"
+    },
+    "partial_payment_allowed": {
+      "@id": "billdesk:partial_payment_allowed",
+      "@type": "@id"
+    },
+    "max_payments_allowed": {
+      "@id": "billdesk:max_payments_allowed",
+      "@type": "@id"
+    },
+    "minimum_partial_amount": {
+      "@id": "billdesk:minimum_partial_amount",
+      "@type": "@id"
+    },
+    "avs": {
+      "@id": "billdesk:avs",
+      "@type": "@id"
+    },
+    "payment-object-response": "billdesk:payment-object-response",
+    "avs-object": "billdesk:avs-object",
+    "bankaccounts": {
+      "@id": "billdesk:bankaccounts",
+      "@container": "@list"
+    },
+    "link_status": "billdesk:link_status",
+    "Auth_status": "billdesk:Auth_status",
+    "Payment_method_type": "billdesk:Payment_method_type",
+    "payment-object-fetch-response": "billdesk:payment-object-fetch-response",
+    "amount_pending": {
+      "@id": "billdesk:amount_pending",
+      "@type": "@id"
+    },
+    "Error-object": "billdesk:Error-object",
+    "Objectid": "billdesk:Objectid",
+    "Mandate-Response": "billdesk:Mandate-Response",
+    "mercid": {
+      "@id": "billdesk:mercid",
+      "@type": "xsd:string"
+    },
+    "customer_refid": {
+      "@id": "billdesk:customer_refid",
+      "@type": "xsd:string"
+    },
+    "subscription_refid": {
+      "@id": "billdesk:subscription_refid",
+      "@type": "xsd:string"
+    },
+    "subscription_desc": {
+      "@id": "billdesk:subscription_desc",
+      "@type": "xsd:string"
+    },
+    "amount_type": {
+      "@id": "billdesk:amount_type",
+      "@type": "xsd:string"
+    },
+    "start_date": {
+      "@id": "billdesk:start_date",
+      "@type": "xsd:string"
+    },
+    "end_date": {
+      "@id": "billdesk:end_date",
+      "@type": "xsd:string"
+    },
+    "frequency": {
+      "@id": "billdesk:frequency",
+      "@type": "xsd:string"
+    },
+    "payment_method_type": {
+      "@id": "billdesk:payment_method_type",
+      "@type": "xsd:string"
+    },
+    "currency": {
+      "@id": "billdesk:currency",
+      "@type": "xsd:string"
+    },
+    "mandateid": {
+      "@id": "billdesk:mandateid",
+      "@type": "xsd:string"
+    },
+    "createdon": {
+      "@id": "billdesk:createdon",
+      "@type": "xsd:string"
+    },
+    "verification_error_code": {
+      "@id": "billdesk:verification_error_code",
+      "@type": "xsd:string"
+    },
+    "verification_error_type": {
+      "@id": "billdesk:verification_error_type",
+      "@type": "xsd:string"
+    },
+    "verification_error_desc": {
+      "@id": "billdesk:verification_error_desc",
+      "@type": "xsd:string"
+    },
+    "Mandate": "billdesk:Mandate",
+    "recurrence_rule": {
+      "@id": "billdesk:recurrence_rule",
+      "@type": "@id"
+    },
+    "debit_day": {
+      "@id": "billdesk:debit_day",
+      "@type": "@id"
+    },
+    "Amount_type": "billdesk:Amount_type",
+    "Avs-request": "billdesk:Avs-request",
+    "Debit_day": "billdesk:Debit_day",
+    "Device-order": "billdesk:Device-order",
+    "init_channel": {
+      "@id": "billdesk:init_channel",
+      "@type": "xsd:string"
+    },
+    "ip": {
+      "@id": "billdesk:ip",
+      "@type": "xsd:string"
+    },
+    "user_agent": {
+      "@id": "billdesk:user_agent",
+      "@type": "xsd:string"
+    },
+    "accept_header": {
+      "@id": "billdesk:accept_header",
+      "@type": "xsd:string"
+    },
+    "Invoice": "billdesk:Invoice",
+    "invoice_number": {
+      "@id": "billdesk:invoice_number",
+      "@type": "xsd:string"
+    },
+    "invoice_display_number": {
+      "@id": "billdesk:invoice_display_number",
+      "@type": "xsd:string"
+    },
+    "customer_name": {
+      "@id": "billdesk:customer_name",
+      "@type": "xsd:string"
+    },
+    "invoice_date": {
+      "@id": "billdesk:invoice_date",
+      "@type": "xsd:date"
+    },
+    "gst_details": {
+      "@id": "billdesk:gst_details"
+    },
+    "Next_step": "billdesk:Next_step",
+    "Recurrence_rule": "billdesk:Recurrence_rule",
+    "Split_payment_request": "billdesk:Split_payment_request",
+    "Frequency": "billdesk:Frequency",
+    "3ds_parameter": "billdesk:3ds_parameter",
+    "Device": "billdesk:Device",
+    "browser_language": {
+      "@id": "billdesk:browser_language",
+      "@type": "xsd:string"
+    },
+    "browser_javascript_enabled": {
+      "@id": "billdesk:browser_javascript_enabled",
+      "@type": "xsd:string"
+    },
+    "browser_tz": {
+      "@id": "billdesk:browser_tz",
+      "@type": "xsd:string"
+    },
+    "browser_color_depth": {
+      "@id": "billdesk:browser_color_depth",
+      "@type": "xsd:string"
+    },
+    "browser_java_enabled": {
+      "@id": "billdesk:browser_java_enabled",
+      "@type": "xsd:string"
+    },
+    "browser_screen_height": {
+      "@id": "billdesk:browser_screen_height",
+      "@type": "xsd:string"
+    },
+    "browser_screen_width": {
+      "@id": "billdesk:browser_screen_width",
+      "@type": "xsd:string"
+    },
+    "Pay-using-altid": "billdesk:Pay-using-altid",
+    "altid_token": {
+      "@id": "billdesk:altid_token"
+    },
+    "card_end": {
+      "@id": "billdesk:card_end",
+      "@type": "xsd:string"
+    },
+    "cvv": {
+      "@id": "billdesk:cvv",
+      "@type": "xsd:string"
+    },
+    "holder_name": {
+      "@id": "billdesk:holder_name",
+      "@type": "xsd:string"
+    },
+    "Pay-using-card-account-id": "billdesk:Pay-using-card-account-id",
+    "cardaccountid": {
+      "@id": "billdesk:cardaccountid",
+      "@type": "xsd:string"
+    },
+    "Pay-using-card-number-pan": "billdesk:Pay-using-card-number-pan",
+    "number": {
+      "@id": "billdesk:number",
+      "@type": "xsd:string"
+    },
+    "expiry_month": {
+      "@id": "billdesk:expiry_month",
+      "@type": "xsd:string"
+    },
+    "expiry_year": {
+      "@id": "billdesk:expiry_year",
+      "@type": "xsd:string"
+    },
+    "tokenize": {
+      "@id": "billdesk:tokenize",
+      "@type": "xsd:string"
+    },
+    "coft_consent": {
+      "@id": "billdesk:coft_consent",
+      "@type": "xsd:string"
+    },
+    "Pay-using-issuer-token": "billdesk:Pay-using-issuer-token",
+    "issuer_token": {
+      "@id": "billdesk:issuer_token"
+    },
+    "Pay-using-network-token": "billdesk:Pay-using-network-token",
+    "network_token": {
+      "@id": "billdesk:network_token"
+    },
+    "Authentication_type": "billdesk:Authentication_type",
+    "Avs-response": "billdesk:Avs-response",
+    "bankaccount": {
+      "@id": "billdesk:bankaccount",
+      "@container": "@list"
+    },
+    "account_matched": {
+      "@id": "billdesk:account_matched",
+      "@type": "xsd:string"
+    },
+    "name_matched": {
+      "@id": "billdesk:name_matched",
+      "@type": "xsd:string"
+    },
+    "Cardaccount-in-txn-response": "billdesk:Cardaccount-in-txn-response",
+    "masked_value": {
+      "@id": "billdesk:masked_value",
+      "@type": "@id"
+    },
+    "type": {
+      "@id": "billdesk:type",
+      "@type": "@id"
+    },
+    "network": {
+      "@id": "billdesk:network",
+      "@type": "@id"
+    },
+    "issuer": {
+      "@id": "billdesk:issuer",
+      "@type": "@id"
+    },
+    "cardaccount": {
+      "@id": "billdesk:cardaccount"
+    },
+    "Links": "billdesk:Links",
+    "links": {
+      "@id": "billdesk:links",
+      "@container": "@list"
+    },
+    "Links_Parameters": "billdesk:Links_Parameters",
+    "creq": {
+      "@id": "billdesk:creq",
+      "@type": "xsd:string"
+    },
+    "bdcreq": {
+      "@id": "billdesk:bdcreq",
+      "@type": "xsd:string"
+    },
+    "tranid": {
+      "@id": "billdesk:tranid",
+      "@type": "xsd:string"
+    },
+    "AccuCardholderId": {
+      "@id": "billdesk:AccuCardholderId",
+      "@type": "xsd:string"
+    },
+    "AccuReturnURL": {
+      "@id": "billdesk:AccuReturnURL",
+      "@type": "xsd:string"
+    },
+    "session": {
+      "@id": "billdesk:session",
+      "@type": "xsd:string"
+    },
+    "AccuGuid": {
+      "@id": "billdesk:AccuGuid",
+      "@type": "xsd:string"
+    },
+    "TermUrl": {
+      "@id": "billdesk:TermUrl",
+      "@type": "xsd:string"
+    },
+    "AccuRequestId": {
+      "@id": "billdesk:AccuRequestId",
+      "@type": "xsd:string"
+    },
+    "cardend": {
+      "@id": "billdesk:cardend",
+      "@type": "xsd:string"
+    },
+    "Txn_process_type": "billdesk:Txn_process_type",
+    "Upi-response": "billdesk:Upi-response",
+    "upi": {
+      "@id": "billdesk:upi"
+    },
+    "Upi": "billdesk:Upi",
+    "vpa": {
+      "@id": "billdesk:vpa",
+      "@type": "xsd:string"
+    },
+    "Card-Response": "billdesk:Card-Response",
+    "Response-parameters": "billdesk:Response-parameters",
+    "cres": {
+      "@id": "billdesk:cres",
+      "@type": "xsd:string"
+    },
+    "AccuResponseCode": {
+      "@id": "billdesk:AccuResponseCode",
+      "@type": "xsd:string"
+    },
+    "otp": {
+      "@id": "billdesk:otp",
+      "@type": "xsd:string"
+    },
+    "Refund_info": "billdesk:Refund_info",
+    "refundInfo": {
+      "@id": "billdesk:refundInfo",
+      "@container": "@list"
+    },
+    "Split_payment_refund_request": "billdesk:Split_payment_refund_request",
+    "txn_amount": {
+      "@id": "billdesk:txn_amount",
+      "@type": "xsd:string"
+    },
+    "refund_amount": {
+      "@id": "billdesk:refund_amount",
+      "@type": "xsd:string"
+    },
+    "Split_payment_refund_response": "billdesk:Split_payment_refund_response",
+    "refund_status": {
+      "@id": "billdesk:refund_status",
+      "@type": "xsd:string"
+    },
+    "Authentication_status": "billdesk:Authentication_status",
+    "Threeds_version": "billdesk:Threeds_version",
+    "Bankaccount": "billdesk:Bankaccount",
+    "dest_bank_id": {
+      "@id": "billdesk:dest_bank_id",
+      "@type": "xsd:string"
+    },
+    "ifsc": {
+      "@id": "billdesk:ifsc",
+      "@type": "xsd:string"
+    },
+    "paymentaccountid": {
+      "@id": "billdesk:paymentaccountid",
+      "@type": "xsd:string"
+    },
+    "bank_id": {
+      "@id": "billdesk:bank_id",
+      "@type": "xsd:string"
+    },
+    "Customer_message": "billdesk:Customer_message",
+    "Payment_method_type_subscriptions": "billdesk:Payment_method_type_subscriptions",
+    "Verification_required": "billdesk:Verification_required",
+    "Verification_type": "billdesk:Verification_type",
+    "Invoice-status": "billdesk:Invoice-status",
+    "Cardacc-network-issuer-token": "billdesk:Cardacc-network-issuer-token",
+    "token_ref_no": {
+      "@id": "billdesk:token_ref_no",
+      "@type": "xsd:string"
+    },
+    "token_expiry_month": {
+      "@id": "billdesk:token_expiry_month",
+      "@type": "xsd:string"
+    },
+    "token_expiry_year": {
+      "@id": "billdesk:token_expiry_year",
+      "@type": "xsd:string"
+    },
+    "Cardaccid_auth_data": "billdesk:Cardaccid_auth_data",
+    "transactionid": {
+      "@id": "billdesk:transactionid",
+      "@type": "@id"
+    },
+    "authenticationid": {
+      "@id": "billdesk:authenticationid",
+      "@type": "@id"
+    },
+    "rupay_auth_ref_no": {
+      "@id": "billdesk:rupay_auth_ref_no",
+      "@type": "@id"
+    },
+    "eci": {
+      "@id": "billdesk:eci",
+      "@type": "@id"
+    },
+    "cavv": {
+      "@id": "billdesk:cavv",
+      "@type": "@id"
+    },
+    "threeds_version": {
+      "@id": "billdesk:threeds_version",
+      "@type": "@id"
+    },
+    "ds_transaction_id": {
+      "@id": "billdesk:ds_transaction_id",
+      "@type": "@id"
+    },
+    "Network-issuer-token": "billdesk:Network-issuer-token",
+    "token_cryptogram": {
+      "@id": "billdesk:token_cryptogram",
+      "@type": "xsd:string"
+    },
+    "token_value": {
+      "@id": "billdesk:token_value",
+      "@type": "xsd:string"
+    },
+    "Altid_card_request": "billdesk:Altid_card_request"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "BillDesk API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects BillDesk's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-14) from openapi/billdesk-linkpay-openapi.yml, openapi/billdesk-pa-settlements-openapi.yml, openapi/billdesk-payments-openapi.yml.",
+  "dcterms:created": "2026-10-14",
+  "dcterms:source": [
+    "openapi/billdesk-linkpay-openapi.yml",
+    "openapi/billdesk-pa-settlements-openapi.yml",
+    "openapi/billdesk-payments-openapi.yml",
+    "openapi/billdesk-penny-drop-openapi.yml",
+    "openapi/billdesk-recurring-openapi.yml"
+  ]
+}

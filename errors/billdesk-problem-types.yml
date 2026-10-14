@@ -1,0 +1,40 @@
+generated: '2026-10-14'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/billdesk-linkpay-openapi.yml
+- openapi/billdesk-pa-settlements-openapi.yml
+- openapi/billdesk-payments-openapi.yml
+- openapi/billdesk-penny-drop-openapi.yml
+- openapi/billdesk-recurring-openapi.yml
+- openapi/billdesk-tokenization-openapi.yml
+- openapi/billdesk-validate-vpa-openapi.yml
+format: custom
+envelope:
+  media_type: application/json
+  schema: Error-object
+coverage:
+  operations: 31
+  statuses_declared: 3
+problems:
+- status: 403
+  title: Forbidden
+  description: Forbidden
+  operations: 29
+  media_types:
+  - application/json
+  schema: Error-object
+- status: 500
+  title: Internal Server Error
+  description: Internal Server Error
+  operations: 29
+  media_types:
+  - application/json
+  schema: Error-object
+- status: default
+  title: null
+  description: Any bad or invalid request will lead to following error object
+  operations: 27
+  media_types:
+  - application/json
+  schema: Error-object

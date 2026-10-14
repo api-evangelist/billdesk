@@ -1,0 +1,83 @@
+generated: '2026-10-14'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 7
+  own: 2
+  other_domain: 2
+  platform: 3
+  roles:
+  - api
+  - docs
+  - other
+  - status
+  - website
+hosts:
+- host: api.billdesk.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: billdesk.com
+  role: api
+  relation: own
+- host: docs.billdesk.io
+  found_by:
+  - pointer
+  - apis[]
+  types:
+  - Documentation
+  serves:
+  - docs
+  registrable_domain: billdesk.io
+  role: docs
+  relation: other-domain
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrg
+  serves: []
+  registrable_domain: github.com
+  role: other
+  relation: platform
+- host: in.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform
+- host: twitter.com
+  found_by:
+  - pointer
+  types:
+  - X
+  serves: []
+  registrable_domain: twitter.com
+  role: other
+  relation: platform
+- host: uptime.com
+  found_by:
+  - pointer
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: uptime.com
+  role: status
+  relation: other-domain
+- host: www.billdesk.com
+  found_by:
+  - pointer
+  types:
+  - Website
+  - Blog
+  - Pricing
+  serves: []
+  registrable_domain: billdesk.com
+  role: website
+  relation: own

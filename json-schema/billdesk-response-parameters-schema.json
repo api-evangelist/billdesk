@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/billdesk/main/json-schema/billdesk-response-parameters-schema.json",
+  "title": "Response-parameters",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/billdesk-recurring-openapi.yml#/components/schemas/Response-parameters",
+  "type": "object",
+  "properties": {
+    "cres": {
+      "type": "string",
+      "description": "Response parameters as received from the issuer, and will be cres for 3ds 2.0 flow"
+    },
+    "AccuResponseCode": {
+      "type": "string",
+      "description": "Response parameters as received from the issuer, and will be received for Rupay cards"
+    },
+    "session": {
+      "type": "string",
+      "description": "Response parameters as received from the issuer, and will be received for Rupay cards"
+    },
+    "AccuGuid": {
+      "type": "string",
+      "description": "Response parameters as received from the issuer, and will be received for Rupay cards"
+    },
+    "AccuRequestId": {
+      "type": "string",
+      "description": "Response parameters as received from the issuer, and will be received for Rupay cards"
+    },
+    "otp": {
+      "type": "string",
+      "description": "for a native authentication where next_step = capture_otp"
+    },
+    "TermUrl": {
+      "type": "string",
+      "description": "Payment parameter for rupay redirect flow"
+    },
+    "cardend": {
+      "type": "string",
+      "description": "Payment parameter for rupay redirect flow"
+    }
+  }
+}

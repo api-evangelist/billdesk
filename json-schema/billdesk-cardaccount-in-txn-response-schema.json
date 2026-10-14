@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/billdesk/main/json-schema/billdesk-cardaccount-in-txn-response-schema.json",
+  "title": "Cardaccount-in-txn-response",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/billdesk-payments-openapi.yml#/components/schemas/Cardaccount-in-txn-response",
+  "type": "object",
+  "properties": {
+    "masked_value": {
+      "$ref": "#/$defs/Masked_value"
+    },
+    "type": {
+      "$ref": "#/$defs/Card_type"
+    },
+    "card_end": {
+      "type": "string"
+    },
+    "network": {
+      "$ref": "#/$defs/Card_network"
+    },
+    "issuer": {
+      "$ref": "#/$defs/Card_issuer"
+    },
+    "cardaccountid": {
+      "$ref": "#/$defs/Cardaccountid"
+    },
+    "coft_consent": {
+      "type": "string"
+    },
+    "cardaccount": {
+      "type": "object",
+      "properties": {
+        "objectid": {
+          "$ref": "#/$defs/Objectid"
+        },
+        "mercid": {
+          "$ref": "#/$defs/Mercid"
+        },
+        "customer_refid": {
+          "$ref": "#/$defs/Customer_refid"
+        },
+        "cardaccountid": {
+          "type": "string"
+        },
+        "orderid": {
+          "$ref": "#/$defs/Orderid"
+        },
+        "masked_value": {
+          "type": "string"
+        },
+        "holder_name": {
+          "$ref": "#/$defs/Holder_name"
+        },
+        "cardaccount_status": {
+          "type": "string"
+        },
+        "createdon": {
+          "type": "string"
+        },
+        "network_token": {
+          "type": "object",
+          "properties": {
+            "token_ref_no": {
+              "type": "string"
+            },
+            "token_expiry_month": {
+              "type": "string"
+            },
+            "token_expiry_year": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "createdon": {
+              "type": "string"
+            }
+          }
+        },
+        "cardaccount_error_code": {
+          "$ref": "#/$defs/Error_code"
+        },
+        "cardaccount_error_type": {
+          "$ref": "#/$defs/Error_type"
+        },
+        "cardaccount_error_desc": {
+          "$ref": "#/$defs/Error_desc"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Card_issuer": {
+      "title": "card_issuer",
+      "x-stoplight": {
+        "id": "tm5adiwnqv7q0"
+      },
+      "type": "string",
+      "description": "Card issuer"
+    },
+    "Card_network": {
+      "title": "card_network",
+      "x-stoplight": {
+        "id": "fmhnjhdrk4ngb"
+      },
+      "type": "string",
+      "description": "Card Network"
+    },
+    "Card_type": {
+      "title": "card_type",
+      "x-stoplight": {
+        "id": "r4tyk0ee6k6u5"
+      },
+      "type": "string",
+      "description": "Card product type, takes the following values - debit, credit or prepaid"
+    },
+    "Cardaccountid": {
+      "title": "cardaccountid",
+      "x-stoplight": {
+        "id": "12f6yszzh3x5y"
+      },
+      "type": "string",
+      "description": "Unique ID created by BillDesk for the combination of card number, mercid and customer_refid",
+      "pattern": "^[A-Za-z0-9]{1,35}$"
+    },
+    "Customer_refid": {
+      "title": "customer_refid",
+      "x-stoplight": {
+        "id": "mpmq18zbl4x12"
+      },
+      "type": "string",
+      "description": "Unique reference of the customer in the merchant system, and can be linked to different subscriptions of the same customer\nRequired for mandate and tokenization",
+      "pattern": "^[A-Za-z0-9\\\\_\\\\:\\\\-]{1,80}$"
+    },
+    "Error_code": {
+      "title": "error_code",
+      "x-stoplight": {
+        "id": "2grhtze0qf6ob"
+      },
+      "type": "string",
+      "description": "Represents the error code for the response"
+    },
+    "Error_desc": {
+      "title": "error_desc",
+      "x-stoplight": {
+        "id": "uyor3loffwtew"
+      },
+      "type": "string",
+      "description": "Represents the error description for the response"
+    },
+    "Error_type": {
+      "title": "error_type",
+      "x-stoplight": {
+        "id": "snpogojwqc0aq"
+      },
+      "type": "string",
+      "description": "Represents the error type for the response"
+    },
+    "Holder_name": {
+      "title": "holder_name",
+      "x-stoplight": {
+        "id": "azsrpizyvmymk"
+      },
+      "type": "string",
+      "description": "Cardholder name"
+    },
+    "Masked_value": {
+      "title": "masked_value",
+      "x-stoplight": {
+        "id": "r3wddilt5cyy4"
+      },
+      "type": "string",
+      "description": "Masked card number, with the last four digits"
+    },
+    "Mercid": {
+      "title": "mercid",
+      "x-stoplight": {
+        "id": "43ns25lu1fyuc"
+      },
+      "type": "string",
+      "pattern": "^[A-Za-z0-9]{1,10}$",
+      "description": "Unique identifier as defined by BillDesk for each merchant"
+    },
+    "Objectid": {
+      "title": "objectid",
+      "x-stoplight": {
+        "id": "bbwm8bhhbqd4r"
+      },
+      "type": "string",
+      "description": "String representing the object's type. Objects of the same type share the same value. ",
+      "enum": [
+        "transaction",
+        "authentication",
+        "mandate",
+        "invoice",
+        "cardaccount",
+        "validatevpa",
+        "dispute",
+        "settlement",
+        "altid",
+        "mandate_token",
+        "accountvalidation",
+        "refund"
+      ]
+    },
+    "Orderid": {
+      "title": "orderid",
+      "x-stoplight": {
+        "id": "lmwrwf7xn6wq8"
+      },
+      "type": "string",
+      "description": "Unique ID generated by the merchant for each request",
+      "pattern": "^[-/~A-Za-z0-9\\_ \\:.,#@!\\\\*\\\\+]{1,120}$"
+    }
+  }
+}
