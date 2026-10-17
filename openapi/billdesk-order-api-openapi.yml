@@ -1,0 +1,1975 @@
+openapi: 3.2.0
+info:
+  title: Payments Order API
+  description: 'This explorer allows merchants to evaluate APIs that are available in the BillDesk Payment Gateway API suite.
+
+    - Only HMAC authentication is supported.
+
+    - All APIs are RESTful and resource oriented.
+
+    - Servers listed are applicable for the API explorer only.'
+  contact:
+    name: API Support
+    url: https://www.billdesk.com/helpcenter.htm
+    email: support@billdesk.com
+  version: '2.5'
+servers:
+- url: https://uat1.billdesk.com/u2
+  description: UAT server
+- url: https://api.billdesk.com
+  description: PROD server
+tags:
+- name: Order
+paths:
+  /payments/ve1_2/orders/create:
+    parameters: []
+    post:
+      summary: Create Order
+      operationId: createOrder
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    objectid: order
+                    mercid: BDMERCID
+                    amount: '300.00'
+                    ru: https://www.demourlmerchant.com/response
+                    orderid: 6yn4uhuz9e9bcw9qo6r6v4
+                    order_date: 2020-08-17T15:19:00+0530
+                    bdorderid: OAFC19XTFD8TSP
+                    additional_info:
+                      additional_info1: Details1
+                      additional_info2: Details2
+                    next_step: redirect
+                    itemcode: DIRECT
+                    createdon: '2021-03-11T19:23:24+05:30'
+                    currency: '356'
+                    links:
+                    - method: GET
+                      rel: self
+                      href: https://www.sampleurl.com/request
+                    - headers:
+                        authorization: OToken DEDC1071B77800A146B6E8D2530E0429E76520C151B40CC3325D8B6D9242CBA3A6BFA643E7E5596FBEBAE0F46A1FB1BCD099EBC1F59DCD82F390B6BC45FCE036F37F7F589BD687A691E1378F1FF432331C62E7E641E857C8F8A405A4BFE2F01B1EB8F3C69817D45F5DDE9DEE346ACABA1B7208DECA9E43CCE7AB3761553E23D9CB36A870C1819C15C7C4B1CFE2802DFD05F651AA537AB81787.4145535F55415431
+                      valid_date: '2020-08-17T15:49:00+05:30'
+                      method: POST
+                      rel: redirect
+                      href: https://www.billdesk.com/pgi/MerchantPayment/
+                      parameters:
+                        mercid: BDMERCID
+                        bdorderid: OAFC19XTFD8TSP
+                    status: ACTIVE
+                    invoice:
+                      invoice_number: MEINVU111111221133
+                      invoice_display_number: '11221133'
+                      customer_name: John Doe
+                      invoice_date: '2021-09-03T13:21:50+05:30'
+                      gst_details:
+                        cgst: '8.00'
+                        sgst: '8.00'
+                        igst: '0.00'
+                        gst: '16.00'
+                        cess: '0.00'
+                        gstincentive: '5.00'
+                        gstpct: '16.00'
+                        gstin: '12344567'
+                    device:
+                      accept_header: text/html
+                      ip: 202.149.208.92
+                      fingerprintid: 61b12c18b5d0cf901be34a23ca64bb19
+                      imei: '990000112233445'
+                      init_channel: internet
+                      mac: 11-AC-58-21-1B-AA
+                      user_agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:51.0) Gecko/20100101 Firefox/51.0
+                properties:
+                  objectid:
+                    $ref: '#/components/schemas/Objectid'
+                  mercid:
+                    $ref: '#/components/schemas/Mercid'
+                  amount:
+                    $ref: '#/components/schemas/Amount'
+                  ru:
+                    $ref: '#/components/schemas/Ru'
+                  orderid:
+                    $ref: '#/components/schemas/Orderid'
+                  order_date:
+                    type: string
+                    description: Merchant order generation date and time in YYYY-MM-DDThh:mm:ssTZD format
+                    example: '2023-03-14T15:14:39+05:30'
+                    format: date-time
+                  bdorderid:
+                    $ref: '#/components/schemas/bdorderid'
+                  next_step:
+                    $ref: '#/components/schemas/Next_step'
+                  itemcode:
+                    $ref: '#/components/schemas/Itemcode'
+                  createdon:
+                    $ref: '#/components/schemas/Createdon'
+                  currency:
+                    $ref: '#/components/schemas/Currency'
+                  links:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        method:
+                          type: string
+                        rel:
+                          type: string
+                        href:
+                          type: string
+                        headers:
+                          type: object
+                          properties:
+                            authorization:
+                              $ref: '#/components/schemas/authorization'
+                        valid_date:
+                          type: string
+                        parameters:
+                          type: object
+                          properties:
+                            mercid:
+                              $ref: '#/components/schemas/Mercid'
+                            bdorderid:
+                              $ref: '#/components/schemas/bdorderid'
+                            rdata:
+                              $ref: '#/components/schemas/rdata'
+                  status:
+                    type: string
+                    enum:
+                    - ACTIVE
+                    description: "Represents the status of the order, with the following possible values:\n•\tACTIVE"
+                  invoice:
+                    $ref: '#/components/schemas/Invoice'
+                  split_payment:
+                    $ref: '#/components/schemas/Split_payment_request'
+                  mandate:
+                    $ref: '#/components/schemas/Mandate-Response'
+                  additional_info:
+                    $ref: '#/components/schemas/Additional-Info'
+              examples:
+                Create order:
+                  value:
+                    mercid: BDMERCID
+                    amount: '29999.28'
+                    ru: https://www.merchant.com
+                    orderid: TEST00000090060
+                    createdon: '2023-11-22T15:43:54+05:30'
+                    order_date: '2023-03-25T15:14:39+05:30'
+                    bdorderid: OAKU2U0V4C6B
+                    next_step: redirect
+                    itemcode: DIRECT
+                    currency: '356'
+                    links:
+                    - method: GET
+                      rel: self
+                      href: https://www.some url.com/demo/TEST00000090060
+                    - headers:
+                        authorization: OToken 47e627dddab9f33066a808b2e5d68c13d9a76b942bb36da8f2d823b9b1b7ed3ed5eb90bce16c75c15aa042ecd6b2adf33f9984b60183071133bad1702d7463b18fa46bed1346a1320675ea61f219d1725f5b6031b57bb860ea8f817cfc860faa91ad89041a66eb5b7776c94cf9f4309928a816a9bbbea5e6357d695aac1af458ceb21956323324a1b0a5eff043e6ef716a7c71c3444aab90a85154aadf6fde399db352a2ee6a.70675f706172616d5f656e6331
+                      valid_date: '2023-11-22T16:13:54+05:30'
+                      method: POST
+                      rel: redirect
+                      href: https://www.some url.com/demo
+                      parameters:
+                        mercid: BDMERCID
+                        bdorderid: OAKU2U0V4C6B
+                        rdata: d7f81c024aef396a80f32c876a1f 60017f4ac50a75cf2a663cd6a81e8c8 37e9912cbf49aac6be28f98d19c1e16 0f7b88a6e730e736f0dc52c82689e70 b55.7561746b657931
+                    objectid: order
+                    status: ACTIVE
+                Create order with split payment:
+                  value:
+                    objectid: order
+                    orderid: UAT1002202300001
+                    bdorderid: OAZG19XTTEVQSS
+                    mercid: BDMERCID
+                    order_date: 2023-02- 09T10:00:45+05:30
+                    amount: '4000.00'
+                    currency: '356'
+                    ru: https://www.merchanturl.com/
+                    additional_info:
+                      additional_info1: NA
+                      additional_info2: NA
+                    itemcode: DIRECT
+                    split_payment:
+                    - mercid: BDMERCID1
+                      amount: '3000.00'
+                    - mercid: BDMERCID2
+                      amount: '1000.00'
+                    createdon: 2023-02- 10T00:19:42+05:30
+                    next_step: redirect
+                    links:
+                    - href: https://www.some url.com/demo
+                      rel: self
+                      method: GET
+                    - href: https://www.redirecturl.io/form
+                      rel: redirect
+                      method: POST
+                      parameters:
+                        mercid: 'BDMERCID '
+                        bdorderid: OAZG19XTTEVQSS
+                        rdata: 3e35f44cf9acd6a683d5c43b71b37f6ea6ae0fc7dbe227c1ea961e7011c6c4aebe5ceaa584c53ba8fc6bff05ec78ab552c58e1ef77ac20f719ac3c0c468df044.7561746b657931
+                      valid_date: 2023-02- 10T00:49:42+05:30
+                      headers:
+                        authorization: O Token 8A20A6DF3BD7957AFC66FC562DED0D8B5966FB2C464E962E0BCADDB8B67F625169D9524423D9A36BC80282904EA6D49ACEECB2AA72B8C8CB4F187ECC9A35D39C3FE770A0B6EBC4EF38CC1F42CE4BCA744875E1152E0EFBDA01F02F3822DD8283E985105A146DD7D8C378106F08E628023ED459C579A10120182E3836ACF543A6922FC81C7682BB5E56B155FD47AC3F9FB18780EDFAFD1982F4.4145535F55415431
+                    status: ACTIVE
+                Create order with Mandate:
+                  value:
+                    objectid: order
+                    orderid: order45608988
+                    bdorderid: OAMA19XU6FRZTC
+                    mercid: BDMERCID
+                    order_date: '2024-01-30T10: 59: 15+05: 30'
+                    amount: '300.00'
+                    currency: '356'
+                    ru: https://www.merchant.com/
+                    additional_info:
+                      additional_info1: Details1
+                      additional_info2: Details2
+                      additional_info3: NA
+                      additional_info4: NA
+                      additional_info5: NA
+                      additional_info6: NA
+                      additional_info7: NA
+                    itemcode: DIRECT
+                    createdon: '2024-02-11T21: 54: 56+05: 30'
+                    next_step: redirect
+                    links:
+                    - href: https://www.billdesk.com/pgi/ve1_2/orders/order45608988
+                      rel: self
+                      method: GET
+                    - href: 'https://uat1.billdesk.com/u2/web/v1_2/embeddedsdk '
+                      rel: redirect
+                      method: POST
+                      parameters:
+                        mercid: BDMERCID
+                        bdorderid: OAMA19XU6FRZTC
+                        rdata: 8F143FB859C8F0C5CB14CA2718CA56BC9CB61766DC0B1CB2173305D94A9B664DEF08964B55A3D4CFA99D7D45B16F02EE8613C720626BD6A6E3F49377B6C49C5.4145535F55415431
+                      valid_date: '2024-02-12T02: 54: 56+05: 30'
+                      headers:
+                        authorization: OToken E88302C05CC3EF626619DC152DF3C6C305CE416F88B47E623763C2438E958150D0128314AE937C79A6C41F3F5513A0FB8F8C9358D970287D8CD6A0AED670BD833F94825D4FAA9BC6DE48EA16BABD2218F81481EA54688BEEC1AB35AC6C959CFC085D91B78C96582C2CFE001457E697344188B821C469B4ED0051AB334EB7395E6D07CFB235712C248C95CA082E7F89C8E28748BEF310612.4145535F55415431
+                    mandate:
+                      mercid: BDMERCID
+                      customer_refid: cust9199028201
+                      subscription_refid: Sub92882992782701
+                      subscription_desc: Term insurance
+                      amount: '200.00'
+                      amount_type: max
+                      start_date: '2024-02-11'
+                      end_date: '2025-12-04'
+                      frequency: year
+                      currency: '356'
+                      status: initiated
+                      mandate_tokenid: NA23DB00429155
+                      recurrence_rule: after
+                      debit_day: '1'
+                      createdon: '2024-02-11T21: 54: 56+05: 30'
+                    status: ACTIVE
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Forbidden:
+                  $ref: '#/components/examples/403-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Internal Server Error:
+                  $ref: '#/components/examples/500-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        default:
+          description: Any bad or invalid request will lead to following error object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Invalid merchant config:
+                  $ref: '#/components/examples/422-Invalid-merchant-config'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+      tags:
+      - Order
+      description: This API can be used to initiate a payment or to set up a mandate along with a payment in the BillDesk Hosted Payment Page or BillDesk Web SDK workflow
+      parameters:
+      - $ref: '#/components/parameters/bdTraceId'
+      - $ref: '#/components/parameters/bdTimeStamp'
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                orderid:
+                  $ref: '#/components/schemas/Orderid'
+                mercid:
+                  $ref: '#/components/schemas/Mercid'
+                order_date:
+                  type: string
+                  description: Merchant order generation date and time in YYYY-MM-DDThh:mm:ssTZD format
+                  example: '2023-03-14T15:14:39+05:30'
+                  format: date-time
+                amount:
+                  $ref: '#/components/schemas/Amount'
+                currency:
+                  $ref: '#/components/schemas/Currency'
+                ru:
+                  $ref: '#/components/schemas/Ru'
+                itemcode:
+                  $ref: '#/components/schemas/Itemcode'
+                settlement_lob:
+                  type: string
+                  description: Settlement line of business preconfigured by BillDesk for funds settlement to merchant account
+                mandate_required:
+                  type: string
+                  enum:
+                  - Y
+                  - N
+                  description: "Value which represents if the customer is to be givrn the option to not set a mandate on the BillDesk Hosted Payment Page or Web SDK. Applicable for the One time payment & Mandate workflow \n\nY- Represents that setting the Mandate is mandatory and the customer does not have an option to turn off the mandate\n\nN- Represents that setting the Mandate is optional and the customer has an option to turn off the mandate. In this case, a one time payment will be made without the mandate"
+                customer:
+                  $ref: '#/components/schemas/Customer'
+                avs:
+                  $ref: '#/components/schemas/Avs-request'
+                device:
+                  $ref: '#/components/schemas/Device-order'
+                invoice:
+                  $ref: '#/components/schemas/Invoice'
+                split_payment:
+                  $ref: '#/components/schemas/Split_payment_request'
+                mandate:
+                  $ref: '#/components/schemas/Mandate'
+                additional_info:
+                  $ref: '#/components/schemas/Additional-Info'
+              required:
+              - orderid
+              - mercid
+              - order_date
+              - amount
+              - currency
+              - ru
+              - itemcode
+            examples:
+              Create order:
+                value:
+                  orderid: TEST00000090061
+                  mercid: BDMERCID
+                  order_date: '2023-03-25T15:14:39+05:30'
+                  amount: '29999.28'
+                  currency: '356'
+                  ru: https://www.merchant.com
+                  itemcode: DIRECT
+                  device:
+                    init_channel: internet
+                    ip: 123.0.0.1
+                    user_agent: 'Mozilla/5.0(WindowsNT10.0;WOW64;rv: 51.0)Gecko/20100101Firefox/51.0'
+                    accept_header: application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+              Create order with split payment:
+                value:
+                  device:
+                    init_channel: internet
+                    ip: 136.232.199.34
+                    user_agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:51.0) Gecko/20100101 Firefox/51.0
+                  split_payment:
+                  - mercid: BDMERCID1
+                    amount: '3000.00'
+                  - mercid: BDMERCID2
+                    amount: '1000.00'
+                  mercid: BDMERCID
+                  orderid: UAT1002202300001
+                  amount: '4000.00'
+                  order_date: '2023-02-09T10:00:45+05:30'
+                  currency: '356'
+                  ru: https://www.merchanturl.com/
+                  itemcode: DIRECT
+              'Create order with Mandate ':
+                value:
+                  mercid: BDMERCID
+                  orderid: order45608988
+                  amount: '300.00'
+                  order_date: '2024-01-30T10: 59: 15+05: 30'
+                  currency: '356'
+                  ru: https://www.merchant.com/
+                  additional_info:
+                    additional_info1: Details1
+                    additional_info2: Details2
+                  mandate:
+                    mercid: BDMERCID
+                    currency: '356'
+                    amount: '200.00'
+                    customer_refid: cust9199028201
+                    subscription_refid: Sub92882992782701
+                    subscription_desc: Term insurance
+                    start_date: '2024-02-11'
+                    end_date: '2025-12-04'
+                    frequency: year
+                    amount_type: max
+                    recurrence_rule: after
+                    debit_day: '1'
+                  mandate_required: Y
+                  itemcode: DIRECT
+                  device:
+                    init_channel: internet
+                    ip: 123.0.0.1
+                    user_agent: 'Mozilla/5.0(WindowsNT10.0;WOW64;rv: 51.0)Gecko/20100101Firefox/51.0'
+                    accept_header: text/html
+                    browser_tz: '-330'
+                    browser_color_depth: '32'
+                    browser_java_enabled: 'false'
+                    browser_screen_height: '601'
+                    browser_screen_width: '657'
+                    browser_language: en-US
+                    browser_javascript_enabled: 'true'
+        description: ''
+  /pgsi/ve1_2/mandatetokens/create:
+    parameters: []
+    post:
+      summary: Create Mandate Token
+      operationId: createMandateToken
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    objectid: mandate_token
+                    mandate_tokenid: NA12BF00383201
+                    mercid: BDMONITOR
+                    customer_refid: cust980823jkdyr9d912
+                    subscription_refid: Sub98nmf0uh9f912
+                    subscription_desc: 9800000d1112
+                    start_date: '2023-12-29'
+                    end_date: '2029-12-04'
+                    amount: '2.00'
+                    amount_type: max
+                    currency: '356'
+                    frequency: year
+                    createdon: '2023-11-21T15:50:31+05:30'
+                    ru: https://www.billdesk.com/web/
+                    additional_info:
+                      additional_info1: Details1
+                      additional_info2: Details2
+                      additional_info3: '123456789'
+                    customer:
+                      first_name: John
+                      last_name: Doe
+                      email: john.doe@somedomain.com
+                      email_alt: john.doe@somedomain.com
+                      mobile: '9800000000'
+                      mobile_alt: '9800000000'
+                    device:
+                      fingerprintid: 61b12c18b5d0cf901be34a23ca64bb19
+                      init_channel: internet
+                      ip: 192.168.1.1
+                      user_agent: Mozilla/5.0(WindowsNT10.0;WOW64;rv:51.0)Gecko/20100101Firefox/51.0
+                      accept_header: text/html
+                      browser_javascript_enabled: 'true'
+                      browser_java_enabled: 'false'
+                      browser_language: en-US
+                      browser_color_depth: '32'
+                      browser_screen_height: '601'
+                      browser_screen_width: '657'
+                      browser_tz: '-330'
+                    status: initiated
+                    recurrence_rule: after
+                    debit_day: '6'
+                    next_step: redirect
+                    links:
+                    - href: https://pguat.billdesk.io/pgsi/v1_2/mandates/token/initiate
+                      rel: self
+                      method: POST
+                      parameters: null
+                      valid_date: null
+                      headers: null
+                    - href: https://billdesk.techbulls.com/sdk/
+                      rel: redirect
+                      method: POST
+                      parameters:
+                        mercid: BDMONITOR
+                        mandate_tokenid: NA12BF00383201
+                      valid_date: '2023-11-21T16:20:31+05:30'
+                      headers:
+                        authorization: OToken 6E8DAD70FD30FCC30377B6AEECE1FFCF25C939D0F60AAC55ED7B35B3995DCE2EE3A042486E1C1C729F501700D9504634075EA302E08304D8ADFED115BD91AF2E205AAFF9AC7EBB1722C91CF7C6AA671AE0E564B631B2770EFB7389089C7888722A19FD302B8D288BD3A8F6739DB0D77720CCB52E3867A1B455D26B94AA1E57AE07DCA932F0FA6F0772DB56016A5FDDE5CFBF3C8E4113B4AFFF.4145535F55415431
+                properties:
+                  objectid:
+                    $ref: '#/components/schemas/Objectid'
+                  mandate_tokenid:
+                    $ref: '#/components/schemas/mandate_tokenid'
+                  mercid:
+                    $ref: '#/components/schemas/Mercid'
+                  customer_refid:
+                    $ref: '#/components/schemas/Customer_refid'
+                  subscription_refid:
+                    $ref: '#/components/schemas/Subscription_refid'
+                  subscription_desc:
+                    $ref: '#/components/schemas/Subscription_desc'
+                  start_date:
+                    $ref: '#/components/schemas/Start_date'
+                  end_date:
+                    $ref: '#/components/schemas/End_date'
+                  amount:
+                    $ref: '#/components/schemas/Amount'
+                  amount_type:
+                    $ref: '#/components/schemas/Amount_type'
+                  currency:
+                    $ref: '#/components/schemas/Currency'
+                  frequency:
+                    $ref: '#/components/schemas/Frequency'
+                  createdon:
+                    $ref: '#/components/schemas/Createdon'
+                  ru:
+                    $ref: '#/components/schemas/Ru'
+                  customer:
+                    $ref: '#/components/schemas/Customer'
+                  additional_info:
+                    $ref: '#/components/schemas/Additional-Info'
+                  status:
+                    $ref: '#/components/schemas/Auth_status'
+                  recurrence_rule:
+                    $ref: '#/components/schemas/Recurrence_rule'
+                  debit_day:
+                    $ref: '#/components/schemas/Debit_day'
+                  next_step:
+                    $ref: '#/components/schemas/Next_step'
+                  links:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        method:
+                          type: string
+                        rel:
+                          type: string
+                        href:
+                          type: string
+                        headers:
+                          type: object
+                          properties:
+                            authorization:
+                              $ref: '#/components/schemas/authorization'
+                        valid_date:
+                          type: string
+                        parameters:
+                          type: object
+                          properties:
+                            mercid:
+                              $ref: '#/components/schemas/Mercid'
+                            bdorderid:
+                              $ref: '#/components/schemas/bdorderid'
+                            rdata:
+                              $ref: '#/components/schemas/rdata'
+              examples:
+                Response:
+                  value:
+                    objectid: mandate_token
+                    mandate_tokenid: NA12BF00383201
+                    mercid: BDMERCID
+                    customer_refid: cust980823jkdyr9d912
+                    subscription_refid: Sub98nmf0uh9f912
+                    subscription_desc: 9800000d1112
+                    start_date: '2023-12-29'
+                    end_date: '2029-12-04'
+                    amount: '2.00'
+                    amount_type: max
+                    currency: '356'
+                    frequency: year
+                    createdon: '2023-11-21T15:50:31+05:30'
+                    ru: https://www.merchant.com/ru/
+                    customer:
+                      first_name: John
+                      last_name: Doe
+                      email: john.doe@somedomain.com
+                      email_alt: john.doe@somedomain.com
+                      mobile: '9800000000'
+                      mobile_alt: '9800000000'
+                    device:
+                      init_channel: internet
+                      ip: 192.168.1.1
+                      user_agent: Mozilla/5.0(WindowsNT10.0;WOW64;rv:51.0)Gecko/20100101Firefox/51.0
+                      accept_header: text/html
+                    status: initiated
+                    recurrence_rule: after
+                    debit_day: '6'
+                    next_step: redirect
+                    links:
+                    - href: https://pguat.billdesk.io/pgsi/v1_2/mandates/token/initiate
+                      rel: self
+                      method: POST
+                      parameters: null
+                      valid_date: null
+                      headers: null
+                    - href: https://billdesk.techbulls.com/sdk/
+                      rel: redirect
+                      method: POST
+                      parameters:
+                        mercid: BDMERCID
+                        mandate_tokenid: NA12BF00383201
+                        rdata: 9b035a3a8a8d0070dc6e93dbd0f09191b315cadc4c76706338aea0841c94310d0086a3b07797d549fee5ca28t51a8e435f149d9b34a138515dfb676b6cf80cd8.70675f706172616d5f656e6333
+                      valid_date: '2023-11-21T16:20:31+05:30'
+                      headers:
+                        authorization: OToken 6E8DAD70FD30FCC30377B6AEECE1FFCF25C939D0F60AAC55ED7B35B3995DCE2EE3A042486E1C1C729F501700D9504634075EA302E08304D8ADFED115BD91AF2E205AAFF9AC7EBB1722C91CF7C6AA671AE0E564B631B2770EFB7389089C7888722A19FD302B8D288BD3A8F6739DB0D77720CCB52E3867A1B455D26B94AA1E57AE07DCA932F0FA6F0772DB56016A5FDDE5CFBF3C8E4113B4AFFF.4145535F55415431
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Forbidden:
+                  $ref: '#/components/examples/403-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Internal Server Error:
+                  $ref: '#/components/examples/500-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        default:
+          description: Any bad or invalid request will lead to following error object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Invalid merchant config:
+                  $ref: '#/components/examples/422-Invalid-merchant-config'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+      tags:
+      - Order
+      description: This API is used to initate the process to Create a Mandate and is applicable for BillDesk Hosted Payments Page and BillDesk Web SDK workflows
+      parameters:
+      - $ref: '#/components/parameters/bdTraceId'
+      - $ref: '#/components/parameters/bdTimeStamp'
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  mercid: BDMONITOR
+                  customer_refid: cust980823jkdyr9d912
+                  subscription_refid: Sub98nmf0uh9f912
+                  subscription_desc: 9800000d1112
+                  currency: '356'
+                  frequency: year
+                  amount_type: max
+                  amount: '2.00'
+                  start_date: '2023-12-29'
+                  end_date: '2029-12-04'
+                  recurrence_rule: after
+                  debit_day: '6'
+                  customer:
+                    first_name: John
+                    last_name: Doe
+                    mobile: '9800000000'
+                    mobile_alt: '9800000000'
+                    email: john.doe@somedomain.com
+                    email_alt: john.doe@somedomain.com
+                  additional_info:
+                    additional_info1: Details1
+                    additional_info2: Details2
+                    additional_info3: '123456789'
+                  device:
+                    init_channel: internet
+                    ip: 192.168.1.1
+                    user_agent: Mozilla/5.0(WindowsNT10.0;WOW64;rv:51.0)Gecko/20100101Firefox/51.0
+                    accept_header: text/html
+                    fingerprintid: 61b12c18b5d0cf901be34a23ca64bb19
+                    browser_tz: '-330'
+                    browser_color_depth: '32'
+                    browser_java_enabled: 'false'
+                    browser_screen_height: '601'
+                    browser_screen_width: '657'
+                    browser_language: en-US
+                    browser_javascript_enabled: 'true'
+                  ru: https://www.billdesk.com/web/
+              properties:
+                mercid:
+                  $ref: '#/components/schemas/Mercid'
+                customer_refid:
+                  $ref: '#/components/schemas/Customer_refid'
+                subscription_refid:
+                  $ref: '#/components/schemas/Subscription_refid'
+                subscription_desc:
+                  $ref: '#/components/schemas/Subscription_desc'
+                currency:
+                  $ref: '#/components/schemas/Currency'
+                frequency:
+                  $ref: '#/components/schemas/Frequency'
+                amount_type:
+                  $ref: '#/components/schemas/Amount_type'
+                amount:
+                  $ref: '#/components/schemas/Amount'
+                start_date:
+                  $ref: '#/components/schemas/Start_date'
+                end_date:
+                  $ref: '#/components/schemas/End_date'
+                recurrence_rule:
+                  $ref: '#/components/schemas/Recurrence_rule'
+                debit_day:
+                  $ref: '#/components/schemas/Debit_day'
+                customer:
+                  $ref: '#/components/schemas/Customer'
+                ru:
+                  $ref: '#/components/schemas/Ru'
+                device:
+                  $ref: '#/components/schemas/Device-order'
+                additional_info:
+                  $ref: '#/components/schemas/Additional-Info'
+              required:
+              - mercid
+              - customer_refid
+              - subscription_refid
+              - subscription_desc
+              - currency
+              - frequency
+              - amount_type
+              - amount
+              - start_date
+              - end_date
+              - customer
+              - ru
+              - device
+            examples:
+              Request:
+                value:
+                  mercid: BDMERCID
+                  customer_refid: cust980823jkdyr9d912
+                  subscription_refid: Sub98nmf0uh9f912
+                  subscription_desc: 9800000d1112
+                  currency: '356'
+                  frequency: year
+                  amount_type: max
+                  amount: '2.00'
+                  start_date: '2023-12-29'
+                  end_date: '2029-12-04'
+                  recurrence_rule: after
+                  debit_day: '6'
+                  customer:
+                    first_name: John
+                    last_name: Doe
+                    mobile: '9800000000'
+                    mobile_alt: '9800000000'
+                    email: john.doe@somedomain.com
+                    email_alt: john.doe@somedomain.com
+                  device:
+                    init_channel: internet
+                    ip: 192.168.1.1
+                    user_agent: Mozilla/5.0(WindowsNT10.0;WOW64;rv:51.0)Gecko/20100101Firefox/51.0
+                    accept_header: text/html
+                  ru: https://merchant.com/ru
+        description: ''
+  /pgsi/ve1_2/mandatetokens/update/create:
+    post:
+      summary: Modify Mandate Token
+      operationId: modify-mandate-token
+      responses:
+        '200':
+          description: OK
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    objectid: mandate_token
+                    mandate_tokenid: NA106900386835
+                    mandateid: MA242A00269906
+                    mercid: BDMONITOR
+                    customer_refid: cusntrfdm
+                    subscription_refid: Sub9rttfhj78t
+                    subscription_desc: UAT Tefsting
+                    start_date: '2023-11-27'
+                    end_date: '2026-12-04'
+                    amount: '50.00'
+                    amount_type: maximum
+                    currency: '356'
+                    frequency: year
+                    createdon: '2023-11-28T11:33:08+05:30'
+                    ru: https://merchant.com/web
+                    additional_info:
+                      additional_info1: Details1
+                      additional_info2: Details2
+                      additional_info3: NA
+                      additional_info4: NA
+                      additional_info5: NA
+                      additional_info6: NA
+                      additional_info7: NA
+                      additional_info8: NA
+                      additional_info9: NA
+                      additional_info10: NA
+                    customer: {}
+                    device:
+                      fingerprintid: 61b12c18b5d0cf901be34a23ca64bb19
+                      init_channel: internet
+                      ip: 17.233.107.92
+                      user_agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:51.0) Gecko/20100101Firefox/51.0
+                      accept_header: text/html
+                    status: initiated
+                    recurrence_rule: 'on'
+                    debit_day: '6'
+                    action: modify
+                    payment_method_type: upi
+                    mandate_edit:
+                      end_date: '2023-12-28'
+                      frequency: mnth
+                      amount: '10.00'
+                      amount_type: fixed
+                    next_step: redirect
+                    links:
+                    - href: https://pguat.billdesk.io/pgsi/v1_2/mandates/token/initiate
+                      rel: self
+                      method: POST
+                      parameters: null
+                      valid_date: null
+                      headers: null
+                    - href: https://pguatweb.billdesk.io/pgtxnsimulator/v1_2/embeddedsdk
+                      rel: redirect
+                      method: POST
+                      parameters:
+                        mercid: BDMONITOR
+                        mandate_tokenid: NA106900386835
+                        rdata: '{hsm:QUVTX1VBVDE=}1810E301DC2226B7F9BA7306DDBB836CEC6C7965AE7EB64FAE98BB73CAB238EB19FA6C6BB5705B059204E69994A60A2A699AF95'
+                      valid_date: '2023-11-28T12:03:08+05:30'
+                      headers:
+                        authorization: OToken 3E6DCE2B15AC2ED1CFBFCAFA43600A084678AB3593E267E6831EF77D9E595377E8AF9E48BCD36AD32DEF7D44DA16085CB98E2C9CD797C8F00C496077F159E3457F8AC2AFEBA53D9AAE0DD1E04A9EA21F26325DC17384086F7AA79F17EFE7DFC4A4EECD9CAA44345F791D6BBC58BF03B5B8A7F9E806392AD02BC38C06BA4CFC479A6FD9E83918F71162FD8D7A06A317B3419B6EEC8253D4064.4145535F55415431
+                properties:
+                  objectid:
+                    $ref: '#/components/schemas/Objectid'
+                  mandate_tokenid:
+                    $ref: '#/components/schemas/mandate_tokenid'
+                  mandateid:
+                    $ref: '#/components/schemas/Mandateid'
+                  mercid:
+                    $ref: '#/components/schemas/Mercid'
+                  customer_refid:
+                    $ref: '#/components/schemas/Customer_refid'
+                  subscription_refid:
+                    $ref: '#/components/schemas/Subscription_refid'
+                  subscription_desc:
+                    $ref: '#/components/schemas/Subscription_desc'
+                  start_date:
+                    $ref: '#/components/schemas/Start_date'
+                  end_date:
+                    $ref: '#/components/schemas/End_date'
+                  amount:
+                    $ref: '#/components/schemas/Subscription_amount'
+                  amount_type:
+                    $ref: '#/components/schemas/Amount_type'
+                  currency:
+                    $ref: '#/components/schemas/Currency'
+                  frequency:
+                    $ref: '#/components/schemas/Frequency'
+                  createdon:
+                    $ref: '#/components/schemas/Createdon'
+                  ru:
+                    $ref: '#/components/schemas/Ru'
+                  additional_info:
+                    $ref: '#/components/schemas/Additional-Info'
+                  customer:
+                    $ref: '#/components/schemas/Customer'
+                  device:
+                    $ref: '#/components/schemas/Device-order'
+                  status:
+                    $ref: '#/components/schemas/Subscription_status'
+                  recurrence_rule:
+                    $ref: '#/components/schemas/Recurrence_rule'
+                  debit_day:
+                    $ref: '#/components/schemas/Debit_day'
+                  action:
+                    type: string
+                    enum:
+                    - modify
+                    - delete
+                  payment_method_type:
+                    type: string
+                  mandate_edit:
+                    type: object
+                    properties:
+                      end_date:
+                        $ref: '#/components/schemas/End_date'
+                      frequency:
+                        $ref: '#/components/schemas/Frequency'
+                      amount:
+                        $ref: '#/components/schemas/Subscription_amount'
+                      amount_type:
+                        $ref: '#/components/schemas/Amount_type'
+                  next_step:
+                    $ref: '#/components/schemas/Next_step'
+                  links:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        href:
+                          type: string
+                        rel:
+                          type: string
+                        method:
+                          type: string
+                        parameters:
+                          type: object
+                          properties:
+                            mercid:
+                              $ref: '#/components/schemas/Mercid'
+                            mandate_token_id:
+                              $ref: '#/components/schemas/mandate_tokenid'
+                            rdata:
+                              $ref: '#/components/schemas/rdata'
+                        valid_date:
+                          type: string
+                        headers:
+                          type: object
+                          properties:
+                            authorization:
+                              $ref: '#/components/schemas/authorization'
+              examples:
+                Modify response:
+                  value:
+                    objectid: mandate_token
+                    mandate_tokenid: NA106900386835
+                    mandateid: MA242A00269906
+                    mercid: BDMERCID
+                    customer_refid: cusntrfdm
+                    subscription_refid: Sub9rttfhj78t
+                    subscription_desc: UAT Tefsting
+                    start_date: '2023-11-27'
+                    end_date: '2026-12-04'
+                    amount: '50.00'
+                    amount_type: maximum
+                    currency: '356'
+                    frequency: year
+                    createdon: '2023-11-28T11:33:08+05:30'
+                    ru: https://merchant.com/web
+                    customer: {}
+                    device:
+                      fingerprintid: 61b12c18b5d0cf901be34a23ca64bb19
+                      init_channel: internet
+                      ip: 17.233.107.92
+                      user_agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:51.0) Gecko/20100101Firefox/51.0
+                      accept_header: text/html
+                    status: initiated
+                    recurrence_rule: 'on'
+                    debit_day: '6'
+                    action: modify
+                    payment_method_type: upi
+                    mandate_edit:
+                      end_date: '2023-12-28'
+                      frequency: mnth
+                      amount: '10.00'
+                      amount_type: fixed
+                    next_step: redirect
+                    links:
+                    - href: https://pguat.billdesk.io/pgsi/v1_2/mandates/token/initiate
+                      rel: self
+                      method: POST
+                      parameters: null
+                      valid_date: null
+                      headers: null
+                    - href: https://pguatweb.billdesk.io/pgtxnsimulator/v1_2/embeddedsdk
+                      rel: redirect
+                      method: POST
+                      parameters:
+                        mercid: BDMONITOR
+                        mandate_tokenid: NA106900386835
+                        rdata: 9dc6a485c0896aa0a85c83a3ad295e9dea6ef0b12ac3aa3a05911bccf33cd45edfc1fb18df7b84017b74d3daaf9def5950206c17672e80583d79904d076bb9.70675f706172616d5f656e6333
+                      valid_date: '2023-11-28T12:03:08+05:30'
+                      headers:
+                        authorization: OToken 3E6DCE2B15AC2ED1CFBFCAFA43600A084678AB3593E267E6831EF77D9E595377E8AF9E48BCD36AD32DEF7D44DA16085CB98E2C9CD797C8F00C496077F159E3457F8AC2AFEBA53D9AAE0DD1E04A9EA21F26325DC17384086F7AA79F17EFE7DFC4A4EECD9CAA44345F791D6BBC58BF03B5B8A7F9E806392AD02BC438C06BA4CFC479A6FD9E83918F71162FD8D7A06A317B3419B6EEC8253D4064.4145535F55415431
+                Delete Response:
+                  value:
+                    objectid: mandate_token
+                    mandate_tokenid: NA180F00386854
+                    mandateid: MA242A00269906
+                    mercid: BDMERCID
+                    customer_refid: cusntrfdm
+                    subscription_refid: Sub9rttfhj78t
+                    subscription_desc: UAT Tefsting
+                    start_date: '2023-11-27'
+                    end_date: '2026-12-04'
+                    amount: '50.00'
+                    amount_type: maximum
+                    currency: '356'
+                    frequency: year
+                    createdon: '2023-11-28T11:51:46+05:30'
+                    ru: https://merchant.com/web
+                    customer: {}
+                    device:
+                      fingerprintid: 61b12c18b5d0cf901be34a23ca64bb19
+                      init_channel: internet
+                      ip: 17.233.107.92
+                      user_agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:51.0) Gecko/20100101Firefox/51.0
+                      accept_header: text/html
+                    status: initiated
+                    recurrence_rule: 'on'
+                    debit_day: '6'
+                    action: delete
+                    payment_method_type: upi
+                    next_step: redirect
+                    links:
+                    - href: https://pguat.billdesk.io/pgsi/v1_2/mandates/token/initiate
+                      rel: self
+                      method: POST
+                      parameters: null
+                      valid_date: null
+                      headers: null
+                    - href: https://pguatweb.billdesk.io/pgtxnsimulator/v1_2/embeddedsdk
+                      rel: redirect
+                      method: POST
+                      parameters:
+                        mercid: BDMONITOR
+                        mandate_tokenid: NA180F00386854
+                      valid_date: '2023-11-28T12:21:46+05:30'
+                      headers:
+                        authorization: OToken 7B1731C70832A8AA461FEBC73010B510BBA96F3772393F49A9BA22D1C5050B5A232659EBCA96FC3DFDB56E74CF5CB5F0F65003BB2A702B52A42FDEC446CD193D0CEAFAE70FD0CC8B6B012E9326BFD52D64AD69CD2252459A9E2DF3B07F914A5A3CE648628C2CA90683BD9CD0E639CBA93ACFA3C5F84D3DFD0A6BC52E529558259356436D9740F3121E35C26530EE73C5460DB2C884556C7448.4145535F55415431
+      description: This API is used to either modify certain attributes of an existing mandate or delete a mandate
+      parameters:
+      - $ref: '#/components/parameters/bdTraceId'
+      - $ref: '#/components/parameters/bdTimeStamp'
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  mercid: BDMONITOR
+                  mandateid: MA242A00269906
+                  action: modify
+                  mandate_edit:
+                    amount: '10.00'
+                    frequency: mnth
+                    amount_type: fixed
+                    end_date: '2023-12-28'
+                  ru: https://merchant.com/web
+              properties:
+                mercid:
+                  $ref: '#/components/schemas/Mercid'
+                mandateid:
+                  $ref: '#/components/schemas/Mandateid'
+                action:
+                  type: string
+                  description: Attribute to specify if the mandate has to be edited or deleted
+                  enum:
+                  - modify
+                  - delete
+                mandate_edit:
+                  type: object
+                  description: Required if action= modify
+                  properties:
+                    amount:
+                      $ref: '#/components/schemas/Subscription_amount'
+                    frequency:
+                      $ref: '#/components/schemas/Frequency'
+                    amount_type:
+                      $ref: '#/components/schemas/Amount_type'
+                    end_date:
+                      $ref: '#/components/schemas/End_date'
+                ru:
+                  $ref: '#/components/schemas/Ru'
+              required:
+              - mercid
+              - mandateid
+              - action
+              - ru
+            examples:
+              Modify Request:
+                value:
+                  mercid: BDMERCID
+                  mandateid: MA242A00269906
+                  action: modify
+                  mandate_edit:
+                    amount: '10.00'
+                    frequency: mnth
+                    amount_type: fixed
+                    end_date: '2023-12-28'
+                  ru: https://merchant.com/web
+              Delete Request:
+                value:
+                  mercid: BDMERCID
+                  mandateid: MA242A00269906
+                  action: delete
+                  ru: https://merchant.com/web
+      tags:
+      - Order
+components:
+  schemas:
+    Mercid:
+      title: mercid
+      x-stoplight:
+        id: 43ns25lu1fyuc
+      type: string
+      pattern: ^[A-Za-z0-9]{1,10}$
+      example: BDMERCID
+      description: Unique identifier as defined by BillDesk for each merchant
+    Bankaccount_holder_name:
+      title: bankaccount_holder_name
+      x-stoplight:
+        id: jedjceugzit8g
+      type: string
+      description: Name of the bank account holder
+      example: John Doe
+      pattern: ^[A-Za-z0-9\\s\\.'\\-\\~\\@\\_]{1,120}$
+    Orderid:
+      title: orderid
+      x-stoplight:
+        id: lmwrwf7xn6wq8
+      type: string
+      description: Unique ID generated by the merchant for each request
+      pattern: ^[-/~A-Za-z0-9\_ \:.,#@!\\*\\+]{1,120}$
+      example: TEST0000009005
+    Frequency:
+      title: frequency
+      x-stoplight:
+        id: xrmygt1ddb1b6
+      type: string
+      description: "Frequency at which the subscription debits will be processed, possible values are:\n•week - weekly \n•mnth - monthly\n•bimn – bi-monthly\n•qurt - quarterly\n•bian – bi-annually\n•year - yearly\n•adho – adhoc\n"
+      enum:
+      - week
+      - mnth
+      - bimn
+      - qurt
+      - bian
+      - year
+      - adho
+    IFSC:
+      title: IFSC
+      x-stoplight:
+        id: grn65kr3i0pk0
+      type: string
+      description: IFSC of the bank account number
+      pattern: ^[A-Za-z]{4}[a-zA-Z0-9]{7}$
+      example: IDBK10000002
+    Createdon:
+      title: createdon
+      x-stoplight:
+        id: k3ewegvbimz0g
+      type: string
+      description: object creation timestamp
+      format: date-time
+    Subscription_amount:
+      title: subscription_amount
+      x-stoplight:
+        id: 7j61bmv2v1u41
+      type: string
+      description: Subscription amount in two decimals, eg. 2400.00
+      example: '2400.00'
+      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+    Amount_type:
+      title: amount_type
+      x-stoplight:
+        id: o7dqaslkupvxa
+      type: string
+      description: "Indicates whether subscription amount is fixed or has a maximum limit. The following values are possible\n•\tmaximum - indicates the maximum amount that can be charged for the subscription\n•\tfixed – indicates the fixed amount to be charged for the subscription\nPlease note: For upi, only \"maximum\" is allowed. This is required to allow for token debit (small value transaction)\n"
+      enum:
+      - maximum
+      - fixed
+    Next_step:
+      title: next_step
+      x-stoplight:
+        id: ayox9qr52qx6o
+      type: string
+      description: Refers to the action to be taken by the merchant, for eg. redirect or capture_otp
+      enum:
+      - redirect
+      - capture_otp
+      - 3ds2_challenge
+      - 3ds2_frictionless
+    authorization:
+      title: authorization
+      x-stoplight:
+        id: 7j04iqr3yp3z3
+      type: string
+      description: Unique value generated by BillDesk for each request
+    Error-object:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: This will be same as HTTP response code
+        error_type:
+          type: string
+          description: This indicates of the category of errors that could be encountered, for e.g. validation_error, api_connection_error, etc.
+        error_code:
+          type: string
+          description: Under the error_type, there could be different error_codes that could be returned depending upon the API and the underlying interaction
+        message:
+          type: string
+          description: More details as a description for the error_code
+    Auth_status:
+      title: auth_status
+      x-stoplight:
+        id: 35i21snltcrdq
+      type: string
+      description: "Represents the authorization status of the transaction with the following possible values:\n•\t0300 - transaction is successful\n•\t0002 - transaction is pending for authorization\n•\t0399 - transaction failed"
+      enum:
+      - '0300'
+      - '0002'
+      - 0399
+    Currency:
+      title: currency
+      x-stoplight:
+        id: 1ehjh4f7vidz7
+      type: string
+      description: ISO currency code of the transaction amount, for INR this value will be 356
+    Mandate-Response:
+      type: object
+      properties:
+        objectid:
+          type: string
+        mercid:
+          type: string
+        customer_refid:
+          type: string
+        subscription_refid:
+          type: string
+        subscription_desc:
+          type: string
+        amount:
+          type: string
+        amount_type:
+          type: string
+        start_date:
+          type: string
+        end_date:
+          type: string
+        frequency:
+          type: string
+        payment_method_type:
+          type: string
+        currency:
+          type: string
+        status:
+          type: string
+        mandateid:
+          type: string
+        createdon:
+          type: string
+        verification_error_code:
+          type: string
+        verification_error_type:
+          type: string
+        verification_error_desc:
+          type: string
+      x-examples:
+        Example 1:
+          objectid: mandate
+          mercid: BDMERCID
+          customer_refid: CUSTREF00A00011
+          subscription_refid: SUBREF00A00011
+          subscription_desc: Family Plan
+          amount: '1500.00'
+          amount_type: maximum
+          start_date: '2021-05-16'
+          end_date: '2029-10-22'
+          frequency: adho
+          payment_method_type: card
+          currency: '356'
+          status: pending
+          mandateid: MA0DDD00050243
+          createdon: '2021-05-16T18:23:11+05:30'
+          verification_error_code: TRS0000
+          verification_error_type: success
+          verification_error_desc: Transaction Successful
+    Itemcode:
+      title: item code
+      x-stoplight:
+        id: tz16mo44yvoae
+      type: string
+      description: Itemcode value as provided by BillDesk, with a default value DIRECT
+      example: DIRECT
+      pattern: ^[A-Za-z0-9]{1,20}$
+    Debit_day:
+      title: debit_day
+      x-stoplight:
+        id: ppp2ede7qx3fc
+      type: string
+      description: 'Required only where payment_method_type = upi. Default value "1" to be passed
+
+        '
+      pattern: ^\\d{1,2}$
+      example: '1'
+      enum:
+      - '1'
+    Customer:
+      title: customer
+      x-examples:
+        Example 1:
+          first_name: John
+          last_name: Doe
+          mobile: '9800000000'
+          mobile_alt: '9800000000'
+          email: john.doe@somedomain.com
+          email_alt: john.doe@somedomain.com
+      type: object
+      properties:
+        first_name:
+          type: string
+          description: Customer’s First Name
+          example: John
+        last_name:
+          type: string
+          description: Customer’s Last Name
+          example: Doe
+        mobile:
+          type: string
+          description: Customer’s Mobile number
+          pattern: ^[\\+]{0,1}[0-9]{5,15}$
+          example: '9022979988'
+        mobile_alt:
+          type: string
+          description: Customer’s Alternate Mobile number
+          pattern: ^[\\+]{0,1}[0-9]{5,15}$
+          example: '9022979982'
+        email:
+          type: string
+          description: Customer’s Email address
+          pattern: ^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9\\-]+)*(\\.[A-Za-z]{2,6})$
+          example: abc@xyz.com
+        email_alt:
+          type: string
+          description: Customer’s alternate Email Address
+          example: abc@xyz.com
+          pattern: ^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9\\-]+)*(\\.[A-Za-z]{2,6})$
+      required:
+      - first_name
+      - last_name
+    bdorderid:
+      title: bdorderid
+      x-stoplight:
+        id: m13q2fo7bn801
+      type: string
+      description: Unique value generated by BillDesk for each order id generated using Create Order API
+    Device-order:
+      type: object
+      x-stoplight:
+        id: bu2ij616i2uce
+      x-examples:
+        Example 1:
+          device:
+            init_channel: internet
+            ip: 124.124.1.1
+            mac: 11-AC-58-21-1B-AA
+            imei: '990000112233445'
+            user_agent: Mozilla/5.0(WindowsNT10.0;WOW64;rv:51.0)Gecko/20100101Firefox/51.0
+            accept_header: text/html
+            fingerprintid: 61b12c18b5d0cf901be34a23ca64bb19
+            browser_tz: '-330'
+            browser_color_depth: '32'
+            browser_java_enabled: 'false'
+            browser_screen_height: '601'
+            browser_screen_width: '657'
+            browser_language: en-US
+            browser_javascript_enabled: 'true'
+      title: Device
+      description: Device
+      properties:
+        init_channel:
+          type: string
+          description: Initiating channel,accepted values are internet,app or kiosk
+          enum:
+          - internet
+          - app
+          - kiosk
+        ip:
+          type: string
+          description: Actual end customer IP address is required to be passed
+          maxLength: 15
+        user_agent:
+          type: string
+          description: 'Exact content of the HTTP user-agent header
+
+
+            Note: If the total length of the User-Agent sent by the browser exceeds 2048 characters, truncate the excess portion'
+          example: 'Mozilla/5.0(WindowsNT10.0;WOW64;rv: 51.0)Gecko/20100101Firefox/51.0'
+          pattern: =^[A-Za-z0-9\\_\\:\\-\\,\\;\\/\\)\\(\\.\\s\\+\\[\\]\\=@]{10,255}$
+        accept_header:
+          type: string
+          description: Customer browser accept header values
+          maxLength: 255
+          example: application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+          pattern: ^[0-9A-Za-z\\.\\+\\-\\/\\=\\*\\,\\;]{10,255}$
+      required:
+      - init_channel
+      - ip
+      - user_agent
+      - accept_header
+    Mandateid:
+      title: mandateid
+      x-stoplight:
+        id: joq1b0hwy6hce
+      type: string
+      description: Unique mandateid created by BillDesk
+      pattern: ^[A-Za-z0-9]{1,20}$
+      example: MA19E400049927
+    Invoice:
+      type: object
+      x-examples:
+        Example 1:
+          invoice_number: MEINVU111111221133
+          invoice_display_number: '11221133'
+          customer_name: John Doe
+          invoice_date: '2021-09-03T13:21:50+05:30'
+          gst_details:
+            cgst: '8.00'
+            sgst: '8.00'
+            igst: '0.00'
+            gst: '16.00'
+            cess: '0.00'
+            gstincentive: '5.00'
+            gstpct: '16.00'
+            gstin: '12344567'
+      properties:
+        invoice_number:
+          type: string
+          description: Unique number assigned by merchant for the invoice
+          pattern: ^[A-Za-z0-9]{1,100}$
+          example: MEINVU111111221133
+        invoice_display_number:
+          type: string
+          description: Invoice number to be displayed to the customer
+          example: '11221133'
+          pattern: ^[A-Za-z0-9]{1,80}$
+        customer_name:
+          type: string
+          pattern: ^[A-Za-z0-9]{1,80}$
+          example: John Doe
+          description: Customer's name to be printed on invoice
+        invoice_date:
+          type: string
+          description: Invoice generation date in the YYYYMMDD format
+          format: date
+          example: '2021-09-03'
+        gst_details:
+          type: object
+          properties:
+            cgst:
+              type: string
+              pattern: ^([0-9]{1}[0-9]{0,7}(\\.[0-9]{1,2})?)$
+              example: '100.00'
+            sgst:
+              type: string
+              pattern: ^([0-9]{1}[0-9]{0,7}(\\.[0-9]{1,2})?)$
+              example: '100.00'
+            igst:
+              type: string
+              example: '200.00'
+              pattern: ^([0-9]{1}[0-9]{0,7}(\\.[0-9]{1,2})?)$
+            gst:
+              type: string
+            cess:
+              type: string
+              pattern: ^([0-9]{1}[0-9]{0,7}(\\.[0-9]{1,2})?)$
+              example: '50.00'
+            gstincentive:
+              type: string
+              pattern: ^([0-9]{1}[0-9]{0,7}(\\.[0-9]{1,2})?)$
+            gstpct:
+              type: string
+              pattern: ^([0-9]{1}[0-9]{0,7}(\\.[0-9]{1,2})?)$
+            gstin:
+              type: string
+              pattern: ^[A-Za-z0-9]{1,80}$
+              example: 29GGGGG1314R9Z6
+    Mandate:
+      type: object
+      x-examples:
+        Example 1:
+          mercid: BDMERCID
+          customer_refid: CUST614514520010012
+          subscription_refid: SUB614514510012
+          subscription_desc: Unlimited Plan
+          start_date: '2023-02-08'
+          end_date: '2050-12-22'
+          amount: '774.00'
+          currency: '356'
+          frequency: adho
+          amount_type: max
+      properties:
+        mercid:
+          type: string
+          description: Unique identifier as defined by BillDesk for each merchant
+          example: BDMERCID
+          pattern: ^[A-Za-z0-9]{1,10}$
+        customer_refid:
+          type: string
+          description: Unique reference of the customer in the merchant system, and can be linked to different subscriptions of the same customer
+          pattern: ^[A-Za-z0-9\\_\\:\\-]{1,80}$
+          example: CUSTREF00A00011
+        subscription_refid:
+          type: string
+          description: Unique reference assigned by merchant for the subscription
+          pattern: ^[A-Za-z0-9_-]{1,128}$
+          example: SUBREF00A00011
+        subscription_desc:
+          type: string
+          description: Customer friendly description for the subscription, this narration is generally displayed to the customer at the issuer channel
+        start_date:
+          $ref: '#/components/schemas/Start_date'
+        end_date:
+          $ref: '#/components/schemas/End_date'
+        amount:
+          type: string
+          description: Subscription amount in two decimals, eg. 2400.00
+          pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+          example: '200.28'
+        currency:
+          type: string
+          description: ISO currency code for the amount, with a value 356 for INR
+          example: '356'
+        frequency:
+          type: string
+          description: "Frequency at which the subscription debits will be processed, possible values are:\n\n•\tweek - weekly\n•\tmnth - monthly\n•\tbimn – bi-monthly\n•\tqurt - quarterly\n•\tbian – bi-annually\n•\tyear - yearly\n•\tadho – adhoc\n\n"
+          enum:
+          - mnth
+          - week
+          - bimn
+          - qurt
+          - bian
+          - year
+          - adho
+          example: adho
+        amount_type:
+          $ref: '#/components/schemas/Amount_type'
+        recurrence_rule:
+          $ref: '#/components/schemas/Recurrence_rule'
+        debit_day:
+          $ref: '#/components/schemas/Debit_day'
+      required:
+      - mercid
+      - customer_refid
+      - subscription_refid
+      - subscription_desc
+      - start_date
+      - end_date
+      - amount
+      - currency
+      - frequency
+      - amount_type
+    Start_date:
+      title: start_date
+      x-stoplight:
+        id: v7tyy2tfnut1w
+      type: string
+      description: "Subscription start date in yyyy-mm-dd format\nNote: Should be greater than or equal to current date (IST timezone). \nNote for UPI : Should be equal to mandate creation date for UPI. In UPI, an subsequent charge is created on a successful mandate. This includes the first charge as well along with mandate creation. Since first charge is done immediately, it is important that the mandate “start_date” should be today’s date \n"
+      format: date
+      example: '2021-05-08'
+    Avs-request:
+      type: object
+      x-examples:
+        Example 1:
+          bankaccount:
+          - number: '12233445566'
+            ifsc: IDBK10000002
+            name: John Doe
+          - number: '12233445567'
+            ifsc: IDBK10000002
+            name: John Doe
+      description: 'This API can be used to verify the bank account number by initiating a penny drop to the account. For upi, validation is done at acquiring bank end '
+      title: Account validation
+      properties:
+        bankaccounts:
+          type: array
+          items:
+            type: object
+            properties:
+              number:
+                $ref: '#/components/schemas/Bankacc_number'
+                description: Customer's bank account number
+              ifsc:
+                $ref: '#/components/schemas/IFSC'
+                description: IFSC of the bank account number
+              name:
+                $ref: '#/components/schemas/Bankaccount_holder_name'
+                description: Name of the bank account holder
+            required:
+            - number
+            - ifsc
+    Recurrence_rule:
+      title: recurrence_rule
+      x-stoplight:
+        id: mzu48wk4tb3i8
+      type: string
+      description: 'Note: Required only where payment_method_type = upi. Default value : ''after''
+
+        '
+      enum:
+      - after
+    Objectid:
+      title: objectid
+      x-stoplight:
+        id: bbwm8bhhbqd4r
+      type: string
+      description: 'String representing the object''s type. Objects of the same type share the same value. '
+      enum:
+      - transaction
+      - authentication
+      - mandate
+      - invoice
+      - cardaccount
+      - validatevpa
+      - dispute
+      - settlement
+      - altid
+      - mandate_token
+      - accountvalidation
+      - refund
+    Customer_refid:
+      title: customer_refid
+      x-stoplight:
+        id: mpmq18zbl4x12
+      type: string
+      description: 'Unique reference of the customer in the merchant system, and can be linked to different subscriptions of the same customer
+
+        Required for mandate and tokenization'
+      pattern: ^[A-Za-z0-9\\_\\:\\-]{1,80}$
+      example: CSREF00001
+    rdata:
+      title: rdata
+      x-stoplight:
+        id: lftrd03d82vvp
+      type: string
+      description: Unique key generated by BillDesk for each request
+      x-examples: {}
+    Additional-Info:
+      type: object
+      x-examples:
+        Example 1:
+          additional_info:
+            additional_info1: Details1
+            additional_info2: Details2
+            additional_info3: Details3
+            additional_info4: Details4
+            additional_info5: Details5
+            additional_info6: Details6
+            additional_info7: Details7
+            additional_info8: Details8
+            additional_info9: Details9
+            additional_info10: Details10
+      description: 'Array of 7 additional_info values that can be attached to
+
+        the transaction.
+
+        Note: Merchant is advised to not pass customer PII
+
+        information in additional info fields.'
+      properties:
+        additional_info1:
+          type: string
+          example: Details1
+        additional_info2:
+          type: string
+          example: Details2
+        additional_info3:
+          type: string
+          example: Details3
+        additional_info4:
+          type: string
+          example: Details4
+        additional_info5:
+          type: string
+          example: Details5
+        additional_info6:
+          type: string
+          example: Details6
+        additional_info7:
+          type: string
+          example: Details7
+    Subscription_status:
+      title: subscription_status
+      x-stoplight:
+        id: y0fyz4zqhcknd
+      type: string
+      description: "Represents the status of the mandate and depends upon the linked payment method. \n\nThe following values are possible:\ncard, upi\n•\tinitiated - mandate request has been initiated, and this status is applicable for the SDK based workflow\n•\tpending - mandate request has been initiated and the linked payment method is not yet validated\n•\tactive – linked payment method has been validated and recurring charges can be processed\n•\trejected - mandate has been rejected by the issuer or payment provider\n•\tdeleted - mandate has been deleted by the customer from the merchant channel\n•\tcancelled – mandate has been stopped by customer from the issuer channel\n•\tsuspended – mandate has been temporarily suspended by the issuer or payment provider\nbankaccount\n•\tpending – mandate request has been sent for account verification to NPCI\n•\tactive – mandate is active and recurring charges can be processed\n•\tdelete_initiated – mandate delete request is initiated by the customer or the merchant\n•\tdeleted – mandate is deleted after confirmation from NPCI\n•\trejected – mandate is rejected by NPCI\n"
+    Bankacc_number:
+      title: bankacc_number
+      x-stoplight:
+        id: 9nwo0pwlz0qos
+      type: string
+      description: Bank account number
+      pattern: ^\\d{9,18}$
+      example: '12233445566'
+    Amount:
+      title: amount
+      x-stoplight:
+        id: s5xd8bwxp2orm
+      type: string
+      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+      example: '299.28'
+      description: Transaction amount in two decimals, eg. 299.28
+    End_date:
+      title: end_date
+      x-stoplight:
+        id: uz968g6golwjt
+      type: string
+      description: 'Subscription end date in yyyy-mm-dd format
+
+        Note: Should be greater than current date (IST timezone). For mandates that are valid ‘until cancelled’ by the customer, end_date year could be 2099, and for upi, maximum duration allowed for a mandate is 30 years'
+      format: date
+      example: '2059-12-31'
+    mandate_tokenid:
+      title: mandate_tokenid
+      x-stoplight:
+        id: 169b004872de3
+      type: string
+      description: Unique value generated by BillDesk for each mandate_token created by the merchant
+    Split_payment_request:
+      type: object
+      x-examples:
+        Example 1:
+          split_payment:
+          - mercid: BDMERCID1
+            amount: '3000.00'
+          - mercid: BDMERCID2
+            amount: '1000.00'
+      properties:
+        mercid:
+          type: string
+          description: Merchant ID provided by BillDesk where split payment amount will be settled.
+          pattern: ^[A-Za-z0-9]{1,10}$
+          example: BDMERCID
+        amount:
+          type: string
+          description: Split Amount which is settled in the respective Split Merchant ID.
+          pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+          example: '299.28'
+      description: This object is applicable in case a merchant has opted to receive the settlement in multiple settlement accounts
+      title: split_payment_request
+    Ru:
+      title: return URL
+      x-stoplight:
+        id: 2nnmkccdq26ck
+      type: string
+      example: https://www.merchant.com
+      pattern: =^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;{]*[-a-zA-Z0-9+&@#/%=~_|} ]{1,2000}$
+      description: Merchants URL where the customer will be redirected after a transaction is completed
+    Subscription_desc:
+      title: subscription_desc
+      x-stoplight:
+        id: lwkkeas7tgojy
+      type: string
+      example: Unlimited Plan
+      description: Customer friendly description for the subscription, this narration is generally displayed to the customer at the issuer channel
+    Subscription_refid:
+      title: subscription_refid
+      x-stoplight:
+        id: 0c9vc4zqx4a8c
+      type: string
+      example: SUBREF101
+      description: Unique reference assigned by merchant for a subscription
+  examples:
+    403-error:
+      value:
+        status: 403
+        error_type: inaccessable_resource_error
+        error_code: GNIAE0002
+        message: Access forbidden
+    500-error:
+      value:
+        status: 500
+        error_type: api_processing_error
+        error_code: AUAPE0001
+        message: Internal server error
+    422-Invalid-merchant-config:
+      value:
+        status: 422
+        error_type: api_validation_error
+        error_code: GNAVE0001
+        message: Incorrect merchant configuration
+  parameters:
+    bdTimeStamp:
+      in: header
+      name: BD-Timestamp
+      description: Request timestamp to identify date and time of origin of request. Example, a value of BD-Timestamp 20210113180403 identifies the request to have originated on 13th January 2021 at 06:04:03 PM.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/json
+      description: Request Content-Type to take the values application/jose
+    bdTraceId:
+      in: header
+      name: BD-Traceid
+      description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    Accept:
+      name: Accept
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/jose
+      description: Accept Response Content-Type to take the values application/jose
+x-stoplight:
+  id: v3t7owhh461u5
+x-samples-languages:
+- shell
+- json
+- node
+- java
+- csharp
+x-provenance:
+  method: searched
+  source: https://docs.billdesk.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.billdesk.io/reference/createauthentication.md
+  - https://docs.billdesk.io/reference/createmandatetoken.md
+  - https://docs.billdesk.io/reference/createorder.md
+  - https://docs.billdesk.io/reference/createrefund.md
+  - https://docs.billdesk.io/reference/createtransaction.md
+  - https://docs.billdesk.io/reference/modify-mandate-token.md
+  - https://docs.billdesk.io/reference/post-payments-v1_2-transactions-get.md
+  - https://docs.billdesk.io/reference/retrieveauthentication.md
+  - https://docs.billdesk.io/reference/retrieverefund.md
+  - https://docs.billdesk.io/reference/updatetransaction.md
+  - https://docs.billdesk.io/reference/validateauthentication.md
+  merge:
+    pages: 11
+    deduped: 284
+    conflicts_kept_first: 0

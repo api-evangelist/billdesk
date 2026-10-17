@@ -1,0 +1,471 @@
+openapi: 3.2.0
+info:
+  title: Tokenization Guest Checkout (AltID) API
+  description: 'This explorer allows merchants to evaluate APIs that are available in the BillDesk Payment Gateway API suite.
+
+    - Only HMAC authentication is supported.
+
+    - All APIs are RESTful and resource oriented.
+
+    - Servers listed are applicable for the API explorer only.'
+  contact:
+    name: API Support
+    url: https://www.billdesk.com/helpcenter.htm
+    email: support@billdesk.com
+  version: '2.5'
+servers:
+- url: https://uat1.billdesk.com/u2
+  description: UAT server
+- url: https://api.billdesk.com
+  description: PROD server
+tags:
+- name: Guest Checkout (AltID)
+paths:
+  /payments/ve1_2/altid/get:
+    parameters: []
+    post:
+      summary: Fetch AltID
+      operationId: retrievealtid
+      responses:
+        '200':
+          description: OK
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    objectid: altid
+                    mercid: BDMERCID
+                    orderid: NMprodV030308832330
+                    masked_value: xxxxxxxxxxxx1784
+                    altid_value: '4610151835782140'
+                    altid_cryptogram: /wAAAAAASCGqcuYAmYMogp4AAAA=
+                    altid_expiry_month: '02'
+                    altid_expiry_year: '2027'
+                    createdon: 2023-06-05T17:47:23+0530
+                properties:
+                  objectid:
+                    $ref: '#/components/schemas/Objectid'
+                  mercid:
+                    $ref: '#/components/schemas/Mercid'
+                  orderid:
+                    $ref: '#/components/schemas/Orderid'
+                  masked_value:
+                    $ref: '#/components/schemas/Masked_value'
+                  altid_value:
+                    type: string
+                    description: 'The unique alt id for the Card Number
+
+                      provided in the request.'
+                    pattern: ^[A-Za-z0-9]{1,35}$
+                  altid_cryptogram:
+                    type: string
+                    description: Alt id cyptogram
+                    pattern: ^[a-zA-Z0-9\\/\\!@#\\$%\\^&\\*\\(\\)\\{\\}_\\+\\=\\|:”;’,\\.~`\\-\\\\]{1,256}$
+                  altid_expiry_month:
+                    type: string
+                    description: alt id expiry month
+                    example: '02'
+                  altid_expiry_year:
+                    type: string
+                    description: alt id expiry year
+                    example: '2029'
+                  request_date:
+                    type: string
+                    description: Request initiation timestamp in YYYY-MM-DDThh:mm:ssTZD format
+              examples:
+                Success:
+                  value:
+                    objectid: altid
+                    mercid: BDMERCID
+                    orderid: NMprodV030308832330
+                    masked_value: xxxxxxxxxxxx1784
+                    altid_value: '4610151835782140'
+                    altid_cryptogram: /wAAAAAASCGqcuYAmYMogp4AAAA=
+                    altid_expiry_month: '02'
+                    altid_expiry_year: '2027'
+                    request_date: '2023-03-14T15:14:39+05:30'
+                Failure:
+                  value:
+                    status: 422
+                    error_type: invalid_data_error
+                    error_code: CRIDE0021
+                    message: Invalid card.number
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Forbidden:
+                  $ref: '#/components/examples/403-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Internal Server Error:
+                  $ref: '#/components/examples/500-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        default:
+          description: Any bad or invalid request will lead to following error object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Invalid merchant config:
+                  $ref: '#/components/examples/422-Invalid-merchant-config'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+      description: This API is used to retrieve the AltID value from network
+      parameters:
+      - $ref: '#/components/parameters/Payments_BdTraceId'
+      - $ref: '#/components/parameters/Payments_BdTimeStamp'
+      - $ref: '#/components/parameters/Payments_Content-Type'
+      - $ref: '#/components/parameters/Payments_Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  mercid: BDMERCID
+                  orderid: NMprodV030308832331
+                  amount: '1.00'
+                  currency: '356'
+                  device:
+                    ip: ''
+                    init_channel: ''
+                    user_agent: ''
+                  card:
+                    number: 4xx0211526891xxx1
+                    expiry_month: '02'
+                    expiry_year: '2027'
+                    holder_name: TestAuthFlow
+                    cvv: '123'
+              properties:
+                mercid:
+                  $ref: '#/components/schemas/Mercid'
+                orderid:
+                  $ref: '#/components/schemas/Orderid'
+                amount:
+                  $ref: '#/components/schemas/Amount'
+                currency:
+                  $ref: '#/components/schemas/Currency'
+                device:
+                  type: object
+                  required:
+                  - ip
+                  - init_channel
+                  properties:
+                    ip:
+                      type: string
+                      description: Customer’s IP address
+                      example: 123.0.0.1
+                    init_channel:
+                      type: string
+                      enum:
+                      - internet
+                      - app
+                      - kiosk
+                      description: Initiating channel,accepted values are internet,app or kiosk
+                    user_agent:
+                      type: string
+                      description: 'Exact content of the HTTP user-agent header\n\nNote: If the total length of the User-Agent sent by the browser exceeds 2048 characters, truncate the excess portion'
+                      pattern: =^[A-Za-z0-9\\\\_\\\\:\\\\-\\\\,\\\\;\\\\/\\\\)\\\\(\\\\.\\\\s\\\\+\\\\[\\\\]\\\\=@]{10,255}$
+                      example: 'Mozilla/5.0(WindowsNT10.0;WOW64;rv: 51.0)Gecko/20100101Firefox/51.0'
+                card:
+                  $ref: '#/components/schemas/Altid_card_request'
+                rupay_auth_ref_no:
+                  $ref: '#/components/schemas/Rupay_auth_ref_no'
+              required:
+              - mercid
+              - orderid
+              - amount
+              - currency
+              - device
+            examples:
+              For V/M/D/A cards:
+                value:
+                  mercid: BDMERCID
+                  orderid: NMprodV030308832331
+                  amount: '1.00'
+                  currency: '356'
+                  device:
+                    ip: 124.124.124.124
+                    init_channel: internet
+                    user_agent: 'Mozilla/5.0(WindowsNT10.0;WOW64;rv: 51.0)Gecko/20100101Firefox/51.0'
+                  card:
+                    number: '40002115268910001'
+                    expiry_month: '02'
+                    expiry_year: '2027'
+                    holder_name: TestAuthFlow
+                    cvv: '123'
+              For Rupay Cards:
+                value:
+                  mercid: BDMERCID
+                  orderid: NRGALT00021
+                  amount: '1.00'
+                  currency: '356'
+                  device:
+                    ip: 124.124.124.124
+                    init_channel: internet
+                    user_agent: 'Mozilla/5.0(WindowsNT10.0;WOW64;rv: 51.0)Gecko/20100101Firefox/51.0'
+                  card:
+                    number: '6071489876543212'
+                    expiry_month: '12'
+                    expiry_year: '2028'
+                    holder_name: TestAuthFlow
+                    cvv: '123'
+                  rupay_auth_ref_no: '992557706215080424440000414458'
+      tags:
+      - Guest Checkout (AltID)
+components:
+  parameters:
+    Payments_Accept:
+      name: Accept
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/jose
+      description: Accept Response Content-Type to take the values application/jose
+    Payments_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/json
+      description: Request Content-Type to take the values application/jose
+    Payments_BdTimeStamp:
+      in: header
+      name: BD-Timestamp
+      description: Request timestamp to identify date and time of origin of request. Example, a value of BD-Timestamp 20210113180403 identifies the request to have originated on 13th January 2021 at 06:04:03 PM.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    Payments_BdTraceId:
+      in: header
+      name: BD-Traceid
+      description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+  examples:
+    422-Invalid-merchant-config:
+      value:
+        status: 422
+        error_type: api_validation_error
+        error_code: GNAVE0001
+        message: Incorrect merchant configuration
+    500-error:
+      value:
+        status: 500
+        error_type: api_processing_error
+        error_code: AUAPE0001
+        message: Internal server error
+    403-error:
+      value:
+        status: 403
+        error_type: inaccessable_resource_error
+        error_code: GNIAE0002
+        message: Access forbidden
+  schemas:
+    Error-object:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: This will be same as HTTP response code
+        error_type:
+          type: string
+          description: This indicates of the category of errors that could be encountered, for e.g. validation_error, api_connection_error, etc.
+        error_code:
+          type: string
+          description: Under the error_type, there could be different error_codes that could be returned depending upon the API and the underlying interaction
+        message:
+          type: string
+          description: More details as a description for the error_code
+    Mercid:
+      title: mercid
+      x-stoplight:
+        id: 43ns25lu1fyuc
+      type: string
+      pattern: ^[A-Za-z0-9]{1,10}$
+      example: BDMERCID
+      description: Unique identifier as defined by BillDesk for each merchant
+    Orderid:
+      title: orderid
+      x-stoplight:
+        id: lmwrwf7xn6wq8
+      type: string
+      description: Unique ID generated by the merchant for each request
+      pattern: ^[-/~A-Za-z0-9\_ \:.,#@!\\*\\+]{1,120}$
+      example: TEST0000009005
+    Currency:
+      title: currency
+      x-stoplight:
+        id: 1ehjh4f7vidz7
+      type: string
+      description: ISO currency of the transaction amount, for INR this value will be 356
+    Amount:
+      title: amount
+      x-stoplight:
+        id: s5xd8bwxp2orm
+      type: string
+      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+      example: '299.28'
+      description: Transaction amount in two decimals, eg. 299.28
+    Altid_card_request:
+      type: object
+      x-examples:
+        Example 1:
+          number: 4xx0211526891xxx1
+          expiry_month: '02'
+          expiry_year: '2027'
+          holder_name: TestAuthFlow
+          cvv: '123'
+      properties:
+        number:
+          type: string
+          description: 'Card number '
+          example: '4242420000001234'
+          pattern: ^[0-9]{16}$
+        'expiry_month ':
+          type: string
+          maxLength: 2
+          example: '02'
+          description: Card expiry month in MM format
+        expiry_year:
+          type: string
+          description: Card expiry year in YYYY format
+          maxLength: 4
+          example: '2029'
+        cvv:
+          type: string
+          description: 'Card cvv value '
+          maxLength: 3
+          example: '123'
+        holder_name:
+          type: string
+          description: Cardholder name
+          example: John Doe
+          pattern: ^[A-Za-z0-9\\s\\.'\\-\\~\\@\\_]{1,120}$
+      required:
+      - number
+      - 'expiry_month '
+      - expiry_year
+    Objectid:
+      title: objectid
+      x-stoplight:
+        id: bbwm8bhhbqd4r
+      type: string
+      description: 'String representing the object''s type. Objects of the same type share the same value. '
+      enum:
+      - transaction
+      - authentication
+      - mandate
+      - invoice
+      - cardaccount
+      - validatevpa
+      - dispute
+      - settlement
+      - altid
+      - mandate_token
+      - accountvalidation
+      - refund
+    Masked_value:
+      title: masked_value
+      x-stoplight:
+        id: r3wddilt5cyy4
+      type: string
+      description: Masked card number, with the last four digits
+      example: xxxxxxxxxxxx1001
+    Rupay_auth_ref_no:
+      title: rupay_auth_ref_no
+      x-stoplight:
+        id: p2pdfeb2zd0g6
+      type: string
+      description: Refers to the specific transaction reference provided by NPCI (for R cards)
+x-stoplight:
+  id: k14igufv2b1qr
+x-samples-languages:
+- shell
+- json
+- node
+- java
+- csharp
+x-provenance:
+  method: searched
+  source: https://docs.billdesk.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.billdesk.io/reference/createcardaccount.md
+  - https://docs.billdesk.io/reference/deletecardaccount.md
+  - https://docs.billdesk.io/reference/listcardaccount.md
+  - https://docs.billdesk.io/reference/retrievealtid.md
+  - https://docs.billdesk.io/reference/retrievecardaccount.md
+  merge:
+    pages: 5
+    deduped: 57
+    conflicts_kept_first: 0

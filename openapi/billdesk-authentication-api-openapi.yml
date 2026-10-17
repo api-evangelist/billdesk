@@ -1,0 +1,2178 @@
+openapi: 3.2.0
+info:
+  title: Payments Authentication API
+  description: 'This explorer allows merchants to evaluate APIs that are available in the BillDesk Payment Gateway API suite.
+
+    - Only HMAC authentication is supported.
+
+    - All APIs are RESTful and resource oriented.
+
+    - Servers listed are applicable for the API explorer only.'
+  contact:
+    name: API Support
+    url: https://www.billdesk.com/helpcenter.htm
+    email: support@billdesk.com
+  version: '2.5'
+servers:
+- url: https://uat1.billdesk.com/u2
+  description: UAT server
+- url: https://api.billdesk.com
+  description: PROD server
+tags:
+- name: Authentication
+paths:
+  /payments/ve1_2/authentications/create:
+    parameters: []
+    post:
+      summary: Create Authentication
+      operationId: createAuthentication
+      responses:
+        '200':
+          description: OK
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    links:
+                    - href: https://www.issuerurl.com/page
+                      rel: redirect
+                      method: post
+                      parameters:
+                        valid_till: '2023-02-16T11:43:28+05:30'
+                        creq: 5a7e8901aa256b4f5012355dc4b12f7bb474be6d7f09232639220163cfb1eb7e36ac8594c92379254.70675f706172616d5f656e6333
+                    itemcode: DIRECT
+                    objectid: authentication
+                    authenticationid: X4560643061923
+                    authentication_date: '2023-02-15T11:43:28+05:30'
+                    amount: '2.00'
+                    currency: '356'
+                    mercid: BDMERCID
+                    bankid: '456'
+                    payment_method_type: card
+                    authentication_type: 3ds2
+                    authentication_status: pending
+                    orderid: TEST0000009005
+                    next_step: 3ds2_challenge
+                    authentication_error_code: AUP0000
+                    authentication_error_type: pending
+                    authentication_error_desc: Authentication Pending
+                    additional_info:
+                      additional_info1: Details1
+                      additional_info2: Details2
+                      additional_info3: Details3
+                      additional_info4: Details4
+                      additional_info5: Details5
+                      additional_info6: Details6
+                      additional_info7: Details7
+                      additional_info8: Details8
+                      additional_info9: Details9
+                      additional_info10: Details10
+                    card:
+                      masked_value: xxxxxxxxxxxx1234
+                      type: CREDIT
+                      card_end: '1234'
+                      network: MASTER
+                      issuer: HDFC Bank
+                properties:
+                  objectid:
+                    $ref: '#/components/schemas/Objectid'
+                  mercid:
+                    $ref: '#/components/schemas/Mercid'
+                  itemcode:
+                    $ref: '#/components/schemas/Itemcode'
+                  authenticationid:
+                    $ref: '#/components/schemas/Authenticationid'
+                  links:
+                    $ref: '#/components/schemas/Links'
+                  authentication_date:
+                    $ref: '#/components/schemas/Authentication_date'
+                  amount:
+                    $ref: '#/components/schemas/Amount'
+                  currency:
+                    $ref: '#/components/schemas/Currency'
+                  bankid:
+                    $ref: '#/components/schemas/Bankid'
+                  payment_method_type:
+                    $ref: '#/components/schemas/Payment_method_type'
+                  authentication_type:
+                    $ref: '#/components/schemas/Authentication_type'
+                  orderid:
+                    $ref: '#/components/schemas/Orderid'
+                  next_step:
+                    $ref: '#/components/schemas/Next_step'
+                  authentication_status:
+                    $ref: '#/components/schemas/Authentication_status'
+                  authentication_error_code:
+                    $ref: '#/components/schemas/Error_code'
+                  authentication_error_type:
+                    $ref: '#/components/schemas/Error_type'
+                  authentication_error_desc:
+                    $ref: '#/components/schemas/Error_desc'
+                  card:
+                    $ref: '#/components/schemas/Card-Response'
+                  additional_info:
+                    $ref: '#/components/schemas/Additional-Info'
+                  threeds_transaction_id:
+                    $ref: '#/components/schemas/Threeds_transaction_id'
+              examples:
+                Challenge Flow:
+                  value:
+                    links:
+                    - href: https://www.issuerurl.com/page
+                      rel: redirect
+                      method: post
+                      parameters:
+                        valid_till: '2023-02-16T11:43:28+05:30'
+                        creq: 5a7e8901aa256b4f5012355dc4b12f7bb474be6d7f09232639220163cfb1eb7e36ac8594c92379254.70675f706172616d5f656e6333
+                    itemcode: DIRECT
+                    objectid: authentication
+                    authenticationid: X4560643061923
+                    authentication_date: '2023-02-15T11:43:28+05:30'
+                    amount: '2.00'
+                    currency: '356'
+                    mercid: BDMERCID
+                    bankid: '456'
+                    payment_method_type: card
+                    authentication_type: 3ds2
+                    authentication_status: pending
+                    orderid: TEST0000009005
+                    next_step: 3ds2_challenge
+                    authentication_error_code: AUP0000
+                    authentication_error_type: pending
+                    authentication_error_desc: Authentication Pending
+                    card:
+                      masked_value: xxxxxxxxxxxx1234
+                      type: CREDIT
+                      card_end: '1234'
+                      network: MASTER
+                      issuer: HDFC Bank
+                Frictionless flow:
+                  value:
+                    itemcode: VDDIRECT
+                    objectid: authentication
+                    authenticationid: A4560000345048
+                    authentication_date: '2022-03-27T10:33:01+05:30'
+                    amount: '2.00'
+                    currency: '356'
+                    mercid: BDMERCID
+                    bankid: '456'
+                    payment_method_type: card
+                    authentication_type: redirect
+                    authentication_status: success
+                    orderid: '27000000001'
+                    authentication_error_code: AUS0000
+                    authentication_error_type: success
+                    authentication_error_desc: Authentication Successful
+                    card:
+                      type: DEBIT
+                      card_end: '1234'
+                      network: VISA
+                      issuer: ABC Bank
+                    eci: '05'
+                    cavv: kBMRIy8dy6JsAAAAAAA82DVhvlpQ
+                    threeds_version: 2.2.0
+                    ds_transaction_id: ef8b6d89-639d-4490-9e38-903691a4087a
+                    threeds_transaction_id: 36041b77-24db-42f1-87a6-dfbd5797110b
+                Rupay redirection flow:
+                  value:
+                    links:
+                    - href: https://wwww.issuerurl.com/
+                      rel: redirect
+                      method: POST
+                      parameters:
+                        AccuCardholderId: TEST1091569481988nW0zT6fB
+                        AccuReturnURL: https://www.someurl.com/response.jsp
+                        session: X4560639244491
+                        AccuGuid: 123456-5c82-4fbf-aa5c-123456
+                        TermUrl: https://www.someurl.com/Response/
+                        AccuRequestId: NTNlMWMwNjgzZjkyMzEwMGEA==
+                        cardend: '1234'
+                    itemcode: DIRECT
+                    objectid: authentication
+                    authenticationid: X4560639244491
+                    authentication_date: '2023-02-07T11:09:15+05:30'
+                    amount: '2.00'
+                    currency: '356'
+                    mercid: BDMERCID
+                    bankid: '123'
+                    payment_method_type: card
+                    authentication_type: redirect
+                    authentication_status: pending
+                    orderid: TEST07082023006
+                    next_step: redirect
+                    authentication_error_code: AUP0000
+                    authentication_error_type: pending
+                    authentication_error_desc: Authentication Pending
+                    card:
+                      masked_value: xxxxxxxxxxxx1234
+                      type: CREDIT
+                      card_end: '1234'
+                      network: RUPAY
+                      issuer: State Bank of India
+                Rupay OTP flow:
+                  value:
+                    itemcode: DIRECT
+                    objectid: authentication
+                    authenticationid: XUR30656677833
+                    authentication_date: '2023-03-13T13:47:45+05:30'
+                    amount: '2.00'
+                    currency: '356'
+                    mercid: BDMERCID
+                    bankid: UR3
+                    payment_method_type: card
+                    authentication_type: otp
+                    authentication_status: pending
+                    orderid: TEST00001200006
+                    next_step: capture_otp
+                    customer_message: Please enter OTP sent to your mobile
+                    authentication_error_code: AUP0000
+                    authentication_error_type: pending
+                    authentication_error_desc: Authentication Pending
+                    card:
+                      masked_value: xxxxxxxxxxxx6244
+                      type: DEBIT
+                      card_end: '1234'
+                      network: RUPAY
+                      issuer: Punjab National Bank
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Forbidden:
+                  $ref: '#/components/examples/403-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Internal Server Error:
+                  $ref: '#/components/examples/500-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        default:
+          description: Any bad or invalid request will lead to following error object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Default error:
+                  $ref: '#/components/examples/Default-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+      parameters:
+      - $ref: '#/components/parameters/bdTraceId'
+      - $ref: '#/components/parameters/bdTimeStamp'
+      - $ref: '#/components/parameters/Accept'
+      - $ref: '#/components/parameters/Content-Type'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  mercid: BDMERCID
+                  amount: '2.00'
+                  currency: '356'
+                  bankid: '456'
+                  itemcode: DIRECT
+                  authentication_type: 3ds2
+                  3ds_parameter: merchant
+                  orderid: TEST0000009005
+                  additional_info:
+                    additional_info1: Details1
+                    additional_info2: Details2
+                    additional_info3: Details3
+                    additional_info4: Details4
+                    additional_info5: Details5
+                    additional_info6: Details6
+                    additional_info7: Details7
+                    additional_info8: Details8
+                    additional_info9: Details9
+                    additional_info10: Details10
+                  ru: https://www.merchanturl.com/response.jsp
+                  payment_method_type: card
+                  device:
+                    init_channel: internet
+                    ip: 124.124.1.1
+                    mac: 11-AC-58-21-1B-AA
+                    imei: '990000112233445'
+                    user_agent: Mozilla/5.0(WindowsNT10.0;WOW64;rv:51.0)Gecko/20100101Firefox/51.0
+                    accept_header: text/html
+                    fingerprintid: 61b12c18b5d0cf901be34a23ca64bb19
+                    browser_tz: '-330'
+                    browser_color_depth: '32'
+                    browser_java_enabled: 'false'
+                    browser_screen_height: '601'
+                    browser_screen_width: '657'
+                    browser_language: en-US
+                    browser_javascript_enabled: 'true'
+                  card:
+                    number: '4242420000001234'
+                    expiry_month: '12'
+                    expiry_year: '2029'
+                    cvv: '123'
+                    holder_name: John Doe
+                  txn_process_type: y3ds
+              properties:
+                mercid:
+                  $ref: '#/components/schemas/Mercid'
+                amount:
+                  $ref: '#/components/schemas/Amount'
+                orderid:
+                  $ref: '#/components/schemas/Orderid'
+                currency:
+                  $ref: '#/components/schemas/Currency'
+                bankid:
+                  $ref: '#/components/schemas/Bankid'
+                itemcode:
+                  $ref: '#/components/schemas/Itemcode'
+                authentication_type:
+                  $ref: '#/components/schemas/Authentication_type'
+                3ds_parameter:
+                  $ref: '#/components/schemas/3ds_parameter'
+                ru:
+                  $ref: '#/components/schemas/Ru'
+                payment_method_type:
+                  $ref: '#/components/schemas/Payment_method_type'
+                txn_process_type:
+                  $ref: '#/components/schemas/Txn_process_type'
+                device:
+                  $ref: '#/components/schemas/Device'
+                card:
+                  oneOf:
+                  - $ref: '#/components/schemas/Pay-using-card-number-pan'
+                  - $ref: '#/components/schemas/Pay-using-network-token'
+                  - $ref: '#/components/schemas/Pay-using-issuer-token'
+                  - $ref: '#/components/schemas/Pay-using-card-account-id'
+                  - $ref: '#/components/schemas/Pay-using-altid'
+                mandate:
+                  $ref: '#/components/schemas/Mandate'
+                additional_info:
+                  $ref: '#/components/schemas/Additional-Info'
+              required:
+              - mercid
+              - amount
+              - orderid
+              - currency
+              - bankid
+              - itemcode
+              - authentication_type
+              - 3ds_parameter
+              - ru
+              - payment_method_type
+              - txn_process_type
+              - device
+              - card
+            examples:
+              Pay with Card number (Pan):
+                value:
+                  mercid: BDMERCID
+                  amount: '2.00'
+                  currency: '356'
+                  bankid: '456'
+                  itemcode: DIRECT
+                  authentication_type: 3ds2
+                  3ds_parameter: merchant
+                  orderid: TEST0000009005
+                  ru: https://www.merchanturl.com/response.jsp
+                  payment_method_type: card
+                  device:
+                    init_channel: internet
+                    ip: 124.124.1.1
+                    mac: 11-AC-58-21-1B-AA
+                    imei: '990000112233445'
+                    user_agent: Mozilla/5.0(WindowsNT10.0;WOW64;rv:51.0)Gecko/20100101Firefox/51.0
+                    accept_header: text/html
+                    fingerprintid: 61b12c18b5d0cf901be34a23ca64bb19
+                    browser_tz: '-330'
+                    browser_color_depth: '32'
+                    browser_java_enabled: 'false'
+                    browser_screen_height: '601'
+                    browser_screen_width: '657'
+                    browser_language: en-US
+                    browser_javascript_enabled: 'true'
+                  card:
+                    number: '4242420000001234'
+                    expiry_month: '12'
+                    expiry_year: '2029'
+                    cvv: '123'
+                    holder_name: John Doe
+                  txn_process_type: y3ds
+              Pay with Network token:
+                value:
+                  mercid: BDMERCID
+                  amount: '2.00'
+                  currency: '356'
+                  bankid: '456'
+                  itemcode: DIRECT
+                  authentication_type: 3ds2
+                  3ds_parameter: merchant
+                  orderid: TEST0000009005
+                  ru: https://www.merchanturl.com/response.jsp
+                  payment_method_type: card
+                  device:
+                    device:
+                      init_channel: internet
+                      ip: 123.0.0.1
+                      mac: 11-AC-58-21-1B-AA
+                      imei: '990000112233445'
+                      user_agent: 'Mozilla/5.0(WindowsNT10.0;WOW64;rv: 51.0)Gecko/20100101Firefox/51.0'
+                      accept_header: application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+                      fingerprintid: string
+                      browser_language: en-US
+                      browser_javascript_enabled: 'true'
+                      browser_tz: '-330'
+                      browser_color_depth: '652'
+                      browser_java_enabled: 'true'
+                      browser_screen_height: '452'
+                      browser_screen_width: '702'
+                  card:
+                    network_token:
+                      token_value: '1234383920541234'
+                      token_cryptogram: /1234AAASMuXoH8AmYMoglY1234=
+                      token_expiry_month: '12'
+                      token_expiry_year: '2029'
+                    card_end: '0004'
+                    cvv: '123'
+                    holder_name: John Doe
+                  txn_process_type: string
+              Pay with Issuer token:
+                value:
+                  mercid: BDMERCID
+                  amount: '2.00'
+                  currency: '356'
+                  bankid: '456'
+                  itemcode: DIRECT
+                  authentication_type: 3ds2
+                  3ds_parameter: merchant
+                  orderid: TEST0000009005
+                  ru: https://www.merchanturl.com/response.jsp
+                  payment_method_type: card
+                  device:
+                    device:
+                      init_channel: internet
+                      ip: 123.0.0.1
+                      mac: 11-AC-58-21-1B-AA
+                      imei: '990000112233445'
+                      user_agent: 'Mozilla/5.0(WindowsNT10.0;WOW64;rv: 51.0)Gecko/20100101Firefox/51.0'
+                      accept_header: application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+                      fingerprintid: string
+                      browser_language: en-US
+                      browser_javascript_enabled: 'true'
+                      browser_tz: '-330'
+                      browser_color_depth: '652'
+                      browser_java_enabled: 'true'
+                      browser_screen_height: '452'
+                      browser_screen_width: '702'
+                  card:
+                    issuer_token:
+                      token_value: '1234383920541234'
+                      token_cryptogram: /1234AAASMuXoH8AmYMoglY1234=
+                      token_expiry_month: '12'
+                      token_expiry_year: '2029'
+                    card_end: '0004'
+                    cvv: '123'
+                    holder_name: John Doe
+                  txn_process_type: string
+              Pay with Card Account ID:
+                value:
+                  mercid: BDMERCID
+                  amount: '2.00'
+                  currency: '356'
+                  bankid: '456'
+                  itemcode: DIRECT
+                  authentication_type: 3ds2
+                  3ds_parameter: merchant
+                  orderid: TEST0000009005
+                  ru: https://www.merchanturl.com/response.jsp
+                  payment_method_type: card
+                  device:
+                    init_channel: internet
+                    ip: 124.124.1.1
+                    mac: 11-AC-58-21-1B-AA
+                    imei: '990000112233445'
+                    user_agent: Mozilla/5.0(WindowsNT10.0;WOW64;rv:51.0)Gecko/20100101Firefox/51.0
+                    accept_header: text/html
+                    fingerprintid: 61b12c18b5d0cf901be34a23ca64bb19
+                    browser_tz: '-330'
+                    browser_color_depth: '32'
+                    browser_java_enabled: 'false'
+                    browser_screen_height: '601'
+                    browser_screen_width: '657'
+                    browser_language: en-US
+                    browser_javascript_enabled: 'true'
+                  card:
+                    cardaccountid: CA0AAEF9000000000123
+                    card_end: '0055'
+                    cvv: '123'
+                    holder_name: John Doe
+                  txn_process_type: y3ds
+        description: ''
+      description: This endpoint creates a new authentication request to initiate a charge using a payment method.
+      tags:
+      - Authentication
+  /payments/ve1_2/authentications/get:
+    post:
+      summary: Retrieve Authentication
+      operationId: retrieveAuthentication
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    itemcode: VDDIRECT
+                    objectid: authentication
+                    authenticationid: A4560000345048
+                    authentication_date: '2022-03-27T10:33:01+05:30'
+                    amount: '2.00'
+                    currency: '356'
+                    mercid: BDMERCID
+                    bankid: '456'
+                    payment_method_type: card
+                    authentication_type: redirect
+                    authentication_status: success
+                    orderid: '27000000001'
+                    enrolled: Y
+                    eci: '05'
+                    eci_status: Y
+                    authentication_error_code: AUS0000
+                    authentication_error_type: success
+                    authentication_error_desc: Authentication Successful
+                    additional_info:
+                      additional_info1: Details1
+                      additional_info2: Details2
+                      additional_info3: Details3
+                      additional_info4: Details4
+                      additional_info5: Details5
+                      additional_info6: Details6
+                      additional_info7: Details7
+                      additional_info8: Details8
+                      additional_info9: Details9
+                      additional_info10: Details10
+                    card:
+                      type: DEBIT
+                      card_end: '1234'
+                      network: VISA
+                      issuer: ABC Bank
+                    cavv: MjcwMzIyQTQcfrtyMDAzNDUwNDg=
+                    xid: MjIwMzIxdtuhjAwMDAzNDUwNDg=
+                    cavvAlgorithm: '2'
+                properties:
+                  itemcode:
+                    $ref: '#/components/schemas/Itemcode'
+                  objectid:
+                    $ref: '#/components/schemas/Objectid'
+                  authenticationid:
+                    $ref: '#/components/schemas/Authenticationid'
+                  authentication_date:
+                    $ref: '#/components/schemas/Authentication_date'
+                  amount:
+                    $ref: '#/components/schemas/Amount'
+                  currency:
+                    $ref: '#/components/schemas/Currency'
+                  mercid:
+                    $ref: '#/components/schemas/Mercid'
+                  bankid:
+                    $ref: '#/components/schemas/Bankid'
+                  payment_method_type:
+                    $ref: '#/components/schemas/Payment_method_type'
+                  authentication_type:
+                    $ref: '#/components/schemas/Authentication_type'
+                  orderid:
+                    $ref: '#/components/schemas/Orderid'
+                  authentication_status:
+                    $ref: '#/components/schemas/Authentication_status'
+                  authentication_error_code:
+                    $ref: '#/components/schemas/Error_code'
+                  authentication_error_type:
+                    $ref: '#/components/schemas/Error_type'
+                  authentication_error_desc:
+                    $ref: '#/components/schemas/Error_desc'
+                  card:
+                    $ref: '#/components/schemas/Card-Response'
+                  eci:
+                    $ref: '#/components/schemas/Eci'
+                  cavv:
+                    $ref: '#/components/schemas/Cavv'
+                  rupay_auth_ref_no:
+                    $ref: '#/components/schemas/Rupay_auth_ref_no'
+                  threeds_version:
+                    $ref: '#/components/schemas/Threeds_version'
+                  ds_transaction_id:
+                    $ref: '#/components/schemas/Ds_transaction_id'
+                  threeds_transaction_id:
+                    $ref: '#/components/schemas/Threeds_transaction_id'
+                  additional_info:
+                    $ref: '#/components/schemas/Additional-Info'
+                required:
+                - mercid
+              examples:
+                Response:
+                  value:
+                    itemcode: VDDIRECT
+                    objectid: authentication
+                    authenticationid: A4560000345048
+                    authentication_date: '2022-03-27T10:33:01+05:30'
+                    amount: '2.00'
+                    currency: '356'
+                    mercid: BDMERCID
+                    bankid: '456'
+                    payment_method_type: card
+                    authentication_type: redirect
+                    authentication_status: success
+                    orderid: '27000000001'
+                    enrolled: Y
+                    eci: '05'
+                    eci_status: Y
+                    authentication_error_code: AUS0000
+                    authentication_error_type: success
+                    authentication_error_desc: Authentication Successful
+                    card:
+                      type: DEBIT
+                      card_end: '1234'
+                      network: VISA
+                      issuer: ABC Bank
+                    cavv: kBMRIy8dy6JAAAAAADVhvlpQ
+                    threeds_version: 2.2.0
+                    ds_transaction_id: ef8b6d89-639d-4490-9e38-903691a4087a
+                    threeds_transaction_id: 36041b77-24db-42f1-87a6-dfbd5797110b
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Forbidden:
+                  $ref: '#/components/examples/403-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Internal server error:
+                  $ref: '#/components/examples/500-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        default:
+          description: Any bad or invalid request will lead to following error object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Authentication id not found:
+                  $ref: '#/components/examples/422-auth-id-not-found-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+      parameters:
+      - $ref: '#/components/parameters/bdTraceId'
+      - $ref: '#/components/parameters/bdTimeStamp'
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  mercid: BDMERCID
+                  authenticationid: A4560000345048
+              properties:
+                mercid:
+                  $ref: '#/components/schemas/Mercid'
+                authenticationid:
+                  $ref: '#/components/schemas/Authenticationid'
+                orderid:
+                  $ref: '#/components/schemas/Orderid'
+              required:
+              - mercid
+            examples:
+              Using authenticationid:
+                value:
+                  mercid: BDMERCID
+                  authenticationid: A4560000345048
+              Using orderid:
+                value:
+                  mercid: BDMERCID
+                  orderid: '27000000001'
+      tags:
+      - Authentication
+      description: This endpoint retrieves the details of a particular authentication using either of `mercid` and `orderid` or `transactionid`.
+  /payments/ve1_2/authentications/validate:
+    post:
+      summary: Validate Authentication
+      operationId: validateAuthentication
+      responses:
+        '200':
+          description: OK
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    itemcode: VDDIRECT
+                    objectid: authentication
+                    authenticationid: A4560000345048
+                    authentication_date: '2022-03-27T10:33:01+05:30'
+                    amount: '2.00'
+                    currency: '356'
+                    mercid: BDMERCID
+                    bankid: '456'
+                    payment_method_type: card
+                    authentication_type: redirect
+                    authentication_status: success
+                    orderid: '27000000001'
+                    authentication_error_code: AUS0000
+                    authentication_error_type: success
+                    authentication_error_desc: Authentication Successful
+                    additional_info:
+                      additional_info1: Details1
+                      additional_info2: Details2
+                      additional_info3: Details3
+                      additional_info4: Details4
+                      additional_info5: Details5
+                      additional_info6: Details6
+                      additional_info7: Details7
+                      additional_info8: Details8
+                      additional_info9: Details9
+                      additional_info10: Details10
+                    card:
+                      type: DEBIT
+                      card_end: '1234'
+                      network: VISA
+                      issuer: ABC Bank
+                    enrolled: Y
+                    eci: '05'
+                    eci_status: Y
+                    cavv: MjcwMzIyQTQcfrtyMDAzNDUwNDg=
+                    xid: MjIwMzIxdtuhjAwMDAzNDUwNDg=
+                    cavvAlgorithm: '2'
+                properties:
+                  itemcode:
+                    $ref: '#/components/schemas/Itemcode'
+                  objectid:
+                    $ref: '#/components/schemas/Objectid'
+                  authenticationid:
+                    $ref: '#/components/schemas/Authenticationid'
+                  authentication_date:
+                    $ref: '#/components/schemas/Authentication_date'
+                  amount:
+                    $ref: '#/components/schemas/Amount'
+                  currency:
+                    $ref: '#/components/schemas/Currency'
+                  mercid:
+                    $ref: '#/components/schemas/Mercid'
+                  bankid:
+                    $ref: '#/components/schemas/Bankid'
+                  payment_method_type:
+                    $ref: '#/components/schemas/Payment_method_type'
+                  authentication_type:
+                    $ref: '#/components/schemas/Authentication_type'
+                  orderid:
+                    $ref: '#/components/schemas/Orderid'
+                  authentication_status:
+                    $ref: '#/components/schemas/Authentication_status'
+                  authentication_error_code:
+                    $ref: '#/components/schemas/Error_code'
+                  authentication_error_type:
+                    $ref: '#/components/schemas/Error_type'
+                  authentication_error_desc:
+                    $ref: '#/components/schemas/Error_desc'
+                  eci:
+                    $ref: '#/components/schemas/Eci'
+                  cavv:
+                    $ref: '#/components/schemas/Cavv'
+                  tranId:
+                    type: string
+                  rupay_auth_ref_no:
+                    $ref: '#/components/schemas/Rupay_auth_ref_no'
+                  authenticationValue:
+                    type: string
+                  tranCtx_id:
+                    type: string
+                  card:
+                    $ref: '#/components/schemas/Card-Response'
+                  threeds_version:
+                    $ref: '#/components/schemas/Threeds_version'
+                  ds_transaction_id:
+                    $ref: '#/components/schemas/Ds_transaction_id'
+                  threeds_transaction_id:
+                    $ref: '#/components/schemas/Threeds_transaction_id'
+                  additional_info:
+                    $ref: '#/components/schemas/Additional-Info'
+              examples:
+                Challenge Flow:
+                  value:
+                    itemcode: DIRECT
+                    objectid: authentication
+                    authenticationid: X4440639244491
+                    authentication_date: '2023-11-21T14:27:13+05:30'
+                    amount: '499.00'
+                    currency: '356'
+                    mercid: BDMERCID
+                    bankid: '444'
+                    payment_method_type: card
+                    authentication_type: 3ds2
+                    authentication_status: success
+                    orderid: TEST07082023006
+                    eci: '02'
+                    authentication_error_code: AUS0000
+                    authentication_error_type: success
+                    authentication_error_desc: Authentication Successful
+                    card:
+                      masked_value: xxxxxxxxxxxx1234
+                      type: CREDIT
+                      card_end: '4184'
+                      network: MASTER
+                      issuer: HDFC Bank
+                    cavv: kBMRIy8dy6AAAAAAAVA82DVhvlpQ
+                    threeds_version: 2.2.0
+                    ds_transaction_id: ef8b6d89-639d-4490-9e38-903691a4087a
+                    threeds_transaction_id: 36041b77-24db-42f1-87a6-dfbd5797110b
+                Rupay Redirection flow:
+                  value:
+                    itemcode: DIRECT
+                    objectid: authentication
+                    authenticationid: X4440639244491
+                    authentication_date: '2023-02-07T11:09:15+05:30'
+                    amount: '2.00'
+                    currency: '356'
+                    mercid: BDMERCID
+                    bankid: '444'
+                    payment_method_type: card
+                    authentication_type: redirect
+                    authentication_status: success
+                    orderid: TEST07082023006
+                    authentication_error_code: AUS0000
+                    authentication_error_type: success
+                    authentication_error_desc: Authentication Successful
+                    card:
+                      masked_value: xxxxxxxxxxxx7119
+                      type: CREDIT
+                      card_end: '7119'
+                      network: RUPAY
+                      issuer: State Bank of India
+                    tranId: '100412023020700000000776830623'
+                    rupay_auth_ref_no: '100412023020700000000776830623'
+                Rupay OTP flow:
+                  value:
+                    itemcode: DIRECT
+                    objectid: authentication
+                    authenticationid: XUR30656677833
+                    authentication_date: '2023-03-13T13:47:45+05:30'
+                    amount: '2.00'
+                    currency: '356'
+                    mercid: BDMERCID
+                    bankid: UR3
+                    payment_method_type: card
+                    authentication_type: otp
+                    authentication_status: success
+                    orderid: TEST00001200006
+                    authentication_error_code: AUS0000
+                    authentication_error_type: success
+                    authentication_error_desc: Authentication Successful
+                    card:
+                      masked_value: xxxxxxxxxxxx6244
+                      type: DEBIT
+                      card_end: '6244'
+                      network: RUPAY
+                      issuer: Punjab National Bank
+                    tranCtx_id: '100122023031300000000799960114'
+                    authenticationValue: c853917f9b07017ee3beb0672fbdffb66868cb2e5a436376ab5e7f35c48e64dd2.00&AAABAHaWFSNjIVQiJpYVAAACMHI=
+                    rupay_auth_ref_no: '100412023020700000000776830623'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Forbidden:
+                  $ref: '#/components/examples/403-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Internal Server Error:
+                  $ref: '#/components/examples/500-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        default:
+          description: Any bad or invalid request will lead to following error object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Default error:
+                  $ref: '#/components/examples/422-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+      parameters:
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/bdTraceId'
+      - $ref: '#/components/parameters/bdTimeStamp'
+      - $ref: '#/components/parameters/Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  authenticationid: A4560000345048
+                  payment_method_type: card
+                  card:
+                    number: '4242420000001234'
+                    expiry_month: '12'
+                    expiry_year: '2029'
+                    cvv: '123'
+                    holder_name: John Doe
+                  response_parameters:
+                    cres: eJytmFmvo8iSgN/5Fa26j1Y3qxdariMlO9hgsy8vIwyYfTGLWX794HP6VFXX1Ghujy7S0UmCzMiIzIgv0nk0kjaKGD0KhjZ6O8pR1XyXA364Xvl88vF+ivl/jvm6mfrze/W+TZS3g
+              properties:
+                mercid:
+                  $ref: '#/components/schemas/Mercid'
+                authenticationid:
+                  $ref: '#/components/schemas/Authenticationid'
+                payment_method_type:
+                  $ref: '#/components/schemas/Payment_method_type'
+                response_parameters:
+                  $ref: '#/components/schemas/Response-parameters'
+              required:
+              - mercid
+              - authenticationid
+              - payment_method_type
+              - response_parameters
+            examples:
+              Challenge Flow:
+                value:
+                  authenticationid: A4560000345048
+                  payment_method_type: card
+                  response_parameters:
+                    cres: eJytmFmvo8iSgN/5Fa26j 1Y3qxdariMlO9hgsy8vIwyYfTGLWX7 94HP6VFXX1Ghujy7S0UmCzMiIzIgv0 nk0kjaKGD0KhjZ6O8pR1XyXA364Xvl 88vF+ivl/jvm6mfrze/W+TZS3g
+              Rupay Redirect flow:
+                value:
+                  authenticationid: X4440639244491
+                  response_parameters:
+                    AccuResponseCode: ACCU000
+                    session: X4440639244491
+                    AccuGuid: a13df076-5c82-4fbf-aa5c-be11e9847e9a
+                    AccuRequestId: MGI2ZTE2M2RjYzJjNTBhMDlkMzA1OTc2NmU3OTBjOTdjNjk3NjA5MDdmY2RlMDI1MTA1MDBjOTYyMzMyODNjNg==
+              Rupay OTP Flow:
+                value:
+                  authenticationid: XUR30656677833
+                  response_parameters:
+                    otp: '123456'
+        description: ''
+      tags:
+      - Authentication
+      description: ''
+components:
+  schemas:
+    3ds_parameter:
+      title: 3ds_parameter
+      x-stoplight:
+        id: 9cf00xo1tntr9
+      type: string
+      enum:
+      - merchant
+      description: Value that determines which entity will capture the device attributes, possible values are merchant
+    Mercid:
+      title: mercid
+      x-stoplight:
+        id: 43ns25lu1fyuc
+      type: string
+      pattern: ^[A-Za-z0-9]{1,10}$
+      example: BDMERCID
+      description: Unique identifier as defined by BillDesk for each merchant
+    Authentication_date:
+      title: authentication_date
+      x-stoplight:
+        id: uz8duh7gras5w
+      type: string
+      description: Authentication date and time in YYYY-MM-DDThh:mm:ssTZD format
+    Card_type:
+      title: card_type
+      x-stoplight:
+        id: r4tyk0ee6k6u5
+      type: string
+      description: Card product type, takes the following values - debit, credit or prepaid
+      example: debit, credit, prepaid
+    Card_network:
+      title: card_network
+      x-stoplight:
+        id: fmhnjhdrk4ngb
+      type: string
+      description: Card Network
+      example: VISA, MASTER
+    Orderid:
+      title: orderid
+      x-stoplight:
+        id: lmwrwf7xn6wq8
+      type: string
+      description: Unique ID generated by the merchant for each request
+      pattern: ^[-/~A-Za-z0-9\_ \:.,#@!\\*\\+]{1,120}$
+      example: TEST0000009005
+    Pay-using-card-number-pan:
+      type: object
+      x-stoplight:
+        id: 1xxgnveu0ix3k
+      x-examples:
+        Example 1:
+          card:
+            number: '4242420000001234'
+            expiry_month: '12'
+            expiry_year: '2029'
+            holder_name: John Doe
+            cvv: '123'
+            tokenize: 'true'
+            coft_consent: 'true'
+      title: Pay using card number - pan
+      properties:
+        number:
+          type: string
+          example: '4242420000001234'
+          pattern: ^[0-9]{16}$
+          description: Card number
+        expiry_month:
+          type: string
+          example: '02'
+          description: Card expiry month in MM format
+        expiry_year:
+          type: string
+          example: '2029'
+          description: Card expiry year in YYYY format
+        holder_name:
+          type: string
+          example: John Doe
+          description: Cardholder name
+          pattern: ^[A-Za-z0-9\\\\s\\\\.'\\\\-\\\\~\\\\@\\\\_]{1,120}$
+        cvv:
+          type: string
+          example: '123'
+          description: Card cvv value
+        tokenize:
+          type: string
+          enum:
+          - 'true'
+          description: If the card is required to be tokenized then, the value is true
+        coft_consent:
+          type: string
+          enum:
+          - 'true'
+          description: Fixed value as true, confirming the card holder consent to tokenize the card
+      required:
+      - number
+      - expiry_month
+      - expiry_year
+      - cvv
+    Error_desc:
+      title: error_desc
+      x-stoplight:
+        id: uyor3loffwtew
+      type: string
+      description: Represents the error description for the response
+    Card_issuer:
+      title: card_issuer
+      x-stoplight:
+        id: tm5adiwnqv7q0
+      type: string
+      description: Card issuer
+    Eci:
+      title: eci
+      x-stoplight:
+        id: jq2g7i098vu5j
+      type: string
+      description: Authentication ECI indicator, as per the 3ds protocol (for V, M, D, A cards)
+    Amount_type:
+      title: amount_type
+      x-stoplight:
+        id: o7dqaslkupvxa
+      type: string
+      description: "Indicates whether subscription amount is fixed or has a maximum limit. The following values are possible\n•\tmaximum - indicates the maximum amount that can be charged for the subscription\n•\tfixed – indicates the fixed amount to be charged for the subscription\nPlease note: For upi, only \"maximum\" is allowed. This is required to allow for token debit (small value transaction)\n"
+      enum:
+      - maximum
+      - fixed
+    Next_step:
+      title: next_step
+      x-stoplight:
+        id: ayox9qr52qx6o
+      type: string
+      description: Refers to the action to be taken by the merchant, for eg. redirect or capture_otp
+      enum:
+      - redirect
+      - capture_otp
+      - 3ds2_challenge
+      - 3ds2_frictionless
+    Pay-using-issuer-token:
+      type: object
+      x-stoplight:
+        id: 605rgi2ucynyf
+      x-examples:
+        Example 1:
+          card:
+            issuer_token:
+              token_value: '1234383920541234'
+              token_cryptogram: /1234AAASMuXoH8AmYMoglY1234=
+              token_expiry_month: '12'
+              token_expiry_year: '2029'
+            card_end: '0004'
+            cvv: '123'
+            holder_name: John Doe
+      title: Pay using issuer token
+      properties:
+        issuer_token:
+          type: object
+          required:
+          - token_value
+          - token_cryptogram
+          - token_expiry_month
+          - token_expiry_year
+          properties:
+            token_value:
+              type: string
+              description: Token Value – as received from TSP in the ‘Detokenize’ response
+              pattern: ^[A-Za-z0-9]{1,35}$
+              example: '1234383920541234'
+            token_cryptogram:
+              type: string
+              description: Token Cryptogram – as received from TSP in the ‘Detokenize’ response
+              example: /1234AAASMuXoH8AmYMoglY1234=
+              pattern: ^[a-zA-Z0-9\\\\/\\\\!@#\\\\$%\\\\^&\\\\*\\\\(\\\\)\\\\{\\\\}_\\\\+\\\\=\\\\|:”;’,\\\\.~`\\\\-\\\\\\\\]{1,256}$
+            token_expiry_month:
+              type: integer
+              example: '02'
+              description: Token Expiry Month – as received from TSP in the MM format
+            token_expiry_year:
+              type: integer
+              example: 2029
+              description: Token Expiry Year – as received from TSP in the YYYY format
+        card_end:
+          type: string
+          description: "Last 4 digits of the card number \n\nNote: For an EMI transaction via network token,this attribute value is required for loan booking"
+          example: '0045'
+        cvv:
+          type: string
+          description: 'Card cvv value '
+          example: '123'
+        holder_name:
+          type: string
+          description: Cardholder name
+          pattern: ^[A-Za-z0-9\\s\\.'\\-\\~\\@\\_]{1,120}$
+          example: John Doe
+      required:
+      - issuer_token
+      - card_end
+    Links_Parameters:
+      description: Parameters that are used to redirect the customer to the issuer URL
+      type: object
+      x-examples:
+        Example 1:
+          tranid: '973712065583009734440001099962'
+          AccuCardholderId: '90926094409'
+          AccuReturnURL: https://www.merchanturl.com/response.jsp
+          session: U4440001099962
+          AccuGuid: 15e66a3b-956e-42f8-84d4-859e3e8c9fed
+          TermUrl: https://www.merchanturl.com/response.jsp
+          AccuRequestId: YjIxM2ZiZGUyMGY2MmNjZWE5YWQ1NGE5OGNiZDUyZjkyYThlMDFiYjFkMTY1Yjc0ZTI4NTgxNDA1MGRiNzE0Ng==
+          cardend: '4938'
+      title: parameters
+      properties:
+        creq:
+          type: string
+          description: Challenge request message or payment message for 3ds2.0 protocol authentication
+        bdcreq:
+          type: string
+          description: "Challenge request message or payment message for \n3ds2.0 protocol authentication (Threeds method url flow)"
+        tranid:
+          type: string
+          description: Payment parameter for rupay redirect flow
+        AccuCardholderId:
+          type: string
+          description: Payment parameter for rupay redirect flow
+        AccuReturnURL:
+          type: string
+          description: Payment parameter for rupay redirect flow
+        session:
+          type: string
+          description: Payment parameter for rupay redirect flow
+        AccuGuid:
+          type: string
+          description: Payment parameter for rupay redirect flow
+        TermUrl:
+          type: string
+          description: Payment parameter for rupay redirect flow
+        AccuRequestId:
+          type: string
+          description: Payment parameter for rupay redirect flow
+        cardend:
+          type: string
+          description: Payment parameter for rupay redirect flow
+    Error-object:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: This will be same as HTTP response code
+        error_type:
+          type: string
+          description: This indicates of the category of errors that could be encountered, for e.g. validation_error, api_connection_error, etc.
+        error_code:
+          type: string
+          description: Under the error_type, there could be different error_codes that could be returned depending upon the API and the underlying interaction
+        message:
+          type: string
+          description: More details as a description for the error_code
+    Pay-using-altid:
+      type: object
+      x-stoplight:
+        id: 77jgo8f9g4srj
+      x-examples:
+        Example 1:
+          card:
+            network_token:
+              token_value: '1234383920541234'
+              token_cryptogram: /1234AAASMuXoH8AmYMoglY1234=
+              token_expiry_month: '12'
+              token_expiry_year: '2029'
+            card_end: '0004'
+            cvv: '123'
+            holder_name: John Doe
+      title: Pay using alt id token
+      properties:
+        altid_token:
+          type: object
+          required:
+          - altid_value
+          - altid_cryptogram
+          - altid_expiry_month
+          - altid_expiry_year
+          properties:
+            altid_value:
+              type: string
+              description: Token Value – as received from TSP, provided in the ‘Detokenize’ response
+              pattern: ^[A-Za-z0-9]{1,35}$
+              example: '1234383920541234'
+            altid_cryptogram:
+              type: string
+              description: Token Cryptogram – as received from TSP, provided in the ‘Detokenize’ response
+              pattern: ^[a-zA-Z0-9\\/\\!@#\\$%\\^&\\*\\(\\)\\{\\}_\\+\\=\\|:”;’,\\.~`\\-\\\\]{1,256}$
+              example: /1234AAASMuXoH8AmYMoglY1234=
+            altid_expiry_month:
+              type: integer
+              example: '02'
+              description: Token Expiry Month – as received from TSP in the MM format
+            altid_expiry_year:
+              type: integer
+              example: 2029
+              description: Token Expiry Year – as received from TSP in the YYYY format
+            altid_trid:
+              type: string
+              description: 'conditional: required only for AMEX - validate once'
+        card_end:
+          type: string
+          description: "Last 4 digits of the card number \n\nNote: For an EMI transaction via network token,this attribute value is required for loan booking"
+          example: '0045'
+        cvv:
+          type: string
+          description: Card cvv value
+          example: '123'
+        holder_name:
+          type: string
+          description: Cardholder name
+          example: John Doe
+          pattern: ^[A-Za-z0-9\\\\s\\\\.'\\\\-\\\\~\\\\@\\\\_]{1,120}$
+      required:
+      - altid_token
+      - cvv
+      - holder_name
+    Currency:
+      title: currency
+      x-stoplight:
+        id: 1ehjh4f7vidz7
+      type: string
+      description: ISO currency code of the transaction amount, for INR this value will be 356
+    Pay-using-network-token:
+      type: object
+      x-stoplight:
+        id: ze1cvmk9lawl5
+      x-examples:
+        Example 1:
+          card:
+            network_token:
+              token_value: '1234383920541234'
+              token_cryptogram: /1234AAASMuXoH8AmYMoglY1234=
+              token_expiry_month: '12'
+              token_expiry_year: '2029'
+            card_end: '0004'
+            cvv: '123'
+            holder_name: John Doe
+      title: Pay using network token
+      properties:
+        network_token:
+          type: object
+          required:
+          - token_value
+          - token_cryptogram
+          - token_expiry_month
+          - token_expiry_year
+          properties:
+            token_value:
+              type: string
+              description: Token Value – as received from TSP, provided in the ‘Detokenize’ response
+              pattern: ^[A-Za-z0-9]{1,35}$
+              example: '1234383920541234'
+            token_cryptogram:
+              type: string
+              description: Token Cryptogram – as received from TSP, provided in the ‘Detokenize’ response
+              pattern: ^[a-zA-Z0-9\\/\\!@#\\$%\\^&\\*\\(\\)\\{\\}_\\+\\=\\|:”;’,\\.~`\\-\\\\]{1,256}$
+              example: /1234AAASMuXoH8AmYMoglY1234=
+            token_expiry_month:
+              type: integer
+              example: '02'
+              description: Token Expiry Month – as received from TSP in the MM format
+            token_expiry_year:
+              type: integer
+              example: 2029
+              description: Token Expiry Year – as received from TSP in the YYYY format
+        card_end:
+          type: string
+          description: "Last 4 digits of the card number \n\nNote: For an EMI transaction via network token,this attribute value is required for loan booking"
+          example: '0045'
+        cvv:
+          type: string
+          description: Card cvv value
+          example: '123'
+        holder_name:
+          type: string
+          description: Cardholder name
+          example: John Doe
+          pattern: ^[A-Za-z0-9\\\\s\\\\.'\\\\-\\\\~\\\\@\\\\_]{1,120}$
+      required:
+      - network_token
+      - card_end
+    Authenticationid:
+      title: authenticationid
+      x-stoplight:
+        id: c1hskskz8e2iq
+      type: string
+      description: Unique authenticationid created by BillDesk
+      pattern: ^[a-zA-Z0-9]{14,35}$
+      example: A1HM0000389872
+    Itemcode:
+      title: item code
+      x-stoplight:
+        id: tz16mo44yvoae
+      type: string
+      description: Itemcode value as provided by BillDesk, with a default value DIRECT
+      example: DIRECT
+      pattern: ^[A-Za-z0-9]{1,20}$
+    Payment_method_type:
+      title: payment_method_type
+      x-stoplight:
+        id: kklghqguq1r3q
+      type: string
+      description: 'Represents the method of payment, and can take the following values - card, netbanking, wallet, upi, eft, bankaccount, cashcard, cardless (non-card emi option)
+
+        The associated object will also be provided in the request.'
+      enum:
+      - card
+      - netbanking
+      - upi
+      - eft
+      - cardless
+      - bankaccount
+    Debit_day:
+      title: debit_day
+      x-stoplight:
+        id: ppp2ede7qx3fc
+      type: string
+      description: 'Required only where payment_method_type = upi. Default value "1" to be passed
+
+        '
+      pattern: ^\\d{1,2}$
+      example: '1'
+      enum:
+      - '1'
+    Masked_value:
+      title: masked_value
+      x-stoplight:
+        id: r3wddilt5cyy4
+      type: string
+      description: Masked card number, with the last four digits
+      example: xxxxxxxxxxxx1001
+    Response-parameters:
+      type: object
+      x-examples:
+        Example 1:
+          cres: eJytmFmvo8iSgN/5Fa26j 1Y3qxdariMlO9hgsy8vIwyYfTGLWX7 94HP6VFXX1Ghujy7S0UmCzMiIzIgv0 nk0kjaKGD0KhjZ6O8pR1XyXA364Xvl 88vF+ivl/jvm6mfrze/W+TZS3g
+          AccuResponseCode: ACCU000
+          session: X4440639244491
+          AccuGuid: a13df076-5c82-4fbf-aa5c-be11e9847e9a
+          AccuRequestId: MGI2ZTE2M2RjYzJjNTBhMDlkMzA1OTc2NmU3OTBjOTdjNjk3NjA5MDdmY2RlMDI1MTA1MDBjOTYyMzMyODNjNg==
+          MD: ''
+          Pares: ''
+      properties:
+        cres:
+          type: string
+          description: Response parameters as received from the issuer, and will be cres for 3ds 2.0 flow
+          example: eJytmFmvo8iSgN/5Fa26j 1Y3qxdariMlO9hgsy8vIwyYfTGLWX7 94HP6VFXX1Ghujy7S0UmCzMiIzIgv0 nk0kjaKGD0KhjZ6O8pR1XyXA364Xvl 88vF+ivl/jvm6mfrze/W+TZS3g
+        AccuResponseCode:
+          type: string
+          description: Response parameters as received from the issuer, and will be received for Rupay cards
+          example: 'ACCU000 '
+        session:
+          type: string
+          description: Response parameters as received from the issuer, and will be received for Rupay cards
+          example: X4440639244491
+        AccuGuid:
+          type: string
+          description: Response parameters as received from the issuer, and will be received for Rupay cards
+          example: a13df076-5c82-4fbf-aa5c-be11e9847e9a
+        AccuRequestId:
+          type: string
+          description: Response parameters as received from the issuer, and will be received for Rupay cards
+          example: MGI2ZTE2M2RjYzJjNTBhMDlkMzA1OTc2NmU3OTBjOTdjNjk3NjA5MDdmY2RlMDI1MTA1MDBjOTYyMzMyODNjNg=="
+        otp:
+          type: string
+          description: for a native authentication where next_step = capture_otp
+        TermUrl:
+          type: string
+          description: Payment parameter for rupay redirect flow
+        cardend:
+          type: string
+          description: Payment parameter for rupay redirect flow
+    Threeds_version:
+      title: threeds_version
+      x-stoplight:
+        id: o8scvjfj8moas
+      type: string
+      description: 'Protocol of the 3ds2.0 version used for authentication
+
+        '
+      enum:
+      - 2.1.0
+      - 2.2.0
+    Mandate:
+      type: object
+      x-examples:
+        Example 1:
+          mercid: BDMERCID
+          customer_refid: CUST614514520010012
+          subscription_refid: SUB614514510012
+          subscription_desc: Unlimited Plan
+          start_date: '2023-02-08'
+          end_date: '2050-12-22'
+          amount: '774.00'
+          currency: '356'
+          frequency: adho
+          amount_type: max
+      properties:
+        mercid:
+          type: string
+          description: Unique identifier as defined by BillDesk for each merchant
+          example: BDMERCID
+          pattern: ^[A-Za-z0-9]{1,10}$
+        customer_refid:
+          type: string
+          description: Unique reference of the customer in the merchant system, and can be linked to different subscriptions of the same customer
+          pattern: ^[A-Za-z0-9\\_\\:\\-]{1,80}$
+          example: CUSTREF00A00011
+        subscription_refid:
+          type: string
+          description: Unique reference assigned by merchant for the subscription
+          pattern: ^[A-Za-z0-9_-]{1,128}$
+          example: SUBREF00A00011
+        subscription_desc:
+          type: string
+          description: Customer friendly description for the subscription, this narration is generally displayed to the customer at the issuer channel
+        start_date:
+          $ref: '#/components/schemas/Start_date'
+        end_date:
+          $ref: '#/components/schemas/End_date'
+        amount:
+          type: string
+          description: Subscription amount in two decimals, eg. 2400.00
+          pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+          example: '200.28'
+        currency:
+          type: string
+          description: ISO currency code for the amount, with a value 356 for INR
+          example: '356'
+        frequency:
+          type: string
+          description: "Frequency at which the subscription debits will be processed, possible values are:\n\n•\tweek - weekly\n•\tmnth - monthly\n•\tbimn – bi-monthly\n•\tqurt - quarterly\n•\tbian – bi-annually\n•\tyear - yearly\n•\tadho – adhoc\n\n"
+          enum:
+          - mnth
+          - week
+          - bimn
+          - qurt
+          - bian
+          - year
+          - adho
+          example: adho
+        amount_type:
+          $ref: '#/components/schemas/Amount_type'
+        recurrence_rule:
+          $ref: '#/components/schemas/Recurrence_rule'
+        debit_day:
+          $ref: '#/components/schemas/Debit_day'
+      required:
+      - mercid
+      - customer_refid
+      - subscription_refid
+      - subscription_desc
+      - start_date
+      - end_date
+      - amount
+      - currency
+      - frequency
+      - amount_type
+    Start_date:
+      title: start_date
+      x-stoplight:
+        id: v7tyy2tfnut1w
+      type: string
+      description: "Subscription start date in yyyy-mm-dd format\nNote: Should be greater than or equal to current date (IST timezone). \nNote for UPI : Should be equal to mandate creation date for UPI. In UPI, an subsequent charge is created on a successful mandate. This includes the first charge as well along with mandate creation. Since first charge is done immediately, it is important that the mandate “start_date” should be today’s date \n"
+      format: date
+      example: '2021-05-08'
+    Cavv:
+      title: cavv
+      x-stoplight:
+        id: 72ehfi721p2mm
+      type: string
+      description: CAVV value generated by issuer (for V, M, D, A cards)
+    Error_type:
+      title: error_type
+      x-stoplight:
+        id: snpogojwqc0aq
+      type: string
+      description: Represents the error type for the response
+    Authentication_type:
+      title: authentication_type
+      x-stoplight:
+        id: c33ke2q5rl7ql
+      type: string
+      description: Represents the type of authentication initiated in the request, will be fixed value - 3ds2
+      enum:
+      - 3ds2
+      example: 3ds2
+    Links:
+      type: object
+      x-stoplight:
+        id: 7t5udyb6ilh37
+      x-examples:
+        Example 1:
+          links:
+          - href: https://wwww.issuerurl.com/somepage
+            rel: redirect
+            method: post
+            parameters:
+              creq: eyJtZXNzYWdlVHlwZSI6IkNSZXEiLCJtZXNzYWdlVmVyc2lvbiI6IjIuMS4wIiwidGhyZWVEU1NlcnZlclRyYW5zSUQiOiIzYjFlYmQ5NC04NTZhLTRlYjEtYTJlMS00MWZkNTdjZGFkZjAiLCJhY3NUcmFuc0lEIjoiOGMzMzk3NTItMjNmMS00NmZlLThmNzEtMzAwZjAyMzY0NjcxIiwiY2hhbGxlbmdlV2luZG93U2l6ZSI6IjA1In0=
+      description: Associated links with the object, and contains the issuer URL that will be provided in the redirect authentication workflow
+      title: links
+      properties:
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              href:
+                type: string
+                description: Issuer response URL
+              rel:
+                type: string
+                description: Fixed value as redirect
+              method:
+                type: string
+                enum:
+                - POST
+              parameters:
+                $ref: '#/components/schemas/Links_Parameters'
+                description: Parameters that are used to redirect the customer to the issuer URL
+    Recurrence_rule:
+      title: recurrence_rule
+      x-stoplight:
+        id: mzu48wk4tb3i8
+      type: string
+      description: 'Note: Required only where payment_method_type = upi. Default value : ''after''
+
+        '
+      enum:
+      - after
+    Pay-using-card-account-id:
+      type: object
+      x-stoplight:
+        id: dbr5tekgwo4lq
+      x-examples:
+        Example 1:
+          card:
+            cardaccountid: CA0AAEF9000000000123
+            cvv: '123'
+            card_end: '0055'
+            holder_name: John Doe
+      title: Pay using card account id
+      properties:
+        cardaccountid:
+          type: string
+          description: Unique ID created by BillDesk for the combination of card number, mercid and customer_refid
+          example: CA0AAEF9000000000123
+        cvv:
+          type: string
+          description: 'Card cvv value '
+          example: '123'
+        card_end:
+          type: string
+          description: "Last 4 digits of the card number \n\nNote: For an EMI transaction via network token,this attribute value is required for loan booking"
+          example: '0045'
+        holder_name:
+          type: string
+          pattern: ^[A-Za-z0-9\\s\\.'\\-\\~\\@\\_]{1,120}$
+          example: John Doe
+          description: Cardholder name
+      required:
+      - cardaccountid
+      - card_end
+    Objectid:
+      title: objectid
+      x-stoplight:
+        id: bbwm8bhhbqd4r
+      type: string
+      description: 'String representing the object''s type. Objects of the same type share the same value. '
+      enum:
+      - transaction
+      - authentication
+      - mandate
+      - invoice
+      - cardaccount
+      - validatevpa
+      - dispute
+      - settlement
+      - altid
+      - mandate_token
+      - accountvalidation
+      - refund
+    Authentication_status:
+      title: authentication_status
+      x-stoplight:
+        id: h2j1d7gkgfr54
+      type: string
+      description: "Represents the status of the request – with possible values as \n•\tpending\n•\tsuccess\n•\tfailure"
+      enum:
+      - pending
+      - success
+      - failure
+    Error_code:
+      title: error_code
+      x-stoplight:
+        id: 2grhtze0qf6ob
+      type: string
+      description: Represents the error code for the response
+    Card-Response:
+      type: object
+      x-stoplight:
+        id: n1nmwdiqy5hrc
+      x-examples:
+        Example 1:
+          card:
+            type: DEBIT
+            card_end: '1234'
+            network: VISA
+            issuer: ABC Bank
+      properties:
+        type:
+          $ref: '#/components/schemas/Card_type'
+          description: Card product type, takes the following values - debit, credit or prepaid
+        masked_value:
+          $ref: '#/components/schemas/Masked_value'
+          description: "Last 4 digits of the card number \nNote: For an EMI transaction via network token, this attribute value is required for loan booking"
+        network:
+          $ref: '#/components/schemas/Card_network'
+          description: Card network, for eg. visa
+        issuer:
+          $ref: '#/components/schemas/Card_issuer'
+          description: Card issuer
+    Ds_transaction_id:
+      title: ds_transaction_id
+      x-stoplight:
+        id: wceohqaji2zvf
+      type: string
+      description: Directory server transaction id for 3ds2.0
+      example: 9ae6259e-08b8-42bb97a2-48d8a1d2a690
+      pattern: ^[0-9a-f]{8}[1-5][0-9a-f]{3}[0-9a-f]{12}$
+    Additional-Info:
+      type: object
+      x-examples:
+        Example 1:
+          additional_info:
+            additional_info1: Details1
+            additional_info2: Details2
+            additional_info3: Details3
+            additional_info4: Details4
+            additional_info5: Details5
+            additional_info6: Details6
+            additional_info7: Details7
+            additional_info8: Details8
+            additional_info9: Details9
+            additional_info10: Details10
+      description: 'Array of 7 additional_info values that can be attached to
+
+        the transaction.
+
+        Note: Merchant is advised to not pass customer PII
+
+        information in additional info fields.'
+      properties:
+        additional_info1:
+          type: string
+          example: Details1
+        additional_info2:
+          type: string
+          example: Details2
+        additional_info3:
+          type: string
+          example: Details3
+        additional_info4:
+          type: string
+          example: Details4
+        additional_info5:
+          type: string
+          example: Details5
+        additional_info6:
+          type: string
+          example: Details6
+        additional_info7:
+          type: string
+          example: Details7
+    Device:
+      type: object
+      x-stoplight:
+        id: 1dup8vlut7f5l
+      x-examples:
+        Example 1:
+          device:
+            init_channel: internet
+            ip: 124.124.1.1
+            mac: 11-AC-58-21-1B-AA
+            imei: '990000112233445'
+            user_agent: Mozilla/5.0(WindowsNT10.0;WOW64;rv:51.0)Gecko/20100101Firefox/51.0
+            accept_header: text/html
+            fingerprintid: 61b12c18b5d0cf901be34a23ca64bb19
+            browser_tz: '-330'
+            browser_color_depth: '32'
+            browser_java_enabled: 'false'
+            browser_screen_height: '601'
+            browser_screen_width: '657'
+            browser_language: en-US
+            browser_javascript_enabled: 'true'
+      title: Device
+      description: ''
+      properties:
+        init_channel:
+          type: string
+          description: Initiating channel,accepted values are internet,app or kiosk
+          enum:
+          - internet
+          - app
+          - kiosk
+        ip:
+          type: string
+          description: Actual end customer IP address is required to be passed
+          maxLength: 15
+        user_agent:
+          type: string
+          description: 'Exact content of the HTTP user-agent header
+
+
+            Note: If the total length of the User-Agent sent by the browser exceeds 2048 characters, truncate the excess portion'
+          example: 'Mozilla/5.0(WindowsNT10.0;WOW64;rv: 51.0)Gecko/20100101Firefox/51.0'
+          pattern: =^[A-Za-z0-9\\_\\:\\-\\,\\;\\/\\)\\(\\.\\s\\+\\[\\]\\=@]{10,255}$
+        accept_header:
+          type: string
+          description: Customer browser accept header values
+          maxLength: 255
+          example: application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+          pattern: ^[0-9A-Za-z\\.\\+\\-\\/\\=\\*\\,\\;]{10,255}$
+        browser_language:
+          type: string
+          description: Value representing the browser language, returned from navigator.language property, for eg. en-US
+          maxLength: 5
+          example: en-US
+          pattern: ^[A-Za-z\\-]{2,5}$
+        browser_javascript_enabled:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+          description: 'Boolean (true or false) that represents the ability of the cardholder browser to execute JavaScript.
+
+            Note – if true, additional attributes of browser_tz, browser_color_depth, browser_java_enabled, browser_screen_height, browser_screen_width are mandatory'
+        browser_tz:
+          type: string
+          description: 'Time-zone offset in minutes between UTC and the Cardholder browser local time.
+
+
+            Note that the offset is positive if the local time zone is behind UTC and negative if it is ahead. For eg. if UTC -5 hours then browser_tz = 300 and if UTC +5 hours then browser_tz = -300’'
+          pattern: ^[0-9\\+\\-]{2,6}$
+          maxLength: 6
+          example: '-330'
+        browser_color_depth:
+          type: string
+          description: 'Value representing the bit depth of the colour palette for displaying images, in bits per pixel.
+
+
+            Obtained from Cardholder browser using the screen.Color.Depth property. In case the actual vaue does not exist in the allowed values, use the closest lower value,for eg. 32'
+          maxLength: 5
+          pattern: ^[0-9]{2,5}$
+          example: '652'
+        browser_java_enabled:
+          type: string
+          description: Boolean (true or false) that represents the ability of the cardholder browser to execute Java. Value is returned from the navigator.javaEnabled property
+          enum:
+          - 'true'
+          - 'false'
+        browser_screen_height:
+          type: string
+          description: Total height of the Cardholder’s screen in pixels. Value is returned from the screen.height property for eg. 601
+          pattern: ^[0-9]{2,5}$
+          example: '452'
+          maxLength: 5
+        browser_screen_width:
+          type: string
+          description: Total width of the cardholder’s screen in pixels. Value is returned from the screen.width property, for eg. 657
+          pattern: ^[0-9]{2,5}$
+          example: '702'
+          maxLength: 5
+      required:
+      - init_channel
+      - ip
+      - user_agent
+      - accept_header
+      - browser_language
+      - browser_javascript_enabled
+    Amount:
+      title: amount
+      x-stoplight:
+        id: s5xd8bwxp2orm
+      type: string
+      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+      example: '299.28'
+      description: Transaction amount in two decimals, eg. 299.28
+    End_date:
+      title: end_date
+      x-stoplight:
+        id: uz968g6golwjt
+      type: string
+      description: 'Subscription end date in yyyy-mm-dd format
+
+        Note: Should be greater than current date (IST timezone). For mandates that are valid ‘until cancelled’ by the customer, end_date year could be 2099, and for upi, maximum duration allowed for a mandate is 30 years'
+      format: date
+      example: '2059-12-31'
+    Threeds_transaction_id:
+      title: threeds_transaction_id
+      x-stoplight:
+        id: c54txyf8e8aqp
+      type: string
+      description: Threeds server transaction id
+      format: uuid
+      example: 4184a9f8-b0f3-47d2-91ec-bc9939080e32
+    Bankid:
+      title: bankid
+      x-stoplight:
+        id: gf7ntync4cj73
+      type: string
+      description: 'BillDesk defined unique identifier for acquirer
+
+        Mandatory for Upi and Netbanking flows'
+      example: 1HM
+      pattern: ^[A-Za-z0-9]{1,10}$
+    Txn_process_type:
+      title: txn_process_type
+      x-stoplight:
+        id: lyz1n731cb596
+      type: string
+      description: "Indicates transaction processing type, will be the following values:\nAFA payment\n•\tcard - 3ds or y3ds or 3ds_redirect\n•\tupi – collect, qr or intent\n•\tnetbanking – nb\n•\teft - offline\nRecurring payment\n•\tcard, upi, bankaccount – si"
+      example: y3ds
+      enum:
+      - y3ds
+      - 3ds
+      - collect
+      - intent
+      - qr
+      - nb
+      - eft
+      - si
+    Rupay_auth_ref_no:
+      title: rupay_auth_ref_no
+      x-stoplight:
+        id: p2pdfeb2zd0g6
+      type: string
+      description: Refers to the specific transaction reference provided by NPCI (for R cards)
+    Ru:
+      title: return URL
+      x-stoplight:
+        id: 2nnmkccdq26ck
+      type: string
+      example: https://www.merchant.com
+      pattern: =^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;{]*[-a-zA-Z0-9+&@#/%=~_|} ]{1,2000}$
+      description: Merchants URL where the customer will be redirected after a transaction is completed
+  examples:
+    422-error:
+      value:
+        status: 422
+        error_type: api_validation_error
+        error_code: AUAVE0004
+        message: Authentication already validated
+    403-error:
+      value:
+        status: 403
+        error_type: inaccessable_resource_error
+        error_code: GNIAE0002
+        message: Access forbidden
+    500-error:
+      value:
+        status: 500
+        error_type: api_processing_error
+        error_code: AUAPE0001
+        message: Internal server error
+    Default-error:
+      value:
+        status: 409
+        error_type: duplicate_request_error
+        error_code: AUDRE0001
+        message: Authentication already exist with given mercid and orderid
+    422-auth-id-not-found-error:
+      value:
+        status: 422
+        error_type: invalid_data_error
+        error_code: AUIDE0018
+        message: Invalid authenticationid
+  parameters:
+    bdTimeStamp:
+      in: header
+      name: BD-Timestamp
+      description: Request timestamp to identify date and time of origin of request. Example, a value of BD-Timestamp 20210113180403 identifies the request to have originated on 13th January 2021 at 06:04:03 PM.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/json
+      description: Request Content-Type to take the values application/jose
+    bdTraceId:
+      in: header
+      name: BD-Traceid
+      description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    Accept:
+      name: Accept
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/jose
+      description: Accept Response Content-Type to take the values application/jose
+x-stoplight:
+  id: v3t7owhh461u5
+x-samples-languages:
+- shell
+- json
+- node
+- java
+- csharp
+x-provenance:
+  method: searched
+  source: https://docs.billdesk.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.billdesk.io/reference/createauthentication.md
+  - https://docs.billdesk.io/reference/createmandatetoken.md
+  - https://docs.billdesk.io/reference/createorder.md
+  - https://docs.billdesk.io/reference/createrefund.md
+  - https://docs.billdesk.io/reference/createtransaction.md
+  - https://docs.billdesk.io/reference/modify-mandate-token.md
+  - https://docs.billdesk.io/reference/post-payments-v1_2-transactions-get.md
+  - https://docs.billdesk.io/reference/retrieveauthentication.md
+  - https://docs.billdesk.io/reference/retrieverefund.md
+  - https://docs.billdesk.io/reference/updatetransaction.md
+  - https://docs.billdesk.io/reference/validateauthentication.md
+  merge:
+    pages: 11
+    deduped: 284
+    conflicts_kept_first: 0

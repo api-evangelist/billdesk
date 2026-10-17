@@ -1,16 +1,17 @@
-openapi: 3.1.0
-x-stoplight:
-  id: ykcpgrfsszuul
+openapi: 3.2.0
 info:
-  title: LinkPay
+  title: LinkPay Payment Links API
   version: '1.0'
 servers:
 - description: UAT
   url: https://uat1.billdesk.com/linkpay/links
 - description: PROD
   url: https://api.billdesk.com/linkpay/links
+tags:
+- name: Payment Links
 paths:
   /create:
+    parameters: []
     post:
       summary: Create Link
       operationId: create-link
@@ -434,8 +435,8 @@ paths:
       description: This API will be used to create a link for the customer to make a payment and the merchant can choose the medium for dissemination of the link- Email, SMS or both.
       tags:
       - Payment Links
-    parameters: []
   /delete:
+    parameters: []
     post:
       summary: Delete Link
       operationId: delete-link
@@ -713,8 +714,8 @@ paths:
                     linkid: LP202409103a6s
       tags:
       - Payment Links
-    parameters: []
   /fetch:
+    parameters: []
     post:
       summary: Retrieve Link
       operationId: retrieve-link
@@ -969,8 +970,8 @@ paths:
       description: This API can be used to fetch the status of an existing payment link
       tags:
       - Payment Links
-    parameters: []
   /resend:
+    parameters: []
     post:
       summary: Resend Link
       operationId: resend-link
@@ -1149,24 +1150,293 @@ paths:
                     linkid: LP20240701WpEL
       tags:
       - Payment Links
-    parameters: []
 components:
   schemas:
-    amount:
+    payment-object-fetch-response:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/amount'
+          x-stoplight:
+            id: hdmnw61vgga2x
+        amount_pending:
+          $ref: '#/components/schemas/amount_pending'
+          x-stoplight:
+            id: x5l2liw87t5r3
+        max_payments_allowed:
+          $ref: '#/components/schemas/max_payments_allowed-response'
+          x-stoplight:
+            id: a6nayap9bh7pj
+        minimum_partial_amount:
+          $ref: '#/components/schemas/minimum_partial_amount-response'
+          x-stoplight:
+            id: mal70uf0n6pkh
+        partial_payment_allowed:
+          $ref: '#/components/schemas/partial_payment_allowed'
+          x-stoplight:
+            id: pxlgvpsiqvezj
+    Mercid:
+      title: mercid
       x-stoplight:
-        id: tvvxkb7grxf9k
-      description: Payment link amount
+        id: p2d1wfy3kxe31
+      type: string
+      pattern: ^[A-Za-z0-9]{1,10}$
+      example: BDMERCID
+      description: Unique identifier as defined by BillDesk for each merchant
+    payment_method_allowed-response:
+      x-stoplight:
+        id: r0aqxq66epyzc
+      type: string
+      description: If not passed or if passed as null, in response it will be all
+      enum:
+      - all
+    link_status:
+      title: link_status
+      x-stoplight:
+        id: mzfm8c62zjz8h
+      type: string
+      description: Status of payment link
+      enum:
+      - ISSUED
+      - ATTEMPTED
+      - PAID
+      - PARTIALLY PAID
+      - EXPIRED
+      - DELETED
+    amount-transaction:
       title: amount
+      x-stoplight:
+        id: f0m22yteq1d5t
       type: string
       pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
       example: '299.28'
-    payment_method_allowed:
-      title: payment_method_allowed
+      description: Transaction amount in two decimals, eg. 299.28
+    Createdon:
+      title: createdon
       x-stoplight:
-        id: 93rodd6rm42o3
+        id: 1bot1fsk2q9m8
       type: string
-      description: Comma separated values to define payment method allowed in the payment link. Allowed values - quickpay, card, emi, nb, upi, wallets, qr, gpay, neft_rtgs, whatsapppay, cbdc or all
-      example: card,upi
+      description: object creation timestamp
+      format: date-time
+    link_title:
+      title: link_title
+      x-stoplight:
+        id: vdz57pkm5yv4f
+      type: string
+      description: Merchant specific title of the link which gets displayed to the customer
+      pattern: ^[A-Za-z0-9 ]{1,60}$
+      example: Instagram Purchase
+    link_expiry_date:
+      title: link_expiry_date
+      x-stoplight:
+        id: vqtycwguu78nu
+      type: string
+      description: Expiry timestamp of the link. If not passed, the default expiry date is one month from the link creation date.
+      example: '2024-08-14T17:57:31.262889064'
+    amount_pending:
+      title: amount_pending
+      x-stoplight:
+        id: uhuvnkenre7o0
+      type: string
+      description: 'Remaining amount required to be paid against the link after the successful payments. Note : When partial payment is allowed'
+      example: '100.00'
+    avs-object:
+      type: object
+      x-examples:
+        Example 1:
+          bankaccounts:
+          - number: '12233445566'
+            ifsc: IDBK10000002
+            name: John Doe
+      title: avs
+      description: 'The avs object can be added to the request to initiate a payment with a third-party bank account validation. AVS is supported for the card (debit card), netbanking and upi payment methods.
+
+        '
+      properties:
+        bankaccounts:
+          type: array
+          description: Object that contains the details of the payment method
+          items:
+            type: object
+            properties:
+              number:
+                type: string
+                description: Customer's bank account number
+                example: '12233445566'
+                pattern: ^\\d{9,18}$
+              ifsc:
+                type: string
+                description: IFSC of the bank account number
+                example: IDBK10000002
+                pattern: ^[A-Za-z]{4}[a-zA-Z0-9]{7}$
+              name:
+                type: string
+                description: Name of the bank account holder
+                example: John Doe
+                pattern: ^[A-Za-z0-9\\s\\.'\\-\\~\\@\\_]{1,120}$
+            required:
+            - number
+            - ifsc
+    Transactionid:
+      title: transactionid
+      x-stoplight:
+        id: kiqdftjqdqlya
+      type: string
+      description: 'Unique transactionid created by BillDesk '
+      pattern: ^[A-Za-z0-9]{14,35}$
+      example: U4560001099939
+    minimum_partial_amount:
+      type: string
+      x-examples:
+        Example 1:
+          minimum_partial_amount: '50'
+      title: minimum_partial_amount
+      description: Minimum amount that is required to be paid for every partial payment. Applicable when partial payment allowed is true. If not passed, default value will be set to 1.00
+      examples:
+      - string
+      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+      example: '50'
+    Auth_status:
+      title: auth_status
+      x-stoplight:
+        id: s7n02k63lqlsj
+      type: string
+      description: "Represents the authorization status of the transaction with the following possible values:\n•\t0300 - transaction is successful\n•\t0002 - transaction is pending for authorization\n•\t0399 - transaction failed"
+      enum:
+      - '0300'
+      - '0002'
+      - 0399
+    link_desc:
+      title: link_desc
+      x-stoplight:
+        id: do1f7g5ij33uh
+      type: string
+      description: Merchant specific description of the link which gets displayed to the customer
+      pattern: ^[-/~A-Za-z0-9\_ \:.,#@!\*\+]{1,120}$
+      example: Apparel - Format shirt, Trousers - 4 nos.
+    Currency:
+      title: currency
+      x-stoplight:
+        id: 4gwprgsvmr2f6
+      type: string
+      description: ISO currency code of the transaction amount as provided by BillDesk, with a fixed value 356.
+      example: '356'
+    objectid:
+      title: objectid
+      x-stoplight:
+        id: s02rgz3dd6d2f
+      type: string
+      enum:
+      - link
+      description: String representing the object's type. Objects of the same type share the same value.
+    transaction_list:
+      title: transaction_list
+      x-stoplight:
+        id: i5s7tw56vy56x
+      type: array
+      items:
+        x-stoplight:
+          id: az9ks0qbcb06g
+        type: object
+        properties:
+          transactionid:
+            $ref: '#/components/schemas/Transactionid'
+          amount:
+            $ref: '#/components/schemas/amount-transaction'
+          auth_status:
+            $ref: '#/components/schemas/Auth_status'
+          transaction_date:
+            $ref: '#/components/schemas/Transaction_date'
+          payment_method_type:
+            $ref: '#/components/schemas/Payment_method_type'
+    Payment_method_type:
+      title: payment_method_type
+      x-stoplight:
+        id: ta4huk11kda8l
+      type: string
+      description: Represents the method of payment, and can take the following values - card, upi, wallets, nb.
+      enum:
+      - card
+      - upi
+      - wallets
+      - nb
+      example: card
+    Customer:
+      title: customer
+      x-examples:
+        Example 1:
+          first_name: John
+          last_name: Doe
+          mobile: '9800000000'
+          mobile_alt: '9800000000'
+          email: john.doe@somedomain.com
+          email_alt: john.doe@somedomain.com
+      type: object
+      x-stoplight:
+        id: 4x1i3bhy9jzwf
+      properties:
+        first_name:
+          type: string
+          description: Customer’s First Name
+          example: John
+          pattern: ^[A-Za-z0-9]{1,15}$
+        last_name:
+          type: string
+          description: Customer’s Last Name
+          example: Doe
+          pattern: ^[A-Za-z0-9]{1,15}$
+        mobile:
+          type: string
+          description: Customer’s Mobile number. This parameter is mandatory if sms is passed as true in customer_notification object.
+          example: '9022979988'
+          pattern: ^[\+]{0,1}[0-9]{5,15}$
+        email:
+          type: string
+          description: Customer’s Email address. This parameter is mandatory if email is passed as true in customer_notification object.
+          example: abc@xyz.com
+          pattern: ^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9\-]+)*(\.[A-Za-z]{2,6})$
+    customer-response:
+      x-stoplight:
+        id: 1rjufsjbzrny1
+      type: object
+      description: 'Customer object response. Note : PII data will be masked'
+      properties:
+        first_name:
+          type: string
+          x-stoplight:
+            id: gkgqnz6wem9zx
+          description: Customer’s First Name
+        last_name:
+          type: string
+          x-stoplight:
+            id: en5q24tmbshcp
+          description: Customer’s Last Name
+        mobile:
+          type: string
+          x-stoplight:
+            id: 3zmr7egoosoth
+          description: Customer’s Mobile number
+        email:
+          type: string
+          x-stoplight:
+            id: 8igxybrrjssyi
+          description: Customer’s Email address
+    customer_notification:
+      type: object
+      x-examples:
+        Example 1:
+          sms: true
+          email: false
+      x-stoplight:
+        id: k7e6coef34ccj
+      description: Merchant can choose to send Email or SMS or both to the customer once payment link is generated.
+      properties:
+        sms:
+          type: boolean
+          description: If true, Billdesk sends a SMS notification on the mobile number provided in customer object
+        email:
+          type: boolean
+          description: If true, Billdesk sends an Email notification on the Email ID provided in customer object
     customer_notification-request:
       type: object
       x-examples:
@@ -1183,34 +1453,88 @@ components:
         email:
           type: boolean
           description: 'If true, BillDesk sends an Email notification on the Email ID provided in customer object '
-    link_expiry_date:
-      title: link_expiry_date
+    payment-object:
+      type: object
+      x-examples:
+        Example 1:
+          amount: 100
+          partial_payment_allowed: true
+          max_payments_allowed: 4
+          minimum_partial_amount: 1
+          avs:
+            bankaccount:
+            - number: '9999999999'
+              ifsc: HDFC9999999
+              holder_name: Dr. kahsdfk
+      properties:
+        amount:
+          $ref: '#/components/schemas/amount'
+        partial_payment_allowed:
+          $ref: '#/components/schemas/partial_payment_allowed'
+        max_payments_allowed:
+          $ref: '#/components/schemas/max_payments_allowed'
+        minimum_partial_amount:
+          $ref: '#/components/schemas/minimum_partial_amount'
+        avs:
+          $ref: '#/components/schemas/avs-object'
+      required:
+      - amount
+      description: This object is required for payment flow_type. Contains parameters pertaining to payment details.
+    forwarding_url:
+      title: forwarding_url
       x-stoplight:
-        id: vqtycwguu78nu
+        id: 0de5x8ee0dhfg
       type: string
-      description: Expiry timestamp of the link. If not passed, the default expiry date is one month from the link creation date.
-      example: '2024-08-14T17:57:31.262889064'
-    link_desc:
-      title: link_desc
+      description: 'Merchant specific url where customer will be redirected post transaction is completed. Please note : transaction details will not be posted on this url.'
+      pattern: ^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]
+      example: https://www.merchant.com
+    merc_link_ref_no:
+      title: merc_link_ref_number
       x-stoplight:
-        id: do1f7g5ij33uh
+        id: ik1jmueze8cl9
       type: string
-      description: Merchant specific description of the link which gets displayed to the customer
-      pattern: ^[-/~A-Za-z0-9\_ \:.,#@!\*\+]{1,120}$
-      example: Apparel - Format shirt, Trousers - 4 nos.
+      description: Unique reference number provided by merchant
+      pattern: ^[A-Za-z0-9]{1,20}$
+      example: testlink01
+    total_attempts:
+      title: total_attempts
+      x-stoplight:
+        id: pa0nmd1ujxna4
+      type: string
+      description: Total successful payment attempts processed out of the maximum number of payments allowed for the link
+      example: '3'
+    error-object:
+      title: error-object
+      x-stoplight:
+        id: maycbi1jxm2fv
+      type: object
+      properties:
+        status:
+          type: integer
+          x-stoplight:
+            id: jdda47decid89
+          description: This will be same as HTTP response code
+        error_type:
+          type: string
+          x-stoplight:
+            id: pbge0wolywsfg
+          description: This indicates of the category of errors that could be encountered, for e.g. validation_error, api_connection_error, etc.
+        error_code:
+          type: string
+          x-stoplight:
+            id: 1o8a0gotvba8w
+          description: Under the error_type, there could be different error_codes that could be returned depending upon the API and the underlying interaction
+        message:
+          type: string
+          x-stoplight:
+            id: cjhi4us30pd8t
+          description: More details as a description for the error_code
     partial_payment_allowed:
       title: partial_payment_allowed
       x-stoplight:
         id: orp0vilk2occc
       type: boolean
       description: To determine if partial payment is allowed on the link against the total amount used for link creation.
-    flow_type:
-      title: flow_type
-      x-stoplight:
-        id: 83rdnyk5449cm
-      type: string
-      description: Fixed value "payment"
-      example: payment
     udf:
       type: array
       x-examples:
@@ -1263,61 +1587,27 @@ components:
             description: 'If true, the object will not be displayed on link summary page
 
               '
-    max_payments_allowed:
-      title: max_payments_allowed
-      x-stoplight:
-        id: 455huxentsrza
-      type: integer
-      description: Only applicable in case partial payment allowed is true. Maximum number of partial payments that can be processed on the same link. This can be a maximum value of 10 (successful transactions).
-      example: '2'
-    minimum_partial_amount:
-      type: string
-      x-examples:
-        Example 1:
-          minimum_partial_amount: '50'
-      title: minimum_partial_amount
-      description: Minimum amount that is required to be paid for every partial payment. Applicable when partial payment allowed is true. If not passed, default value will be set to 1.00
-      examples:
-      - string
-      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
-      example: '50'
-    objectid:
-      title: objectid
-      x-stoplight:
-        id: s02rgz3dd6d2f
-      type: string
-      enum:
-      - link
-      description: String representing the object's type. Objects of the same type share the same value.
-    linkid:
-      title: linkid
-      x-stoplight:
-        id: 9g53zzgjj3vcg
-      type: string
-      description: Unique ID generated by BillDesk for a payment link
-      example: LP20240701lepFL
     link:
       title: link
       x-stoplight:
         id: 0fenyenc2c36x
       type: string
       description: Payment link generated where customer must be redirected for payment
-    customer_notification:
-      type: object
-      x-examples:
-        Example 1:
-          sms: true
-          email: false
+    payment_method_allowed:
+      title: payment_method_allowed
       x-stoplight:
-        id: k7e6coef34ccj
-      description: Merchant can choose to send Email or SMS or both to the customer once payment link is generated.
-      properties:
-        sms:
-          type: boolean
-          description: If true, Billdesk sends a SMS notification on the mobile number provided in customer object
-        email:
-          type: boolean
-          description: If true, Billdesk sends an Email notification on the Email ID provided in customer object
+        id: 93rodd6rm42o3
+      type: string
+      description: Comma separated values to define payment method allowed in the payment link. Allowed values - quickpay, card, emi, nb, upi, wallets, qr, gpay, neft_rtgs, whatsapppay, cbdc or all
+      example: card,upi
+    Transaction_date:
+      title: transaction_date
+      x-stoplight:
+        id: rx9rhq88io0zz
+      type: string
+      description: BillDesk transaction date and time in YYYY-MM-DDThh:mm:ssTZD format
+      format: date-time
+      example: '2023-03-14T15:14:39+05:30'
     Additional-Info:
       type: object
       x-examples:
@@ -1372,98 +1662,26 @@ components:
       x-stoplight:
         id: uf5p0pzl17fur
       examples: []
-    Createdon:
-      title: createdon
+    amount:
       x-stoplight:
-        id: 1bot1fsk2q9m8
+        id: tvvxkb7grxf9k
+      description: Payment link amount
+      title: amount
       type: string
-      description: object creation timestamp
-      format: date-time
-    Currency:
-      title: currency
-      x-stoplight:
-        id: 4gwprgsvmr2f6
-      type: string
-      description: ISO currency code of the transaction amount as provided by BillDesk, with a fixed value 356.
-      example: '356'
-    Customer:
-      title: customer
-      x-examples:
-        Example 1:
-          first_name: John
-          last_name: Doe
-          mobile: '9800000000'
-          mobile_alt: '9800000000'
-          email: john.doe@somedomain.com
-          email_alt: john.doe@somedomain.com
-      type: object
-      x-stoplight:
-        id: 4x1i3bhy9jzwf
-      properties:
-        first_name:
-          type: string
-          description: Customer’s First Name
-          example: John
-          pattern: ^[A-Za-z0-9]{1,15}$
-        last_name:
-          type: string
-          description: Customer’s Last Name
-          example: Doe
-          pattern: ^[A-Za-z0-9]{1,15}$
-        mobile:
-          type: string
-          description: Customer’s Mobile number. This parameter is mandatory if sms is passed as true in customer_notification object.
-          example: '9022979988'
-          pattern: ^[\+]{0,1}[0-9]{5,15}$
-        email:
-          type: string
-          description: Customer’s Email address. This parameter is mandatory if email is passed as true in customer_notification object.
-          example: abc@xyz.com
-          pattern: ^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9\-]+)*(\.[A-Za-z]{2,6})$
-    Mercid:
-      title: mercid
-      x-stoplight:
-        id: p2d1wfy3kxe31
-      type: string
-      pattern: ^[A-Za-z0-9]{1,10}$
-      example: BDMERCID
-      description: Unique identifier as defined by BillDesk for each merchant
-    forwarding_url:
-      title: forwarding_url
-      x-stoplight:
-        id: 0de5x8ee0dhfg
-      type: string
-      description: 'Merchant specific url where customer will be redirected post transaction is completed. Please note : transaction details will not be posted on this url.'
-      pattern: ^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]
-      example: https://www.merchant.com
-    merc_link_ref_no:
-      title: merc_link_ref_number
-      x-stoplight:
-        id: ik1jmueze8cl9
-      type: string
-      description: Unique reference number provided by merchant
-      pattern: ^[A-Za-z0-9]{1,20}$
-      example: testlink01
-    link_title:
-      title: link_title
-      x-stoplight:
-        id: vdz57pkm5yv4f
-      type: string
-      description: Merchant specific title of the link which gets displayed to the customer
-      pattern: ^[A-Za-z0-9 ]{1,60}$
-      example: Instagram Purchase
-    payment_method_allowed-response:
-      x-stoplight:
-        id: r0aqxq66epyzc
-      type: string
-      description: If not passed or if passed as null, in response it will be all
-      enum:
-      - all
+      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+      example: '299.28'
     max_payments_allowed-response:
       x-stoplight:
         id: h49661bkn7y2g
       type: integer
       description: Maximum number of partial payments that can be processed on the same link. This can be a maximum value of 10 (successful transactions). Value of 1 indicates a single payment can be collected against the link.
+    linkid:
+      title: linkid
+      x-stoplight:
+        id: 9g53zzgjj3vcg
+      type: string
+      description: Unique ID generated by BillDesk for a payment link
+      example: LP20240701lepFL
     minimum_partial_amount-response:
       x-stoplight:
         id: rphcf0sbb83t3
@@ -1471,85 +1689,6 @@ components:
       description: Value equal to amount indicates a single payment can be collected against the link.
       pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
       example: '299.28'
-    error-object:
-      title: error-object
-      x-stoplight:
-        id: maycbi1jxm2fv
-      type: object
-      properties:
-        status:
-          type: integer
-          x-stoplight:
-            id: jdda47decid89
-          description: This will be same as HTTP response code
-        error_type:
-          type: string
-          x-stoplight:
-            id: pbge0wolywsfg
-          description: This indicates of the category of errors that could be encountered, for e.g. validation_error, api_connection_error, etc.
-        error_code:
-          type: string
-          x-stoplight:
-            id: 1o8a0gotvba8w
-          description: Under the error_type, there could be different error_codes that could be returned depending upon the API and the underlying interaction
-        message:
-          type: string
-          x-stoplight:
-            id: cjhi4us30pd8t
-          description: More details as a description for the error_code
-    customer-response:
-      x-stoplight:
-        id: 1rjufsjbzrny1
-      type: object
-      description: 'Customer object response. Note : PII data will be masked'
-      properties:
-        first_name:
-          type: string
-          x-stoplight:
-            id: gkgqnz6wem9zx
-          description: Customer’s First Name
-        last_name:
-          type: string
-          x-stoplight:
-            id: en5q24tmbshcp
-          description: Customer’s Last Name
-        mobile:
-          type: string
-          x-stoplight:
-            id: 3zmr7egoosoth
-          description: Customer’s Mobile number
-        email:
-          type: string
-          x-stoplight:
-            id: 8igxybrrjssyi
-          description: Customer’s Email address
-    payment-object:
-      type: object
-      x-examples:
-        Example 1:
-          amount: 100
-          partial_payment_allowed: true
-          max_payments_allowed: 4
-          minimum_partial_amount: 1
-          avs:
-            bankaccount:
-            - number: '9999999999'
-              ifsc: HDFC9999999
-              holder_name: Dr. kahsdfk
-      properties:
-        amount:
-          $ref: '#/components/schemas/amount'
-        partial_payment_allowed:
-          $ref: '#/components/schemas/partial_payment_allowed'
-        max_payments_allowed:
-          $ref: '#/components/schemas/max_payments_allowed'
-        minimum_partial_amount:
-          $ref: '#/components/schemas/minimum_partial_amount'
-        avs:
-          $ref: '#/components/schemas/avs-object'
-      required:
-      - amount
-      description: This object is required for payment flow_type. Contains parameters pertaining to payment details.
     payment-object-response:
       type: object
       x-examples:
@@ -1573,159 +1712,20 @@ components:
           $ref: '#/components/schemas/max_payments_allowed-response'
         minimum_partial_amount:
           $ref: '#/components/schemas/minimum_partial_amount-response'
-    avs-object:
-      type: object
-      x-examples:
-        Example 1:
-          bankaccounts:
-          - number: '12233445566'
-            ifsc: IDBK10000002
-            name: John Doe
-      title: avs
-      description: 'The avs object can be added to the request to initiate a payment with a third-party bank account validation. AVS is supported for the card (debit card), netbanking and upi payment methods.
-
-        '
-      properties:
-        bankaccounts:
-          type: array
-          description: Object that contains the details of the payment method
-          items:
-            type: object
-            properties:
-              number:
-                type: string
-                description: Customer's bank account number
-                example: '12233445566'
-                pattern: ^\\d{9,18}$
-              ifsc:
-                type: string
-                description: IFSC of the bank account number
-                example: IDBK10000002
-                pattern: ^[A-Za-z]{4}[a-zA-Z0-9]{7}$
-              name:
-                type: string
-                description: Name of the bank account holder
-                example: John Doe
-                pattern: ^[A-Za-z0-9\\s\\.'\\-\\~\\@\\_]{1,120}$
-            required:
-            - number
-            - ifsc
-    link_status:
-      title: link_status
+    flow_type:
+      title: flow_type
       x-stoplight:
-        id: mzfm8c62zjz8h
+        id: 83rdnyk5449cm
       type: string
-      description: Status of payment link
-      enum:
-      - ISSUED
-      - ATTEMPTED
-      - PAID
-      - PARTIALLY PAID
-      - EXPIRED
-      - DELETED
-    amount-transaction:
-      title: amount
+      description: Fixed value "payment"
+      example: payment
+    max_payments_allowed:
+      title: max_payments_allowed
       x-stoplight:
-        id: f0m22yteq1d5t
-      type: string
-      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
-      example: '299.28'
-      description: Transaction amount in two decimals, eg. 299.28
-    Auth_status:
-      title: auth_status
-      x-stoplight:
-        id: s7n02k63lqlsj
-      type: string
-      description: "Represents the authorization status of the transaction with the following possible values:\n•\t0300 - transaction is successful\n•\t0002 - transaction is pending for authorization\n•\t0399 - transaction failed"
-      enum:
-      - '0300'
-      - '0002'
-      - 0399
-    Payment_method_type:
-      title: payment_method_type
-      x-stoplight:
-        id: ta4huk11kda8l
-      type: string
-      description: Represents the method of payment, and can take the following values - card, upi, wallets, nb.
-      enum:
-      - card
-      - upi
-      - wallets
-      - nb
-      example: card
-    Transaction_date:
-      title: transaction_date
-      x-stoplight:
-        id: rx9rhq88io0zz
-      type: string
-      description: BillDesk transaction date and time in YYYY-MM-DDThh:mm:ssTZD format
-      format: date-time
-      example: '2023-03-14T15:14:39+05:30'
-    Transactionid:
-      title: transactionid
-      x-stoplight:
-        id: kiqdftjqdqlya
-      type: string
-      description: 'Unique transactionid created by BillDesk '
-      pattern: ^[A-Za-z0-9]{14,35}$
-      example: U4560001099939
-    amount_pending:
-      title: amount_pending
-      x-stoplight:
-        id: uhuvnkenre7o0
-      type: string
-      description: 'Remaining amount required to be paid against the link after the successful payments. Note : When partial payment is allowed'
-      example: '100.00'
-    total_attempts:
-      title: total_attempts
-      x-stoplight:
-        id: pa0nmd1ujxna4
-      type: string
-      description: Total successful payment attempts processed out of the maximum number of payments allowed for the link
-      example: '3'
-    payment-object-fetch-response:
-      type: object
-      properties:
-        amount:
-          $ref: '#/components/schemas/amount'
-          x-stoplight:
-            id: hdmnw61vgga2x
-        amount_pending:
-          $ref: '#/components/schemas/amount_pending'
-          x-stoplight:
-            id: x5l2liw87t5r3
-        max_payments_allowed:
-          $ref: '#/components/schemas/max_payments_allowed-response'
-          x-stoplight:
-            id: a6nayap9bh7pj
-        minimum_partial_amount:
-          $ref: '#/components/schemas/minimum_partial_amount-response'
-          x-stoplight:
-            id: mal70uf0n6pkh
-        partial_payment_allowed:
-          $ref: '#/components/schemas/partial_payment_allowed'
-          x-stoplight:
-            id: pxlgvpsiqvezj
-    transaction_list:
-      title: transaction_list
-      x-stoplight:
-        id: i5s7tw56vy56x
-      type: array
-      items:
-        x-stoplight:
-          id: az9ks0qbcb06g
-        type: object
-        properties:
-          transactionid:
-            $ref: '#/components/schemas/Transactionid'
-          amount:
-            $ref: '#/components/schemas/amount-transaction'
-          auth_status:
-            $ref: '#/components/schemas/Auth_status'
-          transaction_date:
-            $ref: '#/components/schemas/Transaction_date'
-          payment_method_type:
-            $ref: '#/components/schemas/Payment_method_type'
+        id: 455huxentsrza
+      type: integer
+      description: Only applicable in case partial payment allowed is true. Maximum number of partial payments that can be processed on the same link. This can be a maximum value of 10 (successful transactions).
+      example: '2'
   parameters:
     PASettlement_Accept:
       name: Accept
@@ -1735,22 +1735,6 @@ components:
         type: string
         example: application/jose
       description: Accept Response Content-Type to take the values application/jose
-    PASettlement_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        example: application/json
-      description: Request Content-Type to take the values application/jose
-    PASettlement_BdTimeStamp:
-      in: header
-      name: BD-Timestamp
-      description: Request timestamp to identify date and time of origin of request. Example, a value of BD-Timestamp 20210113180403 identifies the request to have originated on 13th January 2021 at 06:04:03 PM.
-      required: true
-      schema:
-        type: string
-        example: '20201203182838'
     PASettlement_BdTraceId:
       in: header
       name: BD-Traceid
@@ -1759,6 +1743,24 @@ components:
       schema:
         type: string
         example: '20201203182838'
+    PASettlement_BdTimeStamp:
+      in: header
+      name: BD-Timestamp
+      description: Request timestamp to identify date and time of origin of request. Example, a value of BD-Timestamp 20210113180403 identifies the request to have originated on 13th January 2021 at 06:04:03 PM.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    PASettlement_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/json
+      description: Request Content-Type to take the values application/jose
+x-stoplight:
+  id: ykcpgrfsszuul
 x-provenance:
   method: searched
   source: https://docs.billdesk.io/reference

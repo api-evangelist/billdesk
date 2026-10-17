@@ -1,0 +1,750 @@
+openapi: 3.2.0
+info:
+  title: Payments Refund API
+  description: 'This explorer allows merchants to evaluate APIs that are available in the BillDesk Payment Gateway API suite.
+
+    - Only HMAC authentication is supported.
+
+    - All APIs are RESTful and resource oriented.
+
+    - Servers listed are applicable for the API explorer only.'
+  contact:
+    name: API Support
+    url: https://www.billdesk.com/helpcenter.htm
+    email: support@billdesk.com
+  version: '2.5'
+servers:
+- url: https://uat1.billdesk.com/u2
+  description: UAT server
+- url: https://api.billdesk.com
+  description: PROD server
+tags:
+- name: Refund
+paths:
+  /payments/ve1_2/refunds/create:
+    post:
+      summary: Create Refund
+      operationId: createRefund
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    objectid: refund
+                    refundid: X45604776418751
+                    transactionid: X4560477641875
+                    orderid: ORDER202200000001
+                    mercid: BDMERCID
+                    transaction_date: '2022-03-18T11:20:07+05:30'
+                    txn_amount: '2.00'
+                    refund_amount: '2.00'
+                    currency: '356'
+                    refund_date: '2022-03-20T21:27:47+05:30'
+                    merc_refund_ref_no: REFTS14RTEST001
+                    refund_status: 0799
+                properties:
+                  objectid:
+                    $ref: '#/components/schemas/Objectid'
+                  refundid:
+                    type: string
+                    description: Unique refundid created by BillDesk for each refund request
+                    pattern: ^[A-Za-z0-9]{1,15}$
+                    example: X45604776418751
+                  transactionid:
+                    $ref: '#/components/schemas/Transactionid'
+                  orderid:
+                    $ref: '#/components/schemas/Orderid'
+                  mercid:
+                    $ref: '#/components/schemas/Mercid'
+                  transaction_date:
+                    $ref: '#/components/schemas/Transaction_date'
+                  txn_amount:
+                    type: string
+                    description: Original transaction amount in two decimals
+                    pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+                    example: '2400.00'
+                  refund_amount:
+                    type: string
+                    pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+                    example: '1100.00'
+                    description: Refund amount in two decimals
+                  currency:
+                    $ref: '#/components/schemas/Currency'
+                  refund_date:
+                    type: string
+                    description: BillDesk refund date and time in YYYY-MM-DDThh:mm:ssTZD format
+                    format: date-time
+                  merc_refund_ref_no:
+                    type: string
+                    pattern: ^[A-Za-z0-9\_\:\-]{1,100}$
+                    description: Unique reference number created by the merchant for the refund request
+                    example: REFTS14RTEST001
+                  split_payment:
+                    $ref: '#/components/schemas/Split_payment_refund_response'
+                  refund_status:
+                    type: string
+                    description: "Represents the refund status with the following values:\n•\t0799 – categorized as a refund, where the original transaction has been already settled \n•\t0699 – categorized as a cancellation, where the original transaction has not been settled"
+                    enum:
+                    - 0699
+                    - 0799
+              examples:
+                Create Refund Response:
+                  value:
+                    objectid: refund
+                    refundid: X45604776418751
+                    transactionid: X4560477641875
+                    orderid: ORDER202200000001
+                    mercid: BDMERCID
+                    transaction_date: '2022-03-18T11:20:07+05:30'
+                    txn_amount: '2.00'
+                    refund_amount: '2.00'
+                    currency: '356'
+                    refund_date: '2022-03-20T21:27:47+05:30'
+                    merc_refund_ref_no: REFTS14RTEST001
+                    refund_status: 0799
+                Create Split Refund Response:
+                  value:
+                    objectid: refund
+                    refundid: X45604776418751
+                    transactionid: X4560477641875
+                    orderid: ORDER202200000001
+                    mercid: BDMERCID
+                    transaction_date: '2022-03-18T11:20:07+05:30'
+                    txn_amount: '100.00'
+                    refund_amount: '90.00'
+                    split_refund:
+                    - mercid: BDMERCID1
+                      txn_amount: '75.00'
+                      refund_amount: '65.00'
+                      refund_status: 0799
+                    - mercid: BDMERCID2
+                      txn_amount: '25.00'
+                      refund_amount: '25.00'
+                      refund_status: 0699
+                    currency: '356'
+                    refund_date: 2022-03- 20T21:27:47+05:30
+                    merc_refund_ref_no: 'REFTS14RTEST001 '
+                    refund_status: 0799
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Forbidden:
+                  $ref: '#/components/examples/403-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Internal Server Error:
+                  $ref: '#/components/examples/500-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        default:
+          description: Any bad or invalid request will lead to following error object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Invalid merchant config:
+                  $ref: '#/components/examples/422-Invalid-merchant-config'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+      parameters:
+      - $ref: '#/components/parameters/bdTraceId'
+      - $ref: '#/components/parameters/bdTimeStamp'
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  transactionid: X4560477641875
+                  orderid: ORDER202200000001
+                  mercid: BDMERCID
+                  transaction_date: '2022-03-18T11:20:07+05:30'
+                  txn_amount: '2.00'
+                  refund_amount: '2.00'
+                  currency: '356'
+                  merc_refund_ref_no: REFTS14RTEST001
+              properties:
+                transactionid:
+                  $ref: '#/components/schemas/Transactionid'
+                orderid:
+                  $ref: '#/components/schemas/Orderid'
+                mercid:
+                  $ref: '#/components/schemas/Mercid'
+                transaction_date:
+                  $ref: '#/components/schemas/Transaction_date'
+                txn_amount:
+                  type: string
+                  description: Original transaction amount in two decimals
+                  pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+                  example: '2400.00'
+                refund_amount:
+                  type: string
+                  pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+                  description: Refund amount in two decimals
+                  example: '1100.00'
+                currency:
+                  $ref: '#/components/schemas/Currency'
+                merc_refund_ref_no:
+                  type: string
+                  description: Unique reference number created by the merchant for the refund request
+                  pattern: ^[A-Za-z0-9\_\:\-]{1,100}$
+                  example: REFTS14RTEST001
+                split_payment:
+                  $ref: '#/components/schemas/Split_payment_refund_request'
+              required:
+              - transactionid
+              - orderid
+              - mercid
+              - transaction_date
+              - txn_amount
+              - refund_amount
+              - currency
+              - merc_refund_ref_no
+            examples:
+              Create Refund:
+                value:
+                  transactionid: X4560477641875
+                  orderid: ORDER202200000001
+                  mercid: BDMERCID
+                  transaction_date: '2022-03-18T11:20:07+05:30'
+                  txn_amount: '2.00'
+                  refund_amount: '2.00'
+                  currency: '356'
+                  merc_refund_ref_no: REFTS14RTEST001
+              Create Split Refund:
+                value:
+                  transactionid: X4560477641875
+                  orderid: ORDER202200000001
+                  mercid: BDMERCID
+                  transaction_date: '2022-03-18T11:20:07+05:30'
+                  txn_amount: '100.00'
+                  refund_amount: '90.00'
+                  split_refund:
+                  - mercid: BDMERCID1
+                    txn_amount: '75.00'
+                    refund_amount: '65.00'
+                  - mercid: BDMERCID2
+                    txn_amount: '25.00'
+                    refund_amount: '25.00'
+                  currency: '356'
+                  merc_refund_ref_no: REFTS14RTEST001
+      description: 'A refund can be initiated for a transaction using the Create Refund API.
+
+
+        Multiple refund requests can be initiated against the same transactionid such that the sum of the refund amounts do not exceed the transaction amount.'
+      tags:
+      - Refund
+  /payments/ve1_2/refunds/get:
+    parameters: []
+    post:
+      summary: Retrieve Refund
+      operationId: retrieveRefund
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    objectid: refund
+                    refundid: X45604776418751
+                    transactionid: X4560477641875
+                    orderid: ORDER202200000001
+                    mercid: BDMERCID
+                    transaction_date: '2022-03-18T11:20:07+05:30'
+                    txn_amount: '2.00'
+                    refund_amount: '2.00'
+                    currency: '356'
+                    refund_date: '2022-03-20T21:27:47+05:30'
+                    merc_refund_ref_no: REFTS1000004RTEST001
+                    refund_status: 0799
+                properties:
+                  objectid:
+                    $ref: '#/components/schemas/Objectid'
+                  refundid:
+                    type: string
+                    description: Unique refundid created by BillDesk for each refund request
+                    pattern: ^[A-Za-z0-9]{1,15}$
+                    example: X45604776418751
+                  transactionid:
+                    $ref: '#/components/schemas/Transactionid'
+                  orderid:
+                    $ref: '#/components/schemas/Orderid'
+                  mercid:
+                    $ref: '#/components/schemas/Mercid'
+                  transaction_date:
+                    $ref: '#/components/schemas/Transaction_date'
+                  txn_amount:
+                    type: string
+                    pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+                    example: '2400.00'
+                    description: Original transaction amount in two decimals
+                  refund_amount:
+                    type: string
+                    pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+                    example: '1100.00'
+                    description: Refund amount in two decimals
+                  currency:
+                    $ref: '#/components/schemas/Currency'
+                  refund_date:
+                    type: string
+                    format: date-time
+                    description: BillDesk refund date and time in YYYY-MMDDThh:mm:ssTZD format
+                  merc_refund_ref_no:
+                    type: string
+                    pattern: ^[A-Za-z0-9\_\:\-]{1,100}$
+                    example: REFTS14RTEST001
+                    description: Unique reference number created by the merchant for the refund request
+                  refund_status:
+                    type: string
+                    description: "Represents the refund status with the following values:\n•\t0799 – categorized as a refund, where the original transaction has been already settled \n•\t0699 – categorized as a cancellation, where the original transaction has not been settled"
+                    enum:
+                    - 0699
+                    - 0799
+              examples:
+                Retrieve refund response:
+                  value:
+                    objectid: refund
+                    refundid: X45604776418751
+                    transactionid: X4560477641875
+                    orderid: ORDER202200000001
+                    mercid: BDMERCID
+                    transaction_date: '2022-03-18T11:20:07+05:30'
+                    txn_amount: '2.00'
+                    refund_amount: '2.00'
+                    currency: '356'
+                    refund_date: '2022-03-20T21:27:47+05:30'
+                    merc_refund_ref_no: REFTS1000004RTEST001
+                    refund_status: 0799
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Forbidden:
+                  $ref: '#/components/examples/403-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Internal Server Error:
+                  $ref: '#/components/examples/500-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        default:
+          description: Any bad or invalid request will lead to following error object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Invalid merchant config:
+                  $ref: '#/components/examples/422-Invalid-merchant-config'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+      description: Merchant can retrieve refund details either by using mercid and merc_refund_ref_no, or the mercid and refundid.
+      parameters:
+      - $ref: '#/components/parameters/Recurring_BdTraceId'
+      - $ref: '#/components/parameters/Recurring_BdTimeStamp'
+      - $ref: '#/components/parameters/Recurring_Content-Type'
+      - $ref: '#/components/parameters/Recurring_Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  mercid: BDMERCID
+                  refundid: X45604776418751
+              properties:
+                mercid:
+                  $ref: '#/components/schemas/Mercid'
+                refundid:
+                  type: string
+                  description: Unique refundid created by BillDesk for each refund request
+                  pattern: ^[A-Za-z0-9]{1,15}$
+                  example: X45604776418751
+                merc_refund_ref_no:
+                  type: string
+                  description: Unique reference number created by the merchant for the refund request
+                  pattern: ^[A-Za-z0-9\_\:\-]{1,100}$
+                  example: REFTS14RTEST001
+              required:
+              - mercid
+            examples:
+              Using BillDesk refundid:
+                value:
+                  mercid: BDMERCID
+                  refundid: X45604776418751
+              Using merc_refund_ref_no:
+                value:
+                  mercid: BDMERCID
+                  merc_refund_ref_no: REFTS14RTEST001
+      tags:
+      - Refund
+components:
+  parameters:
+    Recurring_BdTraceId:
+      in: header
+      name: BD-Traceid
+      description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    Recurring_Accept:
+      name: Accept
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/jose
+      description: Accept Response Content-Type to take the values application/jose
+    Recurring_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/json
+      description: Request Content-Type to take the values application/jose
+    bdTimeStamp:
+      in: header
+      name: BD-Timestamp
+      description: Request timestamp to identify date and time of origin of request. Example, a value of BD-Timestamp 20210113180403 identifies the request to have originated on 13th January 2021 at 06:04:03 PM.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    Recurring_BdTimeStamp:
+      in: header
+      name: BD-Timestamp
+      description: Request timestamp to identify date and time of origin of request. Example, a value of BD-Timestamp 20210113180403 identifies the request to have originated on 13th January 2021 at 06:04:03 PM.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/json
+      description: Request Content-Type to take the values application/jose
+    bdTraceId:
+      in: header
+      name: BD-Traceid
+      description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    Accept:
+      name: Accept
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/jose
+      description: Accept Response Content-Type to take the values application/jose
+  schemas:
+    Mercid:
+      title: mercid
+      x-stoplight:
+        id: 43ns25lu1fyuc
+      type: string
+      pattern: ^[A-Za-z0-9]{1,10}$
+      example: BDMERCID
+      description: Unique identifier as defined by BillDesk for each merchant
+    Orderid:
+      title: orderid
+      x-stoplight:
+        id: lmwrwf7xn6wq8
+      type: string
+      description: Unique ID generated by the merchant for each request
+      pattern: ^[-/~A-Za-z0-9\_ \:.,#@!\\*\\+]{1,120}$
+      example: TEST0000009005
+    Error-object:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: This will be same as HTTP response code
+        error_type:
+          type: string
+          description: This indicates of the category of errors that could be encountered, for e.g. validation_error, api_connection_error, etc.
+        error_code:
+          type: string
+          description: Under the error_type, there could be different error_codes that could be returned depending upon the API and the underlying interaction
+        message:
+          type: string
+          description: More details as a description for the error_code
+    Transactionid:
+      title: transactionid
+      x-stoplight:
+        id: uqizgn6tyoqhg
+      type: string
+      description: 'Unique transactionid created by BillDesk '
+      pattern: ^[A-Za-z0-9]{14,35}$
+      example: U4560001099939
+    Split_payment_refund_request:
+      type: object
+      x-stoplight:
+        id: 715c0b8e1f0ab
+      x-examples:
+        Example 1:
+          split_refund:
+          - mercid: BDMERCID1
+            txn_amount: '75.00'
+            refund_amount: '65.00'
+          - mercid: BDMERCID2
+            txn_amount: '25.00'
+            refund_amount: '25.00'
+      properties:
+        mercid:
+          type: string
+          description: Merchant ID provided by BillDesk where split refund amount will be adjusted
+          pattern: ^[A-Za-z0-9]{1,10}$
+          example: BDMERCID
+        txn_amount:
+          type: string
+          description: Split Amount which was settled in the respective Split Merchant ID.
+          pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+          example: '299.28'
+        refund_amount:
+          type: string
+          description: Refund Amount against txn_amount.
+          pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+          example: '299.28'
+      title: ''
+    Currency:
+      title: currency
+      x-stoplight:
+        id: 1ehjh4f7vidz7
+      type: string
+      description: ISO currency code of the transaction amount, for INR this value will be 356
+    Split_payment_refund_response:
+      type: object
+      x-examples:
+        Example 1:
+          split_refund:
+          - mercid: BDMERCID1
+            txn_amount: '75.00'
+            refund_amount: '65.00'
+            refund_status: 0799
+          - mercid: BDMERCID2
+            txn_amount: '25.00'
+            refund_amount: '25.00'
+            refund_status: 0699
+      properties:
+        mercid:
+          type: string
+          description: Merchant ID provided by BillDesk where split refund amount will be adjusted
+        txn_amount:
+          type: string
+          description: Split Amount which was settled in the respective Split Merchant ID.
+        refund_amount:
+          type: string
+          description: Refund Amount against txn_amount.
+        refund_status:
+          type: string
+          description: "Represents the refund status of the transaction with the following possible values:\n•\t0799 - transaction is refunded\n•\t0699 - transaction is cancelled"
+      description: ''
+    Objectid:
+      title: objectid
+      x-stoplight:
+        id: bbwm8bhhbqd4r
+      type: string
+      description: 'String representing the object''s type. Objects of the same type share the same value. '
+      enum:
+      - transaction
+      - authentication
+      - mandate
+      - invoice
+      - cardaccount
+      - validatevpa
+      - dispute
+      - settlement
+      - altid
+      - mandate_token
+      - accountvalidation
+      - refund
+    Transaction_date:
+      title: transaction_date
+      x-stoplight:
+        id: d0ekw0quxfwwu
+      type: string
+      description: BillDesk transaction date and time in YYYY-MM-DDThh:mm:ssTZD format
+      format: date-time
+      example: '2023-03-14T15:14:39+05:30'
+  examples:
+    403-error:
+      value:
+        status: 403
+        error_type: inaccessable_resource_error
+        error_code: GNIAE0002
+        message: Access forbidden
+    500-error:
+      value:
+        status: 500
+        error_type: api_processing_error
+        error_code: AUAPE0001
+        message: Internal server error
+    422-Invalid-merchant-config:
+      value:
+        status: 422
+        error_type: api_validation_error
+        error_code: GNAVE0001
+        message: Incorrect merchant configuration
+x-stoplight:
+  id: v3t7owhh461u5
+x-samples-languages:
+- shell
+- json
+- node
+- java
+- csharp
+x-provenance:
+  method: searched
+  source: https://docs.billdesk.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.billdesk.io/reference/createauthentication.md
+  - https://docs.billdesk.io/reference/createmandatetoken.md
+  - https://docs.billdesk.io/reference/createorder.md
+  - https://docs.billdesk.io/reference/createrefund.md
+  - https://docs.billdesk.io/reference/createtransaction.md
+  - https://docs.billdesk.io/reference/modify-mandate-token.md
+  - https://docs.billdesk.io/reference/post-payments-v1_2-transactions-get.md
+  - https://docs.billdesk.io/reference/retrieveauthentication.md
+  - https://docs.billdesk.io/reference/retrieverefund.md
+  - https://docs.billdesk.io/reference/updatetransaction.md
+  - https://docs.billdesk.io/reference/validateauthentication.md
+  merge:
+    pages: 11
+    deduped: 284
+    conflicts_kept_first: 0

@@ -1,0 +1,1021 @@
+openapi: 3.2.0
+info:
+  title: Recurring Invoice API
+  description: 'This explorer allows merchants to evaluate APIs that are available in the BillDesk Payment Gateway API suite.
+
+    - Only HMAC authentication is supported.
+
+    - All APIs are RESTful and resource oriented.
+
+    - Servers listed are applicable for the API explorer only.'
+  contact:
+    name: API Support
+    url: https://www.billdesk.com/helpcenter.htm
+    email: support@billdesk.com
+  version: '2.5'
+servers:
+- url: https://uat1.billdesk.com/u2
+  description: UAT server
+- url: https://api.billdesk.com
+  description: PROD server
+tags:
+- name: Invoice
+paths:
+  /pgsi/ve1_2/invoice/create:
+    post:
+      summary: Create Invoice
+      operationId: createInvoice
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    invoice_number: INVCABCUP10002
+                    objectid: invoice
+                    invoice_display_number: DISINVCABCUP10002
+                    mercid: BDMERCID
+                    subscription_refid: SCREFUP00001
+                    customer_refid: CSREFUP00001
+                    invoice_date: '2021-05-10'
+                    duedate: '2021-05-18'
+                    debit_date: '2021-05-16'
+                    amount: '500.00'
+                    net_amount: '500.00'
+                    early_payment_due_date: '2021-05-12'
+                    early_payment_discount: '10.00'
+                    early_payment_amount: '490.00'
+                    late_payment_charges: '20.00'
+                    late_payment_amount: '520.00'
+                    currency: '356'
+                    mandateid: MA1F8A00050242
+                    description: Invoice for May 2021
+                    status: unpaid
+                    invoice_id: IA047F00003663
+                    verification_error_code: INS0000
+                    verification_error_type: Invoice Successful
+                    verification_error_desc: success
+                    additional_info:
+                      additional_info1: Details1
+                      additional_info2: Details2
+                      additional_info3: Details3
+                      additional_info4: Details4
+                      additional_info5: Details5
+                      additional_info6: Details6
+                      additional_info7: Details7
+                      additional_info8: Details8
+                      additional_info9: Details9
+                      additional_info10: Details10
+                    createdon: '2021-05-16T19:20:08+05:30'
+                    debit_request_no: '1'
+                properties:
+                  objectid:
+                    $ref: '#/components/schemas/Objectid'
+                  invoice_number:
+                    $ref: '#/components/schemas/Invoice_number'
+                  invoice_display_number:
+                    $ref: '#/components/schemas/Invoice_display_number'
+                  mercid:
+                    $ref: '#/components/schemas/Mercid'
+                  subscription_refid:
+                    $ref: '#/components/schemas/Subscription_refid'
+                  customer_refid:
+                    $ref: '#/components/schemas/Customer_refid'
+                  invoice_date:
+                    $ref: '#/components/schemas/Invoice_date'
+                  duedate:
+                    $ref: '#/components/schemas/Duedate-invoice'
+                  debit_date:
+                    $ref: '#/components/schemas/Debit_date'
+                  amount:
+                    $ref: '#/components/schemas/Invoice_amount'
+                  net_amount:
+                    $ref: '#/components/schemas/Net_amount'
+                  early_payment_due_date:
+                    $ref: '#/components/schemas/Early_payment_duedate'
+                  early_payment_discount:
+                    $ref: '#/components/schemas/Early_payment_discount'
+                  early_payment_amount:
+                    $ref: '#/components/schemas/Early_payment_amount'
+                  late_payment_charges:
+                    $ref: '#/components/schemas/Late_payment_charges'
+                  late_payment_amount:
+                    $ref: '#/components/schemas/Late_payment_amount'
+                  currency:
+                    $ref: '#/components/schemas/Currency'
+                  mandateid:
+                    $ref: '#/components/schemas/Mandateid'
+                  description:
+                    $ref: '#/components/schemas/Invoice-description'
+                  status:
+                    $ref: '#/components/schemas/Invoice-status'
+                  invoice_id:
+                    $ref: '#/components/schemas/Invoice_id'
+                  verification_error_code:
+                    $ref: '#/components/schemas/Error_code'
+                  verification_error_type:
+                    $ref: '#/components/schemas/Error_type'
+                  verification_error_desc:
+                    $ref: '#/components/schemas/Error_desc'
+                  createdon:
+                    $ref: '#/components/schemas/Createdon'
+                  additional_info:
+                    $ref: '#/components/schemas/Additional-Info'
+              examples:
+                For Card payment mode:
+                  value:
+                    invoice_number: INVNUM0000001
+                    objectid: invoice
+                    invoice_display_number: DISINVNUM0001
+                    mercid: BDMERCID
+                    subscription_refid: Sub319132516OBBWT
+                    customer_refid: cust31913251638S6G
+                    invoice_date: '2023-03-01'
+                    duedate: '2023-03-20'
+                    debit_date: '2023-03-20'
+                    amount: '2.00'
+                    net_amount: '2.00'
+                    currency: '356'
+                    mandateid: MN1DE687658926
+                    description: Debit for Plan 499
+                    status: unpaid
+                    invoice_id: IN23CE129742773
+                    verification_error_code: INS0000
+                    verification_error_type: Invoice Successful
+                    verification_error_desc: success
+                    createdon: '2023-03-19T19:07:56+05:30'
+                For UPI payment mode:
+                  value:
+                    invoice_number: INVCABCUP10002
+                    objectid: invoice
+                    invoice_display_number: DISINVCABCUP10002
+                    mercid: BDMERCID
+                    subscription_refid: SCREFUP00001
+                    customer_refid: CSREFUP00001
+                    invoice_date: '2021-05-10'
+                    duedate: '2021-05-18'
+                    debit_date: '2021-05-16'
+                    amount: '500.00'
+                    net_amount: '500.00'
+                    early_payment_due_date: '2021-05-12'
+                    early_payment_discount: '10.00'
+                    early_payment_amount: '490.00'
+                    late_payment_charges: '20.00'
+                    late_payment_amount: '520.00'
+                    currency: '356'
+                    mandateid: MA1F8A00050242
+                    description: Invoice for May 2021
+                    status: unpaid
+                    invoice_id: IA047F00003663
+                    verification_error_code: INS0000
+                    verification_error_type: Invoice Successful
+                    verification_error_desc: success
+                    createdon: '2021-05-16T19:20:08+05:30'
+                    debit_request_no: '1'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Forbidden:
+                  $ref: '#/components/examples/403-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Internal Server Error:
+                  $ref: '#/components/examples/500-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        default:
+          description: Any bad or invalid request will lead to following error object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Invalid merchant config:
+                  $ref: '#/components/examples/422-Invalid-merchant-config'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+      tags:
+      - Invoice
+      description: 'An invoice represents the billed amount that needs to be collected from the customer for a subscription. This API can be used to create an invoice with the specific reference of the underlying mandateid.
+
+
+        The invoice details are sent to the customer as a pre-debit notification for the card and upi payment methods, as required by regulatory guidelines. For UPI, pre-debit-notifications are sent by bank via (sms, email)
+
+
+        To ensure that the pre-debit notification is received by the customer atleast 24 hours prior to the recurring charge (regulatory requirement), it is recommended that the invoice request is initiated 36 hrs prior to the recurring charge request.
+
+
+        If the recurring charge debit amount is higher than the permissible limit (as per regulations), the customer requires to provide an additional AFA for processing the recurring charge. This is not applicable for upi mandates'
+      parameters:
+      - $ref: '#/components/parameters/bdTraceId'
+      - $ref: '#/components/parameters/bdTimeStamp'
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  additional_info:
+                    additional_info1: Details1
+                    additional_info10: Details10
+                    additional_info2: Details2
+                    additional_info3: Details3
+                    additional_info4: Details4
+                    additional_info5: Details5
+                    additional_info6: Details6
+                    additional_info7: Details7
+                    additional_info8: Details8
+                    additional_info9: Details9
+                  amount: '500.00'
+                  currency: '356'
+                  customer_refid: CSREFUP00001
+                  debit_date: '2021-05-16'
+                  debit_request_no: '1'
+                  description: Invoice for May 2021
+                  duedate: '2021-05-18'
+                  early_payment_amount: '490.00'
+                  early_payment_discount: '10.00'
+                  early_payment_duedate: '2021-05-12'
+                  invoice_date: '2021-05-10'
+                  invoice_display_number: DISINVCABCUP10002
+                  invoice_number: INVCABCUP10002
+                  late_payment_amount: '520.00'
+                  late_payment_charges: '20.00'
+                  mandateid: MA1F8A00050242
+                  mercid: BDMERCID
+                  net_amount: '500.00'
+                  subscription_refid: SCREFUP00001
+              properties:
+                invoice_number:
+                  $ref: '#/components/schemas/Invoice_number'
+                invoice_display_number:
+                  $ref: '#/components/schemas/Invoice_display_number'
+                mercid:
+                  $ref: '#/components/schemas/Mercid'
+                mandateid:
+                  $ref: '#/components/schemas/Mandateid'
+                currency:
+                  $ref: '#/components/schemas/Currency'
+                amount:
+                  $ref: '#/components/schemas/Invoice_amount'
+                subscription_refid:
+                  $ref: '#/components/schemas/Subscription_refid'
+                customer_refid:
+                  $ref: '#/components/schemas/Customer_refid'
+                debit_date:
+                  $ref: '#/components/schemas/Debit_date'
+                invoice_date:
+                  $ref: '#/components/schemas/Invoice_date'
+                description:
+                  $ref: '#/components/schemas/Invoice-description'
+                duedate:
+                  $ref: '#/components/schemas/Duedate-invoice'
+                net_amount:
+                  $ref: '#/components/schemas/Net_amount'
+                early_payment_amount:
+                  $ref: '#/components/schemas/Early_payment_amount'
+                early_payment_discount:
+                  $ref: '#/components/schemas/Early_payment_discount'
+                early_payment_duedate:
+                  $ref: '#/components/schemas/Early_payment_duedate'
+                late_payment_amount:
+                  $ref: '#/components/schemas/Late_payment_amount'
+                late_payment_charges:
+                  $ref: '#/components/schemas/Late_payment_charges'
+                additional_info:
+                  $ref: '#/components/schemas/Additional-Info'
+              required:
+              - invoice_number
+              - invoice_display_number
+              - mercid
+              - mandateid
+              - currency
+              - amount
+              - subscription_refid
+              - customer_refid
+              - debit_date
+              - invoice_date
+              - description
+              - duedate
+              - net_amount
+            examples:
+              Using Card payment mode:
+                value:
+                  mercid: BDMERCID
+                  mandateid: MN1DE687658926
+                  customer_refid: cust31913251638S6G
+                  subscription_refid: Sub319132516OBBWT
+                  invoice_number: INVNUM0000001
+                  invoice_display_number: DISINVNUM0001
+                  invoice_date: '2023-03-01'
+                  duedate: '2023-03-20'
+                  debit_date: '2023-03-20'
+                  amount: '2.00'
+                  net_amount: '2.00'
+                  currency: '356'
+                  description: Debit for Plan 499
+              Using UPI payment mode:
+                value:
+                  mercid: BDMERCID
+                  subscription_refid: SCREFUP00001
+                  customer_refid: CSREFUP00001
+                  invoice_number: INVCABCUP10002
+                  invoice_display_number: DISINVCABCUP10002
+                  invoice_date: '2021-05-10'
+                  duedate: '2021-05-18'
+                  debit_date: '2021-05-16'
+                  early_payment_duedate: '2021-05-12'
+                  early_payment_discount: '10.00'
+                  early_payment_amount: '490.00'
+                  late_payment_charges: '20.00'
+                  late_payment_amount: '520.00'
+                  amount: '500.00'
+                  net_amount: '500.00'
+                  currency: '356'
+                  mandateid: MA1F8A00050242
+                  description: Invoice for May 2021
+                  debit_request_no: '1'
+  /pgsi/ve1_2/invoice/get:
+    post:
+      summary: Retrieve Invoice
+      operationId: retriveInvoice
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    invoice_number: INVCABCUP10002
+                    objectid: invoice
+                    invoice_display_number: DISINVCABCUP10002
+                    mercid: BDMERCID
+                    subscription_refid: SCREFUP00001
+                    customer_refid: CSREFUP00001
+                    invoice_date: '2021-05-10'
+                    duedate: '2021-05-18'
+                    debit_date: '2021-05-16'
+                    amount: '500.00'
+                    net_amount: '500.00'
+                    early_payment_due_date: '2021-05-12'
+                    early_payment_discount: '10.00'
+                    early_payment_amount: '490.00'
+                    late_payment_charges: '20.00'
+                    late_payment_amount: '520.00'
+                    currency: '356'
+                    mandateid: MA1F8A00050242
+                    description: Invoice for May 2021
+                    status: unpaid
+                    invoice_id: IA047F00003663
+                    verification_error_code: INS0000
+                    verification_error_type: Invoice Successful
+                    verification_error_desc: success
+                    additional_info:
+                      additional_info1: Details1
+                      additional_info2: Details2
+                      additional_info3: Details3
+                      additional_info4: Details4
+                      additional_info5: Details5
+                      additional_info6: Details6
+                      additional_info7: Details7
+                      additional_info8: Details8
+                      additional_info9: Details9
+                      additional_info10: Details10
+                    createdon: '2021-05-16T19:20:08+05:30'
+                    debit_request_no: '1'
+                properties:
+                  invoice_number:
+                    $ref: '#/components/schemas/Invoice_number'
+                  objectid:
+                    $ref: '#/components/schemas/Objectid'
+                  invoice_display_number:
+                    $ref: '#/components/schemas/Invoice_display_number'
+                  mercid:
+                    $ref: '#/components/schemas/Mercid'
+                  subscription_refid:
+                    $ref: '#/components/schemas/Subscription_refid'
+                  customer_refid:
+                    $ref: '#/components/schemas/Customer_refid'
+                  invoice_date:
+                    $ref: '#/components/schemas/Invoice_date'
+                  duedate:
+                    $ref: '#/components/schemas/Duedate-invoice'
+                  debit_date:
+                    $ref: '#/components/schemas/Debit_date'
+                  amount:
+                    $ref: '#/components/schemas/Invoice_amount'
+                  net_amount:
+                    $ref: '#/components/schemas/Net_amount'
+                  early_payment_due_date:
+                    $ref: '#/components/schemas/Early_payment_duedate'
+                  early_payment_discount:
+                    $ref: '#/components/schemas/Early_payment_discount'
+                  early_payment_amount:
+                    $ref: '#/components/schemas/Early_payment_amount'
+                  late_payment_charges:
+                    $ref: '#/components/schemas/Late_payment_charges'
+                  late_payment_amount:
+                    $ref: '#/components/schemas/Late_payment_amount'
+                  currency:
+                    $ref: '#/components/schemas/Currency'
+                  mandateid:
+                    $ref: '#/components/schemas/Mandateid'
+                  description:
+                    $ref: '#/components/schemas/Invoice-description'
+                  status:
+                    $ref: '#/components/schemas/Invoice-status'
+                  invoice_id:
+                    $ref: '#/components/schemas/Invoice_id'
+                  verification_error_code:
+                    $ref: '#/components/schemas/Error_code'
+                  verification_error_type:
+                    $ref: '#/components/schemas/Error_type'
+                  verification_error_desc:
+                    $ref: '#/components/schemas/Error_desc'
+                  createdon:
+                    $ref: '#/components/schemas/Createdon'
+                  debit_request_no:
+                    $ref: '#/components/schemas/Debit_request_no'
+                  additional_info:
+                    $ref: '#/components/schemas/Additional-Info'
+              examples:
+                Response- For Card payment mode:
+                  value:
+                    invoice_number: INVCABCUP10002
+                    objectid: invoice
+                    invoice_display_number: DISINVCABCUP10002
+                    mercid: BDMERCID
+                    subscription_refid: SCREFUP00001
+                    customer_refid: CSREFUP00001
+                    invoice_date: '2021-05-10'
+                    duedate: '2021-05-18'
+                    debit_date: '2021-05-16'
+                    amount: '500.00'
+                    net_amount: '500.00'
+                    early_payment_due_date: '2021-05-12'
+                    early_payment_discount: '10.00'
+                    early_payment_amount: '490.00'
+                    late_payment_charges: '20.00'
+                    late_payment_amount: '520.00'
+                    currency: '356'
+                    mandateid: MA1F8A00050242
+                    description: Invoice for May 2021
+                    status: unpaid
+                    invoice_id: IA047F00003663
+                    verification_error_code: INS0000
+                    verification_error_type: Invoice Successful
+                    verification_error_desc: success
+                    createdon: '2021-05-16T19:20:08+05:30'
+                Response - For UPI payment mode:
+                  value:
+                    invoice_number: INVCABCUP10002
+                    objectid: invoice
+                    invoice_display_number: DISINVCABCUP10002
+                    mercid: BDMERCID
+                    subscription_refid: SCREFUP00001
+                    customer_refid: CSREFUP00001
+                    invoice_date: '2021-05-10'
+                    duedate: '2021-05-18'
+                    debit_date: '2021-05-16'
+                    amount: '500.00'
+                    net_amount: '500.00'
+                    early_payment_due_date: '2021-05-12'
+                    early_payment_discount: '10.00'
+                    early_payment_amount: '490.00'
+                    late_payment_charges: '20.00'
+                    late_payment_amount: '520.00'
+                    currency: '356'
+                    mandateid: MA1F8A00050242
+                    description: Invoice for May 2021
+                    status: unpaid
+                    invoice_id: IA047F00003663
+                    verification_error_code: INS0000
+                    verification_error_type: Invoice Successful
+                    verification_error_desc: success
+                    createdon: '2021-05-16T19:20:08+05:30'
+                    debit_request_no: '1'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Forbidden:
+                  $ref: '#/components/examples/403-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Internal Server Error:
+                  $ref: '#/components/examples/500-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        default:
+          description: Any bad or invalid request will lead to following error object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Invalid merchant config:
+                  $ref: '#/components/examples/422-Invalid-merchant-config'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+      description: Merchants can retrieve invoice details by using mercid and invoice_number
+      parameters:
+      - $ref: '#/components/parameters/bdTraceId'
+      - $ref: '#/components/parameters/bdTimeStamp'
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  mercid: BDMERCID
+                  invoice_number: INVCABCUP10002
+              properties:
+                mercid:
+                  $ref: '#/components/schemas/Mercid'
+                invoice_number:
+                  $ref: '#/components/schemas/Invoice_number'
+            examples:
+              Request:
+                value:
+                  mercid: BDMERCID
+                  invoice_number: INVNUM0000001
+      tags:
+      - Invoice
+components:
+  schemas:
+    Mercid:
+      title: mercid
+      x-stoplight:
+        id: 43ns25lu1fyuc
+      type: string
+      pattern: ^[A-Za-z0-9]{1,10}$
+      example: BDMERCID
+      description: Unique identifier as defined by BillDesk for each merchant
+    Error_desc:
+      title: error_desc
+      x-stoplight:
+        id: uyor3loffwtew
+      type: string
+      description: Represents the error description for the response
+    Early_payment_amount:
+      title: early_payment_amount
+      x-stoplight:
+        id: u4yui5aos3xnp
+      type: string
+      description: Amount after adjusting any discount applicable.
+      example: '490.00'
+      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+    Createdon:
+      title: createdon
+      x-stoplight:
+        id: k3ewegvbimz0g
+      type: string
+      description: object creation timestamp
+      format: date-time
+    Invoice-status:
+      title: invoice status
+      x-stoplight:
+        id: 5u2aujpkflkqe
+      type: string
+      description: "Status of the invoice. Possible values are:\n•\tunpaid – invoice has been received successfully, and charge can be processed\n•\trejected – invoice has been rejected by the system\n•\tstopped – invoice has been stopped by the customer"
+      enum:
+      - unpaid
+      - rejected
+      - stopped
+    Error-object:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: This will be same as HTTP response code
+        error_type:
+          type: string
+          description: This indicates of the category of errors that could be encountered, for e.g. validation_error, api_connection_error, etc.
+        error_code:
+          type: string
+          description: Under the error_type, there could be different error_codes that could be returned depending upon the API and the underlying interaction
+        message:
+          type: string
+          description: More details as a description for the error_code
+    Invoice-description:
+      title: invoice description
+      x-stoplight:
+        id: uupk2dh7h3o3d
+      type: string
+      description: Brief description for the invoice
+      example: Debit for Plan 499
+    Currency:
+      title: currency
+      x-stoplight:
+        id: 1ehjh4f7vidz7
+      type: string
+      description: ISO currency of the transaction amount, for INR this value will be 356
+    Invoice_date:
+      title: invoice_date
+      x-stoplight:
+        id: 6mq22pcpkw417
+      type: string
+      description: Invoice generation date in the YYYYMMDD format
+      format: date
+      pattern: ^(20[0-9]{2})-(0[1-9]|1[012])-(0[1-9]|(1|2)[0-9]|3[01])$
+      example: '2023-04-22'
+    Net_amount:
+      title: net_amount
+      x-stoplight:
+        id: i71dt7x5lc5pb
+      type: string
+      description: Current payable amount, adjusted for discount or late payment charges as applicable
+      example: '2.00'
+      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+    Late_payment_charges:
+      title: late_payment_charges
+      x-stoplight:
+        id: 6gfk8t6uxedl5
+      type: string
+      description: Late payment charges if any
+      example: '20.00'
+      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+    Invoice_display_number:
+      title: invoice_display_number
+      x-stoplight:
+        id: b2njtovqpbyjr
+      type: string
+      description: Invoice number to be displayed to the customer
+      pattern: ^[A-Za-z0-9]{1,80}$
+      example: DISINVNUM0001
+    Mandateid:
+      title: mandateid
+      x-stoplight:
+        id: joq1b0hwy6hce
+      type: string
+      description: Unique mandateid created by BillDesk
+      pattern: ^[A-Za-z0-9]{1,20}$
+      example: MA19E400049927
+    Early_payment_duedate:
+      title: early_payment_duedate
+      x-stoplight:
+        id: u2m2m4rt1cfwg
+      type: string
+      description: Early payment date for invoice
+      format: date
+      example: '2021-05-12'
+    Invoice_number:
+      title: invoice_number
+      x-stoplight:
+        id: oiuf5pzvt5xfg
+      type: string
+      description: Unique number assigned by merchant for the invoice
+      pattern: ^[A-Za-z0-9]{1,100}$
+      example: INVNUM0000001
+    Debit_date:
+      title: debit_date
+      x-stoplight:
+        id: 5usx2p3zckebu
+      type: string
+      description: Date on which the SI debit needs to be executed to the payment method
+      format: date
+      example: '2023-03-20'
+    Error_type:
+      title: error_type
+      x-stoplight:
+        id: snpogojwqc0aq
+      type: string
+      description: Represents the error type for the response
+    Late_payment_amount:
+      title: late_payment_amount
+      x-stoplight:
+        id: 6ioh3qt3dfubl
+      type: string
+      description: Payment amount after due date
+      example: '520.00'
+      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+    Error_code:
+      title: error_code
+      x-stoplight:
+        id: 2grhtze0qf6ob
+      type: string
+      description: Represents the error code for the response
+    Objectid:
+      title: objectid
+      x-stoplight:
+        id: bbwm8bhhbqd4r
+      type: string
+      description: 'String representing the object''s type. Objects of the same type share the same value. '
+      enum:
+      - transaction
+      - authentication
+      - mandate
+      - invoice
+      - cardaccount
+      - validatevpa
+      - dispute
+      - settlement
+      - altid
+      - mandate_token
+      - accountvalidation
+    Invoice_amount:
+      title: invoice_amount
+      x-stoplight:
+        id: 9fgc9kmduepen
+      type: string
+      description: Invoice amount in two decimals, eg. 2400.00
+      example: '2400.00'
+      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+    Debit_request_no:
+      title: debit_request_no
+      x-stoplight:
+        id: ptagco5o2uzfu
+      type: string
+      description: 'Sequence of the recurring charge as per the mandate received from the customer
+
+
+        For e.g. Say a customer is on a monthly payment plan – the first recurring charge has the value as “1”, the second as “2” and so on. If the merchant does not process a debit say for the second month and then in the next (third) month when initiating a charge, this value should be set as “3” in the request.'
+      example: '1'
+    Customer_refid:
+      title: customer_refid
+      x-stoplight:
+        id: mpmq18zbl4x12
+      type: string
+      description: 'Unique reference of the customer in the merchant system, and can be linked to different subscriptions of the same customer
+
+        Required for mandate and tokenization'
+      pattern: ^[A-Za-z0-9\\_\\:\\-]{1,80}$
+      example: CSREF00001
+    Additional-Info:
+      type: object
+      x-examples:
+        Example 1:
+          additional_info:
+            additional_info1: Details1
+            additional_info2: Details2
+            additional_info3: Details3
+            additional_info4: Details4
+            additional_info5: Details5
+            additional_info6: Details6
+            additional_info7: Details7
+            additional_info8: Details8
+            additional_info9: Details9
+            additional_info10: Details10
+      description: 'Array of 7 additional_info values that can be attached to
+
+        the transaction.
+
+        Note: Merchant is advised to not pass customer PII
+
+        information in additional info fields.'
+      properties:
+        additional_info1:
+          type: string
+          example: Details1
+        additional_info2:
+          type: string
+          example: Details2
+        additional_info3:
+          type: string
+          example: Details3
+        additional_info4:
+          type: string
+          example: Details4
+        additional_info5:
+          type: string
+          example: Details5
+        additional_info6:
+          type: string
+          example: Details6
+        additional_info7:
+          type: string
+          example: Details7
+    Duedate-invoice:
+      title: duedate invoice
+      x-stoplight:
+        id: v12xirnswg2kg
+      type: string
+      description: Invoice due date in the YYYYMMDD format
+      format: date
+      example: '2023-06-17'
+    Early_payment_discount:
+      title: early_payment_discount
+      x-stoplight:
+        id: 0lsucvetql6v4
+      type: string
+      description: Discount amount for early payment of invoice
+      example: '10.00'
+      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+    Invoice_id:
+      title: invoice_id
+      x-stoplight:
+        id: egk48lxwpqerd
+      type: string
+      description: Unique id created by BillDesk for each invoice
+      pattern: ^[A-Za-z0-9]{14,35}$
+      example: IA047F00003663
+    Subscription_refid:
+      title: subscription_refid
+      x-stoplight:
+        id: 0c9vc4zqx4a8c
+      type: string
+      example: SUBREF101
+      description: Unique reference assigned by merchant for a subscription
+  examples:
+    403-error:
+      value:
+        status: 403
+        error_type: inaccessable_resource_error
+        error_code: GNIAE0002
+        message: Access forbidden
+    500-error:
+      value:
+        status: 500
+        error_type: api_processing_error
+        error_code: AUAPE0001
+        message: Internal server error
+    422-Invalid-merchant-config:
+      value:
+        status: 422
+        error_type: api_validation_error
+        error_code: GNAVE0001
+        message: Incorrect merchant configuration
+  parameters:
+    bdTimeStamp:
+      in: header
+      name: BD-Timestamp
+      description: Request timestamp to identify date and time of origin of request. Example, a value of BD-Timestamp 20210113180403 identifies the request to have originated on 13th January 2021 at 06:04:03 PM.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/json
+      description: Request Content-Type to take the values application/jose
+    bdTraceId:
+      in: header
+      name: BD-Traceid
+      description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    Accept:
+      name: Accept
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/jose
+      description: Accept Response Content-Type to take the values application/jose
+x-stoplight:
+  id: fn32l3grxzejb
+x-samples-languages:
+- shell
+- json
+- node
+- java
+- csharp
+x-provenance:
+  method: searched
+  source: https://docs.billdesk.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.billdesk.io/reference/createinvoice.md
+  - https://docs.billdesk.io/reference/createmandate.md
+  - https://docs.billdesk.io/reference/deletemandate.md
+  - https://docs.billdesk.io/reference/listmandates.md
+  - https://docs.billdesk.io/reference/modifymandate.md
+  - https://docs.billdesk.io/reference/retrievemandate.md
+  - https://docs.billdesk.io/reference/retriveinvoice.md
+  - https://docs.billdesk.io/reference/updatemandate.md
+  merge:
+    pages: 8
+    deduped: 228
+    conflicts_kept_first: 0

@@ -112,8 +112,9 @@ common:
 apis:
 - aid: billdesk:neo-payments-api
   name: BillDesk Neo Full Redirect API
-  description: Pre-built hosted checkout solution for one-time and recurring online payments. Merchants redirect customers to BillDesk-hosted
-    pages, minimizing PCI DSS scope.
+  description: >-
+    Pre-built hosted checkout solution for one-time and recurring online payments. Merchants redirect
+    customers to BillDesk-hosted pages, minimizing PCI DSS scope.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
   baseURL: https://api.billdesk.com/payments/ve1_2
@@ -126,8 +127,9 @@ apis:
     url: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
 - aid: billdesk:ace-sdk-api
   name: BillDesk Ace SDK API
-  description: SDK-based payment integration for Android, iOS, Flutter, and web. Provides embedded payment experiences with BillDesk handling
-    payment orchestration.
+  description: >-
+    SDK-based payment integration for Android, iOS, Flutter, and web. Provides embedded payment experiences
+    with BillDesk handling payment orchestration.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
   baseURL: https://api.billdesk.com/payments/ve1_2
@@ -142,8 +144,10 @@ apis:
     url: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
 - aid: billdesk:cx-plus-deep-api
   name: BillDesk CX+ Deep API
-  description: Direct REST API access for advanced payment processing, giving merchants full control over checkout UX. Supports transactions,
-    mandates, refunds, card tokenization, invoices, payment links, and settlement retrieval.
+  description: >-
+    Direct REST API access for advanced payment processing, giving merchants full control over checkout
+    UX. Supports transactions, mandates, refunds, card tokenization, invoices, payment links, and settlement
+    retrieval.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.billdesk.io/
   baseURL: https://api.billdesk.com/payments/ve1_2
@@ -160,16 +164,16 @@ apis:
     url: https://docs.billdesk.io/
   - type: Sandbox
     url: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
-- aid: billdesk:billdesk-linkpay
-  name: BillDesk Linkpay Openapi.Yml API
-  description: The Linkpay Openapi.Yml API from BillDesk — 4 operation(s) for linkpay openapi.yml.
+- aid: billdesk:billdesk-authentication-api
+  name: BillDesk Authentication API
+  description: The Authentication API from BillDesk — 3 operation(s) for authentication.
   humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
   baseURL: https://api.billdesk.com/payments/ve1_2
   tags:
-  - Linkpay Openapi.Yml
+  - Authentication
   properties:
   - type: OpenAPI
-    url: openapi/billdesk-linkpay-openapi.yml
+    url: openapi/billdesk-authentication-api-openapi.yml
   - type: JSONSchema
     url: json-schema/billdesk-additional-info-schema.json
   - type: JSONSchema
@@ -182,32 +186,12 @@ apis:
     url: json-schema/billdesk-payment-object-response-schema.json
   - type: JSONSchema
     url: json-schema/billdesk-customer-response-schema.json
-- aid: billdesk:billdesk-pa-settlements
-  name: BillDesk Settlement API
-  description: The Settlement API from BillDesk — 1 operation(s) for settlement.
-  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
-  baseURL: https://api.billdesk.com/payments/ve1_2
-  tags:
-  - Settlement
-  properties:
-  - type: OpenAPI
-    url: openapi/billdesk-pa-settlements-openapi.yml
   - type: JSONSchema
     url: json-schema/billdesk-objectid-schema.json
   - type: JSONSchema
     url: json-schema/billdesk-mercid-schema.json
   - type: JSONSchema
     url: json-schema/billdesk-currency-schema.json
-- aid: billdesk:billdesk-payments
-  name: BillDesk Order API
-  description: The Order API from BillDesk — 11 operation(s) for order.
-  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
-  baseURL: https://api.billdesk.com/payments/ve1_2
-  tags:
-  - Order
-  properties:
-  - type: OpenAPI
-    url: openapi/billdesk-payments-openapi.yml
   - type: JSONSchema
     url: json-schema/billdesk-device-schema.json
   - type: JSONSchema
@@ -220,60 +204,18 @@ apis:
     url: json-schema/billdesk-pay-using-issuer-token-schema.json
   - type: JSONSchema
     url: json-schema/billdesk-pay-using-network-token-schema.json
-- aid: billdesk:billdesk-penny-drop
-  name: BillDesk Penny Drop API
-  description: The Penny Drop API from BillDesk — 1 operation(s) for penny drop.
-  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
-  baseURL: https://api.billdesk.com/payments/ve1_2
-  tags:
-  - Penny Drop
-  properties:
-  - type: OpenAPI
-    url: openapi/billdesk-penny-drop-openapi.yml
   - type: JSONSchema
     url: json-schema/billdesk-device-order-schema.json
   - type: JSONSchema
-    url: json-schema/billdesk-additional-info-schema.json
-  - type: JSONSchema
     url: json-schema/billdesk-payment-method-type-schema.json
-  - type: JSONSchema
-    url: json-schema/billdesk-objectid-schema.json
   - type: JSONSchema
     url: json-schema/billdesk-orderid-schema.json
   - type: JSONSchema
     url: json-schema/billdesk-bankid-schema.json
-- aid: billdesk:billdesk-recurring
-  name: BillDesk Recurring Openapi.Yml API
-  description: The Recurring Openapi.Yml API from BillDesk — 8 operation(s) for recurring openapi.yml.
-  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
-  baseURL: https://api.billdesk.com/payments/ve1_2
-  tags:
-  - Recurring Openapi.Yml
-  properties:
-  - type: OpenAPI
-    url: openapi/billdesk-recurring-openapi.yml
-  - type: JSONSchema
-    url: json-schema/billdesk-device-schema.json
-  - type: JSONSchema
-    url: json-schema/billdesk-pay-using-altid-schema.json
-  - type: JSONSchema
-    url: json-schema/billdesk-pay-using-issuer-token-schema.json
-  - type: JSONSchema
-    url: json-schema/billdesk-pay-using-network-token-schema.json
   - type: JSONSchema
     url: json-schema/billdesk-response-parameters-schema.json
   - type: JSONSchema
     url: json-schema/billdesk-bankaccount-schema.json
-- aid: billdesk:billdesk-tokenization
-  name: BillDesk Card Account API
-  description: The Card Account API from BillDesk — 5 operation(s) for card account.
-  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
-  baseURL: https://api.billdesk.com/payments/ve1_2
-  tags:
-  - Card Account
-  properties:
-  - type: OpenAPI
-    url: openapi/billdesk-tokenization-openapi.yml
   - type: JSONSchema
     url: json-schema/billdesk-pay-using-card-number-pan-schema.json
   - type: JSONSchema
@@ -285,8 +227,693 @@ apis:
   - type: JSONSchema
     url: json-schema/billdesk-cardaccid-auth-data-schema.json
   - type: JSONSchema
+    url: json-schema/billdesk-upi-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-error-desc-schema.json
+- aid: billdesk:billdesk-card-account-api
+  name: BillDesk Card Account API
+  description: The Card Account API from BillDesk — 4 operation(s) for card account.
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - Card Account
+  properties:
+  - type: OpenAPI
+    url: openapi/billdesk-card-account-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/billdesk-additional-info-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-udf-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-response-schema.json
+  - type: JSONSchema
     url: json-schema/billdesk-objectid-schema.json
-- aid: billdesk:billdesk-validate-vpa
+  - type: JSONSchema
+    url: json-schema/billdesk-mercid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-currency-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mandate-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccount-in-txn-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-altid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-network-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-order-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-method-type-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-orderid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-response-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankaccount-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-card-number-pan-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-altid-card-request-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardacc-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccid-auth-data-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-error-desc-schema.json
+- aid: billdesk:billdesk-guest-checkout-altid-api
+  name: BillDesk Guest Checkout (AltID) API
+  description: >-
+    The Guest Checkout (AltID) API from BillDesk — 1 operation(s) for guest checkout (altid).
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - Guest Checkout (AltID)
+  properties:
+  - type: OpenAPI
+    url: openapi/billdesk-guest-checkout-altid-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/billdesk-additional-info-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-udf-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-objectid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mercid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-currency-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mandate-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccount-in-txn-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-altid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-network-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-order-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-method-type-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-orderid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-response-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankaccount-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-card-number-pan-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-altid-card-request-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardacc-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccid-auth-data-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-error-desc-schema.json
+- aid: billdesk:billdesk-invoice-api
+  name: BillDesk Invoice API
+  description: The Invoice API from BillDesk — 2 operation(s) for invoice.
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - Invoice
+  properties:
+  - type: OpenAPI
+    url: openapi/billdesk-invoice-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/billdesk-additional-info-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-udf-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-objectid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mercid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-currency-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mandate-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccount-in-txn-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-altid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-network-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-order-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-method-type-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-orderid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-response-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankaccount-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-card-number-pan-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-altid-card-request-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardacc-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccid-auth-data-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-error-desc-schema.json
+- aid: billdesk:billdesk-mandate-api
+  name: BillDesk Mandate API
+  description: The Mandate API from BillDesk — 6 operation(s) for mandate.
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - Mandate
+  properties:
+  - type: OpenAPI
+    url: openapi/billdesk-mandate-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/billdesk-additional-info-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-udf-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-objectid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mercid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-currency-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mandate-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccount-in-txn-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-altid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-network-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-order-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-method-type-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-orderid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-response-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankaccount-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-card-number-pan-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-altid-card-request-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardacc-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccid-auth-data-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-error-desc-schema.json
+- aid: billdesk:billdesk-order-api
+  name: BillDesk Order API
+  description: The Order API from BillDesk — 3 operation(s) for order.
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - Order
+  properties:
+  - type: OpenAPI
+    url: openapi/billdesk-order-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/billdesk-additional-info-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-udf-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-objectid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mercid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-currency-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mandate-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccount-in-txn-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-altid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-network-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-order-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-method-type-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-orderid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-response-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankaccount-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-card-number-pan-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-altid-card-request-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardacc-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccid-auth-data-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-error-desc-schema.json
+- aid: billdesk:billdesk-payment-links-api
+  name: BillDesk Payment Links API
+  description: The Payment Links API from BillDesk — 4 operation(s) for payment links.
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - Payment Links
+  properties:
+  - type: OpenAPI
+    url: openapi/billdesk-payment-links-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/billdesk-additional-info-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-udf-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-objectid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mercid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-currency-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mandate-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccount-in-txn-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-altid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-network-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-order-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-method-type-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-orderid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-response-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankaccount-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-card-number-pan-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-altid-card-request-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardacc-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccid-auth-data-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-error-desc-schema.json
+- aid: billdesk:billdesk-penny-drop-api
+  name: BillDesk Penny Drop API
+  description: The Penny Drop API from BillDesk — 1 operation(s) for penny drop.
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - Penny Drop
+  properties:
+  - type: OpenAPI
+    url: openapi/billdesk-penny-drop-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/billdesk-additional-info-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-udf-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-objectid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mercid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-currency-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mandate-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccount-in-txn-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-altid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-network-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-order-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-method-type-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-orderid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-response-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankaccount-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-card-number-pan-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-altid-card-request-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardacc-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccid-auth-data-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-error-desc-schema.json
+- aid: billdesk:billdesk-refund-api
+  name: BillDesk Refund API
+  description: The Refund API from BillDesk — 2 operation(s) for refund.
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - Refund
+  properties:
+  - type: OpenAPI
+    url: openapi/billdesk-refund-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/billdesk-additional-info-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-udf-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-objectid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mercid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-currency-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mandate-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccount-in-txn-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-altid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-network-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-order-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-method-type-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-orderid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-response-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankaccount-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-card-number-pan-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-altid-card-request-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardacc-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccid-auth-data-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-error-desc-schema.json
+- aid: billdesk:billdesk-settlement-api
+  name: BillDesk Settlement API
+  description: The Settlement API from BillDesk — 1 operation(s) for settlement.
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - Settlement
+  properties:
+  - type: OpenAPI
+    url: openapi/billdesk-settlement-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/billdesk-additional-info-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-udf-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-objectid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mercid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-currency-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mandate-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccount-in-txn-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-altid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-network-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-order-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-method-type-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-orderid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-response-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankaccount-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-card-number-pan-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-altid-card-request-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardacc-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccid-auth-data-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-error-desc-schema.json
+- aid: billdesk:billdesk-transaction-api
+  name: BillDesk Transaction API
+  description: The Transaction API from BillDesk — 3 operation(s) for transaction.
+  humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
+  baseURL: https://api.billdesk.com/payments/ve1_2
+  tags:
+  - Transaction
+  properties:
+  - type: OpenAPI
+    url: openapi/billdesk-transaction-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/billdesk-additional-info-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-udf-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-objectid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mercid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-currency-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mandate-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccount-in-txn-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-altid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-network-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-order-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-method-type-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-orderid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-response-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankaccount-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-card-number-pan-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-altid-card-request-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardacc-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccid-auth-data-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-upi-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-error-desc-schema.json
+- aid: billdesk:billdesk-validate-vpa-api
   name: BillDesk Validate VPA API
   description: The Validate VPA API from BillDesk — 1 operation(s) for validate vpa.
   humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
@@ -295,20 +922,65 @@ apis:
   - Validate VPA
   properties:
   - type: OpenAPI
-    url: openapi/billdesk-validate-vpa-openapi.yml
+    url: openapi/billdesk-validate-vpa-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/billdesk-additional-info-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-udf-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-object-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-customer-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-objectid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mercid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-currency-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-mandate-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccount-in-txn-response-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-altid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-network-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-device-order-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-payment-method-type-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-orderid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankid-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-response-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-bankaccount-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-pay-using-card-number-pan-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-altid-card-request-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardacc-network-issuer-token-schema.json
+  - type: JSONSchema
+    url: json-schema/billdesk-cardaccid-auth-data-schema.json
   - type: JSONSchema
     url: json-schema/billdesk-upi-response-schema.json
   - type: JSONSchema
     url: json-schema/billdesk-upi-schema.json
   - type: JSONSchema
-    url: json-schema/billdesk-objectid-schema.json
-  - type: JSONSchema
-    url: json-schema/billdesk-orderid-schema.json
-  - type: JSONSchema
-    url: json-schema/billdesk-mercid-schema.json
-  - type: JSONSchema
     url: json-schema/billdesk-error-desc-schema.json
-
 x-readme-harvest:
   date: '2026-10-14'
   ops: 31

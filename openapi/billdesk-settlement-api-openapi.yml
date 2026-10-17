@@ -1,27 +1,28 @@
-openapi: 3.0.0
-x-stoplight:
-  id: 7ssf5linembvk
-servers:
-- url: https://uat1.billdesk.com/u2
-  description: UAT server
-- url: https://api.billdesk.com
-  description: PROD server
+openapi: 3.2.0
 info:
-  title: PA Settlements
-  description: "This explorer allows merchants to evaluate APIs that are available in the BillDesk Payment Gateway API suite.\n - Only HMAC authentication is supported.\n - All APIs are RESTful and resource oriented.\n - Servers listed are applicable for the API explorer only."
+  title: PA Settlements Settlement API
+  description: 'This explorer allows merchants to evaluate APIs that are available in the BillDesk Payment Gateway API suite.
+
+    - Only HMAC authentication is supported.
+
+    - All APIs are RESTful and resource oriented.
+
+    - Servers listed are applicable for the API explorer only.'
   contact:
     name: API Support
     url: https://www.billdesk.com/helpcenter.htm
     email: support@billdesk.com
   version: '2.5'
-x-samples-languages:
-- shell
-- json
-- node
-- java
-- csharp
+servers:
+- url: https://uat1.billdesk.com/u2
+  description: UAT server
+- url: https://api.billdesk.com
+  description: PROD server
+tags:
+- name: Settlement
 paths:
   /pasettlements/v1_2/settlements/get:
+    parameters: []
     post:
       summary: Retrieve Settlement
       operationId: retrieve-settlement
@@ -326,9 +327,16 @@ paths:
                   to_date: '2022-01-03'
       tags:
       - Settlement
-    parameters: []
 components:
   parameters:
+    Recurring_BdTraceId:
+      in: header
+      name: BD-Traceid
+      description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
     Recurring_Accept:
       name: Accept
       in: header
@@ -353,34 +361,34 @@ components:
       schema:
         type: string
         example: '20201203182838'
-    Recurring_BdTraceId:
-      in: header
-      name: BD-Traceid
-      description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
-      required: true
-      schema:
-        type: string
-        example: '20201203182838'
   examples:
-    403-error:
-      value:
-        status: 403
-        error_type: inaccessable_resource_error
-        error_code: GNIAE0002
-        message: Access forbidden
-    500-error:
-      value:
-        status: 500
-        error_type: api_processing_error
-        error_code: AUAPE0001
-        message: Internal server error
     422-Invalid-merchant-config:
       value:
         status: 422
         error_type: api_validation_error
         error_code: GNAVE0001
         message: Incorrect merchant configuration
+    500-error:
+      value:
+        status: 500
+        error_type: api_processing_error
+        error_code: AUAPE0001
+        message: Internal server error
+    403-error:
+      value:
+        status: 403
+        error_type: inaccessable_resource_error
+        error_code: GNIAE0002
+        message: Access forbidden
   schemas:
+    Mercid:
+      title: mercid
+      x-stoplight:
+        id: 43ns25lu1fyuc
+      type: string
+      pattern: ^[A-Za-z0-9]{1,10}$
+      example: BDMERCID
+      description: Unique identifier as defined by BillDesk for each merchant
     Error-object:
       type: object
       properties:
@@ -402,14 +410,6 @@ components:
         id: 1ehjh4f7vidz7
       type: string
       description: ISO currency code of the transaction amount, for INR this value will be 356
-    Mercid:
-      title: mercid
-      x-stoplight:
-        id: 43ns25lu1fyuc
-      type: string
-      pattern: ^[A-Za-z0-9]{1,10}$
-      example: BDMERCID
-      description: Unique identifier as defined by BillDesk for each merchant
     Objectid:
       title: objectid
       x-stoplight:
@@ -429,8 +429,14 @@ components:
       - mandate_token
       - accountvalidation
       - refund
-tags:
-- name: Settlement
+x-stoplight:
+  id: 7ssf5linembvk
+x-samples-languages:
+- shell
+- json
+- node
+- java
+- csharp
 x-provenance:
   method: searched
   source: https://docs.billdesk.io/reference

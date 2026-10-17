@@ -1,661 +1,26 @@
-openapi: 3.0.0
-x-stoplight:
-  id: fn32l3grxzejb
-servers:
-- url: https://uat1.billdesk.com/u2
-  description: UAT server
-- url: https://api.billdesk.com
-  description: PROD server
+openapi: 3.2.0
 info:
-  title: Recurring
-  description: "This explorer allows merchants to evaluate APIs that are available in the BillDesk Payment Gateway API suite.\n - Only HMAC authentication is supported.\n - All APIs are RESTful and resource oriented.\n - Servers listed are applicable for the API explorer only."
+  title: Recurring Mandate API
+  description: 'This explorer allows merchants to evaluate APIs that are available in the BillDesk Payment Gateway API suite.
+
+    - Only HMAC authentication is supported.
+
+    - All APIs are RESTful and resource oriented.
+
+    - Servers listed are applicable for the API explorer only.'
   contact:
     name: API Support
     url: https://www.billdesk.com/helpcenter.htm
     email: support@billdesk.com
   version: '2.5'
-x-samples-languages:
-- shell
-- json
-- node
-- java
-- csharp
+servers:
+- url: https://uat1.billdesk.com/u2
+  description: UAT server
+- url: https://api.billdesk.com
+  description: PROD server
+tags:
+- name: Mandate
 paths:
-  /pgsi/ve1_2/invoice/create:
-    post:
-      summary: Create Invoice
-      operationId: createInvoice
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                x-examples:
-                  Example 1:
-                    invoice_number: INVCABCUP10002
-                    objectid: invoice
-                    invoice_display_number: DISINVCABCUP10002
-                    mercid: BDMERCID
-                    subscription_refid: SCREFUP00001
-                    customer_refid: CSREFUP00001
-                    invoice_date: '2021-05-10'
-                    duedate: '2021-05-18'
-                    debit_date: '2021-05-16'
-                    amount: '500.00'
-                    net_amount: '500.00'
-                    early_payment_due_date: '2021-05-12'
-                    early_payment_discount: '10.00'
-                    early_payment_amount: '490.00'
-                    late_payment_charges: '20.00'
-                    late_payment_amount: '520.00'
-                    currency: '356'
-                    mandateid: MA1F8A00050242
-                    description: Invoice for May 2021
-                    status: unpaid
-                    invoice_id: IA047F00003663
-                    verification_error_code: INS0000
-                    verification_error_type: Invoice Successful
-                    verification_error_desc: success
-                    additional_info:
-                      additional_info1: Details1
-                      additional_info2: Details2
-                      additional_info3: Details3
-                      additional_info4: Details4
-                      additional_info5: Details5
-                      additional_info6: Details6
-                      additional_info7: Details7
-                      additional_info8: Details8
-                      additional_info9: Details9
-                      additional_info10: Details10
-                    createdon: '2021-05-16T19:20:08+05:30'
-                    debit_request_no: '1'
-                properties:
-                  objectid:
-                    $ref: '#/components/schemas/Objectid'
-                  invoice_number:
-                    $ref: '#/components/schemas/Invoice_number'
-                  invoice_display_number:
-                    $ref: '#/components/schemas/Invoice_display_number'
-                  mercid:
-                    $ref: '#/components/schemas/Mercid'
-                  subscription_refid:
-                    $ref: '#/components/schemas/Subscription_refid'
-                  customer_refid:
-                    $ref: '#/components/schemas/Customer_refid'
-                  invoice_date:
-                    $ref: '#/components/schemas/Invoice_date'
-                  duedate:
-                    $ref: '#/components/schemas/Duedate-invoice'
-                  debit_date:
-                    $ref: '#/components/schemas/Debit_date'
-                  amount:
-                    $ref: '#/components/schemas/Invoice_amount'
-                  net_amount:
-                    $ref: '#/components/schemas/Net_amount'
-                  early_payment_due_date:
-                    $ref: '#/components/schemas/Early_payment_duedate'
-                  early_payment_discount:
-                    $ref: '#/components/schemas/Early_payment_discount'
-                  early_payment_amount:
-                    $ref: '#/components/schemas/Early_payment_amount'
-                  late_payment_charges:
-                    $ref: '#/components/schemas/Late_payment_charges'
-                  late_payment_amount:
-                    $ref: '#/components/schemas/Late_payment_amount'
-                  currency:
-                    $ref: '#/components/schemas/Currency'
-                  mandateid:
-                    $ref: '#/components/schemas/Mandateid'
-                  description:
-                    $ref: '#/components/schemas/Invoice-description'
-                  status:
-                    $ref: '#/components/schemas/Invoice-status'
-                  invoice_id:
-                    $ref: '#/components/schemas/Invoice_id'
-                  verification_error_code:
-                    $ref: '#/components/schemas/Error_code'
-                  verification_error_type:
-                    $ref: '#/components/schemas/Error_type'
-                  verification_error_desc:
-                    $ref: '#/components/schemas/Error_desc'
-                  createdon:
-                    $ref: '#/components/schemas/Createdon'
-                  additional_info:
-                    $ref: '#/components/schemas/Additional-Info'
-              examples:
-                For Card payment mode:
-                  value:
-                    invoice_number: INVNUM0000001
-                    objectid: invoice
-                    invoice_display_number: DISINVNUM0001
-                    mercid: BDMERCID
-                    subscription_refid: Sub319132516OBBWT
-                    customer_refid: cust31913251638S6G
-                    invoice_date: '2023-03-01'
-                    duedate: '2023-03-20'
-                    debit_date: '2023-03-20'
-                    amount: '2.00'
-                    net_amount: '2.00'
-                    currency: '356'
-                    mandateid: MN1DE687658926
-                    description: Debit for Plan 499
-                    status: unpaid
-                    invoice_id: IN23CE129742773
-                    verification_error_code: INS0000
-                    verification_error_type: Invoice Successful
-                    verification_error_desc: success
-                    createdon: '2023-03-19T19:07:56+05:30'
-                For UPI payment mode:
-                  value:
-                    invoice_number: INVCABCUP10002
-                    objectid: invoice
-                    invoice_display_number: DISINVCABCUP10002
-                    mercid: BDMERCID
-                    subscription_refid: SCREFUP00001
-                    customer_refid: CSREFUP00001
-                    invoice_date: '2021-05-10'
-                    duedate: '2021-05-18'
-                    debit_date: '2021-05-16'
-                    amount: '500.00'
-                    net_amount: '500.00'
-                    early_payment_due_date: '2021-05-12'
-                    early_payment_discount: '10.00'
-                    early_payment_amount: '490.00'
-                    late_payment_charges: '20.00'
-                    late_payment_amount: '520.00'
-                    currency: '356'
-                    mandateid: MA1F8A00050242
-                    description: Invoice for May 2021
-                    status: unpaid
-                    invoice_id: IA047F00003663
-                    verification_error_code: INS0000
-                    verification_error_type: Invoice Successful
-                    verification_error_desc: success
-                    createdon: '2021-05-16T19:20:08+05:30'
-                    debit_request_no: '1'
-          headers:
-            BD-Traceid:
-              schema:
-                type: string
-              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
-            Content-Type:
-              schema:
-                type: string
-              description: Request Content-Type to take the values application/jose
-            Accept:
-              schema:
-                type: string
-              description: Accept Response Content-Type to take the values application/jose
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error-object'
-              examples:
-                Forbidden:
-                  $ref: '#/components/examples/403-error'
-          headers:
-            BD-Traceid:
-              schema:
-                type: string
-              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
-            Content-Type:
-              schema:
-                type: string
-              description: Request Content-Type to take the values application/jose
-            Accept:
-              schema:
-                type: string
-              description: Accept Response Content-Type to take the values application/jose
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error-object'
-              examples:
-                Internal Server Error:
-                  $ref: '#/components/examples/500-error'
-          headers:
-            BD-Traceid:
-              schema:
-                type: string
-              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
-            Content-Type:
-              schema:
-                type: string
-              description: Request Content-Type to take the values application/jose
-            Accept:
-              schema:
-                type: string
-              description: Accept Response Content-Type to take the values application/jose
-        default:
-          description: Any bad or invalid request will lead to following error object
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error-object'
-              examples:
-                Invalid merchant config:
-                  $ref: '#/components/examples/422-Invalid-merchant-config'
-          headers:
-            BD-Traceid:
-              schema:
-                type: string
-              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
-            Content-Type:
-              schema:
-                type: string
-              description: Request Content-Type to take the values application/jose
-            Accept:
-              schema:
-                type: string
-              description: Accept Response Content-Type to take the values application/jose
-      tags:
-      - Invoice
-      description: "An invoice represents the billed amount that needs to be collected from the customer for a subscription. This API can be used to create an invoice with the specific reference of the underlying mandateid.\n\nThe invoice details are sent to the customer as a pre-debit notification for the card and upi payment methods, as required by regulatory guidelines. For UPI, pre-debit-notifications are sent by bank via (sms, email) \n\nTo ensure that the pre-debit notification is received by the customer atleast 24 hours prior to the recurring charge (regulatory requirement), it is recommended that the invoice request is initiated 36 hrs prior to the recurring charge request.\n\nIf the recurring charge debit amount is higher than the permissible limit (as per regulations), the customer requires to provide an additional AFA for processing the recurring charge. This is not applicable for upi mandates"
-      parameters:
-      - $ref: '#/components/parameters/bdTraceId'
-      - $ref: '#/components/parameters/bdTimeStamp'
-      - $ref: '#/components/parameters/Content-Type'
-      - $ref: '#/components/parameters/Accept'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              x-examples:
-                Example 1:
-                  additional_info:
-                    additional_info1: Details1
-                    additional_info10: Details10
-                    additional_info2: Details2
-                    additional_info3: Details3
-                    additional_info4: Details4
-                    additional_info5: Details5
-                    additional_info6: Details6
-                    additional_info7: Details7
-                    additional_info8: Details8
-                    additional_info9: Details9
-                  amount: '500.00'
-                  currency: '356'
-                  customer_refid: CSREFUP00001
-                  debit_date: '2021-05-16'
-                  debit_request_no: '1'
-                  description: Invoice for May 2021
-                  duedate: '2021-05-18'
-                  early_payment_amount: '490.00'
-                  early_payment_discount: '10.00'
-                  early_payment_duedate: '2021-05-12'
-                  invoice_date: '2021-05-10'
-                  invoice_display_number: DISINVCABCUP10002
-                  invoice_number: INVCABCUP10002
-                  late_payment_amount: '520.00'
-                  late_payment_charges: '20.00'
-                  mandateid: MA1F8A00050242
-                  mercid: BDMERCID
-                  net_amount: '500.00'
-                  subscription_refid: SCREFUP00001
-              properties:
-                invoice_number:
-                  $ref: '#/components/schemas/Invoice_number'
-                invoice_display_number:
-                  $ref: '#/components/schemas/Invoice_display_number'
-                mercid:
-                  $ref: '#/components/schemas/Mercid'
-                mandateid:
-                  $ref: '#/components/schemas/Mandateid'
-                currency:
-                  $ref: '#/components/schemas/Currency'
-                amount:
-                  $ref: '#/components/schemas/Invoice_amount'
-                subscription_refid:
-                  $ref: '#/components/schemas/Subscription_refid'
-                customer_refid:
-                  $ref: '#/components/schemas/Customer_refid'
-                debit_date:
-                  $ref: '#/components/schemas/Debit_date'
-                invoice_date:
-                  $ref: '#/components/schemas/Invoice_date'
-                description:
-                  $ref: '#/components/schemas/Invoice-description'
-                duedate:
-                  $ref: '#/components/schemas/Duedate-invoice'
-                net_amount:
-                  $ref: '#/components/schemas/Net_amount'
-                early_payment_amount:
-                  $ref: '#/components/schemas/Early_payment_amount'
-                early_payment_discount:
-                  $ref: '#/components/schemas/Early_payment_discount'
-                early_payment_duedate:
-                  $ref: '#/components/schemas/Early_payment_duedate'
-                late_payment_amount:
-                  $ref: '#/components/schemas/Late_payment_amount'
-                late_payment_charges:
-                  $ref: '#/components/schemas/Late_payment_charges'
-                additional_info:
-                  $ref: '#/components/schemas/Additional-Info'
-              required:
-              - invoice_number
-              - invoice_display_number
-              - mercid
-              - mandateid
-              - currency
-              - amount
-              - subscription_refid
-              - customer_refid
-              - debit_date
-              - invoice_date
-              - description
-              - duedate
-              - net_amount
-            examples:
-              Using Card payment mode:
-                value:
-                  mercid: BDMERCID
-                  mandateid: MN1DE687658926
-                  customer_refid: cust31913251638S6G
-                  subscription_refid: Sub319132516OBBWT
-                  invoice_number: INVNUM0000001
-                  invoice_display_number: DISINVNUM0001
-                  invoice_date: '2023-03-01'
-                  duedate: '2023-03-20'
-                  debit_date: '2023-03-20'
-                  amount: '2.00'
-                  net_amount: '2.00'
-                  currency: '356'
-                  description: Debit for Plan 499
-              Using UPI payment mode:
-                value:
-                  mercid: BDMERCID
-                  subscription_refid: SCREFUP00001
-                  customer_refid: CSREFUP00001
-                  invoice_number: INVCABCUP10002
-                  invoice_display_number: DISINVCABCUP10002
-                  invoice_date: '2021-05-10'
-                  duedate: '2021-05-18'
-                  debit_date: '2021-05-16'
-                  early_payment_duedate: '2021-05-12'
-                  early_payment_discount: '10.00'
-                  early_payment_amount: '490.00'
-                  late_payment_charges: '20.00'
-                  late_payment_amount: '520.00'
-                  amount: '500.00'
-                  net_amount: '500.00'
-                  currency: '356'
-                  mandateid: MA1F8A00050242
-                  description: Invoice for May 2021
-                  debit_request_no: '1'
-  /pgsi/ve1_2/invoice/get:
-    post:
-      summary: Retrieve Invoice
-      operationId: retriveInvoice
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                x-examples:
-                  Example 1:
-                    invoice_number: INVCABCUP10002
-                    objectid: invoice
-                    invoice_display_number: DISINVCABCUP10002
-                    mercid: BDMERCID
-                    subscription_refid: SCREFUP00001
-                    customer_refid: CSREFUP00001
-                    invoice_date: '2021-05-10'
-                    duedate: '2021-05-18'
-                    debit_date: '2021-05-16'
-                    amount: '500.00'
-                    net_amount: '500.00'
-                    early_payment_due_date: '2021-05-12'
-                    early_payment_discount: '10.00'
-                    early_payment_amount: '490.00'
-                    late_payment_charges: '20.00'
-                    late_payment_amount: '520.00'
-                    currency: '356'
-                    mandateid: MA1F8A00050242
-                    description: Invoice for May 2021
-                    status: unpaid
-                    invoice_id: IA047F00003663
-                    verification_error_code: INS0000
-                    verification_error_type: Invoice Successful
-                    verification_error_desc: success
-                    additional_info:
-                      additional_info1: Details1
-                      additional_info2: Details2
-                      additional_info3: Details3
-                      additional_info4: Details4
-                      additional_info5: Details5
-                      additional_info6: Details6
-                      additional_info7: Details7
-                      additional_info8: Details8
-                      additional_info9: Details9
-                      additional_info10: Details10
-                    createdon: '2021-05-16T19:20:08+05:30'
-                    debit_request_no: '1'
-                properties:
-                  invoice_number:
-                    $ref: '#/components/schemas/Invoice_number'
-                  objectid:
-                    $ref: '#/components/schemas/Objectid'
-                  invoice_display_number:
-                    $ref: '#/components/schemas/Invoice_display_number'
-                  mercid:
-                    $ref: '#/components/schemas/Mercid'
-                  subscription_refid:
-                    $ref: '#/components/schemas/Subscription_refid'
-                  customer_refid:
-                    $ref: '#/components/schemas/Customer_refid'
-                  invoice_date:
-                    $ref: '#/components/schemas/Invoice_date'
-                  duedate:
-                    $ref: '#/components/schemas/Duedate-invoice'
-                  debit_date:
-                    $ref: '#/components/schemas/Debit_date'
-                  amount:
-                    $ref: '#/components/schemas/Invoice_amount'
-                  net_amount:
-                    $ref: '#/components/schemas/Net_amount'
-                  early_payment_due_date:
-                    $ref: '#/components/schemas/Early_payment_duedate'
-                  early_payment_discount:
-                    $ref: '#/components/schemas/Early_payment_discount'
-                  early_payment_amount:
-                    $ref: '#/components/schemas/Early_payment_amount'
-                  late_payment_charges:
-                    $ref: '#/components/schemas/Late_payment_charges'
-                  late_payment_amount:
-                    $ref: '#/components/schemas/Late_payment_amount'
-                  currency:
-                    $ref: '#/components/schemas/Currency'
-                  mandateid:
-                    $ref: '#/components/schemas/Mandateid'
-                  description:
-                    $ref: '#/components/schemas/Invoice-description'
-                  status:
-                    $ref: '#/components/schemas/Invoice-status'
-                  invoice_id:
-                    $ref: '#/components/schemas/Invoice_id'
-                  verification_error_code:
-                    $ref: '#/components/schemas/Error_code'
-                  verification_error_type:
-                    $ref: '#/components/schemas/Error_type'
-                  verification_error_desc:
-                    $ref: '#/components/schemas/Error_desc'
-                  createdon:
-                    $ref: '#/components/schemas/Createdon'
-                  debit_request_no:
-                    $ref: '#/components/schemas/Debit_request_no'
-                  additional_info:
-                    $ref: '#/components/schemas/Additional-Info'
-              examples:
-                Response- For Card payment mode:
-                  value:
-                    invoice_number: INVCABCUP10002
-                    objectid: invoice
-                    invoice_display_number: DISINVCABCUP10002
-                    mercid: BDMERCID
-                    subscription_refid: SCREFUP00001
-                    customer_refid: CSREFUP00001
-                    invoice_date: '2021-05-10'
-                    duedate: '2021-05-18'
-                    debit_date: '2021-05-16'
-                    amount: '500.00'
-                    net_amount: '500.00'
-                    early_payment_due_date: '2021-05-12'
-                    early_payment_discount: '10.00'
-                    early_payment_amount: '490.00'
-                    late_payment_charges: '20.00'
-                    late_payment_amount: '520.00'
-                    currency: '356'
-                    mandateid: MA1F8A00050242
-                    description: Invoice for May 2021
-                    status: unpaid
-                    invoice_id: IA047F00003663
-                    verification_error_code: INS0000
-                    verification_error_type: Invoice Successful
-                    verification_error_desc: success
-                    createdon: '2021-05-16T19:20:08+05:30'
-                Response - For UPI payment mode:
-                  value:
-                    invoice_number: INVCABCUP10002
-                    objectid: invoice
-                    invoice_display_number: DISINVCABCUP10002
-                    mercid: BDMERCID
-                    subscription_refid: SCREFUP00001
-                    customer_refid: CSREFUP00001
-                    invoice_date: '2021-05-10'
-                    duedate: '2021-05-18'
-                    debit_date: '2021-05-16'
-                    amount: '500.00'
-                    net_amount: '500.00'
-                    early_payment_due_date: '2021-05-12'
-                    early_payment_discount: '10.00'
-                    early_payment_amount: '490.00'
-                    late_payment_charges: '20.00'
-                    late_payment_amount: '520.00'
-                    currency: '356'
-                    mandateid: MA1F8A00050242
-                    description: Invoice for May 2021
-                    status: unpaid
-                    invoice_id: IA047F00003663
-                    verification_error_code: INS0000
-                    verification_error_type: Invoice Successful
-                    verification_error_desc: success
-                    createdon: '2021-05-16T19:20:08+05:30'
-                    debit_request_no: '1'
-          headers:
-            BD-Traceid:
-              schema:
-                type: string
-              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
-            Content-Type:
-              schema:
-                type: string
-              description: Request Content-Type to take the values application/jose
-            Accept:
-              schema:
-                type: string
-              description: Accept Response Content-Type to take the values application/jose
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error-object'
-              examples:
-                Forbidden:
-                  $ref: '#/components/examples/403-error'
-          headers:
-            BD-Traceid:
-              schema:
-                type: string
-              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
-            Content-Type:
-              schema:
-                type: string
-              description: Request Content-Type to take the values application/jose
-            Accept:
-              schema:
-                type: string
-              description: Accept Response Content-Type to take the values application/jose
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error-object'
-              examples:
-                Internal Server Error:
-                  $ref: '#/components/examples/500-error'
-          headers:
-            BD-Traceid:
-              schema:
-                type: string
-              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
-            Content-Type:
-              schema:
-                type: string
-              description: Request Content-Type to take the values application/jose
-            Accept:
-              schema:
-                type: string
-              description: Accept Response Content-Type to take the values application/jose
-        default:
-          description: Any bad or invalid request will lead to following error object
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error-object'
-              examples:
-                Invalid merchant config:
-                  $ref: '#/components/examples/422-Invalid-merchant-config'
-          headers:
-            BD-Traceid:
-              schema:
-                type: string
-              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
-            Content-Type:
-              schema:
-                type: string
-              description: Request Content-Type to take the values application/jose
-            Accept:
-              schema:
-                type: string
-              description: Accept Response Content-Type to take the values application/jose
-      description: Merchants can retrieve invoice details by using mercid and invoice_number
-      parameters:
-      - $ref: '#/components/parameters/bdTraceId'
-      - $ref: '#/components/parameters/bdTimeStamp'
-      - $ref: '#/components/parameters/Content-Type'
-      - $ref: '#/components/parameters/Accept'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              x-examples:
-                Example 1:
-                  mercid: BDMERCID
-                  invoice_number: INVCABCUP10002
-              properties:
-                mercid:
-                  $ref: '#/components/schemas/Mercid'
-                invoice_number:
-                  $ref: '#/components/schemas/Invoice_number'
-            examples:
-              Request:
-                value:
-                  mercid: BDMERCID
-                  invoice_number: INVNUM0000001
-      tags:
-      - Invoice
   /pgsi/ve1_2/mandates/create:
     post:
       summary: Create Mandate
@@ -1113,7 +478,7 @@ paths:
               schema:
                 type: string
               description: Accept Response Content-Type to take the values application/jose
-      description: 'A mandate can be created by providing the details of the subscription and the associated payment method.  To create a mandate using a payment method, a ‘small-value’ authorization has to be completed for payment_method_type = card and upi.
+      description: 'A mandate can be created by providing the details of the subscription and the associated payment method. To create a mandate using a payment method, a ‘small-value’ authorization has to be completed for payment_method_type = card and upi.
 
 
         Mandates can be created using the card, upi or bankaccount (ie enach) as the payment method.'
@@ -1659,7 +1024,7 @@ paths:
       description: 'This API allows the merchant to delete the mandate using the mandateid.
 
 
-        Through this action, the mandate set to a ‘deleted’ status at the issuer.  Some card networks (RuPay, Amex) require the customer to complete an additional AFA using the payment method linked with the mandate to approve the deletion process.'
+        Through this action, the mandate set to a ‘deleted’ status at the issuer. Some card networks (RuPay, Amex) require the customer to complete an additional AFA using the payment method linked with the mandate to approve the deletion process.'
       parameters:
       - $ref: '#/components/parameters/bdTraceId'
       - $ref: '#/components/parameters/bdTimeStamp'
@@ -2396,7 +1761,7 @@ paths:
               schema:
                 type: string
               description: Accept Response Content-Type to take the values application/jose
-      description: List of attributes that can be modified depend upon the payment method type.  An AFA using the payment method linked with the mandate is required to modify one or more of the attributes.
+      description: List of attributes that can be modified depend upon the payment method type. An AFA using the payment method linked with the mandate is required to modify one or more of the attributes.
       parameters:
       - $ref: '#/components/parameters/bdTraceId'
       - $ref: '#/components/parameters/bdTimeStamp'
@@ -2817,6 +2182,20 @@ paths:
       - Mandate
 components:
   schemas:
+    Upi:
+      type: object
+      x-stoplight:
+        id: 5964437f54f97
+      x-examples:
+        Example 1:
+          vpa: testvpa@abc
+      properties:
+        vpa:
+          type: string
+          description: Virtual Payment Address
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9\\.\\-\\_]{2,38}\\@[a-zA-Z0-9]{3,20}$
+          example: abc@okbank
+      description: Required when payment_method_type = upi and txn_process_type = collect
     3ds_parameter:
       title: 3ds_parameter
       x-stoplight:
@@ -2825,6 +2204,870 @@ components:
       enum:
       - merchant
       description: Value that determines which entity will capture the device attributes, possible values are merchant
+    Mercid:
+      title: mercid
+      x-stoplight:
+        id: 43ns25lu1fyuc
+      type: string
+      pattern: ^[A-Za-z0-9]{1,10}$
+      example: BDMERCID
+      description: Unique identifier as defined by BillDesk for each merchant
+    Bankaccount_holder_name:
+      title: bankaccount_holder_name
+      x-stoplight:
+        id: jedjceugzit8g
+      type: string
+      description: Name of the bank account holder
+      example: John Doe
+      pattern: ^[A-Za-z0-9\\s\\.'\\-\\~\\@\\_]{1,120}$
+    Card_type:
+      description: Card product type, takes the following values - debit, credit or prepaid
+      title: card_type
+      x-stoplight:
+        id: r4tyk0ee6k6u5
+      type: string
+      example: debit, credit, prepaid
+    Card_network:
+      description: Card network, for eg. visa
+      title: card_network
+      x-stoplight:
+        id: fmhnjhdrk4ngb
+      type: string
+      example: VISA, MASTER
+    Pay-using-card-number-pan:
+      type: object
+      x-stoplight:
+        id: 1xxgnveu0ix3k
+      x-examples:
+        Example 1:
+          card:
+            number: '4242420000001234'
+            expiry_month: '12'
+            expiry_year: '2029'
+            holder_name: John Doe
+            cvv: '123'
+            tokenize: 'true'
+            coft_consent: 'true'
+      title: Pay using card number - pan
+      properties:
+        number:
+          type: string
+          example: '4242420000001234'
+          pattern: ^[0-9]{16}$
+          description: Card number
+        expiry_month:
+          type: string
+          example: '02'
+          description: Card expiry month in MM format
+        expiry_year:
+          type: string
+          example: '2029'
+          description: Card expiry year in YYYY format
+        holder_name:
+          type: string
+          example: John Doe
+          description: Cardholder name
+          pattern: ^[A-Za-z0-9\\\\s\\\\.'\\\\-\\\\~\\\\@\\\\_]{1,120}$
+        cvv:
+          type: string
+          example: '123'
+          description: Card cvv value
+        tokenize:
+          type: string
+          enum:
+          - 'true'
+          description: If the card is required to be tokenized then, the value is true
+        coft_consent:
+          type: string
+          enum:
+          - 'true'
+          description: Fixed value as true, confirming the card holder consent to tokenize the card
+      required:
+      - number
+      - expiry_month
+      - expiry_year
+      - cvv
+    Deletedon:
+      title: deletedon
+      x-stoplight:
+        id: say421z8ls54l
+      type: string
+    Frequency:
+      title: frequency
+      x-stoplight:
+        id: xrmygt1ddb1b6
+      type: string
+      description: "Frequency at which the subscription debits will be processed, possible values are:\n•week - weekly \n•mnth - monthly\n•bimn – bi-monthly\n•qurt - quarterly\n•bian – bi-annually\n•year - yearly\n•adho – adhoc\n"
+      enum:
+      - week
+      - mnth
+      - bimn
+      - qurt
+      - bian
+      - year
+      - adho
+    IFSC:
+      title: IFSC
+      x-stoplight:
+        id: grn65kr3i0pk0
+      type: string
+      description: IFSC of the bank account number
+      pattern: ^[A-Za-z]{4}[a-zA-Z0-9]{7}$
+      example: IDBK10000002
+    Error_desc:
+      title: error_desc
+      x-stoplight:
+        id: uyor3loffwtew
+      type: string
+      description: Represents the error description for the response
+    Createdon:
+      title: createdon
+      x-stoplight:
+        id: k3ewegvbimz0g
+      type: string
+      description: object creation timestamp
+      format: date-time
+    Subscription_amount:
+      title: subscription_amount
+      x-stoplight:
+        id: 7j61bmv2v1u41
+      type: string
+      description: Subscription amount in two decimals, eg. 2400.00
+      example: '2400.00'
+      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+    Card_issuer:
+      description: Card issuer
+      title: card_issuer
+      x-stoplight:
+        id: tm5adiwnqv7q0
+      type: string
+    Amount_type:
+      title: amount_type
+      x-stoplight:
+        id: o7dqaslkupvxa
+      type: string
+      description: "Indicates whether subscription amount is fixed or has a maximum limit. The following values are possible\n•\tmaximum - indicates the maximum amount that can be charged for the subscription\n•\tfixed – indicates the fixed amount to be charged for the subscription\nPlease note: For upi, only \"maximum\" is allowed. This is required to allow for token debit (small value transaction)\n"
+      enum:
+      - maximum
+      - fixed
+    Next_step:
+      title: next_step
+      x-stoplight:
+        id: ayox9qr52qx6o
+      type: string
+      description: Refers to the action to be taken by the merchant, for eg. redirect or capture_otp
+      enum:
+      - redirect
+      - capture_otp
+      - 3ds2_challenge
+      - 3ds2_frictionless
+    Pay-using-issuer-token:
+      type: object
+      x-stoplight:
+        id: 605rgi2ucynyf
+      x-examples:
+        Example 1:
+          card:
+            issuer_token:
+              token_value: '1234383920541234'
+              token_cryptogram: /1234AAASMuXoH8AmYMoglY1234=
+              token_expiry_month: '12'
+              token_expiry_year: '2029'
+            card_end: '0004'
+            cvv: '123'
+            holder_name: John Doe
+      title: Pay using issuer token
+      properties:
+        issuer_token:
+          type: object
+          required:
+          - token_value
+          - token_cryptogram
+          - token_expiry_month
+          - token_expiry_year
+          properties:
+            token_value:
+              type: string
+              description: Token Value – as received from TSP in the ‘Detokenize’ response
+              pattern: ^[A-Za-z0-9]{1,35}$
+              example: '1234383920541234'
+            token_cryptogram:
+              type: string
+              description: Token Cryptogram – as received from TSP in the ‘Detokenize’ response
+              example: /1234AAASMuXoH8AmYMoglY1234=
+              pattern: ^[a-zA-Z0-9\\\\/\\\\!@#\\\\$%\\\\^&\\\\*\\\\(\\\\)\\\\{\\\\}_\\\\+\\\\=\\\\|:”;’,\\\\.~`\\\\-\\\\\\\\]{1,256}$
+            token_expiry_month:
+              type: integer
+              example: '02'
+              description: Token Expiry Month – as received from TSP in the MM format
+            token_expiry_year:
+              type: integer
+              example: 2029
+              description: Token Expiry Year – as received from TSP in the YYYY format
+        card_end:
+          type: string
+          description: "Last 4 digits of the card number \n\nNote: For an EMI transaction via network token,this attribute value is required for loan booking"
+          example: '0045'
+        cvv:
+          type: string
+          description: 'Card cvv value '
+          example: '123'
+        holder_name:
+          type: string
+          description: Cardholder name
+          pattern: ^[A-Za-z0-9\\s\\.'\\-\\~\\@\\_]{1,120}$
+          example: John Doe
+      required:
+      - issuer_token
+      - card_end
+    Links_Parameters:
+      description: Parameters that are used to redirect the customer to the issuer URL
+      type: object
+      x-examples:
+        Example 1:
+          tranid: '973712065583009734440001099962'
+          AccuCardholderId: '90926094409'
+          AccuReturnURL: https://www.merchanturl.com/response.jsp
+          session: U4440001099962
+          AccuGuid: 15e66a3b-956e-42f8-84d4-859e3e8c9fed
+          TermUrl: https://www.merchanturl.com/response.jsp
+          AccuRequestId: YjIxM2ZiZGUyMGY2MmNjZWE5YWQ1NGE5OGNiZDUyZjkyYThlMDFiYjFkMTY1Yjc0ZTI4NTgxNDA1MGRiNzE0Ng==
+          cardend: '4938'
+      title: parameters
+      properties:
+        creq:
+          type: string
+          description: Challenge request message or payment message for 3ds2.0 protocol authentication
+        bdcreq:
+          type: string
+          description: "Challenge request message or payment message for \n3ds2.0 protocol authentication (Threeds method url flow)"
+        tranid:
+          type: string
+          description: Payment parameter for rupay redirect flow
+        AccuCardholderId:
+          type: string
+          description: Payment parameter for rupay redirect flow
+        AccuReturnURL:
+          type: string
+          description: Payment parameter for rupay redirect flow
+        session:
+          type: string
+          description: Payment parameter for rupay redirect flow
+        AccuGuid:
+          type: string
+          description: Payment parameter for rupay redirect flow
+        TermUrl:
+          type: string
+          description: Payment parameter for rupay redirect flow
+        AccuRequestId:
+          type: string
+          description: Payment parameter for rupay redirect flow
+        cardend:
+          type: string
+          description: Payment parameter for rupay redirect flow
+    Error-object:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: This will be same as HTTP response code
+        error_type:
+          type: string
+          description: This indicates of the category of errors that could be encountered, for e.g. validation_error, api_connection_error, etc.
+        error_code:
+          type: string
+          description: Under the error_type, there could be different error_codes that could be returned depending upon the API and the underlying interaction
+        message:
+          type: string
+          description: More details as a description for the error_code
+    Transactionid:
+      title: transactionid
+      x-stoplight:
+        id: uqizgn6tyoqhg
+      type: string
+      description: 'Unique transactionid created by BillDesk '
+      pattern: ^[A-Za-z0-9]{14,35}$
+      example: U4560001099939
+    Pay-using-altid:
+      type: object
+      x-stoplight:
+        id: 77jgo8f9g4srj
+      x-examples:
+        Example 1:
+          card:
+            network_token:
+              token_value: '1234383920541234'
+              token_cryptogram: /1234AAASMuXoH8AmYMoglY1234=
+              token_expiry_month: '12'
+              token_expiry_year: '2029'
+            card_end: '0004'
+            cvv: '123'
+            holder_name: John Doe
+      title: Pay using alt id token
+      properties:
+        altid_token:
+          type: object
+          required:
+          - altid_value
+          - altid_cryptogram
+          - altid_expiry_month
+          - altid_expiry_year
+          properties:
+            altid_value:
+              type: string
+              description: Token Value – as received from TSP, provided in the ‘Detokenize’ response
+              pattern: ^[A-Za-z0-9]{1,35}$
+              example: '1234383920541234'
+            altid_cryptogram:
+              type: string
+              description: Token Cryptogram – as received from TSP, provided in the ‘Detokenize’ response
+              pattern: ^[a-zA-Z0-9\\/\\!@#\\$%\\^&\\*\\(\\)\\{\\}_\\+\\=\\|:”;’,\\.~`\\-\\\\]{1,256}$
+              example: /1234AAASMuXoH8AmYMoglY1234=
+            altid_expiry_month:
+              type: integer
+              example: '02'
+              description: Token Expiry Month – as received from TSP in the MM format
+            altid_expiry_year:
+              type: integer
+              example: 2029
+              description: Token Expiry Year – as received from TSP in the YYYY format
+            altid_trid:
+              type: string
+              description: 'conditional: required only for AMEX - validate once'
+        card_end:
+          type: string
+          description: "Last 4 digits of the card number \n\nNote: For an EMI transaction via network token,this attribute value is required for loan booking"
+          example: '0045'
+        cvv:
+          type: string
+          description: Card cvv value
+          example: '123'
+        holder_name:
+          type: string
+          description: Cardholder name
+          example: John Doe
+          pattern: ^[A-Za-z0-9\\\\s\\\\.'\\\\-\\\\~\\\\@\\\\_]{1,120}$
+      required:
+      - altid_token
+      - cvv
+      - holder_name
+    Currency:
+      title: currency
+      x-stoplight:
+        id: 1ehjh4f7vidz7
+      type: string
+      description: ISO currency of the transaction amount, for INR this value will be 356
+    Pay-using-network-token:
+      type: object
+      x-stoplight:
+        id: ze1cvmk9lawl5
+      x-examples:
+        Example 1:
+          card:
+            network_token:
+              token_value: '1234383920541234'
+              token_cryptogram: /1234AAASMuXoH8AmYMoglY1234=
+              token_expiry_month: '12'
+              token_expiry_year: '2029'
+            card_end: '0004'
+            cvv: '123'
+            holder_name: John Doe
+      title: Pay using network token
+      properties:
+        network_token:
+          type: object
+          required:
+          - token_value
+          - token_cryptogram
+          - token_expiry_month
+          - token_expiry_year
+          properties:
+            token_value:
+              type: string
+              description: Token Value – as received from TSP, provided in the ‘Detokenize’ response
+              pattern: ^[A-Za-z0-9]{1,35}$
+              example: '1234383920541234'
+            token_cryptogram:
+              type: string
+              description: Token Cryptogram – as received from TSP, provided in the ‘Detokenize’ response
+              pattern: ^[a-zA-Z0-9\\/\\!@#\\$%\\^&\\*\\(\\)\\{\\}_\\+\\=\\|:”;’,\\.~`\\-\\\\]{1,256}$
+              example: /1234AAASMuXoH8AmYMoglY1234=
+            token_expiry_month:
+              type: integer
+              example: '02'
+              description: Token Expiry Month – as received from TSP in the MM format
+            token_expiry_year:
+              type: integer
+              example: 2029
+              description: Token Expiry Year – as received from TSP in the YYYY format
+        card_end:
+          type: string
+          description: "Last 4 digits of the card number \n\nNote: For an EMI transaction via network token,this attribute value is required for loan booking"
+          example: '0045'
+        cvv:
+          type: string
+          description: Card cvv value
+          example: '123'
+        holder_name:
+          type: string
+          description: Cardholder name
+          example: John Doe
+          pattern: ^[A-Za-z0-9\\\\s\\\\.'\\\\-\\\\~\\\\@\\\\_]{1,120}$
+      required:
+      - network_token
+      - card_end
+    Payment_method_type_subscriptions:
+      title: payment_method_type
+      x-stoplight:
+        id: srv1yjnq1s6ua
+      type: string
+      description: 'Represents the method of payment, and can take the following values - card, netbanking, wallet, upi, eft, bankaccount, cashcard, cardless (non-card emi option)
+
+        The associated object will also be provided in the request.'
+      enum:
+      - card
+      - netbanking
+      - upi
+    Bankaccount:
+      type: object
+      x-stoplight:
+        id: xz4vf44eamaja
+      x-examples:
+        Example 1:
+          type: savings
+          number: 025199000004061
+          holder_name: John Doe
+          dest_bank_id: YBK
+      description: Required when payment_method_type = bankaccount
+      properties:
+        number:
+          type: string
+          description: Bank account number
+          pattern: ^\\d{9,18}$
+          example: '8928292891111'
+          x-stoplight:
+            id: gtyccqe4czccv
+        type:
+          type: string
+          description: "Type of the bank account, and can take the following values:\n•\tsavings\n•\tcurrent"
+          enum:
+          - savings
+          - current
+          - overdraft
+          x-stoplight:
+            id: iv130qvba1z6k
+        holder_name:
+          type: string
+          description: Name of the bank account holder
+          pattern: ^[A-Za-z0-9\\s\\.'\\-\\~\\@\\_]{1,120}$
+          example: John Doe
+          x-stoplight:
+            id: mmbh9skvdy39x
+        dest_bank_id:
+          type: string
+          description: Unique id created for the destination bank, where enach services are currently facilitated by NPCI
+          example: YBK
+          x-stoplight:
+            id: xkncms4x678ni
+        ifsc:
+          type: string
+          description: IFSC of the bank account number
+          pattern: ^[A-Za-z]{4}[a-zA-Z0-9]{7}$
+          example: BANK0000002
+          x-stoplight:
+            id: oij0aiw1orzjm
+        paymentaccountid:
+          type: string
+          description: Unique id created by BillDesk for the payment instrument
+          x-stoplight:
+            id: bwkpaipiq7kq3
+        bank_id:
+          type: string
+          description: Sponsor bank through which the mandate is created
+          pattern: ^[A-Za-z0-9]{1,10}$
+          example: 1HM
+          x-stoplight:
+            id: h0jt9657rsmng
+      required:
+      - number
+      - type
+      - holder_name
+      - dest_bank_id
+    Debit_day:
+      title: debit_day
+      x-stoplight:
+        id: ppp2ede7qx3fc
+      type: string
+      description: 'Required only where payment_method_type = upi. Default value "1" to be passed
+
+        '
+      pattern: ^\\d{1,2}$
+      example: '1'
+      enum:
+      - '1'
+    Masked_value:
+      description: "Last 4 digits of the card number \nNote: For an EMI transaction via network token, this attribute value is required for loan booking"
+      title: masked_value
+      x-stoplight:
+        id: r3wddilt5cyy4
+      type: string
+      example: xxxxxxxxxxxx1001
+    Customer:
+      title: customer
+      x-examples:
+        Example 1:
+          first_name: John
+          last_name: Doe
+          mobile: '9800000000'
+          mobile_alt: '9800000000'
+          email: john.doe@somedomain.com
+          email_alt: john.doe@somedomain.com
+      type: object
+      properties:
+        first_name:
+          type: string
+          description: Customer’s First Name
+          example: John
+        last_name:
+          type: string
+          description: Customer’s Last Name
+          example: Doe
+        mobile:
+          type: string
+          description: Customer’s Mobile number
+          pattern: ^[\\+]{0,1}[0-9]{5,15}$
+          example: '9022979988'
+        mobile_alt:
+          type: string
+          description: Customer’s Alternate Mobile number
+          pattern: ^[\\+]{0,1}[0-9]{5,15}$
+          example: '9022979982'
+        email:
+          type: string
+          description: Customer’s Email address
+          pattern: ^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9\\-]+)*(\\.[A-Za-z]{2,6})$
+          example: abc@xyz.com
+        email_alt:
+          type: string
+          description: Customer’s alternate Email Address
+          example: abc@xyz.com
+          pattern: ^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9\\-]+)*(\\.[A-Za-z]{2,6})$
+      required:
+      - first_name
+      - last_name
+    Response-parameters:
+      type: object
+      x-examples:
+        Example 1:
+          cres: eJytmFmvo8iSgN/5Fa26j 1Y3qxdariMlO9hgsy8vIwyYfTGLWX7 94HP6VFXX1Ghujy7S0UmCzMiIzIgv0 nk0kjaKGD0KhjZ6O8pR1XyXA364Xvl 88vF+ivl/jvm6mfrze/W+TZS3g
+          AccuResponseCode: ACCU000
+          session: X4440639244491
+          AccuGuid: a13df076-5c82-4fbf-aa5c-be11e9847e9a
+          AccuRequestId: MGI2ZTE2M2RjYzJjNTBhMDlkMzA1OTc2NmU3OTBjOTdjNjk3NjA5MDdmY2RlMDI1MTA1MDBjOTYyMzMyODNjNg==
+          MD: ''
+          Pares: ''
+      properties:
+        cres:
+          type: string
+          description: Response parameters as received from the issuer, and will be cres for 3ds 2.0 flow
+          example: eJytmFmvo8iSgN/5Fa26j 1Y3qxdariMlO9hgsy8vIwyYfTGLWX7 94HP6VFXX1Ghujy7S0UmCzMiIzIgv0 nk0kjaKGD0KhjZ6O8pR1XyXA364Xvl 88vF+ivl/jvm6mfrze/W+TZS3g
+        AccuResponseCode:
+          type: string
+          description: Response parameters as received from the issuer, and will be received for Rupay cards
+          example: 'ACCU000 '
+        session:
+          type: string
+          description: Response parameters as received from the issuer, and will be received for Rupay cards
+          example: X4440639244491
+        AccuGuid:
+          type: string
+          description: Response parameters as received from the issuer, and will be received for Rupay cards
+          example: a13df076-5c82-4fbf-aa5c-be11e9847e9a
+        AccuRequestId:
+          type: string
+          description: Response parameters as received from the issuer, and will be received for Rupay cards
+          example: MGI2ZTE2M2RjYzJjNTBhMDlkMzA1OTc2NmU3OTBjOTdjNjk3NjA5MDdmY2RlMDI1MTA1MDBjOTYyMzMyODNjNg=="
+        otp:
+          type: string
+          description: for a native authentication where next_step = capture_otp
+        TermUrl:
+          type: string
+          description: Payment parameter for rupay redirect flow
+        cardend:
+          type: string
+          description: Payment parameter for rupay redirect flow
+    Mandateid:
+      title: mandateid
+      x-stoplight:
+        id: joq1b0hwy6hce
+      type: string
+      description: Unique mandateid created by BillDesk
+      pattern: ^[A-Za-z0-9]{1,20}$
+      example: MA19E400049927
+    Start_date:
+      title: start_date
+      x-stoplight:
+        id: v7tyy2tfnut1w
+      type: string
+      description: "Subscription start date in yyyy-mm-dd format\nNote: Should be greater than or equal to current date (IST timezone). \nNote for UPI : Should be equal to mandate creation date for UPI. In UPI, an subsequent charge is created on a successful mandate. This includes the first charge as well along with mandate creation. Since first charge is done immediately, it is important that the mandate “start_date” should be today’s date \n"
+      format: date
+      example: '2021-05-08'
+    Error_type:
+      title: error_type
+      x-stoplight:
+        id: snpogojwqc0aq
+      type: string
+      description: Represents the error type for the response
+    Avs-request:
+      type: object
+      x-examples:
+        Example 1:
+          bankaccount:
+          - number: '12233445566'
+            ifsc: IDBK10000002
+            name: John Doe
+          - number: '12233445567'
+            ifsc: IDBK10000002
+            name: John Doe
+      description: 'This API can be used to verify the bank account number by initiating a penny drop to the account. For upi, validation is done at acquiring bank end '
+      title: Account validation
+      properties:
+        bankaccounts:
+          type: array
+          items:
+            type: object
+            properties:
+              number:
+                $ref: '#/components/schemas/Bankacc_number'
+                description: Customer's bank account number
+              ifsc:
+                $ref: '#/components/schemas/IFSC'
+                description: IFSC of the bank account number
+              name:
+                $ref: '#/components/schemas/Bankaccount_holder_name'
+                description: Name of the bank account holder
+            required:
+            - number
+            - ifsc
+    Authentication_type:
+      title: authentication_type
+      x-stoplight:
+        id: c33ke2q5rl7ql
+      type: string
+      description: Represents the type of authentication initiated in the request, will be fixed value - 3ds2
+      enum:
+      - 3ds2
+      example: 3ds2
+    Recurrence_rule:
+      title: recurrence_rule
+      x-stoplight:
+        id: mzu48wk4tb3i8
+      type: string
+      description: 'Note: Required only where payment_method_type = upi. Default value : ''after''
+
+        '
+      enum:
+      - after
+    Verification_required:
+      title: verification_required
+      x-stoplight:
+        id: aoczom910lxfh
+      type: string
+      enum:
+      - 'true'
+      - 'false'
+      description: 'Indicates whether a verification is required while creating the mandate, and takes the boolean true.
+
+        Note Required only where payment_method_type = bankaccount.'
+    Pay-using-card-account-id:
+      type: object
+      x-stoplight:
+        id: dbr5tekgwo4lq
+      x-examples:
+        Example 1:
+          card:
+            cardaccountid: CA0AAEF9000000000123
+            cvv: '123'
+            card_end: '0055'
+            holder_name: John Doe
+      title: Pay using card account id
+      properties:
+        cardaccountid:
+          type: string
+          description: Unique ID created by BillDesk for the combination of card number, mercid and customer_refid
+          example: CA0AAEF9000000000123
+        cvv:
+          type: string
+          description: 'Card cvv value '
+          example: '123'
+        card_end:
+          type: string
+          description: "Last 4 digits of the card number \n\nNote: For an EMI transaction via network token,this attribute value is required for loan booking"
+          example: '0045'
+        holder_name:
+          type: string
+          pattern: ^[A-Za-z0-9\\s\\.'\\-\\~\\@\\_]{1,120}$
+          example: John Doe
+          description: Cardholder name
+      required:
+      - cardaccountid
+      - cvv
+      - card_end
+    Objectid:
+      title: objectid
+      x-stoplight:
+        id: bbwm8bhhbqd4r
+      type: string
+      description: 'String representing the object''s type. Objects of the same type share the same value. '
+      enum:
+      - transaction
+      - authentication
+      - mandate
+      - invoice
+      - cardaccount
+      - validatevpa
+      - dispute
+      - settlement
+      - altid
+      - mandate_token
+      - accountvalidation
+    Error_code:
+      title: error_code
+      x-stoplight:
+        id: 2grhtze0qf6ob
+      type: string
+      description: Represents the error code for the response
+    Valid_date:
+      title: valid_date
+      x-stoplight:
+        id: cdufg3umnvllt
+      type: string
+      description: Date and time till when the url is valid
+    Avs-response:
+      type: object
+      x-examples:
+        Example 1:
+          bankaccount:
+          - number: xxxxxxxxx5566
+            ifsc: IDBK10000002
+            name: John Doe
+          - number: xxxxxxxxx5567
+            ifsc: IDBK10000002
+            name: John Doe
+          account_matched: 'true'
+          name_matched: 'true'
+      properties:
+        bankaccount:
+          type: array
+          description: Details of the bank account
+          items:
+            type: object
+            properties:
+              number:
+                $ref: '#/components/schemas/Bankacc_number'
+              ifsc:
+                $ref: '#/components/schemas/IFSC'
+              name:
+                $ref: '#/components/schemas/Bankaccount_holder_name'
+        account_matched:
+          type: string
+          description: Boolean value (true or false) that indicates the status of account matching
+          enum:
+          - 'true'
+          - 'false'
+        name_matched:
+          type: string
+          description: Boolean value (true or false) that indicates the status of name matching
+          enum:
+          - 'true'
+          - 'false'
+      description: ''
+    Links:
+      type: object
+      x-stoplight:
+        id: 7t5udyb6ilh37
+      x-examples:
+        Example 1:
+          links:
+          - href: https://wwww.issuerurl.com/somepage
+            rel: redirect
+            method: post
+            parameters:
+              creq: eyJtZXNzYWdlVHlwZSI6IkNSZXEiLCJtZXNzYWdlVmVyc2lvbiI6IjIuMS4wIiwidGhyZWVEU1NlcnZlclRyYW5zSUQiOiIzYjFlYmQ5NC04NTZhLTRlYjEtYTJlMS00MWZkNTdjZGFkZjAiLCJhY3NUcmFuc0lEIjoiOGMzMzk3NTItMjNmMS00NmZlLThmNzEtMzAwZjAyMzY0NjcxIiwiY2hhbGxlbmdlV2luZG93U2l6ZSI6IjA1In0=
+      description: Associated links with the object, and contains the issuer URL that will be provided in the redirect authentication workflow
+      properties:
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              href:
+                type: string
+                description: Issuer response URL
+              rel:
+                type: string
+                description: Fixed value as redirect
+              method:
+                type: string
+                enum:
+                - POST
+              parameters:
+                $ref: '#/components/schemas/Links_Parameters'
+                description: Parameters that are used to redirect the customer to the issuer URL
+      title: links
+    Card-Response:
+      type: object
+      x-stoplight:
+        id: n1nmwdiqy5hrc
+      x-examples:
+        Example 1:
+          card:
+            type: DEBIT
+            card_end: '1234'
+            network: VISA
+            issuer: ABC Bank
+      properties:
+        type:
+          $ref: '#/components/schemas/Card_type'
+          description: Card product type, takes the following values - debit, credit or prepaid
+        masked_value:
+          $ref: '#/components/schemas/Masked_value'
+          description: "Last 4 digits of the card number \nNote: For an EMI transaction via network token, this attribute value is required for loan booking"
+        network:
+          $ref: '#/components/schemas/Card_network'
+          description: Card network, for eg. visa
+        issuer:
+          $ref: '#/components/schemas/Card_issuer'
+          description: Card issuer
+    Customer_message:
+      title: customer_message
+      x-stoplight:
+        id: ln96v402kk8ge
+      type: string
+      description: Customer message for display and is generally provided in the native OTP authentication journey, ie. next_step=capture_otp
+      enum:
+      - capture_otp
+    Bank_umrn:
+      title: bank_umrn
+      x-stoplight:
+        id: qjm9t2s4xtj05
+      type: string
+      example: 130a977ccabb11e7abc4cec278b6b50a@mypsp
+      description: 'Unique mandate reference number provided from the acquiring bank or network
+
+        Note: This attribute is provided for the upi and bankaccount payment methods
+
+        '
+    Customer_refid:
+      title: customer_refid
+      x-stoplight:
+        id: mpmq18zbl4x12
+      type: string
+      description: 'Unique reference of the customer in the merchant system, and can be linked to different subscriptions of the same customer
+
+        Required for mandate and tokenization'
+      pattern: ^[A-Za-z0-9\\_\\:\\-]{1,80}$
+      example: CSREF00001
     Additional-Info:
       type: object
       x-examples:
@@ -2869,30 +3112,6 @@ components:
         additional_info7:
           type: string
           example: Details7
-    Card-Response:
-      type: object
-      x-stoplight:
-        id: n1nmwdiqy5hrc
-      x-examples:
-        Example 1:
-          card:
-            type: DEBIT
-            card_end: '1234'
-            network: VISA
-            issuer: ABC Bank
-      properties:
-        type:
-          $ref: '#/components/schemas/Card_type'
-          description: Card product type, takes the following values - debit, credit or prepaid
-        masked_value:
-          $ref: '#/components/schemas/Masked_value'
-          description: "Last 4 digits of the card number \nNote: For an EMI transaction via network token, this attribute value is required for loan booking"
-        network:
-          $ref: '#/components/schemas/Card_network'
-          description: Card network, for eg. visa
-        issuer:
-          $ref: '#/components/schemas/Card_issuer'
-          description: Card issuer
     Device:
       type: object
       x-stoplight:
@@ -2999,396 +3218,12 @@ components:
       - accept_header
       - browser_language
       - browser_javascript_enabled
-    Error-object:
-      type: object
-      properties:
-        status:
-          type: integer
-          description: This will be same as HTTP response code
-        error_type:
-          type: string
-          description: This indicates of the category of errors that could be encountered, for e.g. validation_error, api_connection_error, etc.
-        error_code:
-          type: string
-          description: Under the error_type, there could be different error_codes that could be returned depending upon the API and the underlying interaction
-        message:
-          type: string
-          description: More details as a description for the error_code
-    IFSC:
-      title: IFSC
+    Subscription_status:
+      title: subscription_status
       x-stoplight:
-        id: grn65kr3i0pk0
+        id: y0fyz4zqhcknd
       type: string
-      description: IFSC of the bank account number
-      pattern: ^[A-Za-z]{4}[a-zA-Z0-9]{7}$
-      example: IDBK10000002
-    Pay-using-altid:
-      type: object
-      x-stoplight:
-        id: 77jgo8f9g4srj
-      x-examples:
-        Example 1:
-          card:
-            network_token:
-              token_value: '1234383920541234'
-              token_cryptogram: /1234AAASMuXoH8AmYMoglY1234=
-              token_expiry_month: '12'
-              token_expiry_year: '2029'
-            card_end: '0004'
-            cvv: '123'
-            holder_name: John Doe
-      title: Pay using alt id token
-      properties:
-        altid_token:
-          type: object
-          required:
-          - altid_value
-          - altid_cryptogram
-          - altid_expiry_month
-          - altid_expiry_year
-          properties:
-            altid_value:
-              type: string
-              description: Token Value – as received from TSP, provided in the ‘Detokenize’ response
-              pattern: ^[A-Za-z0-9]{1,35}$
-              example: '1234383920541234'
-            altid_cryptogram:
-              type: string
-              description: Token Cryptogram – as received from TSP, provided in the ‘Detokenize’ response
-              pattern: ^[a-zA-Z0-9\\/\\!@#\\$%\\^&\\*\\(\\)\\{\\}_\\+\\=\\|:”;’,\\.~`\\-\\\\]{1,256}$
-              example: /1234AAASMuXoH8AmYMoglY1234=
-            altid_expiry_month:
-              type: integer
-              example: '02'
-              description: Token Expiry Month – as received from TSP in the MM format
-            altid_expiry_year:
-              type: integer
-              example: 2029
-              description: Token Expiry Year – as received from TSP in the YYYY format
-            altid_trid:
-              type: string
-              description: 'conditional: required only for AMEX - validate once'
-        card_end:
-          type: string
-          description: "Last 4 digits of the card number \n\nNote: For an EMI transaction via network token,this attribute value is required for loan booking"
-          example: '0045'
-        cvv:
-          type: string
-          description: Card cvv value
-          example: '123'
-        holder_name:
-          type: string
-          description: Cardholder name
-          example: John Doe
-          pattern: ^[A-Za-z0-9\\\\s\\\\.'\\\\-\\\\~\\\\@\\\\_]{1,120}$
-      required:
-      - altid_token
-      - cvv
-      - holder_name
-    Pay-using-card-account-id:
-      type: object
-      x-stoplight:
-        id: dbr5tekgwo4lq
-      x-examples:
-        Example 1:
-          card:
-            cardaccountid: CA0AAEF9000000000123
-            cvv: '123'
-            card_end: '0055'
-            holder_name: John Doe
-      title: Pay using card account id
-      properties:
-        cardaccountid:
-          type: string
-          description: Unique ID created by BillDesk for the combination of card number, mercid and customer_refid
-          example: CA0AAEF9000000000123
-        cvv:
-          type: string
-          description: 'Card cvv value '
-          example: '123'
-        card_end:
-          type: string
-          description: "Last 4 digits of the card number \n\nNote: For an EMI transaction via network token,this attribute value is required for loan booking"
-          example: '0045'
-        holder_name:
-          type: string
-          pattern: ^[A-Za-z0-9\\s\\.'\\-\\~\\@\\_]{1,120}$
-          example: John Doe
-          description: Cardholder name
-      required:
-      - cardaccountid
-      - cvv
-      - card_end
-    Pay-using-card-number-pan:
-      type: object
-      x-stoplight:
-        id: 1xxgnveu0ix3k
-      x-examples:
-        Example 1:
-          card:
-            number: '4242420000001234'
-            expiry_month: '12'
-            expiry_year: '2029'
-            holder_name: John Doe
-            cvv: '123'
-            tokenize: 'true'
-            coft_consent: 'true'
-      title: Pay using card number - pan
-      properties:
-        number:
-          type: string
-          example: '4242420000001234'
-          pattern: ^[0-9]{16}$
-          description: Card number
-        expiry_month:
-          type: string
-          example: '02'
-          description: Card expiry month in MM format
-        expiry_year:
-          type: string
-          example: '2029'
-          description: Card expiry year in YYYY format
-        holder_name:
-          type: string
-          example: John Doe
-          description: Cardholder name
-          pattern: ^[A-Za-z0-9\\\\s\\\\.'\\\\-\\\\~\\\\@\\\\_]{1,120}$
-        cvv:
-          type: string
-          example: '123'
-          description: Card cvv value
-        tokenize:
-          type: string
-          enum:
-          - 'true'
-          description: If the card is required to be tokenized then, the value is true
-        coft_consent:
-          type: string
-          enum:
-          - 'true'
-          description: Fixed value as true, confirming the card holder consent to tokenize the card
-      required:
-      - number
-      - expiry_month
-      - expiry_year
-      - cvv
-    Pay-using-issuer-token:
-      type: object
-      x-stoplight:
-        id: 605rgi2ucynyf
-      x-examples:
-        Example 1:
-          card:
-            issuer_token:
-              token_value: '1234383920541234'
-              token_cryptogram: /1234AAASMuXoH8AmYMoglY1234=
-              token_expiry_month: '12'
-              token_expiry_year: '2029'
-            card_end: '0004'
-            cvv: '123'
-            holder_name: John Doe
-      title: Pay using issuer token
-      properties:
-        issuer_token:
-          type: object
-          required:
-          - token_value
-          - token_cryptogram
-          - token_expiry_month
-          - token_expiry_year
-          properties:
-            token_value:
-              type: string
-              description: Token Value – as received from TSP in the ‘Detokenize’ response
-              pattern: ^[A-Za-z0-9]{1,35}$
-              example: '1234383920541234'
-            token_cryptogram:
-              type: string
-              description: Token Cryptogram – as received from TSP in the ‘Detokenize’ response
-              example: /1234AAASMuXoH8AmYMoglY1234=
-              pattern: ^[a-zA-Z0-9\\\\/\\\\!@#\\\\$%\\\\^&\\\\*\\\\(\\\\)\\\\{\\\\}_\\\\+\\\\=\\\\|:”;’,\\\\.~`\\\\-\\\\\\\\]{1,256}$
-            token_expiry_month:
-              type: integer
-              example: '02'
-              description: Token Expiry Month – as received from TSP in the MM format
-            token_expiry_year:
-              type: integer
-              example: 2029
-              description: Token Expiry Year – as received from TSP in the YYYY format
-        card_end:
-          type: string
-          description: "Last 4 digits of the card number \n\nNote: For an EMI transaction via network token,this attribute value is required for loan booking"
-          example: '0045'
-        cvv:
-          type: string
-          description: 'Card cvv value '
-          example: '123'
-        holder_name:
-          type: string
-          description: Cardholder name
-          pattern: ^[A-Za-z0-9\\s\\.'\\-\\~\\@\\_]{1,120}$
-          example: John Doe
-      required:
-      - issuer_token
-      - card_end
-    Pay-using-network-token:
-      type: object
-      x-stoplight:
-        id: ze1cvmk9lawl5
-      x-examples:
-        Example 1:
-          card:
-            network_token:
-              token_value: '1234383920541234'
-              token_cryptogram: /1234AAASMuXoH8AmYMoglY1234=
-              token_expiry_month: '12'
-              token_expiry_year: '2029'
-            card_end: '0004'
-            cvv: '123'
-            holder_name: John Doe
-      title: Pay using network token
-      properties:
-        network_token:
-          type: object
-          required:
-          - token_value
-          - token_cryptogram
-          - token_expiry_month
-          - token_expiry_year
-          properties:
-            token_value:
-              type: string
-              description: Token Value – as received from TSP, provided in the ‘Detokenize’ response
-              pattern: ^[A-Za-z0-9]{1,35}$
-              example: '1234383920541234'
-            token_cryptogram:
-              type: string
-              description: Token Cryptogram – as received from TSP, provided in the ‘Detokenize’ response
-              pattern: ^[a-zA-Z0-9\\/\\!@#\\$%\\^&\\*\\(\\)\\{\\}_\\+\\=\\|:”;’,\\.~`\\-\\\\]{1,256}$
-              example: /1234AAASMuXoH8AmYMoglY1234=
-            token_expiry_month:
-              type: integer
-              example: '02'
-              description: Token Expiry Month – as received from TSP in the MM format
-            token_expiry_year:
-              type: integer
-              example: 2029
-              description: Token Expiry Year – as received from TSP in the YYYY format
-        card_end:
-          type: string
-          description: "Last 4 digits of the card number \n\nNote: For an EMI transaction via network token,this attribute value is required for loan booking"
-          example: '0045'
-        cvv:
-          type: string
-          description: Card cvv value
-          example: '123'
-        holder_name:
-          type: string
-          description: Cardholder name
-          example: John Doe
-          pattern: ^[A-Za-z0-9\\\\s\\\\.'\\\\-\\\\~\\\\@\\\\_]{1,120}$
-      required:
-      - network_token
-      - card_end
-    Amount_type:
-      title: amount_type
-      x-stoplight:
-        id: o7dqaslkupvxa
-      type: string
-      description: "Indicates whether subscription amount is fixed or has a maximum limit. The following values are possible\n•\tmaximum - indicates the maximum amount that can be charged for the subscription\n•\tfixed – indicates the fixed amount to be charged for the subscription\nPlease note: For upi, only \"maximum\" is allowed. This is required to allow for token debit (small value transaction)\n"
-      enum:
-      - maximum
-      - fixed
-    Authentication_type:
-      title: authentication_type
-      x-stoplight:
-        id: c33ke2q5rl7ql
-      type: string
-      description: Represents the type of authentication initiated in the request, will be fixed value - 3ds2
-      enum:
-      - 3ds2
-      example: 3ds2
-    Avs-request:
-      type: object
-      x-examples:
-        Example 1:
-          bankaccount:
-          - number: '12233445566'
-            ifsc: IDBK10000002
-            name: John Doe
-          - number: '12233445567'
-            ifsc: IDBK10000002
-            name: John Doe
-      description: 'This API can be used to verify the bank account number by initiating a penny drop to the account. For upi, validation is done at acquiring bank end '
-      title: Account validation
-      properties:
-        bankaccounts:
-          type: array
-          items:
-            type: object
-            properties:
-              number:
-                $ref: '#/components/schemas/Bankacc_number'
-                description: Customer's bank account number
-              ifsc:
-                $ref: '#/components/schemas/IFSC'
-                description: IFSC of the bank account number
-              name:
-                $ref: '#/components/schemas/Bankaccount_holder_name'
-                description: Name of the bank account holder
-            required:
-            - number
-            - ifsc
-    Avs-response:
-      type: object
-      x-examples:
-        Example 1:
-          bankaccount:
-          - number: xxxxxxxxx5566
-            ifsc: IDBK10000002
-            name: John Doe
-          - number: xxxxxxxxx5567
-            ifsc: IDBK10000002
-            name: John Doe
-          account_matched: 'true'
-          name_matched: 'true'
-      properties:
-        bankaccount:
-          type: array
-          description: Details of the bank account
-          items:
-            type: object
-            properties:
-              number:
-                $ref: '#/components/schemas/Bankacc_number'
-              ifsc:
-                $ref: '#/components/schemas/IFSC'
-              name:
-                $ref: '#/components/schemas/Bankaccount_holder_name'
-        account_matched:
-          type: string
-          description: Boolean value (true or false) that indicates the status of account matching
-          enum:
-          - 'true'
-          - 'false'
-        name_matched:
-          type: string
-          description: Boolean value (true or false) that indicates the status of name matching
-          enum:
-          - 'true'
-          - 'false'
-      description: ''
-    Bank_umrn:
-      title: bank_umrn
-      x-stoplight:
-        id: qjm9t2s4xtj05
-      type: string
-      example: 130a977ccabb11e7abc4cec278b6b50a@mypsp
-      description: 'Unique mandate reference number provided from the acquiring bank or network
-
-        Note: This attribute is provided for the upi and bankaccount payment methods
-
-        '
+      description: "Represents the status of the mandate and depends upon the linked payment method. \n\nThe following values are possible:\ncard, upi\n•\tinitiated - mandate request has been initiated, and this status is applicable for the SDK based workflow\n•\tpending - mandate request has been initiated and the linked payment method is not yet validated\n•\tactive – linked payment method has been validated and recurring charges can be processed\n•\trejected - mandate has been rejected by the issuer or payment provider\n•\tdeleted - mandate has been deleted by the customer from the merchant channel\n•\tcancelled – mandate has been stopped by customer from the issuer channel\n•\tsuspended – mandate has been temporarily suspended by the issuer or payment provider\nbankaccount\n•\tpending – mandate request has been sent for account verification to NPCI\n•\tactive – mandate is active and recurring charges can be processed\n•\tdelete_initiated – mandate delete request is initiated by the customer or the merchant\n•\tdeleted – mandate is deleted after confirmation from NPCI\n•\trejected – mandate is rejected by NPCI\n"
     Bankacc_number:
       title: bankacc_number
       x-stoplight:
@@ -3397,185 +3232,14 @@ components:
       description: Bank account number
       pattern: ^\\d{9,18}$
       example: '12233445566'
-    Bankaccount:
-      type: object
+    Amount:
+      title: amount
       x-stoplight:
-        id: xz4vf44eamaja
-      x-examples:
-        Example 1:
-          type: savings
-          number: 025199000004061
-          holder_name: John Doe
-          dest_bank_id: YBK
-      description: Required when payment_method_type = bankaccount
-      properties:
-        number:
-          type: string
-          description: Bank account number
-          pattern: ^\\d{9,18}$
-          example: '8928292891111'
-          x-stoplight:
-            id: gtyccqe4czccv
-        type:
-          type: string
-          description: "Type of the bank account, and can take the following values:\n•\tsavings\n•\tcurrent"
-          enum:
-          - savings
-          - current
-          - overdraft
-          x-stoplight:
-            id: iv130qvba1z6k
-        holder_name:
-          type: string
-          description: Name of the bank account holder
-          pattern: ^[A-Za-z0-9\\s\\.'\\-\\~\\@\\_]{1,120}$
-          example: John Doe
-          x-stoplight:
-            id: mmbh9skvdy39x
-        dest_bank_id:
-          type: string
-          description: Unique id created for the destination bank, where enach services are currently facilitated by NPCI
-          example: YBK
-          x-stoplight:
-            id: xkncms4x678ni
-        ifsc:
-          type: string
-          description: IFSC of the bank account number
-          pattern: ^[A-Za-z]{4}[a-zA-Z0-9]{7}$
-          example: BANK0000002
-          x-stoplight:
-            id: oij0aiw1orzjm
-        paymentaccountid:
-          type: string
-          description: Unique id created by BillDesk for the payment instrument
-          x-stoplight:
-            id: bwkpaipiq7kq3
-        bank_id:
-          type: string
-          description: Sponsor bank through which the mandate is created
-          pattern: ^[A-Za-z0-9]{1,10}$
-          example: 1HM
-          x-stoplight:
-            id: h0jt9657rsmng
-      required:
-      - number
-      - type
-      - holder_name
-      - dest_bank_id
-    Bankaccount_holder_name:
-      title: bankaccount_holder_name
-      x-stoplight:
-        id: jedjceugzit8g
+        id: s5xd8bwxp2orm
       type: string
-      description: Name of the bank account holder
-      example: John Doe
-      pattern: ^[A-Za-z0-9\\s\\.'\\-\\~\\@\\_]{1,120}$
-    Card_issuer:
-      description: Card issuer
-      title: card_issuer
-      x-stoplight:
-        id: tm5adiwnqv7q0
-      type: string
-    Card_network:
-      description: Card network, for eg. visa
-      title: card_network
-      x-stoplight:
-        id: fmhnjhdrk4ngb
-      type: string
-      example: VISA, MASTER
-    Card_type:
-      description: Card product type, takes the following values - debit, credit or prepaid
-      title: card_type
-      x-stoplight:
-        id: r4tyk0ee6k6u5
-      type: string
-      example: debit, credit, prepaid
-    Createdon:
-      title: createdon
-      x-stoplight:
-        id: k3ewegvbimz0g
-      type: string
-      description: object creation timestamp
-      format: date-time
-    Currency:
-      title: currency
-      x-stoplight:
-        id: 1ehjh4f7vidz7
-      type: string
-      description: ISO currency of the transaction amount, for INR this value will be 356
-    Customer:
-      title: customer
-      x-examples:
-        Example 1:
-          first_name: John
-          last_name: Doe
-          mobile: '9800000000'
-          mobile_alt: '9800000000'
-          email: john.doe@somedomain.com
-          email_alt: john.doe@somedomain.com
-      type: object
-      properties:
-        first_name:
-          type: string
-          description: Customer’s First Name
-          example: John
-        last_name:
-          type: string
-          description: Customer’s Last Name
-          example: Doe
-        mobile:
-          type: string
-          description: Customer’s Mobile number
-          pattern: ^[\\+]{0,1}[0-9]{5,15}$
-          example: '9022979988'
-        mobile_alt:
-          type: string
-          description: Customer’s Alternate Mobile number
-          pattern: ^[\\+]{0,1}[0-9]{5,15}$
-          example: '9022979982'
-        email:
-          type: string
-          description: Customer’s Email address
-          pattern: ^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9\\-]+)*(\\.[A-Za-z]{2,6})$
-          example: abc@xyz.com
-        email_alt:
-          type: string
-          description: Customer’s alternate Email Address
-          example: abc@xyz.com
-          pattern: ^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9\\-]+)*(\\.[A-Za-z]{2,6})$
-      required:
-      - first_name
-      - last_name
-    Customer_message:
-      title: customer_message
-      x-stoplight:
-        id: ln96v402kk8ge
-      type: string
-      description: Customer message for display and is generally provided in the native OTP authentication journey, ie. next_step=capture_otp
-      enum:
-      - capture_otp
-    Customer_refid:
-      title: customer_refid
-      x-stoplight:
-        id: mpmq18zbl4x12
-      type: string
-      description: 'Unique reference of the customer in the merchant system, and can be linked to different subscriptions of the same customer
-
-        Required for mandate and tokenization'
-      pattern: ^[A-Za-z0-9\\_\\:\\-]{1,80}$
-      example: CSREF00001
-    Debit_day:
-      title: debit_day
-      x-stoplight:
-        id: ppp2ede7qx3fc
-      type: string
-      description: 'Required only where payment_method_type = upi. Default value "1" to be passed
-
-        '
-      pattern: ^\\d{1,2}$
-      example: '1'
-      enum:
-      - '1'
+      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
+      example: '299.28'
+      description: Transaction amount in two decimals, eg. 299.28
     End_date:
       title: end_date
       x-stoplight:
@@ -3586,190 +3250,6 @@ components:
         Note: Should be greater than current date (IST timezone). For mandates that are valid ‘until cancelled’ by the customer, end_date year could be 2099, and for upi, maximum duration allowed for a mandate is 30 years'
       format: date
       example: '2059-12-31'
-    Error_code:
-      title: error_code
-      x-stoplight:
-        id: 2grhtze0qf6ob
-      type: string
-      description: Represents the error code for the response
-    Error_desc:
-      title: error_desc
-      x-stoplight:
-        id: uyor3loffwtew
-      type: string
-      description: Represents the error description for the response
-    Error_type:
-      title: error_type
-      x-stoplight:
-        id: snpogojwqc0aq
-      type: string
-      description: Represents the error type for the response
-    Frequency:
-      title: frequency
-      x-stoplight:
-        id: xrmygt1ddb1b6
-      type: string
-      description: "Frequency at which the subscription debits will be processed, possible values are:\n•week - weekly \n•mnth - monthly\n•bimn – bi-monthly\n•qurt - quarterly\n•bian – bi-annually\n•year - yearly\n•adho – adhoc\n"
-      enum:
-      - week
-      - mnth
-      - bimn
-      - qurt
-      - bian
-      - year
-      - adho
-    Links:
-      type: object
-      x-stoplight:
-        id: 7t5udyb6ilh37
-      x-examples:
-        Example 1:
-          links:
-          - href: https://wwww.issuerurl.com/somepage
-            rel: redirect
-            method: post
-            parameters:
-              creq: eyJtZXNzYWdlVHlwZSI6IkNSZXEiLCJtZXNzYWdlVmVyc2lvbiI6IjIuMS4wIiwidGhyZWVEU1NlcnZlclRyYW5zSUQiOiIzYjFlYmQ5NC04NTZhLTRlYjEtYTJlMS00MWZkNTdjZGFkZjAiLCJhY3NUcmFuc0lEIjoiOGMzMzk3NTItMjNmMS00NmZlLThmNzEtMzAwZjAyMzY0NjcxIiwiY2hhbGxlbmdlV2luZG93U2l6ZSI6IjA1In0=
-      description: Associated links with the object, and contains the issuer URL that will be provided in the redirect authentication workflow
-      properties:
-        links:
-          type: array
-          items:
-            type: object
-            properties:
-              href:
-                type: string
-                description: Issuer response URL
-              rel:
-                type: string
-                description: Fixed value as redirect
-              method:
-                type: string
-                enum:
-                - POST
-              parameters:
-                $ref: '#/components/schemas/Links_Parameters'
-                description: Parameters that are used to redirect the customer to the issuer URL
-      title: links
-    Links_Parameters:
-      description: Parameters that are used to redirect the customer to the issuer URL
-      type: object
-      x-examples:
-        Example 1:
-          tranid: '973712065583009734440001099962'
-          AccuCardholderId: '90926094409'
-          AccuReturnURL: https://www.merchanturl.com/response.jsp
-          session: U4440001099962
-          AccuGuid: 15e66a3b-956e-42f8-84d4-859e3e8c9fed
-          TermUrl: https://www.merchanturl.com/response.jsp
-          AccuRequestId: YjIxM2ZiZGUyMGY2MmNjZWE5YWQ1NGE5OGNiZDUyZjkyYThlMDFiYjFkMTY1Yjc0ZTI4NTgxNDA1MGRiNzE0Ng==
-          cardend: '4938'
-      title: parameters
-      properties:
-        creq:
-          type: string
-          description: Challenge request message or payment message for 3ds2.0 protocol authentication
-        bdcreq:
-          type: string
-          description: "Challenge request message or payment message for \n3ds2.0 protocol authentication (Threeds method url flow)"
-        tranid:
-          type: string
-          description: Payment parameter for rupay redirect flow
-        AccuCardholderId:
-          type: string
-          description: Payment parameter for rupay redirect flow
-        AccuReturnURL:
-          type: string
-          description: Payment parameter for rupay redirect flow
-        session:
-          type: string
-          description: Payment parameter for rupay redirect flow
-        AccuGuid:
-          type: string
-          description: Payment parameter for rupay redirect flow
-        TermUrl:
-          type: string
-          description: Payment parameter for rupay redirect flow
-        AccuRequestId:
-          type: string
-          description: Payment parameter for rupay redirect flow
-        cardend:
-          type: string
-          description: Payment parameter for rupay redirect flow
-    Mandateid:
-      title: mandateid
-      x-stoplight:
-        id: joq1b0hwy6hce
-      type: string
-      description: Unique mandateid created by BillDesk
-      pattern: ^[A-Za-z0-9]{1,20}$
-      example: MA19E400049927
-    Masked_value:
-      description: "Last 4 digits of the card number \nNote: For an EMI transaction via network token, this attribute value is required for loan booking"
-      title: masked_value
-      x-stoplight:
-        id: r3wddilt5cyy4
-      type: string
-      example: xxxxxxxxxxxx1001
-    Mercid:
-      title: mercid
-      x-stoplight:
-        id: 43ns25lu1fyuc
-      type: string
-      pattern: ^[A-Za-z0-9]{1,10}$
-      example: BDMERCID
-      description: Unique identifier as defined by BillDesk for each merchant
-    Next_step:
-      title: next_step
-      x-stoplight:
-        id: ayox9qr52qx6o
-      type: string
-      description: Refers to the action to be taken by the merchant, for eg. redirect or capture_otp
-      enum:
-      - redirect
-      - capture_otp
-      - 3ds2_challenge
-      - 3ds2_frictionless
-    Objectid:
-      title: objectid
-      x-stoplight:
-        id: bbwm8bhhbqd4r
-      type: string
-      description: 'String representing the object''s type. Objects of the same type share the same value. '
-      enum:
-      - transaction
-      - authentication
-      - mandate
-      - invoice
-      - cardaccount
-      - validatevpa
-      - dispute
-      - settlement
-      - altid
-      - mandate_token
-      - accountvalidation
-    Payment_method_type_subscriptions:
-      title: payment_method_type
-      x-stoplight:
-        id: srv1yjnq1s6ua
-      type: string
-      description: 'Represents the method of payment, and can take the following values - card, netbanking, wallet, upi, eft, bankaccount, cashcard, cardless (non-card emi option)
-
-        The associated object will also be provided in the request.'
-      enum:
-      - card
-      - netbanking
-      - upi
-    Recurrence_rule:
-      title: recurrence_rule
-      x-stoplight:
-        id: mzu48wk4tb3i8
-      type: string
-      description: 'Note: Required only where payment_method_type = upi. Default value : ''after''
-
-        '
-      enum:
-      - after
     Ru:
       title: return URL
       x-stoplight:
@@ -3778,22 +3258,6 @@ components:
       example: https://www.merchant.com
       pattern: =^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;{]*[-a-zA-Z0-9+&@#/%=~_|} ]{1,2000}$
       description: Merchants URL where the customer will be redirected after a transaction is completed
-    Start_date:
-      title: start_date
-      x-stoplight:
-        id: v7tyy2tfnut1w
-      type: string
-      description: "Subscription start date in yyyy-mm-dd format\nNote: Should be greater than or equal to current date (IST timezone). \nNote for UPI : Should be equal to mandate creation date for UPI. In UPI, an subsequent charge is created on a successful mandate. This includes the first charge as well along with mandate creation. Since first charge is done immediately, it is important that the mandate “start_date” should be today’s date \n"
-      format: date
-      example: '2021-05-08'
-    Subscription_amount:
-      title: subscription_amount
-      x-stoplight:
-        id: 7j61bmv2v1u41
-      type: string
-      description: Subscription amount in two decimals, eg. 2400.00
-      example: '2400.00'
-      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
     Subscription_desc:
       title: subscription_desc
       x-stoplight:
@@ -3808,44 +3272,6 @@ components:
       type: string
       example: SUBREF101
       description: Unique reference assigned by merchant for a subscription
-    Subscription_status:
-      title: subscription_status
-      x-stoplight:
-        id: y0fyz4zqhcknd
-      type: string
-      description: "Represents the status of the mandate and depends upon the linked payment method. \n\nThe following values are possible:\ncard, upi\n•\tinitiated - mandate request has been initiated, and this status is applicable for the SDK based workflow\n•\tpending - mandate request has been initiated and the linked payment method is not yet validated\n•\tactive – linked payment method has been validated and recurring charges can be processed\n•\trejected - mandate has been rejected by the issuer or payment provider\n•\tdeleted - mandate has been deleted by the customer from the merchant channel\n•\tcancelled – mandate has been stopped by customer from the issuer channel\n•\tsuspended – mandate has been temporarily suspended by the issuer or payment provider\nbankaccount\n•\tpending – mandate request has been sent for account verification to NPCI\n•\tactive – mandate is active and recurring charges can be processed\n•\tdelete_initiated – mandate delete request is initiated by the customer\
-        \ or the merchant\n•\tdeleted – mandate is deleted after confirmation from NPCI\n•\trejected – mandate is rejected by NPCI\n"
-    Upi:
-      type: object
-      x-stoplight:
-        id: 5964437f54f97
-      x-examples:
-        Example 1:
-          vpa: testvpa@abc
-      properties:
-        vpa:
-          type: string
-          description: Virtual Payment Address
-          pattern: ^[a-zA-Z0-9][a-zA-Z0-9\\.\\-\\_]{2,38}\\@[a-zA-Z0-9]{3,20}$
-          example: abc@okbank
-      description: Required when payment_method_type = upi and txn_process_type = collect
-    Valid_date:
-      title: valid_date
-      x-stoplight:
-        id: cdufg3umnvllt
-      type: string
-      description: Date and time till when the url is valid
-    Verification_required:
-      title: verification_required
-      x-stoplight:
-        id: aoczom910lxfh
-      type: string
-      enum:
-      - 'true'
-      - 'false'
-      description: 'Indicates whether a verification is required while creating the mandate, and takes the boolean true.
-
-        Note Required only where payment_method_type = bankaccount.'
     Verification_type:
       title: verification_type
       x-stoplight:
@@ -3857,233 +3283,6 @@ components:
       description: 'Indicates type of verification that will be performed by the customer to set up the mandate, accepted values are enach_nb for netbanking, enach_dc for debit card.
 
         Note Required only where payment_method_type = bankaccount.'
-    Response-parameters:
-      type: object
-      x-examples:
-        Example 1:
-          cres: eJytmFmvo8iSgN/5Fa26j 1Y3qxdariMlO9hgsy8vIwyYfTGLWX7 94HP6VFXX1Ghujy7S0UmCzMiIzIgv0 nk0kjaKGD0KhjZ6O8pR1XyXA364Xvl 88vF+ivl/jvm6mfrze/W+TZS3g
-          AccuResponseCode: ACCU000
-          session: X4440639244491
-          AccuGuid: a13df076-5c82-4fbf-aa5c-be11e9847e9a
-          AccuRequestId: MGI2ZTE2M2RjYzJjNTBhMDlkMzA1OTc2NmU3OTBjOTdjNjk3NjA5MDdmY2RlMDI1MTA1MDBjOTYyMzMyODNjNg==
-          MD: ''
-          Pares: ''
-      properties:
-        cres:
-          type: string
-          description: Response parameters as received from the issuer, and will be cres for 3ds 2.0 flow
-          example: eJytmFmvo8iSgN/5Fa26j 1Y3qxdariMlO9hgsy8vIwyYfTGLWX7 94HP6VFXX1Ghujy7S0UmCzMiIzIgv0 nk0kjaKGD0KhjZ6O8pR1XyXA364Xvl 88vF+ivl/jvm6mfrze/W+TZS3g
-        AccuResponseCode:
-          type: string
-          description: Response parameters as received from the issuer, and will be received for Rupay cards
-          example: 'ACCU000 '
-        session:
-          type: string
-          description: Response parameters as received from the issuer, and will be received for Rupay cards
-          example: X4440639244491
-        AccuGuid:
-          type: string
-          description: Response parameters as received from the issuer, and will be received for Rupay cards
-          example: a13df076-5c82-4fbf-aa5c-be11e9847e9a
-        AccuRequestId:
-          type: string
-          description: Response parameters as received from the issuer, and will be received for Rupay cards
-          example: MGI2ZTE2M2RjYzJjNTBhMDlkMzA1OTc2NmU3OTBjOTdjNjk3NjA5MDdmY2RlMDI1MTA1MDBjOTYyMzMyODNjNg=="
-        otp:
-          type: string
-          description: for a native authentication where next_step = capture_otp
-        TermUrl:
-          type: string
-          description: Payment parameter for rupay redirect flow
-        cardend:
-          type: string
-          description: Payment parameter for rupay redirect flow
-    Transactionid:
-      title: transactionid
-      x-stoplight:
-        id: uqizgn6tyoqhg
-      type: string
-      description: 'Unique transactionid created by BillDesk '
-      pattern: ^[A-Za-z0-9]{14,35}$
-      example: U4560001099939
-    Amount:
-      title: amount
-      x-stoplight:
-        id: s5xd8bwxp2orm
-      type: string
-      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
-      example: '299.28'
-      description: Transaction amount in two decimals, eg. 299.28
-    Deletedon:
-      title: deletedon
-      x-stoplight:
-        id: say421z8ls54l
-      type: string
-    Debit_date:
-      title: debit_date
-      x-stoplight:
-        id: 5usx2p3zckebu
-      type: string
-      description: Date on which the SI debit needs to be executed to the payment method
-      format: date
-      example: '2023-03-20'
-    Duedate-invoice:
-      title: duedate invoice
-      x-stoplight:
-        id: v12xirnswg2kg
-      type: string
-      description: Invoice due date in the YYYYMMDD format
-      format: date
-      example: '2023-06-17'
-    Early_payment_amount:
-      title: early_payment_amount
-      x-stoplight:
-        id: u4yui5aos3xnp
-      type: string
-      description: Amount after adjusting any discount applicable.
-      example: '490.00'
-      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
-    Early_payment_discount:
-      title: early_payment_discount
-      x-stoplight:
-        id: 0lsucvetql6v4
-      type: string
-      description: Discount amount for early payment of invoice
-      example: '10.00'
-      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
-    Early_payment_duedate:
-      title: early_payment_duedate
-      x-stoplight:
-        id: u2m2m4rt1cfwg
-      type: string
-      description: Early payment date for invoice
-      format: date
-      example: '2021-05-12'
-    Invoice-description:
-      title: invoice description
-      x-stoplight:
-        id: uupk2dh7h3o3d
-      type: string
-      description: Brief description for the invoice
-      example: Debit for Plan 499
-    Invoice-status:
-      title: invoice status
-      x-stoplight:
-        id: 5u2aujpkflkqe
-      type: string
-      description: "Status of the invoice. Possible values are:\n•\tunpaid – invoice has been received successfully, and charge can be processed\n•\trejected – invoice has been rejected by the system\n•\tstopped – invoice has been stopped by the customer"
-      enum:
-      - unpaid
-      - rejected
-      - stopped
-    Invoice_amount:
-      title: invoice_amount
-      x-stoplight:
-        id: 9fgc9kmduepen
-      type: string
-      description: Invoice amount in two decimals, eg. 2400.00
-      example: '2400.00'
-      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
-    Invoice_date:
-      title: invoice_date
-      x-stoplight:
-        id: 6mq22pcpkw417
-      type: string
-      description: Invoice generation date in the YYYYMMDD format
-      format: date
-      pattern: ^(20[0-9]{2})-(0[1-9]|1[012])-(0[1-9]|(1|2)[0-9]|3[01])$
-      example: '2023-04-22'
-    Invoice_display_number:
-      title: invoice_display_number
-      x-stoplight:
-        id: b2njtovqpbyjr
-      type: string
-      description: Invoice number to be displayed to the customer
-      pattern: ^[A-Za-z0-9]{1,80}$
-      example: DISINVNUM0001
-    Invoice_id:
-      title: invoice_id
-      x-stoplight:
-        id: egk48lxwpqerd
-      type: string
-      description: Unique id created by BillDesk for each invoice
-      pattern: ^[A-Za-z0-9]{14,35}$
-      example: IA047F00003663
-    Invoice_number:
-      title: invoice_number
-      x-stoplight:
-        id: oiuf5pzvt5xfg
-      type: string
-      description: Unique number assigned by merchant for the invoice
-      pattern: ^[A-Za-z0-9]{1,100}$
-      example: INVNUM0000001
-    Late_payment_amount:
-      title: late_payment_amount
-      x-stoplight:
-        id: 6ioh3qt3dfubl
-      type: string
-      description: Payment amount after due date
-      example: '520.00'
-      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
-    Late_payment_charges:
-      title: late_payment_charges
-      x-stoplight:
-        id: 6gfk8t6uxedl5
-      type: string
-      description: Late payment charges if any
-      example: '20.00'
-      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
-    Net_amount:
-      title: net_amount
-      x-stoplight:
-        id: i71dt7x5lc5pb
-      type: string
-      description: Current payable amount, adjusted for discount or late payment charges as applicable
-      example: '2.00'
-      pattern: ^([1-9]{1}[0-9]{0,7}(\.[0-9]{1,2})?)$
-    Debit_request_no:
-      title: debit_request_no
-      x-stoplight:
-        id: ptagco5o2uzfu
-      type: string
-      description: 'Sequence of the recurring charge as per the mandate received from the customer
-
-
-        For e.g. Say a customer is on a monthly payment plan – the first recurring charge has the value as “1”, the second as “2” and so on. If the merchant does not process a debit say for the second month and then in the next (third) month when initiating a charge, this value should be set as “3” in the request.'
-      example: '1'
-  parameters:
-    bdTraceId:
-      in: header
-      name: BD-Traceid
-      description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
-      required: true
-      schema:
-        type: string
-        example: '20201203182838'
-    bdTimeStamp:
-      in: header
-      name: BD-Timestamp
-      description: Request timestamp to identify date and time of origin of request. Example, a value of BD-Timestamp 20210113180403 identifies the request to have originated on 13th January 2021 at 06:04:03 PM.
-      required: true
-      schema:
-        type: string
-        example: '20201203182838'
-    Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        example: application/json
-      description: Request Content-Type to take the values application/jose
-    Accept:
-      name: Accept
-      in: header
-      required: true
-      schema:
-        type: string
-        example: application/jose
-      description: Accept Response Content-Type to take the values application/jose
   examples:
     403-error:
       value:
@@ -4103,6 +3302,47 @@ components:
         error_type: api_validation_error
         error_code: GNAVE0001
         message: Incorrect merchant configuration
+  parameters:
+    bdTimeStamp:
+      in: header
+      name: BD-Timestamp
+      description: Request timestamp to identify date and time of origin of request. Example, a value of BD-Timestamp 20210113180403 identifies the request to have originated on 13th January 2021 at 06:04:03 PM.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/json
+      description: Request Content-Type to take the values application/jose
+    bdTraceId:
+      in: header
+      name: BD-Traceid
+      description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    Accept:
+      name: Accept
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/jose
+      description: Accept Response Content-Type to take the values application/jose
+x-stoplight:
+  id: fn32l3grxzejb
+x-samples-languages:
+- shell
+- json
+- node
+- java
+- csharp
 x-provenance:
   method: searched
   source: https://docs.billdesk.io/reference

@@ -1,0 +1,53 @@
+{
+  "provider": "billdesk",
+  "sources": [
+    "billdesk-linkpay-openapi.yml",
+    "billdesk-pa-settlements-openapi.yml",
+    "billdesk-payments-openapi.yml",
+    "billdesk-penny-drop-openapi.yml",
+    "billdesk-recurring-openapi.yml",
+    "billdesk-tokenization-openapi.yml",
+    "billdesk-validate-vpa-openapi.yml"
+  ],
+  "outputs": [
+    "billdesk-payment-links-api-openapi.yml",
+    "billdesk-settlement-api-openapi.yml",
+    "billdesk-authentication-api-openapi.yml",
+    "billdesk-order-api-openapi.yml",
+    "billdesk-refund-api-openapi.yml",
+    "billdesk-transaction-api-openapi.yml",
+    "billdesk-penny-drop-api-openapi.yml",
+    "billdesk-invoice-api-openapi.yml",
+    "billdesk-mandate-api-openapi.yml",
+    "billdesk-card-account-api-openapi.yml",
+    "billdesk-guest-checkout-altid-api-openapi.yml",
+    "billdesk-validate-vpa-api-openapi.yml"
+  ],
+  "archived": [
+    "archived openapi/billdesk-linkpay-openapi.yml",
+    "archived openapi/billdesk-pa-settlements-openapi.yml",
+    "archived openapi/billdesk-payments-openapi.yml",
+    "archived openapi/billdesk-penny-drop-openapi.yml",
+    "archived openapi/billdesk-recurring-openapi.yml",
+    "archived openapi/billdesk-tokenization-openapi.yml",
+    "archived openapi/billdesk-validate-vpa-openapi.yml"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "billdesk-linkpay-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "billdesk-linkpay-openapi.yml: declared missing tag: Payment Links",
+    "billdesk-pa-settlements-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "billdesk-payments-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "billdesk-payments-openapi.yml: declared missing tag: Authentication",
+    "billdesk-penny-drop-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "billdesk-recurring-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "billdesk-recurring-openapi.yml: declared missing tag: Invoice",
+    "billdesk-recurring-openapi.yml: declared missing tag: Mandate",
+    "billdesk-tokenization-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "billdesk-validate-vpa-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "apis.yml register: written (+12 apis, 15 total)"
+  ],
+  "skipped": []
+}

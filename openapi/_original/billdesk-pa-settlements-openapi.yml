@@ -1,0 +1,447 @@
+# x-archived-from: billdesk-pa-settlements-openapi.yml
+# x-archived-on: 2026-10-16
+openapi: 3.0.0
+x-stoplight:
+  id: 7ssf5linembvk
+servers:
+- url: https://uat1.billdesk.com/u2
+  description: UAT server
+- url: https://api.billdesk.com
+  description: PROD server
+info:
+  title: PA Settlements
+  description: "This explorer allows merchants to evaluate APIs that are available in the BillDesk Payment Gateway API suite.\n - Only HMAC authentication is supported.\n - All APIs are RESTful and resource oriented.\n - Servers listed are applicable for the API explorer only."
+  contact:
+    name: API Support
+    url: https://www.billdesk.com/helpcenter.htm
+    email: support@billdesk.com
+  version: '2.5'
+x-samples-languages:
+- shell
+- json
+- node
+- java
+- csharp
+paths:
+  /pasettlements/v1_2/settlements/get:
+    post:
+      summary: Retrieve Settlement
+      operationId: retrieve-settlement
+      responses:
+        '200':
+          description: OK
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                type: array
+                x-examples:
+                  Example 1:
+                  - objectid: settlement
+                    pv_number: OPCIT2008252833448
+                    mercid: BDMERCID
+                    payout_mercid: PAYOUTMERCID
+                    pv_file: PV_ABCDEF_OPCIT2010192123456.xls
+                    pv_file_date: '2022-01-03'
+                    currency: '356'
+                    amount_details:
+                      settlement: '500.00'
+                      refund: '20.00'
+                      chargeback: '10.00'
+                      refund_reversal: '0.00'
+                      chargeback_reversal: '0.00'
+                      adjustment: '0.00'
+                    charges: '10.00'
+                    taxes: '3.00'
+                    other_adjustments: '2.00'
+                    payout_amount: '455.00'
+                    status: confirmed
+                    settlement_date: '2022-01-03T10:32:15+05:30'
+                    utr: OPCIT2008252833448
+                    utr_date: '2022-01-03T10:32:15+05:30'
+                items:
+                  type: object
+                  properties:
+                    objectid:
+                      $ref: '#/components/schemas/Objectid'
+                    pv_number:
+                      type: string
+                      description: 'Unique pv_number provided by BillDesk for the
+
+                        settlement'
+                    mercid:
+                      $ref: '#/components/schemas/Mercid'
+                    payout_mercid:
+                      type: string
+                      description: 'Unique identifier for the merchant assigned in respect of the
+
+                        payout'
+                    pv_file:
+                      type: string
+                      description: Name of the file, referencing the PV
+                    pv_file_date:
+                      type: string
+                      description: Date of generation of the PV file
+                    currency:
+                      $ref: '#/components/schemas/Currency'
+                    amount_details:
+                      type: object
+                      properties:
+                        settlement:
+                          type: string
+                          description: 'positive, amount in respect of transactions to be
+
+                            settled to the merchant'
+                        refund:
+                          type: string
+                          description: 'negative, amount deducted in respect of refunds that
+
+                            are initiated'
+                        chargeback:
+                          type: string
+                          description: 'negative, amount deducted in respect of
+
+                            chargebacks'
+                        refund_reversal:
+                          type: string
+                          description: 'positive, amount in respect of refunds that
+
+                            could not be processed by the bank'
+                        chargeback_reversal:
+                          type: string
+                          description: 'positive, amount in respect of
+
+                            chargebacks that were contested successfully'
+                        adjustment:
+                          type: string
+                          description: 'positive or negative, refers to adjustments that
+
+                            are agreed with the merchant'
+                    charges:
+                      type: string
+                      description: 'Amount of BillDesk charges for the transaction processing fees
+
+                        that are deducted from the total payout'
+                    taxes:
+                      type: string
+                      description: 'Amount of applicable taxes that are deducted from the total
+
+                        payout'
+                    other_adjustments:
+                      type: string
+                      description: Any other adjustment amounts, could be positive or negative
+                    payout_amount:
+                      type: string
+                      description: 'Net Payout Amount that is settled to the merchant, and can be
+
+                        computed as -
+
+                        payout_amount = amount_details – charges – taxes +/-
+
+                        other_adjustments'
+                    status:
+                      type: string
+                      description: 'Refers to the status of the settlement object, and will take the
+
+                        following values:
+
+                        created – the settlement object is created, and sent to the bank
+
+                        for processing
+
+                        confirmed – when the UTR confirmation is received '
+                    settlement_date:
+                      type: string
+                      description: 'Date when the settlement object is created
+
+                        '
+                    utr:
+                      type: string
+                      description: 'Unique Transaction Reference (UTR) number that represents the
+
+                        inter-bank transfer instructions'
+                    utr_date:
+                      type: string
+                      description: Date when the UTR was sent
+              examples:
+                Success:
+                  value:
+                  - objectid: settlement
+                    pv_number: OPCIT2008252833448
+                    mercid: BDMERCID
+                    payout_mercid: PAYOUTMERCID
+                    pv_file: PV_ABCDEF_OPCIT2010192123456.xls
+                    pv_file_date: '2022-01-03'
+                    currency: '356'
+                    amount_details:
+                      settlement: '500.00'
+                      refund: '20.00'
+                      chargeback: '10.00'
+                      refund_reversal: '0.00'
+                      chargeback_reversal: '0.00'
+                      adjustment: '0.00'
+                    charges: '10.00'
+                    taxes: '3.00'
+                    other_adjustments: '2.00'
+                    payout_amount: '455.00'
+                    status: confirmed
+                    settlement_date: '2022-01-03T10:32:15+05:30'
+                    utr: OPCIT2008252833448
+                    utr_date: '2022-01-03T10:32:15+05:30'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Forbidden:
+                  $ref: '#/components/examples/403-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Internal Server Error:
+                  $ref: '#/components/examples/500-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        default:
+          description: Any bad or invalid request will lead to following error object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Invalid merchant config:
+                  $ref: '#/components/examples/422-Invalid-merchant-config'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+      description: You can fetch the list of settlements created within a specific time period range using this API.
+      parameters:
+      - $ref: '#/components/parameters/Recurring_BdTraceId'
+      - $ref: '#/components/parameters/Recurring_BdTimeStamp'
+      - $ref: '#/components/parameters/Recurring_Content-Type'
+      - $ref: '#/components/parameters/Recurring_Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  mercid: BDMERCID
+                  from_date: '2022-01-01'
+                  to_date: '2022-01-03'
+              properties:
+                mercid:
+                  $ref: '#/components/schemas/Mercid'
+                from_date:
+                  type: string
+                  description: 'From date in YYYYMMDD format – date from when
+
+                    the merchant wants to fetch the settlement details
+
+                    If the merchant wants to fetch settlement details for
+
+                    only one day, the merchant should specify the same
+
+                    date in ‘from_date’ and ‘to_date’
+
+                    This attribute is Mandatory when the pv_number is
+
+                    not provided in the request
+
+                    '
+                to_date:
+                  type: string
+                  description: 'To date in YYYYMMDD format – date up to when the
+
+                    merchant wants to fetch settlement details
+
+                    The maximum date range supported will be 7 days.'
+                pv_number:
+                  type: string
+                  description: 'pv_number provided by BillDesk for the settlement
+
+                    This attribute is Mandatory if the ‘from_date’ is not
+
+                    provided.'
+            examples:
+              using pv_number:
+                value:
+                  mercid: BDMERCID
+                  pv_number: OPCIT2008252833448
+              using date range:
+                value:
+                  mercid: BDMERCID
+                  from_date: '2022-01-01'
+                  to_date: '2022-01-03'
+      tags:
+      - Settlement
+    parameters: []
+components:
+  parameters:
+    Recurring_Accept:
+      name: Accept
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/jose
+      description: Accept Response Content-Type to take the values application/jose
+    Recurring_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/json
+      description: Request Content-Type to take the values application/jose
+    Recurring_BdTimeStamp:
+      in: header
+      name: BD-Timestamp
+      description: Request timestamp to identify date and time of origin of request. Example, a value of BD-Timestamp 20210113180403 identifies the request to have originated on 13th January 2021 at 06:04:03 PM.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    Recurring_BdTraceId:
+      in: header
+      name: BD-Traceid
+      description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+  examples:
+    403-error:
+      value:
+        status: 403
+        error_type: inaccessable_resource_error
+        error_code: GNIAE0002
+        message: Access forbidden
+    500-error:
+      value:
+        status: 500
+        error_type: api_processing_error
+        error_code: AUAPE0001
+        message: Internal server error
+    422-Invalid-merchant-config:
+      value:
+        status: 422
+        error_type: api_validation_error
+        error_code: GNAVE0001
+        message: Incorrect merchant configuration
+  schemas:
+    Error-object:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: This will be same as HTTP response code
+        error_type:
+          type: string
+          description: This indicates of the category of errors that could be encountered, for e.g. validation_error, api_connection_error, etc.
+        error_code:
+          type: string
+          description: Under the error_type, there could be different error_codes that could be returned depending upon the API and the underlying interaction
+        message:
+          type: string
+          description: More details as a description for the error_code
+    Currency:
+      title: currency
+      x-stoplight:
+        id: 1ehjh4f7vidz7
+      type: string
+      description: ISO currency code of the transaction amount, for INR this value will be 356
+    Mercid:
+      title: mercid
+      x-stoplight:
+        id: 43ns25lu1fyuc
+      type: string
+      pattern: ^[A-Za-z0-9]{1,10}$
+      example: BDMERCID
+      description: Unique identifier as defined by BillDesk for each merchant
+    Objectid:
+      title: objectid
+      x-stoplight:
+        id: bbwm8bhhbqd4r
+      type: string
+      description: 'String representing the object''s type. Objects of the same type share the same value. '
+      enum:
+      - transaction
+      - authentication
+      - mandate
+      - invoice
+      - cardaccount
+      - validatevpa
+      - dispute
+      - settlement
+      - altid
+      - mandate_token
+      - accountvalidation
+      - refund
+tags:
+- name: Settlement
+x-provenance:
+  method: searched
+  source: https://docs.billdesk.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.billdesk.io/reference/retrieve-settlement.md
+  merge:
+    pages: 1
+    deduped: 0
+    conflicts_kept_first: 0

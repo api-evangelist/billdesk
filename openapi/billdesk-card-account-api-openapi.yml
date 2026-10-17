@@ -1,0 +1,1278 @@
+openapi: 3.2.0
+info:
+  title: Tokenization Card Account API
+  description: 'This explorer allows merchants to evaluate APIs that are available in the BillDesk Payment Gateway API suite.
+
+    - Only HMAC authentication is supported.
+
+    - All APIs are RESTful and resource oriented.
+
+    - Servers listed are applicable for the API explorer only.'
+  contact:
+    name: API Support
+    url: https://www.billdesk.com/helpcenter.htm
+    email: support@billdesk.com
+  version: '2.5'
+servers:
+- url: https://uat1.billdesk.com/u2
+  description: UAT server
+- url: https://api.billdesk.com
+  description: PROD server
+tags:
+- name: Card Account
+paths:
+  /tokenizer/ve1_2/token/create:
+    post:
+      summary: Create Card Account
+      operationId: createCardAccount
+      responses:
+        '200':
+          description: OK
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    objectid: cardaccount
+                    mercid: BDMERCID
+                    customer_refid: CUSREF00000001
+                    cardaccountid: CA07D151000000001234
+                    orderid: ODR000000001
+                    masked_value: xxxxxxxxxxxx1234
+                    holder_name: John Doe
+                    issuer: ABC Bank
+                    network: VISA
+                    status: ACTIVE
+                    coft_consent: 'true'
+                    createdon: '2022-03-20T21:53:50+05:30'
+                    network_token:
+                      token_ref_no: 1fa3dbc43247ac3092971d3f8f4e658f
+                      token_expiry_month: '06'
+                      token_expiry_year: '2026'
+                      status: ACTIVE
+                      createdon: '2022-03-20T21:53:50+05:30'
+                properties:
+                  objectid:
+                    $ref: '#/components/schemas/Objectid'
+                  mercid:
+                    $ref: '#/components/schemas/Mercid'
+                  customer_refid:
+                    $ref: '#/components/schemas/Customer_refid'
+                  cardaccountid:
+                    $ref: '#/components/schemas/Cardaccountid'
+                  orderid:
+                    $ref: '#/components/schemas/Orderid'
+                  masked_value:
+                    $ref: '#/components/schemas/Masked_value'
+                  holder_name:
+                    $ref: '#/components/schemas/Holder_name'
+                  issuer:
+                    $ref: '#/components/schemas/Card_issuer'
+                  network:
+                    $ref: '#/components/schemas/Card_network'
+                  cardaccount_status:
+                    type: string
+                  coft_consent:
+                    type: string
+                  createdon:
+                    $ref: '#/components/schemas/Createdon'
+                  network_token:
+                    $ref: '#/components/schemas/Cardacc-network-issuer-token'
+                  issuer token:
+                    $ref: '#/components/schemas/Cardacc-network-issuer-token'
+                  cardaccount_error_code:
+                    $ref: '#/components/schemas/Error_code'
+                  cardaccount_error_type:
+                    $ref: '#/components/schemas/Error_type'
+                  cardaccount_error_desc:
+                    $ref: '#/components/schemas/Error_desc'
+              examples:
+                Success Response:
+                  value:
+                    objectid: cardaccount
+                    mercid: BDMERCID
+                    customer_refid: CUSREF00000001
+                    cardaccountid: CA07D151000000001234
+                    orderid: ODR000000001
+                    masked_value: xxxxxxxxxxxx1234
+                    holder_name: John Doe
+                    issuer: ABC Bank
+                    network: VISA
+                    status: ACTIVE
+                    coft_consent: 'true'
+                    createdon: '2022-03-20T21:53:50+05:30'
+                    network_token:
+                      token_ref_no: 1fa3dbc43247ac3092971d3f8f4e658f
+                      token_expiry_month: '06'
+                      token_expiry_year: '2026'
+                      status: ACTIVE
+                      createdon: '2022-03-20T21:53:50+05:30'
+                Failure Response:
+                  value:
+                    status: 422
+                    error_type: invalid_data_error
+                    error_code: TKIDE0007
+                    message: Invalid card.number
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Forbidden:
+                  $ref: '#/components/examples/403-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Internal Server Error:
+                  $ref: '#/components/examples/500-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        default:
+          description: Any bad or invalid request will lead to following error object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Invalid merchant config:
+                  $ref: '#/components/examples/422-Invalid-merchant-config'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+      tags:
+      - Card Account
+      description: 'A card account (or card token) can be created by providing the card details and a customer reference.
+
+
+        The API will provide a cardaccount object as a response, with a unique cardaccountid, that can be used to initiate a transaction.'
+      parameters:
+      - $ref: '#/components/parameters/bdTraceId'
+      - $ref: '#/components/parameters/bdTimeStamp'
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  mercid: BDMERCID
+                  orderid: ODR000000001
+                  customer_refid: CUSREF00000001
+                  tokenization_mode: ISSUER
+                  card:
+                    number: '4242420000001234'
+                    expiry_month: '12'
+                    expiry_year: '2029'
+                    holder_name: John Doe
+                  coft_consent: 'true'
+                  authentication_data:
+                    transactionid: U4560000453222
+                    transaction_date: '2022-03-20T21:52:55+05:30'
+              properties:
+                mercid:
+                  $ref: '#/components/schemas/Mercid'
+                orderid:
+                  $ref: '#/components/schemas/Orderid'
+                customer_refid:
+                  $ref: '#/components/schemas/Customer_refid'
+                card:
+                  $ref: '#/components/schemas/Pay-using-card-number-pan'
+                coft_consent:
+                  type: string
+                authentication_data:
+                  $ref: '#/components/schemas/Cardaccid_auth_data'
+              required:
+              - mercid
+              - orderid
+              - customer_refid
+              - card
+              - coft_consent
+              - authentication_data
+            examples:
+              Transaction done through BillDesk:
+                value:
+                  mercid: BDMERCID
+                  customer_refid: '123456'
+                  orderid: ORDER12
+                  card:
+                    number: '4000000000000002'
+                    expiry_month: '12'
+                    expiry_year: '2029'
+                    holder_name: TEST
+                    cvv: '123'
+                  coft_consent: 'true'
+                  device:
+                    init_channel: internet
+                    ip: 17.233.107.92
+                    user_agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:51.0) Gecko/20100101 Firefox/51.0
+                  authentication_data:
+                    transactionid: U4560000738625
+              Authentication done through BillDesk:
+                value:
+                  mercid: BDMERCID
+                  orderid: ODR000000001
+                  customer_refid: CUSREF00000001
+                  card:
+                    number: '4242420000001234'
+                    expiry_month: '12'
+                    expiry_year: '2029'
+                    holder_name: John Doe
+                  coft_consent: 'true'
+                  authentication_data:
+                    authenticationid: U4560000453222
+                    transaction_date: '2022-03-20T21:52:55+05:30'
+              Authentication done through external MPI:
+                value:
+                  mercid: BDMERCID
+                  orderid: ODR000000001
+                  customer_refid: CUSREF00000001
+                  card:
+                    number: '4242420000001234'
+                    expiry_month: '12'
+                    expiry_year: '2029'
+                    holder_name: John Doe
+                  coft_consent: 'true'
+                  authentication_data:
+                    eci: '05'
+                    cavv: MjcwMzIyQTQcfrtyMDAzNDUwNDg=
+                    threeds_version: 2.1.0
+                    ds_transaction_id: 9ae6259e08b8-42bb-97a2-48d8a1d2a690
+        description: ''
+  /tokenizer/ve1_2/token/delete:
+    parameters: []
+    post:
+      summary: Delete Card Account
+      operationId: deleteCardAccount
+      responses:
+        '200':
+          description: OK
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    objectid: cardaccount
+                    mercid: BDMERCID
+                    cardaccountid: CA0F2D99000000000445
+                    status: DELETED
+                properties:
+                  objectid:
+                    $ref: '#/components/schemas/Objectid'
+                  mercid:
+                    $ref: '#/components/schemas/Mercid'
+                  cardaccountid:
+                    $ref: '#/components/schemas/Cardaccountid'
+                  status:
+                    type: string
+              examples:
+                Success Response:
+                  value:
+                    objectid: cardaccount
+                    mercid: BDMERCID
+                    cardaccountid: CA0F2D99000000000445
+                    status: DELETED
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Forbidden:
+                  $ref: '#/components/examples/403-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Internal Server Error:
+                  $ref: '#/components/examples/500-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        default:
+          description: Any bad or invalid request will lead to following error object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Invalid merchant config:
+                  $ref: '#/components/examples/422-Invalid-merchant-config'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+      parameters:
+      - $ref: '#/components/parameters/bdTraceId'
+      - $ref: '#/components/parameters/bdTimeStamp'
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  mercid: BDMERCID
+                  cardaccountid: CA0F2D99000000000445
+              properties:
+                mercid:
+                  $ref: '#/components/schemas/Mercid'
+                cardaccountid:
+                  $ref: '#/components/schemas/Cardaccountid'
+            examples:
+              Request:
+                value:
+                  mercid: BDMERCID
+                  cardaccountid: CA0F2D99000000000445
+      description: This API can be used to delete a card account by providing the mercid and cardaccountid or the mercid, customer_refid and cardaccountid.
+      tags:
+      - Card Account
+  /tokenizer/ve1_2/token/list:
+    parameters: []
+    post:
+      summary: List Card Account
+      operationId: listCardAccount
+      responses:
+        '200':
+          description: OK
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    mercid: BDMERCID
+                    customer_refid: AG00001
+                    cards:
+                    - objectid: cardaccount
+                      cardaccountid: CA03F9D2000000012345
+                      orderid: ORD21121403
+                      masked_value: xxxxxxxxxxxx1234
+                      holder_name: John Doe
+                      issuer: ABC Bank
+                      network: Visa
+                      status: ACTIVE
+                      coft_consent: 'true'
+                      createdon: '2021-12-14T13:03:57+05:30'
+                      network_token:
+                        token_ref_no: 15CCBD63456
+                        token_expiry_month: '06'
+                        token_expiry_year: '2026'
+                        status: ACTIVE
+                        createdon: '2021-12-14T13:03:57+05:30'
+                    - objectid: cardaccount
+                      cardaccountid: CA0EE700000000007890
+                      orderid: ORD21121404
+                      masked_value: xxxxxxxxxxxx5831
+                      holder_name: John Doe
+                      issuer: ABC Bank
+                      network: Visa
+                      status: ACTIVE
+                      coft_consent: 'true'
+                      createdon: '2021-12-14T19:07:19+05:30'
+                      network_token:
+                        token_ref_no: 2EA4EF0153
+                        token_expiry_month: '06'
+                        token_expiry_year: '2026'
+                        status: ACTIVE
+                        createdon: '2021-12-14T19:07:19+05:30'
+                    - objectid: cardaccount
+                      cardaccountid: CA02FD2F000000000345
+                      orderid: IORD21121402
+                      masked_value: xxxxxxxxxxxx5831
+                      holder_name: John Doe
+                      issuer: ABC Bank
+                      network: Visa
+                      status: ACTIVE
+                      coft_consent: 'true'
+                      createdon: '2021-12-14T18:59:54+05:30'
+                      network_token:
+                        token_ref_no: 600E65A045
+                        token_expiry_month: '06'
+                        token_expiry_year: '2026'
+                        status: ACTIVE
+                        createdon: '2021-12-14T18:59:54+05:30'
+                properties:
+                  mercid:
+                    $ref: '#/components/schemas/Mercid'
+                  customer_refid:
+                    $ref: '#/components/schemas/Customer_refid'
+                  cards:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        objectid:
+                          $ref: '#/components/schemas/Objectid'
+                        cardaccountid:
+                          $ref: '#/components/schemas/Cardaccountid'
+                        orderid:
+                          $ref: '#/components/schemas/Orderid'
+                        masked_value:
+                          $ref: '#/components/schemas/Masked_value'
+                        holder_name:
+                          $ref: '#/components/schemas/Holder_name'
+                        issuer:
+                          $ref: '#/components/schemas/Card_issuer'
+                        network:
+                          $ref: '#/components/schemas/Card_network'
+                        status:
+                          type: string
+                        coft_consent:
+                          type: string
+                        createdon:
+                          $ref: '#/components/schemas/Createdon'
+                        network_token:
+                          $ref: '#/components/schemas/Network-issuer-token'
+              examples:
+                Response:
+                  value:
+                    mercid: BDMERCID
+                    customer_refid: AG00001
+                    cards:
+                    - objectid: cardaccount
+                      cardaccountid: CA03F9D2000000012345
+                      orderid: ORD21121403
+                      masked_value: xxxxxxxxxxxx1234
+                      holder_name: John Doe
+                      issuer: ABC Bank
+                      network: Visa
+                      status: ACTIVE
+                      coft_consent: 'true'
+                      createdon: '2021-12-14T13:03:57+05:30'
+                      network_token:
+                        token_ref_no: 15CCBD63456
+                        token_expiry_month: '06'
+                        token_expiry_year: '2026'
+                        status: ACTIVE
+                        createdon: '2021-12-14T13:03:57+05:30'
+                    - objectid: cardaccount
+                      cardaccountid: CA0EE700000000007890
+                      orderid: ORD21121404
+                      masked_value: xxxxxxxxxxxx5831
+                      holder_name: John Doe
+                      issuer: ABC Bank
+                      network: Visa
+                      status: ACTIVE
+                      coft_consent: 'true'
+                      createdon: '2021-12-14T19:07:19+05:30'
+                      network_token:
+                        token_ref_no: 2EA4EF0153
+                        token_expiry_month: '06'
+                        token_expiry_year: '2026'
+                        status: ACTIVE
+                        createdon: '2021-12-14T19:07:19+05:30'
+                    - objectid: cardaccount
+                      cardaccountid: CA02FD2F000000000345
+                      orderid: IORD21121402
+                      masked_value: xxxxxxxxxxxx5831
+                      holder_name: John Doe
+                      issuer: ABC Bank
+                      network: Visa
+                      status: ACTIVE
+                      coft_consent: 'true'
+                      createdon: '2021-12-14T18:59:54+05:30'
+                      network_token:
+                        token_ref_no: 600E65A045
+                        token_expiry_month: '06'
+                        token_expiry_year: '2026'
+                        status: ACTIVE
+                        createdon: '2021-12-14T18:59:54+05:30'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Forbidden:
+                  $ref: '#/components/examples/403-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Internal Server Error:
+                  $ref: '#/components/examples/500-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        default:
+          description: Any bad or invalid request will lead to following error object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Invalid merchant config:
+                  $ref: '#/components/examples/422-Invalid-merchant-config'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+      description: This API will fetch the list of cardaccounts created for a customer_refid.
+      parameters:
+      - $ref: '#/components/parameters/bdTraceId'
+      - $ref: '#/components/parameters/bdTimeStamp'
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  mercid: BDMERCID
+                  customer_refid: AG00001
+              properties:
+                mercid:
+                  $ref: '#/components/schemas/Mercid'
+                customer_refid:
+                  $ref: '#/components/schemas/Customer_refid'
+              required:
+              - mercid
+              - customer_refid
+            examples:
+              Request:
+                value:
+                  mercid: BDMERCID
+                  customer_refid: AG00001
+      tags:
+      - Card Account
+  /tokenizer/ve1_2/token/retrieve:
+    parameters: []
+    post:
+      summary: Retrieve Card Account
+      operationId: retrieveCardAccount
+      responses:
+        '200':
+          description: OK
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    objectid: cardaccount
+                    mercid: BDMERCID
+                    customer_refid: CUSREF00000001
+                    cardaccountid: CA07D151000000001234
+                    orderid: ODR000000001
+                    masked_value: xxxxxxxxxxxx1234
+                    holder_name: John Doe
+                    issuer: ABC Bank
+                    network: VISA
+                    status: ACTIVE
+                    coft_consent: 'true'
+                    createdon: '2022-03-20T21:53:50+05:30'
+                    network_token:
+                      token_ref_no: 1fa3dbc43247ac3092971d3f8f4e658f
+                      token_expiry_month: '06'
+                      token_expiry_year: '2026'
+                      status: ACTIVE
+                      createdon: '2022-03-20T21:53:50+05:30'
+                properties:
+                  objectid:
+                    $ref: '#/components/schemas/Objectid'
+                  mercid:
+                    $ref: '#/components/schemas/Mercid'
+                  customer_refid:
+                    $ref: '#/components/schemas/Customer_refid'
+                  cardaccountid:
+                    $ref: '#/components/schemas/Cardaccountid'
+                  orderid:
+                    $ref: '#/components/schemas/Orderid'
+                  masked_value:
+                    $ref: '#/components/schemas/Masked_value'
+                  holder_name:
+                    $ref: '#/components/schemas/Holder_name'
+                  issuer:
+                    $ref: '#/components/schemas/Card_issuer'
+                  network:
+                    $ref: '#/components/schemas/Card_network'
+                  status:
+                    type: string
+                  coft_consent:
+                    type: string
+                  createdon:
+                    $ref: '#/components/schemas/Createdon'
+                  network_token:
+                    $ref: '#/components/schemas/Network-issuer-token'
+                  issuer_token:
+                    $ref: '#/components/schemas/Network-issuer-token'
+              examples:
+                Response:
+                  value:
+                    objectid: cardaccount
+                    mercid: BDMERCID
+                    customer_refid: CUSREF00000001
+                    cardaccountid: CA07D151000000001234
+                    orderid: ODR000000001
+                    masked_value: xxxxxxxxxxxx1234
+                    holder_name: John Doe
+                    issuer: ABC Bank
+                    network: VISA
+                    status: ACTIVE
+                    coft_consent: 'true'
+                    createdon: '2022-03-20T21:53:50+05:30'
+                    network_token:
+                      token_ref_no: 1fa3dbc43247ac3092971d3f8f4e658f
+                      token_expiry_month: '06'
+                      token_expiry_year: '2026'
+                      status: ACTIVE
+                      createdon: '2022-03-20T21:53:50+05:30'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Forbidden:
+                  $ref: '#/components/examples/403-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Internal Server Error:
+                  $ref: '#/components/examples/500-error'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+        default:
+          description: Any bad or invalid request will lead to following error object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-object'
+              examples:
+                Invalid merchant config:
+                  $ref: '#/components/examples/422-Invalid-merchant-config'
+          headers:
+            BD-Traceid:
+              schema:
+                type: string
+              description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+            Content-Type:
+              schema:
+                type: string
+              description: Request Content-Type to take the values application/jose
+            Accept:
+              schema:
+                type: string
+              description: Accept Response Content-Type to take the values application/jose
+      description: Retrieve details of a cardaccount either by using the mercid and cardaccountid or the mercid, orderid and customer_refid as inputs.
+      parameters:
+      - $ref: '#/components/parameters/bdTraceId'
+      - $ref: '#/components/parameters/bdTimeStamp'
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Accept'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  mercid: BDMERCID
+                  cardaccountid: CA07D151000000001234
+                  customer_refid: CUSREF00000001
+                  orderid: ODR000000001
+              properties:
+                mercid:
+                  $ref: '#/components/schemas/Mercid'
+                cardaccountid:
+                  $ref: '#/components/schemas/Cardaccountid'
+                customer_refid:
+                  $ref: '#/components/schemas/Customer_refid'
+                orderid:
+                  $ref: '#/components/schemas/Orderid'
+              required:
+              - mercid
+            examples:
+              Using cardaccountid:
+                value:
+                  mercid: BDMERCID
+                  cardaccountid: CA07D151000000001234
+              Using customer_refid & orderid:
+                value:
+                  mercid: BDMERCID
+                  customer_refid: CUSREF00000001
+                  orderid: ODR000000001
+      tags:
+      - Card Account
+components:
+  schemas:
+    Mercid:
+      title: mercid
+      x-stoplight:
+        id: 43ns25lu1fyuc
+      type: string
+      pattern: ^[A-Za-z0-9]{1,10}$
+      example: BDMERCID
+      description: Unique identifier as defined by BillDesk for each merchant
+    Card_network:
+      title: card_network
+      x-stoplight:
+        id: fmhnjhdrk4ngb
+      type: string
+      description: Card Network
+      example: VISA, MASTER
+    Orderid:
+      title: orderid
+      x-stoplight:
+        id: lmwrwf7xn6wq8
+      type: string
+      description: Unique ID generated by the merchant for each request
+      pattern: ^[-/~A-Za-z0-9\_ \:.,#@!\\*\\+]{1,120}$
+      example: TEST0000009005
+    Pay-using-card-number-pan:
+      type: object
+      x-stoplight:
+        id: 1xxgnveu0ix3k
+      x-examples:
+        Example 1:
+          card:
+            number: '4242420000001234'
+            expiry_month: '12'
+            expiry_year: '2029'
+            holder_name: John Doe
+            cvv: '123'
+            tokenize: 'true'
+            coft_consent: 'true'
+      title: Pay using card number - pan
+      properties:
+        number:
+          type: string
+          example: '4242420000001234'
+          pattern: ^[0-9]{16}$
+          description: Card number
+        expiry_month:
+          type: string
+          example: '02'
+          description: Card expiry month in MM format
+        expiry_year:
+          type: string
+          example: '2029'
+          description: Card expiry year in YYYY format
+        holder_name:
+          type: string
+          example: John Doe
+          description: Cardholder name
+          pattern: ^[A-Za-z0-9\\\\s\\\\.'\\\\-\\\\~\\\\@\\\\_]{1,120}$
+        cvv:
+          type: string
+          example: '123'
+          description: Card cvv value
+        tokenize:
+          type: string
+          enum:
+          - 'true'
+          description: If the card is required to be tokenized then, the value is true
+        coft_consent:
+          type: string
+          enum:
+          - 'true'
+          description: Fixed value as true, confirming the card holder consent to tokenize the card
+      required:
+      - number
+      - expiry_month
+      - expiry_year
+      - cvv
+    Error_desc:
+      title: error_desc
+      x-stoplight:
+        id: uyor3loffwtew
+      type: string
+      description: Represents the error description for the response
+    Createdon:
+      title: createdon
+      x-stoplight:
+        id: k3ewegvbimz0g
+      type: string
+      description: object creation timestamp
+      format: date-time
+    Card_issuer:
+      title: card_issuer
+      x-stoplight:
+        id: tm5adiwnqv7q0
+      type: string
+      description: Card issuer
+    Eci:
+      title: eci
+      x-stoplight:
+        id: jq2g7i098vu5j
+      type: string
+      description: Authentication ECI indicator, as per the 3ds protocol (for V, M, D, A cards)
+    Error-object:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: This will be same as HTTP response code
+        error_type:
+          type: string
+          description: This indicates of the category of errors that could be encountered, for e.g. validation_error, api_connection_error, etc.
+        error_code:
+          type: string
+          description: Under the error_type, there could be different error_codes that could be returned depending upon the API and the underlying interaction
+        message:
+          type: string
+          description: More details as a description for the error_code
+    Transactionid:
+      title: transactionid
+      x-stoplight:
+        id: uqizgn6tyoqhg
+      type: string
+      description: 'Unique transactionid created by BillDesk '
+      pattern: ^[A-Za-z0-9]{14,35}$
+      example: U4560001099939
+    Authenticationid:
+      title: authenticationid
+      x-stoplight:
+        id: c1hskskz8e2iq
+      type: string
+      description: Unique authenticationid created by BillDesk
+      pattern: ^[a-zA-Z0-9]{14,35}$
+      example: A1HM0000389872
+    Masked_value:
+      title: masked_value
+      x-stoplight:
+        id: r3wddilt5cyy4
+      type: string
+      description: Masked card number, with the last four digits
+      example: xxxxxxxxxxxx1001
+    Threeds_version:
+      title: threeds_version
+      x-stoplight:
+        id: o8scvjfj8moas
+      type: string
+      description: 'Protocol of the 3ds2.0 version used for authentication
+
+        '
+      enum:
+      - 2.1.0
+      - 2.2.0
+    Cardaccid_auth_data:
+      type: object
+      properties:
+        transactionid:
+          $ref: '#/components/schemas/Transactionid'
+        authenticationid:
+          $ref: '#/components/schemas/Authenticationid'
+        rupay_auth_ref_no:
+          $ref: '#/components/schemas/Rupay_auth_ref_no'
+        eci:
+          $ref: '#/components/schemas/Eci'
+        cavv:
+          $ref: '#/components/schemas/Cavv'
+        threeds_version:
+          $ref: '#/components/schemas/Threeds_version'
+        ds_transaction_id:
+          $ref: '#/components/schemas/Ds_transaction_id'
+      title: cardaccid auth data
+    Cardacc-network-issuer-token:
+      type: object
+      x-stoplight:
+        id: wm1fjsdftpd8k
+      x-examples:
+        Example 1:
+          token_ref_no: 0f276cf3-a251-4f49-9567-da12ba9e028a
+          status: ACTIVE
+          token_expiry_month: '01'
+          token_expiry_year: '2024'
+          createdon: '2023-02-07T14:41:35+05:30'
+      properties:
+        token_ref_no:
+          type: string
+          description: Token Reference Number – as received from TSP
+          example: 0f276cf3-a251-4f49-9567-da12ba9e028a
+        status:
+          type: string
+          description: Token Status – as received from TSP
+          example: ACTIVE
+        token_expiry_month:
+          type: string
+          description: Token Expiry Month – as received from TSP in the MM format
+        token_expiry_year:
+          type: string
+          description: Token Expiry Year – as received from TSP in the YYYY format
+        createdon:
+          type: string
+    Error_type:
+      title: error_type
+      x-stoplight:
+        id: snpogojwqc0aq
+      type: string
+      description: Represents the error type for the response
+    Cavv:
+      title: cavv
+      x-stoplight:
+        id: 72ehfi721p2mm
+      type: string
+      description: CAVV value generated by issuer (for V, M, D, A cards)
+    Error_code:
+      title: error_code
+      x-stoplight:
+        id: 2grhtze0qf6ob
+      type: string
+      description: Represents the error code for the response
+    Objectid:
+      title: objectid
+      x-stoplight:
+        id: bbwm8bhhbqd4r
+      type: string
+      description: 'String representing the object''s type. Objects of the same type share the same value. '
+      enum:
+      - transaction
+      - authentication
+      - mandate
+      - invoice
+      - cardaccount
+      - validatevpa
+      - dispute
+      - settlement
+      - altid
+      - mandate_token
+      - accountvalidation
+      - refund
+    Network-issuer-token:
+      type: object
+      x-examples:
+        Example 1:
+          token_ref_no: 0f276cf3-a251-4f49-9567-da12ba9e028a
+          status: ACTIVE
+          token_expiry_month: '01'
+          token_expiry_year: '2024'
+          createdon: '2023-02-07T14:41:35+05:30'
+      properties:
+        token_ref_no:
+          type: string
+          description: Token Reference Number – as received from TSP
+          example: 0f276cf3-a251-4f49-9567-da12ba9e028a
+        status:
+          type: string
+          description: Token Status – as received from TSP
+          example: ACTIVE
+        token_expiry_month:
+          type: string
+          description: Token Expiry Month – as received from TSP in the MM format
+        token_expiry_year:
+          type: string
+          description: Token Expiry Year – as received from TSP in the YYYY format
+        createdon:
+          type: string
+        token_cryptogram:
+          type: string
+          description: Token Cryptogram – as received from TSP in the ‘Detokenize’ response
+        token_value:
+          type: string
+          description: Token Value – as received from TSP in the ‘Detokenize’ response
+    Customer_refid:
+      title: customer_refid
+      x-stoplight:
+        id: mpmq18zbl4x12
+      type: string
+      description: 'Unique reference of the customer in the merchant system, and can be linked to different subscriptions of the same customer
+
+        Required for mandate and tokenization'
+      pattern: ^[A-Za-z0-9\\_\\:\\-]{1,80}$
+      example: CSREF00001
+    Ds_transaction_id:
+      title: ds_transaction_id
+      x-stoplight:
+        id: wceohqaji2zvf
+      type: string
+      description: Directory server transaction id for 3ds2.0
+      example: 9ae6259e-08b8-42bb97a2-48d8a1d2a690
+      pattern: ^[0-9a-f]{8}[1-5][0-9a-f]{3}[0-9a-f]{12}$
+    Cardaccountid:
+      title: cardaccountid
+      x-stoplight:
+        id: 12f6yszzh3x5y
+      type: string
+      description: Unique ID created by BillDesk for the combination of card number, mercid and customer_refid
+      pattern: ^[A-Za-z0-9]{1,35}$
+      example: CA0AAEF9000000000123
+    Holder_name:
+      title: holder_name
+      x-stoplight:
+        id: azsrpizyvmymk
+      type: string
+      description: Cardholder name
+    Rupay_auth_ref_no:
+      title: rupay_auth_ref_no
+      x-stoplight:
+        id: p2pdfeb2zd0g6
+      type: string
+      description: Refers to the specific transaction reference provided by NPCI (for R cards)
+  examples:
+    403-error:
+      value:
+        status: 403
+        error_type: inaccessable_resource_error
+        error_code: GNIAE0002
+        message: Access forbidden
+    500-error:
+      value:
+        status: 500
+        error_type: api_processing_error
+        error_code: AUAPE0001
+        message: Internal server error
+    422-Invalid-merchant-config:
+      value:
+        status: 422
+        error_type: api_validation_error
+        error_code: GNAVE0001
+        message: Incorrect merchant configuration
+  parameters:
+    bdTimeStamp:
+      in: header
+      name: BD-Timestamp
+      description: Request timestamp to identify date and time of origin of request. Example, a value of BD-Timestamp 20210113180403 identifies the request to have originated on 13th January 2021 at 06:04:03 PM.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/json
+      description: Request Content-Type to take the values application/jose
+    bdTraceId:
+      in: header
+      name: BD-Traceid
+      description: BD-TraceID is a unique identifier passed by the merchant to ensure request idempotency. Requests with identical BD-TraceID within a 24 hour window would fail.
+      required: true
+      schema:
+        type: string
+        example: '20201203182838'
+    Accept:
+      name: Accept
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/jose
+      description: Accept Response Content-Type to take the values application/jose
+x-stoplight:
+  id: k14igufv2b1qr
+x-samples-languages:
+- shell
+- json
+- node
+- java
+- csharp
+x-provenance:
+  method: searched
+  source: https://docs.billdesk.io/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.billdesk.io/reference/createcardaccount.md
+  - https://docs.billdesk.io/reference/deletecardaccount.md
+  - https://docs.billdesk.io/reference/listcardaccount.md
+  - https://docs.billdesk.io/reference/retrievealtid.md
+  - https://docs.billdesk.io/reference/retrievecardaccount.md
+  merge:
+    pages: 5
+    deduped: 57
+    conflicts_kept_first: 0
