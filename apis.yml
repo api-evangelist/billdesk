@@ -375,6 +375,8 @@ apis:
   humanURL: https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal
   baseURL: https://api.billdesk.com/payments/ve1_2
   tags:
+  - Invoices
+  tags_raw:
   - Invoice
   properties:
   - type: OpenAPI
