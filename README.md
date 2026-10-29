@@ -1,4 +1,4 @@
-# BillDesk (billdesk)
+# BillDesk
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,100 +66,172 @@
 
 BillDesk is an Indian integrated payment solutions platform founded in 2000, offering REST APIs for bill payments, recurring mandates, UPI payments, net banking, card payments, and enterprise payment gateway integrations. The platform provides three integration tiers (Neo full-redirect, Ace SDK, and CX+ deep API), supporting online payments, e-Mandate setup, invoicing, refunds, tokenization, and 150+ payment methods across web, mobile, and third-party e-commerce plugins.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/billdesk/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/billdesk/refs/heads/main/apis.yml)
+**Areas:** Payments · India · Payment Gateway · UPI · Recurring Payments · Mandates · Net Banking · Bill Payments · Fintech
 
-## Tags
+## BillDesk on APIs.io
 
-- Payments
-- India
-- Payment Gateway
-- UPI
-- Recurring Payments
-- Mandates
-- Net Banking
-- Bill Payments
-- Fintech
+Everything profiled for BillDesk is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/billdesk/](https://apis.io/providers/billdesk/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (15)
 
-- **Created:** 2026-06-13
-- **Modified:** 2026-06-13
+- [BillDesk Neo Full Redirect API](https://apis.io/apis/billdesk/neo-payments-api/) — Pre-built hosted checkout solution for one-time and recurring online payments. Merchants redirect customers to BillDesk-hosted pages, minimizing PCI DSS scope.
+- [BillDesk Ace SDK API](https://apis.io/apis/billdesk/ace-sdk-api/) — SDK-based payment integration for Android, iOS, Flutter, and web. Provides embedded payment experiences with BillDesk handling payment orchestration.
+- [BillDesk CX+ Deep API](https://apis.io/apis/billdesk/cx-plus-deep-api/) — Direct REST API access for advanced payment processing, giving merchants full control over checkout UX. Supports transactions, mandates, refunds, card…
+- [BillDesk Authentication API](https://apis.io/apis/billdesk/billdesk-authentication-api/) — The Authentication API from BillDesk — 3 operation(s) for authentication.
+- [BillDesk Card Account API](https://apis.io/apis/billdesk/billdesk-card-account-api/) — The Card Account API from BillDesk — 4 operation(s) for card account.
+- [BillDesk Guest Checkout (AltID) API](https://apis.io/apis/billdesk/billdesk-guest-checkout-altid-api/) — The Guest Checkout (AltID) API from BillDesk — 1 operation(s) for guest checkout (altid).
+- [BillDesk Invoice API](https://apis.io/apis/billdesk/billdesk-invoice-api/) — The Invoice API from BillDesk — 2 operation(s) for invoice.
+- [BillDesk Mandate API](https://apis.io/apis/billdesk/billdesk-mandate-api/) — The Mandate API from BillDesk — 6 operation(s) for mandate.
+- [BillDesk Order API](https://apis.io/apis/billdesk/billdesk-order-api/) — The Order API from BillDesk — 3 operation(s) for order.
+- [BillDesk Payment Links API](https://apis.io/apis/billdesk/billdesk-payment-links-api/) — The Payment Links API from BillDesk — 4 operation(s) for payment links.
+- [BillDesk Penny Drop API](https://apis.io/apis/billdesk/billdesk-penny-drop-api/) — The Penny Drop API from BillDesk — 1 operation(s) for penny drop.
+- [BillDesk Refund API](https://apis.io/apis/billdesk/billdesk-refund-api/) — The Refund API from BillDesk — 2 operation(s) for refund.
+- [BillDesk Settlement API](https://apis.io/apis/billdesk/billdesk-settlement-api/) — The Settlement API from BillDesk — 1 operation(s) for settlement.
+- [BillDesk Transaction API](https://apis.io/apis/billdesk/billdesk-transaction-api/) — The Transaction API from BillDesk — 3 operation(s) for transaction.
+- [BillDesk Validate VPA API](https://apis.io/apis/billdesk/billdesk-validate-vpa-api/) — The Validate VPA API from BillDesk — 1 operation(s) for validate vpa.
 
-## APIs
+### Published properties
 
-### BillDesk Neo Full Redirect API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Pre-built hosted checkout solution for one-time and recurring online payments. Merchants redirect customers to BillDesk-hosted pages, minimizing PCI DSS scope.
+#### MCP servers (1)
 
-- **Human URL:** [https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal](https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal)
-- **Base URL:** `https://api.billdesk.com/payments/ve1_2`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [billdesk-mcp.yml](https://apis.io/servers/billdesk/billdesk-mcp-yml/)
 
-- Payments
-- Checkout
-- Redirect
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal)
+- [Billdesk Agentic Access](https://apis.io/agentic-access/billdesk/billdesk-agentic-access/)
 
-### BillDesk Ace SDK API
+#### JSON Schema (29)
 
-SDK-based payment integration for Android, iOS, Flutter, and web. Provides embedded payment experiences with BillDesk handling payment orchestration.
+The data models the API reads and writes.
 
-- **Human URL:** [https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal](https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal)
-- **Base URL:** `https://api.billdesk.com/payments/ve1_2`
+- [Additional-Info](https://apis.io/schemas/billdesk/billdesk-additional-info/)
+- [Altid_card_request](https://apis.io/schemas/billdesk/billdesk-altid-card-request/)
+- [Bankaccount](https://apis.io/schemas/billdesk/billdesk-bankaccount/)
+- [bankid](https://apis.io/schemas/billdesk/billdesk-bankid/)
+- [Cardacc-network-issuer-token](https://apis.io/schemas/billdesk/billdesk-cardacc-network-issuer-token/)
+- [cardaccid auth data](https://apis.io/schemas/billdesk/billdesk-cardaccid-auth-data/)
+- [Cardaccount-in-txn-response](https://apis.io/schemas/billdesk/billdesk-cardaccount-in-txn-response/)
+- [currency](https://apis.io/schemas/billdesk/billdesk-currency/)
+- [customer](https://apis.io/schemas/billdesk/billdesk-customer/)
+- [customer-response](https://apis.io/schemas/billdesk/billdesk-customer-response/)
+- [Device](https://apis.io/schemas/billdesk/billdesk-device/)
+- [Device object](https://apis.io/schemas/billdesk/billdesk-device-order/)
+- [error_desc](https://apis.io/schemas/billdesk/billdesk-error-desc/)
+- [Mandate](https://apis.io/schemas/billdesk/billdesk-mandate/)
+- [mercid](https://apis.io/schemas/billdesk/billdesk-mercid/)
+- [Network-issuer-token](https://apis.io/schemas/billdesk/billdesk-network-issuer-token/)
+- [objectid](https://apis.io/schemas/billdesk/billdesk-objectid/)
+- [orderid](https://apis.io/schemas/billdesk/billdesk-orderid/)
+- [Pay using alt id token](https://apis.io/schemas/billdesk/billdesk-pay-using-altid/)
+- [Pay using card number - pan](https://apis.io/schemas/billdesk/billdesk-pay-using-card-number-pan/)
+- [Pay using issuer token](https://apis.io/schemas/billdesk/billdesk-pay-using-issuer-token/)
+- [Pay using network token](https://apis.io/schemas/billdesk/billdesk-pay-using-network-token/)
+- [payment_method_type](https://apis.io/schemas/billdesk/billdesk-payment-method-type/)
+- [payment-object](https://apis.io/schemas/billdesk/billdesk-payment-object/)
+- [payment-object-response](https://apis.io/schemas/billdesk/billdesk-payment-object-response/)
+- …and 4 more published on APIs.io
 
-#### Tags
+#### JSON-LD (1)
 
-- SDK
-- Mobile Payments
-- Android
-- iOS
-- Flutter
+Linked-data contexts for the provider's vocabulary.
 
-#### Properties
+- [Billdesk Context](https://apis.io/jsonld/billdesk/billdesk-context/)
 
-- [Documentation](https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal)
+#### Governance rules (1)
 
-### BillDesk CX+ Deep API
+Spectral rulesets for the provider's contracts.
 
-Direct REST API access for advanced payment processing, giving merchants full control over checkout UX. Supports transactions, mandates, refunds, card tokenization, invoices, payment links, and settlement retrieval.
+- [BillDesk API Rules](https://apis.io/rules/billdesk/billdesk-rules/)
 
-- **Human URL:** [https://docs.billdesk.io/](https://docs.billdesk.io/)
-- **Base URL:** `https://api.billdesk.com/payments/ve1_2`
+#### Security (1)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- REST API
-- Payments
-- Mandates
-- Refunds
-- Tokenization
-- Invoicing
-- UPI
+- [Billdesk Domain Security](https://apis.io/security/billdesk/billdesk-domain-security/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://docs.billdesk.io/)
-- [Sandbox](https://docs.billdesk.io/docs/guide-to-the-billdesk-documentation-portal)
+Published plans, tiers and prices.
 
-## Common Properties
+- [Billdesk Plans Pricing](https://apis.io/plans/billdesk/billdesk-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Billdesk Rate Limits](https://apis.io/rate-limits/billdesk/billdesk-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Billdesk Finops](https://apis.io/finops/billdesk/billdesk-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.billdesk.com/web/)
 - [Documentation](https://docs.billdesk.io/)
-- [Git Hub Org](https://github.com/billdesk)
-- [LinkedIn](https://in.linkedin.com/company/billdesk)
-- [Blog](https://www.billdesk.com/web/blog)
 - [Pricing](https://www.billdesk.com/web/contact)
-- [Status Page](https://uptime.com/billdesk.com)
-- [X (Twitter)](https://twitter.com/billdesk)
-- [Plans](plans/billdesk-plans-pricing.yml)
-- [Rate Limits](rate-limits/billdesk-rate-limits.yml)
-- [Fin Ops](finops/billdesk-finops.yml)
+- [Blog](https://www.billdesk.com/web/blog)
+- [Status](https://uptime.com/billdesk.com)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 34.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 66.0 |
+| Contract governance | 22.0 |
+| Operational transparency | 28.9 |
+| Developer ergonomics | 10.7 |
+| Access clarity | 15.8 |
+
+**Agent readiness 38.7** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 15.2** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/billdesk/](https://apis.io/providers/billdesk/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for BillDesk: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/billdesk/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
